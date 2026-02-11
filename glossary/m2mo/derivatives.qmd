@@ -1,0 +1,239 @@
+---
+title: "Glossary - Derivatives market"
+author:
+  name: Cheryl KOUADIO
+categories: [glossary]
+listing:
+  sort: "title"
+  filter-ui: true
+  type: default
+---
+
+
+# Fondements
+
+[Arbitrage]{#acro-arbitrage .acronym-item}
+:   Opportunité de gain certain sans investissement initial et sans risque de perte.  
+    Formellement, il existe une stratégie autofinancée de valeur initiale nulle dont la valeur finale est presque sûrement positive et strictement positive avec probabilité non nulle.
+
+[Marché primaire]{#acro-marche-primaire .acronym-item}
+:   Ensemble des actifs fondamentaux du marché, généralement composé d’un actif sans risque et de $q$ actifs risqués.
+
+[Actif sans risque]{#acro-actif-risk-free .acronym-item}
+:   Actif de prix $S^0_t$ évoluant de manière déterministe, typiquement selon  
+    $$
+    dS^0_t = r_t S^0_t \, dt,
+    $$
+    où $r_t$ est le taux d’intérêt instantané.
+
+[Actif risqué]{#acro-actif-risque .acronym-item}
+:   Actif de prix $S^i_t$ dont la dynamique est soumise à une composante aléatoire, par exemple
+    $$
+    dS^i_t = \mu_t S^i_t dt + \sigma_t S^i_t dW_t.
+    $$
+
+[Marché complet]{#acro-marche-complet .acronym-item}
+:   Marché dans lequel tout payoff contingent mesurable peut être parfaitement répliqué par une stratégie dynamique autofinancée.
+
+[Mesure risque-neutre]{#acro-mesure-risque-neutre .acronym-item}
+:   Mesure de probabilité équivalente à la probabilité historique sous laquelle les prix actualisés des actifs sont des martingales.
+
+[Martingale]{#acro-martingale .acronym-item}
+:   Processus $(M_t)_{t \ge 0}$ adapté tel que, pour tout $s \le t$,
+    $$
+    \mathbb{E}[M_t \mid \mathcal{F}_s] = M_s.
+    $$
+
+[Stratégie autofinancée]{#acro-strategie-autofinancee .acronym-item}
+:   Stratégie $(\delta^0_t, \delta^1_t, \dots, \delta^q_t)$ telle que la variation de richesse vérifie
+    $$
+    dV_t = \sum_{i=0}^q \delta^i_t \, dS^i_t,
+    $$
+    c’est-à-dire qu’aucun apport ni retrait externe de capital n’intervient.
+
+
+<!-- 
+# Produits vanilles
+
+[Call européen]{#acro-call-europeen .acronym-item}
+:   Option donnant le droit d’acheter un actif à un prix fixé à maturité.
+
+[Put européen]{#acro-put-europeen .acronym-item}
+:   Option donnant le droit de vendre un actif à un prix fixé à maturité.
+
+[Call américain]{#acro-call-americain .acronym-item}
+:   Call exerçable à tout instant avant maturité.
+
+[Put américain]{#acro-put-americain .acronym-item}
+:   Put exerçable à tout instant avant maturité.
+
+[Payoff]{#acro-payoff .acronym-item}
+:   Flux financier généré par un produit dérivé à maturité.
+
+[Moneyness]{#acro-moneyness .acronym-item}
+:   Position relative du prix spot par rapport au strike (ITM, ATM, OTM).
+
+[Forward]{#acro-forward .acronym-item}
+:   Contrat d’achat ou de vente futur à prix fixé aujourd’hui.
+
+[Futures]{#acro-futures .acronym-item}
+:   Forward standardisé coté en marché organisé avec appels de marge.
+
+---
+
+# Pricing
+
+[Modèle de Black-Scholes]{#acro-black-scholes .acronym-item}
+:   Modèle de diffusion lognormale permettant la valorisation analytique des options européennes.
+
+[Équation de Black-Scholes]{#acro-edp-bs .acronym-item}
+:   EDP satisfaite par le prix d’une option dans un modèle sans arbitrage.
+
+[Formule fermée du call]{#acro-formule-call .acronym-item}
+:   Expression explicite du prix du call européen sous Black-Scholes.
+
+[Changement de numéraire]{#acro-changement-numeraire .acronym-item}
+:   Technique probabiliste modifiant la mesure pour simplifier le pricing.
+
+[Processus de diffusion]{#acro-diffusion .acronym-item}
+:   Processus stochastique continu gouverné par une EDS sans sauts.
+
+[Processus de Lévy]{#acro-levy .acronym-item}
+:   Processus à accroissements indépendants pouvant comporter des sauts.
+
+[Modèle de Merton]{#acro-merton .acronym-item}
+:   Modèle Black-Scholes enrichi de sauts de Poisson composés.
+
+[Modèle de Heston]{#acro-heston .acronym-item}
+:   Modèle à volatilité stochastique corrélée avec le sous-jacent.
+
+---
+
+# Greeks
+
+[Delta]{#acro-delta .acronym-item}
+:   Sensibilité du prix de l’option par rapport au prix du sous-jacent.
+
+[Gamma]{#acro-gamma .acronym-item}
+:   Dérivée seconde du prix par rapport au sous-jacent.
+
+[Vega]{#acro-vega .acronym-item}
+:   Sensibilité du prix par rapport à la volatilité.
+
+[Theta]{#acro-theta .acronym-item}
+:   Sensibilité du prix par rapport au temps.
+
+[Rho]{#acro-rho .acronym-item}
+:   Sensibilité du prix par rapport au taux d’intérêt.
+
+[Convexité]{#acro-convexite .acronym-item}
+:   Propriété garantissant l’absence d’arbitrage statique en strike.
+
+
+---
+
+# Volatilité
+
+[Volatilité historique]{#acro-vol-historique .acronym-item}
+:   Estimation statistique de la variance des rendements passés.
+
+[Volatilité réalisée]{#acro-vol-realisee .acronym-item}
+:   Volatilité effectivement observée sur une période donnée.
+
+[Volatilité implicite]{#acro-vol-implicite .acronym-item}
+:   Volatilité extraite du prix de marché d’une option via inversion du modèle de pricing.
+
+[Smile]{#acro-smile .acronym-item}
+:   Forme non plate de la volatilité implicite en fonction du strike.
+
+[Skew]{#acro-skew .acronym-item}
+:   Asymétrie de la volatilité implicite selon le strike.
+
+[Surface de volatilité]{#acro-surface-vol .acronym-item}
+:   Représentation bidimensionnelle de la volatilité implicite selon strike et maturité.
+
+[Volatilité locale]{#acro-vol-locale .acronym-item}
+:   Fonction déterministe σ(t,S) reproduisant exactement la surface implicite.
+
+[Volatilité stochastique]{#acro-vol-stochastique .acronym-item}
+:   Modèle où la volatilité suit elle-même une dynamique aléatoire.
+
+[Arbitrage de volatilité]{#acro-arbitrage-vol .acronym-item}
+:   Stratégie exploitant l’écart entre volatilité implicite et réalisée.
+
+---
+
+# Structure en strike et maturité
+
+[Monotonicité en K]{#acro-monotonicite .acronym-item}
+:   Propriété selon laquelle le prix d’un call décroît avec le strike.
+
+[Convexité en K]{#acro-convexite-k .acronym-item}
+:   Condition garantissant l’absence d’arbitrage butterfly.
+
+[Densité implicite]{#acro-densite-implicite .acronym-item}
+:   Densité risque-neutre obtenue par dérivation seconde du prix du call en strike.
+
+[Calendar arbitrage]{#acro-calendar-arbitrage .acronym-item}
+:   Arbitrage lié à une incohérence entre maturités.
+
+[Butterfly arbitrage]{#acro-butterfly .acronym-item}
+:   Arbitrage issu d’une violation de convexité en strike.
+
+---
+
+# Couverture
+
+[Delta-hedging]{#acro-delta-hedging .acronym-item}
+:   Couverture dynamique neutralisant l’exposition linéaire au sous-jacent.
+
+[Gamma-hedging]{#acro-gamma-hedging .acronym-item}
+:   Couverture neutralisant la convexité locale.
+
+[Couverture statique]{#acro-couverture-statique .acronym-item}
+:   Réplication par portefeuille fixe d’options.
+
+[Erreur de couverture]{#acro-erreur-hedge .acronym-item}
+:   Différence entre le payoff réel et le portefeuille de réplication.
+
+[Risque de saut]{#acro-risque-saut .acronym-item}
+:   Risque non couvert par une stratégie delta dans un modèle discontinu.
+
+---
+
+# Produits exotiques
+
+[Option barrière]{#acro-barriere .acronym-item}
+:   Option activée ou désactivée selon le franchissement d’un niveau.
+
+[Option digitale]{#acro-digitale .acronym-item}
+:   Option versant un montant fixe si une condition est satisfaite.
+
+[Option asiatique]{#acro-asiatique .acronym-item}
+:   Option dépendant de la moyenne du sous-jacent.
+
+[Option lookback]{#acro-lookback .acronym-item}
+:   Option dépendant du maximum ou minimum atteint.
+
+[Autocall]{#acro-autocall .acronym-item}
+:   Produit structuré avec remboursement anticipé conditionnel.
+
+---
+
+# Produits de taux
+
+[Swap]{#acro-swap .acronym-item}
+:   Échange de flux financiers à dates futures.
+
+[Swaption]{#acro-swaption .acronym-item}
+:   Option donnant le droit d’entrer dans un swap.
+
+[Cap]{#acro-cap .acronym-item}
+:   Option protégeant contre la hausse d’un taux.
+
+[Floor]{#acro-floor .acronym-item}
+:   Option protégeant contre la baisse d’un taux.
+
+[Taux forward]{#acro-forward-rate .acronym-item}
+:   Taux implicite pour une période future.
+ -->

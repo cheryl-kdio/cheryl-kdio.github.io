@@ -1,0 +1,75 @@
+---
+title: "Cheryl Kouadio, Msc"
+subtitle: |
+  Master’s Student in Stochastic Modeling and Quantitative Finance \
+  Université Paris Cité \
+  Faculty of Mathematics and Applications \
+  Paris, France
+description-meta: "Cheryl Kouadio is a graduate student in stochastic modeling and quantitative finance at Université Paris Cité. Her academic interests focus on probability theory, stochastic processes, data analysis, and financial risk modeling. She studies how rigorous statistical and mathematical methods can be applied to quantify uncertainty and support decision-making in finance and risk management."
+image: "files/profile/kouadio_profile.jpeg"
+page-navigation: false
+toc: false
+#sidebar: false
+page-layout: full
+
+about:
+  id: hero-heading
+  template: trestles
+  image-width: 80%
+  links:
+  - icon: envelope
+    text: E-mail
+    href: mailto:cheryl.s.kouadio@gmail.com
+  - icon: github
+    text: Github
+    href: https://github.com/cheryl-kdio
+  - icon: linkedin
+    text: LinkedIn
+    href: https://linkedin.com/in/cheryl-kouadio
+    target: _blank
+
+listing:
+  - id: recent-posts
+    contents: 
+      - posts
+      - posts/post-links.yml
+#    exclude:
+#      title: " "
+    type: grid
+    max-items: 6
+#    image-height: 150px
+    page-size: 6 #set same as max-times to remove the page number setting
+    fields: [image, date, title, subtitle]
+    max-description-length: 75
+    sort: 
+      - "date desc"
+      - "title asc"
+
+---
+
+<!-- <link rel="me" href="https://mastodon.social/@hegang"> -->
+
+## Recent Posts
+Check out the latest &nbsp;[Published articles](posts.qmd#category=news)&nbsp;, &nbsp;[M2MO](posts.qmd#category=m2mo)&nbsp;, &nbsp;[Ensai](posts.qmd#category=ensai-gdr)&nbsp;, and &nbsp;[More »](/posts.qmd)
+
+:::{#recent-posts}
+:::
+
+<p align="right">[All Posts »](/posts.qmd)</p>
+
+## About me
+
+:::{#hero-heading}
+
+I am a graduate student in statistics and quantitative modeling, with academic and professional interests at the intersection of **probability theory, stochastic modeling, data analysis, and financial risk management**. I am currently completing a **Master’s degree in Modélisation Aléatoire et Finance Quantitative (M2MO)** at **Université Paris Cité**, a selective program focused on advanced probability, stochastic processes, numerical methods, and applications to finance and risk.
+
+My academic training is grounded in **mathematical statistics and applied data science**. I previously studied **Statistics and Decision Informatics**, where I developed a strong foundation in statistical inference, multivariate analysis, time series, optimization, and programming for data analysis. Throughout my studies, I have built solid technical skills in **Python, R, SAS, and SQL**, and I regularly use data-visualization tools to communicate quantitative results clearly and effectively.
+
+Alongside my academic training, I have gained **hands-on experience in applied statistics and data analysis** through professional assignments in institutional and administrative environments. My work has involved data cleaning and processing, statistical reporting, automation of analyses, and the development of dashboards to support data-driven decision-making. These experiences have strengthened my ability to bridge rigorous statistical theory with real-world applications.
+
+My current academic focus centers on **stochastic processes, probabilistic modeling, numerical methods for finance, and quantitative risk analysis**. I am particularly interested in how mathematically sound models can be used to quantify uncertainty, assess financial risk, and support regulatory and strategic decision frameworks. I place strong emphasis on methodological rigor, model validation, and the transparent interpretation of results.
+
+More broadly, I am building a profile oriented toward **quantitative finance, risk modeling, and advanced statistical research**, combining strong theoretical foundations with practical implementation skills. My goal is to use mathematics and statistics as tools to better understand complex systems, manage risk, and produce reliable and interpretable quantitative analyses.
+
+:::
+

@@ -1,0 +1,26 @@
+---
+title: "Calcul stochastique"
+author:
+  name: Cheryl KOUADIO
+categories: [glossary]
+listing:
+  sort: "title"
+  filter-ui: true
+  type: default
+---
+
+
+
+# Sauts et modèles avancés
+
+[Processus de Poisson composé]{#acro-poisson-compose .acronym-item}
+:   Processus de sauts obtenu par sommation de tailles aléatoires aux temps de Poisson.
+
+[Mesure de Poisson]{#acro-mesure-poisson .acronym-item}
+:   Mesure aléatoire comptant les sauts d’un processus.
+
+[Compensateur]{#acro-compensateur .acronym-item}
+:   Terme moyen rendant une mesure de saut martingale après compensation.
+
+[Itô avec sauts]{#acro-ito-sauts .acronym-item}
+:   Extension de la formule d’Itô aux processus discontinus.
