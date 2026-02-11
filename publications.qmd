@@ -1,0 +1,37 @@
+---
+title: "Publications"
+description-meta: "Information, pdfs, and social metrics of papers"
+#page-layout: full
+#back-to-top-navigation: true
+title-block-banner: false
+css: /custom.css
+---
+
+## Journal Articles
+
+**Cheryl Kouadio, Msc**, Subodh Selukar, PhD, Megan Othus, PhD, and Sylvie Chevret, MD, PhD,  2025 [Detecting the Cure Model Appropriateness in Randomized Clinical Trials With Long-Term Survivors](https://ascopubs.org/doi/10.1200/CCI-25-00084). *JCO Clinical Cancer Informatics* 9: e210084, 2025.
+
+## Report 
+
+**Kouadio Cheryl**, Kougoum Moko Mani Marilene, and Ouyassin Mariyam,  2025 [Implémentation de la VaR à l’aide de la théorie des valeurs extrêmes et comparaison des méthodes d’implémentation](files/papers/projet_EVT_Kouadio_Kougoum_Ouyassin.pdf). 
+
+**Kouadio Cheryl**, and Wane Mountaga,  2025 [Stress testing du CAC 40 à l’aide de la théoried des valeurs extrêmes](files/papers/projet_EVT_Wane_Kouadio.pdf). 
+
+Mathis Bouillon ,**Kouadio Cheryl**, Kougoum Moko Mani Marilene, Ouyassin Mariyam, and Wane Mountaga,  2025 [Stock price predictions using time series](files/papers/rapport_series_temporelles.pdf). 
+
+**Kouadio Cheryl**, and Ouyassin Mariyam,  2025 [Introduction aux modèles de courbe de taux](files/papers/Rapport_KOUADIO_OUYASSIN_courbes_de_taux.pdf).
+
+
+**Kouadio Cheryl**, and Ouyassin Mariyam,  2025 [Modélisation des risques multiples à l'aide de la théorie des copules](files/papers/Rapport_Kouadio_Ouyassin_copules.pdf).
+
+**Kouadio Cheryl**,  2024 [Understand better econometrics applied to microeconomy](files/papers/microeconometrics_courses.pdf).
+
+
+## Applications launched
+
+Stock price prediction : CAC40 [streamlit app](https://cac40forecast.streamlit.app/)
+
+Asset pricing and management [github project](https://github.com/Niyo-D-JC/Asset-Pricing-and-Management)
+
+
+{{< include /files/includes/_socialshare.qmd >}}

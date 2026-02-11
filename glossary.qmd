@@ -1,0 +1,26 @@
+---
+title: "Glossary"
+description-meta: "Glossary of element used in articles"
+listing: 
+  id: glossary
+  sort: "title"
+  type: table
+  fields: [title]
+  page-size: 100
+  categories: true
+  sort-ui: true
+  filter-ui: true
+  feed: true
+  contents: 
+      - glossary     
+page-layout: full
+draft-mode: unlinked
+page-navigation: false
+title-block-banner: false
+---
+
+<!--This is my personal clarity, please delete or replace with your own clarity-->
+<!-- {{< include /files/includes/_msclarity.qmd >}} -->
+
+:::{#glossary}
+:::

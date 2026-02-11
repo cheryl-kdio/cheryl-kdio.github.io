@@ -1,0 +1,13 @@
+---
+title: "Model free pricing results"
+subtitle: "Financial Markets"
+author:
+  name: Cheryl KOUADIO
+categories: [paper,m2mo,derivatives]
+date: "2026-02-11"
+image: "featured.png"
+---
+
+
+
+{{< include /files/includes/_socialshare.qmd >}}

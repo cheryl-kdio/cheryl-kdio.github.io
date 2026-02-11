@@ -1,0 +1,120 @@
+---
+title: "Introduction to financial markets"
+subtitle: "Financial Markets"
+author:
+  name: Cheryl KOUADIO
+categories: [paper,m2mo,derivatives]
+date: "2026-02-01"
+image: "featured.png"
+---
+
+
+In the financial sector, a market refers to the place where the supply and demand for financial products and services meet. It brings together numerous participants, including banks, financial institutions, corporations, and individual investors.
+
+Among the various financial instruments traded, one finds equities, bonds, derivatives, currencies, and commodities.
+
+In this article, we examine three major types of financial markets: the equity market, the bond market, and the derivatives market, along with their characteristics and operating mechanisms.
+
+## Equity markets
+
+The equity market enables companies to raise capital by issuing ownership securities (shares) that investors can purchase. These shares are subsequently traded on stock exchanges such as euronext paris or the new york stock exchange.
+
+Share prices fluctuate according to supply and demand, influenced by corporate performance, macroeconomic conditions, and market sentiment.
+
+The main participants in this market include issuing companies, institutional investors such as pension funds and insurance companies, and retail investors. To buy or sell shares, investors typically use online brokers or investment banks. They submit buy orders (bid) or sell orders (ask), which can be observed in the order book and are then executed on the market.
+
+A market order corresponds to an immediate purchase or sale at the best available price.
+
+A limit order allows the purchase or sale of a specified quantity of securities subject to a price condition. It provides control over the execution price and enables investors to set a target buying or selling price.
+
+A stop order is executed only if the price reaches a specified threshold. It is often used to limit losses or secure gains. For a purchase, it is generally placed above the current market price; for a sale, below.
+
+A stop-limit order combines a stop trigger with a limit condition and may include time restrictions.
+
+A trailing stop order functions similarly to a stop order but is defined as a percentage variation rather than a fixed price level.
+
+Additional tactical order types allow the implementation of more sophisticated investment strategies.
+
+In france, the autorité des marchés financiers supervises financial markets to ensure transparency and proper functioning.
+
+### Price formation
+
+The price of a share is determined by the interaction of supply and demand. When demand increases, the price tends to rise. Conversely, when supply exceeds demand, the price falls. The traded price corresponds to the effective intersection between a bid and an ask, that is, where an order is matched.
+
+Fundamental factors also influence prices, including corporate earnings, dividend distributions, growth prospects, and general economic conditions.
+
+At market close, the closing price corresponds to the last traded price of the session. This price may differ from the next opening price due to events occurring outside trading hours.
+
+## Bond market
+
+The bond market is where investors buy and sell debt securities. Bonds are debt instruments issued by governments or corporations to raise capital. A bond is a contract between an issuer and an investor in which the issuer commits to repaying the principal at maturity while paying periodic interest payments, known as coupons.
+
+Through bond issuance, the issuer contracts debt on the market. The investor lends funds by purchasing the bond and receives interest payments until maturity, at which point the principal, also called the face value, is repaid.
+
+Bonds are generally considered lower-risk investments compared to equities, as they typically provide fixed returns and exhibit lower volatility. However, their expected return is usually lower than that of stocks.
+
+Bonds can be classified according to their issuer, maturity, and interest structure. Government bonds are issued by sovereign states. Corporate bonds are issued by private or public companies. Short-term bonds typically have maturities below five years, whereas long-term bonds exceed ten years. Interest rates may be fixed or variable. Bonds are also categorized according to credit rating, which assesses the issuer’s ability to repay its debt.
+
+### Bond valuation
+
+Bond valuation consists of determining its present value, that is, the amount an investor is willing to pay today. The price of a bond is given by
+
+$$B(t,T) = \sum_{u=1}^{T} \frac{C}{(1+r)^u} + \frac{N}{(1+r)^T}.
+$$
+
+
+The bond value depends on the market interest rate (r), the remaining maturity (T-t), the coupon rate, and the issuer’s credit quality. When market interest rates increase, existing bond prices decline, as new bonds offer higher yields.
+
+A zero-coupon bond does not pay periodic interest. Its value simplifies to
+
+$B(t,T) = \frac{N}{(1+r)^{T-t}}.$
+
+## Derivatives market
+
+Derivatives are financial instruments whose value depends on an underlying asset. Examples include options, futures, forwards, and swaps. These instruments are used for hedging, speculation, and arbitrage.
+
+Hedging involves taking a derivative position to offset an existing exposure. Speculation consists of taking a position based on expected future price movements without prior exposure. Arbitrage involves exploiting price discrepancies across markets to generate risk-free profit.
+
+Derivatives may be traded on organized exchanges or over-the-counter markets. Organized markets are centralized and regulated, offering standardized contracts and daily settlement through clearinghouses. Margin requirements and marking-to-market procedures reduce counterparty risk.
+
+Over-the-counter markets are decentralized and allow customized contracts between counterparties.
+
+Prices are determined by bid and ask quotes. The bid-ask spread reflects market liquidity.
+
+### Forward contracts
+
+A forward contract is an agreement between two parties to buy or sell an asset at a price (K) at a future date (T). The payoff for a long position is $S_T - K,$ and for a short position, $K - S_T.$
+
+Forwards are primarily used for hedging purposes.
+
+### Options
+
+An option gives the holder the right, but not the obligation, to buy or sell an underlying asset at a strike price (K) before or at maturity (T).
+
+The payoff of a european call is $\max(S_T - K, 0),$ while the payoff of a european put is $\max(K - S_T, 0).$
+
+Options may be used for hedging, speculation, or income generation.
+
+### Futures
+
+Futures contracts are standardized agreements traded on organized exchanges. They are marked to market daily, and margin accounts are adjusted accordingly. Futures prices converge to spot prices at maturity to prevent arbitrage.
+
+### Swaps
+
+A swap is a derivative contract in which two parties exchange cash flows based on a notional amount over a specified period. The most common type is the interest rate swap, in which one party pays a fixed rate while receiving a floating rate, typically linked to libor or a similar benchmark.
+
+The swap can be viewed as a combination of a fixed-rate bond and a floating-rate bond. Its value equals the difference between the present values of fixed and floating cash flows:
+
+$$V_{\text{swap}} = B_{\text{fixed}} - B_{\text{floating}}.
+$$
+
+When the fixed rate equals the swap rate, the contract initially has zero net value.
+
+Swap markets provide quoted bid and ask fixed rates across maturities, which are used to construct the zero-coupon yield curve through bootstrapping techniques.
+
+Although swap rates are not strictly risk-free, they are often used as reference discount rates for long maturities under normal market conditions.
+
+Source: john c. hull, *options, futures, and other derivatives*, 11th edition.
+
+
+{{< include /files/includes/_socialshare.qmd >}}

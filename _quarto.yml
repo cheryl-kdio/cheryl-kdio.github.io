@@ -1,0 +1,128 @@
+project:
+  type: website
+  output-dir: docs
+
+execute:
+  enabled: true
+  cache: false
+  freeze: false
+  python: venv/bin/python
+  
+# Meta
+description-meta: "Cheryl Kouadio is a graduate student in stochastic modeling and quantitative finance at Université Paris Cité. Her academic interests focus on probability theory, stochastic processes, data analysis, and financial risk modeling. She studies how rigorous statistical and mathematical methods can be applied to quantify uncertainty and support decision-making in finance and risk management."
+author-meta: "Cheryl Kouadio"
+
+website:
+  title: "Cheryl Kouadio"
+  image: "/files/profile/kouadio_profile.jpeg"
+  description: "Cheryl Kouadio is a graduate student in stochastic modeling and quantitative finance at Université Paris Cité. Her academic interests focus on probability theory, stochastic processes, data analysis, and financial risk modeling. She studies how rigorous statistical and mathematical methods can be applied to quantify uncertainty and support decision-making in finance and risk management."
+  navbar:
+    background: light
+
+    left:
+#      - text: Home
+#        href: index.qmd
+      - text: About
+        menu:
+          - text: News
+            href: posts.qmd#category=news
+          - text: Events
+            href: posts.qmd#category=event
+          - text: Now
+            href: now.qmd                
+      - text: Articles
+        menu:
+          - text: Reports
+            href: publications.qmd
+          - text: All papers
+            href: posts.qmd#category=paper
+          - text: Ensai
+            href: posts.qmd#category=ensai-gdr
+          - text: M2MO
+            href: posts.qmd#category=m2mo
+      
+      - text: Outreach
+        menu:
+        - text: Policy Engagement
+          href: posts.qmd#category=outreach       
+        - text: Presentations
+          href: posts.qmd#category=presentation            
+        - text: Notes
+          href: notes.qmd          
+      - text : Glossary
+        href: glossary.qmd    
+
+    right: 
+      - text: CV
+        href: files/Cheryl-Kouadio-CV.pdf
+        target: _blank 
+      - icon: github
+        text: Github
+        href: https://github.com/cheryl-kdio
+        target: _blank
+      - icon: linkedin
+        text: Linkedin
+        href: https://www.linkedin.com/in/cheryl-kouadio-251815206/
+        target: _blank
+#      - icon: twitter-x 
+#        href: https://twitter.com/DrGangHe
+#        target: _blank        
+      - icon: rss
+        href: posts.xml
+        target: _blank
+  
+  page-navigation: true
+  
+  page-footer: 
+    center: "[Cheryl Kouadio](https://github.com/cheryl-kdio) &copy; <script>document.write(new Date().getFullYear())</script>"
+    # left: "[Cheryl Kouadio](https://github.com/cheryl-kdio) &copy; <script>document.write(new Date().getFullYear())</script>" 
+    # right:  
+    #   - icon: github
+    #     href: https://github.com/cheryl-kdio
+    #     target: _blank
+    #   - text: "{{< fa brands bluesky >}}" 
+    #     href: https://bsky.app/profile/hegang.bsky.social
+    #     target: _blank
+    #   - icon: rss
+    #     href: posts.xml
+    #     target: _blank  
+  
+  search:
+    location: navbar
+    type: textbox
+  
+  reader-mode: true
+
+  draft-mode: unlinked
+  
+  repo-url: https://github.com/cheryl-kdio
+#  repo-actions: [edit, issue, source]
+  
+  open-graph: true
+  
+  twitter-card: true 
+#  card-style: summary      
+  
+  site-url: "https://cheryl-kdio.github.io"
+  
+  # google-analytics:
+  #   tracking-id: "G-G4DYZHP5J7"  # Please delete or replace with your own tracking ID
+  #   anonymize-ip: true 
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+    footnotes-hover: true
+    code-copy: true
+    code-link: true
+    code-overflow: wrap
+    fig-align: center
+    link-external-icon: false
+    link-external-newwindow: true
+    email-obfuscation: javascript
+    link-external-filter: '^(?:http:|https:)\/\/cheryl-kdio\.github\.io\/custom'
+    include-in-header: "files/includes/_academic.qmd"

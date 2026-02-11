@@ -1,0 +1,10 @@
+
+- path: https://ascopubs.org/doi/10.1200/CCI-25-00084
+  image: https://ascopubs.org/cms/10.1200/CCI-25-00084/asset/d0c5b157-fe4e-42e3-b911-27a37c390406/assets/images/large/cci-25-00084f1.jpg
+  title: "Detecting the Cure Model Appropriateness in Randomized Clinical Trials With Long-Term Survivors"
+  author: "Cheryl Kouadio, Msc, Subodh Selukar, PhD, Megan Othus, PhD, and Sylvie Chevret, MD, PhD"
+  description: "To evaluate the appropriateness of a cure model when analyzing right-censored end points of a randomized clinical trial (RCT) in malignancy in the presence of long-term survivors. We aim to derive how the ratio estimation of censored cured subjects (RECeUS), previously proposed for a homogeneous population, could be extended for use in RCTs."
+  date: "2025-12-15"
+  categories: [news] 
+
+#[news,event, recognition,paper]
