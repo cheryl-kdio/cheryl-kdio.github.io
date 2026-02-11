@@ -1,0 +1,104 @@
+[
+  {
+    "listing": "/glossary/m2mo/derivatives.html",
+    "items": [
+      "/glossary/m2mo/calcul_sto.html",
+      "/glossary/m2mo/edp.html"
+    ]
+  },
+  {
+    "listing": "/glossary/m2mo/edp.html",
+    "items": [
+      "/glossary/m2mo/calcul_sto.html",
+      "/glossary/m2mo/derivatives.html"
+    ]
+  },
+  {
+    "listing": "/glossary.html",
+    "items": [
+      "/glossary/m2mo/calcul_sto.html",
+      "/glossary/m2mo/derivatives.html",
+      "/glossary/m2mo/edp.html"
+    ]
+  },
+  {
+    "listing": "/notes.html",
+    "items": [
+      "/notes/cuny-baruch-visiting-scholar-paperwork-guide.html",
+      "/notes/new-york-state-climate-policy.html"
+    ]
+  },
+  {
+    "listing": "/index.html",
+    "items": [
+      "/posts/m2mo/derivatives/01_intro_market.html",
+      "/posts/m2mo/derivatives/02_model_free(1).html",
+      "/posts/m2mo/derivatives/00_references.html",
+      "/posts/ensai/gestion_actifs/TP-3.html",
+      "/posts/ensai/risques_financiers/value-at-risk/pj_copules.html",
+      "/posts/ensai/proc_stochastique/pj_courbe_tx.html",
+      "/posts/ensai/risques_financiers/value-at-risk/var_classiques.html",
+      "/posts/ensai/risques_financiers/value-at-risk/var_evt.html",
+      "/posts/ensai/risques_financiers/value-at-risk/var_garch.html",
+      "/posts/ensai/proc_stochastique/APF_filter.html",
+      "/posts/ensai/others/spearman-pearson.html",
+      "/posts/ensai/proc_stochastique/modele_heston.html",
+      "/posts/ensai/gestion_actifs/TP-1.html",
+      "/posts/ensai/gestion_actifs/TP-2.html",
+      "/posts/ensai/proc_stochastique/modele_log_sv-part2.html",
+      "/posts/ensai/proc_stochastique/modele_log_sv-part1.html",
+      "/posts/ensai/proc_stochastique/modele_bs.html",
+      "/posts/ensai/apprentisage-stat/Tp4.html",
+      "/posts/ensai/apprentisage-stat/Tp3.html",
+      "/posts/ensai/apprentisage-stat/Tp2.html",
+      "/posts/ensai/apprentisage-stat/Tp1.html",
+      "/posts/ensai/analyses_financieres/reglementation_prudentielle.html",
+      "/posts/ensai/others/ISR.html",
+      "/posts/ensai/risques_financiers/risque_def.html",
+      "/posts/ensai/analyses_financieres/bilan_entreprise.html",
+      "/posts/ensai/risques_financiers/value-at-risk/var_application.html",
+      "/posts/ensai/risques_financiers/value-at-risk/var_def.html",
+      "/posts/ensai/others/finance_durable.html"
+    ]
+  },
+  {
+    "listing": "/posts.html",
+    "items": [
+      "/posts/m2mo/derivatives/01_intro_market.html",
+      "/posts/m2mo/derivatives/02_model_free(1).html",
+      "/posts/m2mo/derivatives/00_references.html",
+      "/posts/ensai/gestion_actifs/TP-3.html",
+      "/posts/ensai/risques_financiers/value-at-risk/pj_copules.html",
+      "/posts/ensai/proc_stochastique/pj_courbe_tx.html",
+      "/posts/ensai/risques_financiers/value-at-risk/var_garch.html",
+      "/posts/ensai/risques_financiers/value-at-risk/var_evt.html",
+      "/posts/ensai/risques_financiers/value-at-risk/var_classiques.html",
+      "/posts/ensai/proc_stochastique/APF_filter.html",
+      "/posts/ensai/others/spearman-pearson.html",
+      "/posts/ensai/proc_stochastique/modele_heston.html",
+      "/posts/ensai/gestion_actifs/TP-1.html",
+      "/posts/ensai/gestion_actifs/TP-2.html",
+      "/posts/ensai/proc_stochastique/modele_log_sv-part2.html",
+      "/posts/ensai/proc_stochastique/modele_log_sv-part1.html",
+      "/posts/ensai/proc_stochastique/modele_bs.html",
+      "/posts/ensai/apprentisage-stat/Tp4.html",
+      "/posts/ensai/apprentisage-stat/Tp3.html",
+      "/posts/ensai/apprentisage-stat/Tp2.html",
+      "/posts/ensai/apprentisage-stat/Tp1.html",
+      "/posts/ensai/analyses_financieres/reglementation_prudentielle.html",
+      "/posts/ensai/others/ISR.html",
+      "/posts/ensai/risques_financiers/risque_def.html",
+      "/posts/ensai/analyses_financieres/bilan_entreprise.html",
+      "/posts/ensai/risques_financiers/value-at-risk/var_application.html",
+      "/posts/ensai/risques_financiers/value-at-risk/var_def.html",
+      "/posts/ensai/others/finance_durable.html"
+    ]
+  },
+  {
+    "listing": "/glossary/m2mo/calcul_sto.html",
+    "items": [
+      "/glossary/m2mo/derivatives.html",
+      "/glossary/m2mo/edp.html"
+    ]
+  }
+]

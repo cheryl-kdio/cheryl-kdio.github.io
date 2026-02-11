@@ -1,0 +1,530 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Cheryl Kouadio</title>
+<link>https://cheryl-kdio.github.io/glossary.html</link>
+<atom:link href="https://cheryl-kdio.github.io/glossary.xml" rel="self" type="application/rss+xml"/>
+<description>Cheryl Kouadio is a graduate student in stochastic modeling and quantitative finance at Université Paris Cité. Her academic interests focus on probability theory, stochastic processes, data analysis, and financial risk modeling. She studies how rigorous statistical and mathematical methods can be applied to quantify uncertainty and support decision-making in finance and risk management.</description>
+<image>
+<url>https://cheryl-kdio.github.io/files/profile/kouadio_profile.jpeg</url>
+<title>Cheryl Kouadio</title>
+<link>https://cheryl-kdio.github.io/glossary.html</link>
+</image>
+<generator>quarto-1.6.40</generator>
+<lastBuildDate>Wed, 11 Feb 2026 14:41:41 GMT</lastBuildDate>
+<item>
+  <title>Calcul stochastique</title>
+  <dc:creator>Cheryl KOUADIO</dc:creator>
+  <link>https://cheryl-kdio.github.io/glossary/m2mo/calcul_sto.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="sauts-et-modèles-avancés" class="level1">
+<h1>Sauts et modèles avancés</h1>
+<dl>
+<dt><span id="acro-poisson-compose" class="acronym-item">Processus de Poisson composé</span></dt>
+<dd>
+Processus de sauts obtenu par sommation de tailles aléatoires aux temps de Poisson.
+</dd>
+<dt><span id="acro-mesure-poisson" class="acronym-item">Mesure de Poisson</span></dt>
+<dd>
+Mesure aléatoire comptant les sauts d’un processus.
+</dd>
+<dt><span id="acro-compensateur" class="acronym-item">Compensateur</span></dt>
+<dd>
+Terme moyen rendant une mesure de saut martingale après compensation.
+</dd>
+<dt><span id="acro-ito-sauts" class="acronym-item">Itô avec sauts</span></dt>
+<dd>
+Extension de la formule d’Itô aux processus discontinus.
+</dd>
+</dl>
+
+
+
+</section>
+
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="listing-actions-group">
+    <div class="input-group input-group-sm quarto-listing-filter">
+      <span class="input-group-text"><i class="bi bi-search"></i></span>
+      <input type="text" class="search form-control" placeholder="Filter">
+    </div>
+</div>
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="Z2xvc3Nhcnk=" data-listing-file-modified-sort="1770803094882" data-listing-reading-time-sort="5" data-listing-word-count-sort="929">
+<div class="thumbnail">
+<p><a href="../../glossary/m2mo/derivatives.html" class="no-external"></a></p><a href="../../glossary/m2mo/derivatives.html" class="no-external">
+<!-- img(9CEB782EFEE6)[progressive=false, height=]:listing:glossary/m2mo/derivatives.html -->
+</a><p><a href="../../glossary/m2mo/derivatives.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../glossary/m2mo/derivatives.html" class="no-external">Glossary - Derivatives market</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../glossary/m2mo/derivatives.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../glossary/m2mo/derivatives.html" class="no-external"><!-- desc(5A0113B34292)[max=175]:glossary/m2mo/derivatives.html --></a>
+</div>
+</div>
+<div class="metadata">
+<p><a href="../../glossary/m2mo/derivatives.html" class="no-external"></a></p><a href="../../glossary/m2mo/derivatives.html" class="no-external">
+<div class="listing-author">
+Cheryl KOUADIO
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="Z2xvc3Nhcnk=" data-listing-file-modified-sort="1770803249326" data-listing-reading-time-sort="1" data-listing-word-count-sort="56">
+<div class="thumbnail">
+<p><a href="../../glossary/m2mo/edp.html" class="no-external"></a></p><a href="../../glossary/m2mo/edp.html" class="no-external">
+<!-- img(9CEB782EFEE6)[progressive=false, height=]:listing:glossary/m2mo/edp.html -->
+</a><p><a href="../../glossary/m2mo/edp.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../glossary/m2mo/edp.html" class="no-external">Monte-Carlo/EDP</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../glossary/m2mo/edp.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../glossary/m2mo/edp.html" class="no-external"><!-- desc(5A0113B34292)[max=175]:glossary/m2mo/edp.html --></a>
+</div>
+</div>
+<div class="metadata">
+<p><a href="../../glossary/m2mo/edp.html" class="no-external"></a></p><a href="../../glossary/m2mo/edp.html" class="no-external">
+<div class="listing-author">
+Cheryl KOUADIO
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div> ]]></description>
+  <category>glossary</category>
+  <guid>https://cheryl-kdio.github.io/glossary/m2mo/calcul_sto.html</guid>
+  <pubDate>Wed, 11 Feb 2026 14:41:41 GMT</pubDate>
+</item>
+<item>
+  <title>Glossary - Derivatives market</title>
+  <dc:creator>Cheryl KOUADIO</dc:creator>
+  <link>https://cheryl-kdio.github.io/glossary/m2mo/derivatives.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="fondements" class="level1">
+<h1>Fondements</h1>
+<dl>
+<dt><span id="acro-arbitrage" class="acronym-item">Arbitrage</span></dt>
+<dd>
+Opportunité de gain certain sans investissement initial et sans risque de perte.<br>
+Formellement, il existe une stratégie autofinancée de valeur initiale nulle dont la valeur finale est presque sûrement positive et strictement positive avec probabilité non nulle.
+</dd>
+<dt><span id="acro-marche-primaire" class="acronym-item">Marché primaire</span></dt>
+<dd>
+Ensemble des actifs fondamentaux du marché, généralement composé d’un actif sans risque et de <img src="https://latex.codecogs.com/png.latex?q"> actifs risqués.
+</dd>
+<dt><span id="acro-actif-risk-free" class="acronym-item">Actif sans risque</span></dt>
+<dd>
+Actif de prix <img src="https://latex.codecogs.com/png.latex?S%5E0_t"> évoluant de manière déterministe, typiquement selon<br>
+<img src="https://latex.codecogs.com/png.latex?%0AdS%5E0_t%20=%20r_t%20S%5E0_t%20%5C,%20dt,%0A"> où <img src="https://latex.codecogs.com/png.latex?r_t"> est le taux d’intérêt instantané.
+</dd>
+<dt><span id="acro-actif-risque" class="acronym-item">Actif risqué</span></dt>
+<dd>
+Actif de prix <img src="https://latex.codecogs.com/png.latex?S%5Ei_t"> dont la dynamique est soumise à une composante aléatoire, par exemple <img src="https://latex.codecogs.com/png.latex?%0AdS%5Ei_t%20=%20%5Cmu_t%20S%5Ei_t%20dt%20+%20%5Csigma_t%20S%5Ei_t%20dW_t.%0A">
+</dd>
+<dt><span id="acro-marche-complet" class="acronym-item">Marché complet</span></dt>
+<dd>
+Marché dans lequel tout payoff contingent mesurable peut être parfaitement répliqué par une stratégie dynamique autofinancée.
+</dd>
+<dt><span id="acro-mesure-risque-neutre" class="acronym-item">Mesure risque-neutre</span></dt>
+<dd>
+Mesure de probabilité équivalente à la probabilité historique sous laquelle les prix actualisés des actifs sont des martingales.
+</dd>
+<dt><span id="acro-martingale" class="acronym-item">Martingale</span></dt>
+<dd>
+Processus <img src="https://latex.codecogs.com/png.latex?(M_t)_%7Bt%20%5Cge%200%7D"> adapté tel que, pour tout <img src="https://latex.codecogs.com/png.latex?s%20%5Cle%20t">, <img src="https://latex.codecogs.com/png.latex?%0A%5Cmathbb%7BE%7D%5BM_t%20%5Cmid%20%5Cmathcal%7BF%7D_s%5D%20=%20M_s.%0A">
+</dd>
+<dt><span id="acro-strategie-autofinancee" class="acronym-item">Stratégie autofinancée</span></dt>
+<dd>
+Stratégie <img src="https://latex.codecogs.com/png.latex?(%5Cdelta%5E0_t,%20%5Cdelta%5E1_t,%20%5Cdots,%20%5Cdelta%5Eq_t)"> telle que la variation de richesse vérifie <img src="https://latex.codecogs.com/png.latex?%0AdV_t%20=%20%5Csum_%7Bi=0%7D%5Eq%20%5Cdelta%5Ei_t%20%5C,%20dS%5Ei_t,%0A"> c’est-à-dire qu’aucun apport ni retrait externe de capital n’intervient.
+</dd>
+</dl>
+<!-- 
+# Produits vanilles
+
+[Call européen]{#acro-call-europeen .acronym-item}
+:   Option donnant le droit d’acheter un actif à un prix fixé à maturité.
+
+[Put européen]{#acro-put-europeen .acronym-item}
+:   Option donnant le droit de vendre un actif à un prix fixé à maturité.
+
+[Call américain]{#acro-call-americain .acronym-item}
+:   Call exerçable à tout instant avant maturité.
+
+[Put américain]{#acro-put-americain .acronym-item}
+:   Put exerçable à tout instant avant maturité.
+
+[Payoff]{#acro-payoff .acronym-item}
+:   Flux financier généré par un produit dérivé à maturité.
+
+[Moneyness]{#acro-moneyness .acronym-item}
+:   Position relative du prix spot par rapport au strike (ITM, ATM, OTM).
+
+[Forward]{#acro-forward .acronym-item}
+:   Contrat d’achat ou de vente futur à prix fixé aujourd’hui.
+
+[Futures]{#acro-futures .acronym-item}
+:   Forward standardisé coté en marché organisé avec appels de marge.
+
+---
+
+# Pricing
+
+[Modèle de Black-Scholes]{#acro-black-scholes .acronym-item}
+:   Modèle de diffusion lognormale permettant la valorisation analytique des options européennes.
+
+[Équation de Black-Scholes]{#acro-edp-bs .acronym-item}
+:   EDP satisfaite par le prix d’une option dans un modèle sans arbitrage.
+
+[Formule fermée du call]{#acro-formule-call .acronym-item}
+:   Expression explicite du prix du call européen sous Black-Scholes.
+
+[Changement de numéraire]{#acro-changement-numeraire .acronym-item}
+:   Technique probabiliste modifiant la mesure pour simplifier le pricing.
+
+[Processus de diffusion]{#acro-diffusion .acronym-item}
+:   Processus stochastique continu gouverné par une EDS sans sauts.
+
+[Processus de Lévy]{#acro-levy .acronym-item}
+:   Processus à accroissements indépendants pouvant comporter des sauts.
+
+[Modèle de Merton]{#acro-merton .acronym-item}
+:   Modèle Black-Scholes enrichi de sauts de Poisson composés.
+
+[Modèle de Heston]{#acro-heston .acronym-item}
+:   Modèle à volatilité stochastique corrélée avec le sous-jacent.
+
+---
+
+# Greeks
+
+[Delta]{#acro-delta .acronym-item}
+:   Sensibilité du prix de l’option par rapport au prix du sous-jacent.
+
+[Gamma]{#acro-gamma .acronym-item}
+:   Dérivée seconde du prix par rapport au sous-jacent.
+
+[Vega]{#acro-vega .acronym-item}
+:   Sensibilité du prix par rapport à la volatilité.
+
+[Theta]{#acro-theta .acronym-item}
+:   Sensibilité du prix par rapport au temps.
+
+[Rho]{#acro-rho .acronym-item}
+:   Sensibilité du prix par rapport au taux d’intérêt.
+
+[Convexité]{#acro-convexite .acronym-item}
+:   Propriété garantissant l’absence d’arbitrage statique en strike.
+
+
+---
+
+# Volatilité
+
+[Volatilité historique]{#acro-vol-historique .acronym-item}
+:   Estimation statistique de la variance des rendements passés.
+
+[Volatilité réalisée]{#acro-vol-realisee .acronym-item}
+:   Volatilité effectivement observée sur une période donnée.
+
+[Volatilité implicite]{#acro-vol-implicite .acronym-item}
+:   Volatilité extraite du prix de marché d’une option via inversion du modèle de pricing.
+
+[Smile]{#acro-smile .acronym-item}
+:   Forme non plate de la volatilité implicite en fonction du strike.
+
+[Skew]{#acro-skew .acronym-item}
+:   Asymétrie de la volatilité implicite selon le strike.
+
+[Surface de volatilité]{#acro-surface-vol .acronym-item}
+:   Représentation bidimensionnelle de la volatilité implicite selon strike et maturité.
+
+[Volatilité locale]{#acro-vol-locale .acronym-item}
+:   Fonction déterministe σ(t,S) reproduisant exactement la surface implicite.
+
+[Volatilité stochastique]{#acro-vol-stochastique .acronym-item}
+:   Modèle où la volatilité suit elle-même une dynamique aléatoire.
+
+[Arbitrage de volatilité]{#acro-arbitrage-vol .acronym-item}
+:   Stratégie exploitant l’écart entre volatilité implicite et réalisée.
+
+---
+
+# Structure en strike et maturité
+
+[Monotonicité en K]{#acro-monotonicite .acronym-item}
+:   Propriété selon laquelle le prix d’un call décroît avec le strike.
+
+[Convexité en K]{#acro-convexite-k .acronym-item}
+:   Condition garantissant l’absence d’arbitrage butterfly.
+
+[Densité implicite]{#acro-densite-implicite .acronym-item}
+:   Densité risque-neutre obtenue par dérivation seconde du prix du call en strike.
+
+[Calendar arbitrage]{#acro-calendar-arbitrage .acronym-item}
+:   Arbitrage lié à une incohérence entre maturités.
+
+[Butterfly arbitrage]{#acro-butterfly .acronym-item}
+:   Arbitrage issu d’une violation de convexité en strike.
+
+---
+
+# Couverture
+
+[Delta-hedging]{#acro-delta-hedging .acronym-item}
+:   Couverture dynamique neutralisant l’exposition linéaire au sous-jacent.
+
+[Gamma-hedging]{#acro-gamma-hedging .acronym-item}
+:   Couverture neutralisant la convexité locale.
+
+[Couverture statique]{#acro-couverture-statique .acronym-item}
+:   Réplication par portefeuille fixe d’options.
+
+[Erreur de couverture]{#acro-erreur-hedge .acronym-item}
+:   Différence entre le payoff réel et le portefeuille de réplication.
+
+[Risque de saut]{#acro-risque-saut .acronym-item}
+:   Risque non couvert par une stratégie delta dans un modèle discontinu.
+
+---
+
+# Produits exotiques
+
+[Option barrière]{#acro-barriere .acronym-item}
+:   Option activée ou désactivée selon le franchissement d’un niveau.
+
+[Option digitale]{#acro-digitale .acronym-item}
+:   Option versant un montant fixe si une condition est satisfaite.
+
+[Option asiatique]{#acro-asiatique .acronym-item}
+:   Option dépendant de la moyenne du sous-jacent.
+
+[Option lookback]{#acro-lookback .acronym-item}
+:   Option dépendant du maximum ou minimum atteint.
+
+[Autocall]{#acro-autocall .acronym-item}
+:   Produit structuré avec remboursement anticipé conditionnel.
+
+---
+
+# Produits de taux
+
+[Swap]{#acro-swap .acronym-item}
+:   Échange de flux financiers à dates futures.
+
+[Swaption]{#acro-swaption .acronym-item}
+:   Option donnant le droit d’entrer dans un swap.
+
+[Cap]{#acro-cap .acronym-item}
+:   Option protégeant contre la hausse d’un taux.
+
+[Floor]{#acro-floor .acronym-item}
+:   Option protégeant contre la baisse d’un taux.
+
+[Taux forward]{#acro-forward-rate .acronym-item}
+:   Taux implicite pour une période future.
+ -->
+
+
+
+</section>
+
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="listing-actions-group">
+    <div class="input-group input-group-sm quarto-listing-filter">
+      <span class="input-group-text"><i class="bi bi-search"></i></span>
+      <input type="text" class="search form-control" placeholder="Filter">
+    </div>
+</div>
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="Z2xvc3Nhcnk=" data-listing-file-modified-sort="1770803198640" data-listing-reading-time-sort="1" data-listing-word-count-sort="58">
+<div class="thumbnail">
+<p><a href="../../glossary/m2mo/calcul_sto.html" class="no-external"></a></p><a href="../../glossary/m2mo/calcul_sto.html" class="no-external">
+<!-- img(9CEB782EFEE6)[progressive=false, height=]:listing:glossary/m2mo/calcul_sto.html -->
+</a><p><a href="../../glossary/m2mo/calcul_sto.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../glossary/m2mo/calcul_sto.html" class="no-external">Calcul stochastique</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../glossary/m2mo/calcul_sto.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../glossary/m2mo/calcul_sto.html" class="no-external"><!-- desc(5A0113B34292)[max=175]:glossary/m2mo/calcul_sto.html --></a>
+</div>
+</div>
+<div class="metadata">
+<p><a href="../../glossary/m2mo/calcul_sto.html" class="no-external"></a></p><a href="../../glossary/m2mo/calcul_sto.html" class="no-external">
+<div class="listing-author">
+Cheryl KOUADIO
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="Z2xvc3Nhcnk=" data-listing-file-modified-sort="1770803249326" data-listing-reading-time-sort="1" data-listing-word-count-sort="56">
+<div class="thumbnail">
+<p><a href="../../glossary/m2mo/edp.html" class="no-external"></a></p><a href="../../glossary/m2mo/edp.html" class="no-external">
+<!-- img(9CEB782EFEE6)[progressive=false, height=]:listing:glossary/m2mo/edp.html -->
+</a><p><a href="../../glossary/m2mo/edp.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../glossary/m2mo/edp.html" class="no-external">Monte-Carlo/EDP</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../glossary/m2mo/edp.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../glossary/m2mo/edp.html" class="no-external"><!-- desc(5A0113B34292)[max=175]:glossary/m2mo/edp.html --></a>
+</div>
+</div>
+<div class="metadata">
+<p><a href="../../glossary/m2mo/edp.html" class="no-external"></a></p><a href="../../glossary/m2mo/edp.html" class="no-external">
+<div class="listing-author">
+Cheryl KOUADIO
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div> ]]></description>
+  <category>glossary</category>
+  <guid>https://cheryl-kdio.github.io/glossary/m2mo/derivatives.html</guid>
+  <pubDate>Wed, 11 Feb 2026 14:41:41 GMT</pubDate>
+</item>
+<item>
+  <title>Monte-Carlo/EDP</title>
+  <dc:creator>Cheryl KOUADIO</dc:creator>
+  <link>https://cheryl-kdio.github.io/glossary/m2mo/edp.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="numérique" class="level1">
+<h1>Numérique</h1>
+<dl>
+<dt><span id="acro-monte-carlo" class="acronym-item">Monte Carlo</span></dt>
+<dd>
+Méthode de simulation stochastique pour le pricing.
+</dd>
+<dt><span id="acro-diff-finies" class="acronym-item">Différences finies</span></dt>
+<dd>
+Méthode numérique de résolution d’EDP.
+</dd>
+<dt><span id="acro-crank-nicolson" class="acronym-item">Crank-Nicolson</span></dt>
+<dd>
+Schéma implicite semi-centré stable et d’ordre 2.
+</dd>
+<dt><span id="acro-psor" class="acronym-item">PSOR</span></dt>
+<dd>
+Méthode itérative pour résoudre les problèmes à obstacle.
+</dd>
+<dt><span id="acro-calibration" class="acronym-item">Calibration</span></dt>
+<dd>
+Estimation des paramètres d’un modèle pour reproduire les prix de marché.
+</dd>
+</dl>
+
+
+
+</section>
+
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="listing-actions-group">
+    <div class="input-group input-group-sm quarto-listing-filter">
+      <span class="input-group-text"><i class="bi bi-search"></i></span>
+      <input type="text" class="search form-control" placeholder="Filter">
+    </div>
+</div>
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="Z2xvc3Nhcnk=" data-listing-file-modified-sort="1770803198640" data-listing-reading-time-sort="1" data-listing-word-count-sort="58">
+<div class="thumbnail">
+<p><a href="../../glossary/m2mo/calcul_sto.html" class="no-external"></a></p><a href="../../glossary/m2mo/calcul_sto.html" class="no-external">
+<!-- img(9CEB782EFEE6)[progressive=false, height=]:listing:glossary/m2mo/calcul_sto.html -->
+</a><p><a href="../../glossary/m2mo/calcul_sto.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../glossary/m2mo/calcul_sto.html" class="no-external">Calcul stochastique</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../glossary/m2mo/calcul_sto.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../glossary/m2mo/calcul_sto.html" class="no-external"><!-- desc(5A0113B34292)[max=175]:glossary/m2mo/calcul_sto.html --></a>
+</div>
+</div>
+<div class="metadata">
+<p><a href="../../glossary/m2mo/calcul_sto.html" class="no-external"></a></p><a href="../../glossary/m2mo/calcul_sto.html" class="no-external">
+<div class="listing-author">
+Cheryl KOUADIO
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="Z2xvc3Nhcnk=" data-listing-file-modified-sort="1770803094882" data-listing-reading-time-sort="5" data-listing-word-count-sort="929">
+<div class="thumbnail">
+<p><a href="../../glossary/m2mo/derivatives.html" class="no-external"></a></p><a href="../../glossary/m2mo/derivatives.html" class="no-external">
+<!-- img(9CEB782EFEE6)[progressive=false, height=]:listing:glossary/m2mo/derivatives.html -->
+</a><p><a href="../../glossary/m2mo/derivatives.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../glossary/m2mo/derivatives.html" class="no-external">Glossary - Derivatives market</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../glossary/m2mo/derivatives.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../glossary/m2mo/derivatives.html" class="no-external"><!-- desc(5A0113B34292)[max=175]:glossary/m2mo/derivatives.html --></a>
+</div>
+</div>
+<div class="metadata">
+<p><a href="../../glossary/m2mo/derivatives.html" class="no-external"></a></p><a href="../../glossary/m2mo/derivatives.html" class="no-external">
+<div class="listing-author">
+Cheryl KOUADIO
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div> ]]></description>
+  <category>glossary</category>
+  <guid>https://cheryl-kdio.github.io/glossary/m2mo/edp.html</guid>
+  <pubDate>Wed, 11 Feb 2026 14:41:41 GMT</pubDate>
+</item>
+</channel>
+</rss>
