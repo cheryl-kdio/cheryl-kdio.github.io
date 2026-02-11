@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Cheryl Kouadio">
-<meta name="dcterms.date" content="2026-02-10">
+<meta name="dcterms.date" content="2026-02-11">
 <meta name="description" content="Cheryl Kouadio is a graduate student in stochastic modeling and quantitative finance at Université Paris Cité. Her academic interests focus on probability theory, stochastic processes, data analysis, and financial risk modeling. She studies how rigorous statistical and mathematical methods can be applied to quantify uncertainty and support decision-making in finance and risk management.">
 
 <title>Mathematical foundations of financial market modeling – Cheryl Kouadio</title>
@@ -121,16 +121,16 @@ window.Quarto = {
 
 <link rel="stylesheet" href="../../../styles.css">
 <meta property="og:title" content="Mathematical foundations of financial market modeling – Cheryl Kouadio">
-<meta property="og:description" content="Financial Markets">
-<meta property="og:image" content="https://cheryl-kdio.github.io/posts/m2mo/derivatives/featured.png">
+<meta property="og:description" content="Interest rate derivatives">
+<meta property="og:image" content="https://cheryl-kdio.github.io/posts/m2mo/yield_curves/featured.png">
 <meta property="og:site_name" content="Cheryl Kouadio">
-<meta property="og:image:height" content="1024">
-<meta property="og:image:width" content="1536">
+<meta property="og:image:height" content="289">
+<meta property="og:image:width" content="481">
 <meta name="twitter:title" content="Mathematical foundations of financial market modeling – Cheryl Kouadio">
-<meta name="twitter:description" content="Financial Markets">
-<meta name="twitter:image" content="https://cheryl-kdio.github.io/posts/m2mo/derivatives/featured.png">
-<meta name="twitter:image-height" content="1024">
-<meta name="twitter:image-width" content="1536">
+<meta name="twitter:description" content="Interest rate derivatives">
+<meta name="twitter:image" content="https://cheryl-kdio.github.io/posts/m2mo/yield_curves/featured.png">
+<meta name="twitter:image-height" content="289">
+<meta name="twitter:image-width" content="481">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -258,18 +258,14 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#financial-markets-and-traded-assets" id="toc-financial-markets-and-traded-assets" class="nav-link active" data-scroll-target="#financial-markets-and-traded-assets">Financial markets and traded assets</a>
+  <li><a href="#different-types-of-interest-rates" id="toc-different-types-of-interest-rates" class="nav-link active" data-scroll-target="#different-types-of-interest-rates">Different types of interest rates</a></li>
+  <li><a href="#link-between-the-zero-coupon-bond-price-and-the-interest-rates" id="toc-link-between-the-zero-coupon-bond-price-and-the-interest-rates" class="nav-link" data-scroll-target="#link-between-the-zero-coupon-bond-price-and-the-interest-rates">Link between the Zero-coupon bond price and the interest rates</a>
   <ul class="collapse">
-  <li><a href="#structural-properties-of-a-financial-market" id="toc-structural-properties-of-a-financial-market" class="nav-link" data-scroll-target="#structural-properties-of-a-financial-market">Structural properties of a financial market</a></li>
+  <li><a href="#zero-coupon-bond-price-and-simple-spot-interest-rate" id="toc-zero-coupon-bond-price-and-simple-spot-interest-rate" class="nav-link" data-scroll-target="#zero-coupon-bond-price-and-simple-spot-interest-rate">Zero-coupon bond price and simple spot interest rate</a></li>
+  <li><a href="#zero-coupon-bond-price-and-simple-forward-interest-rate" id="toc-zero-coupon-bond-price-and-simple-forward-interest-rate" class="nav-link" data-scroll-target="#zero-coupon-bond-price-and-simple-forward-interest-rate">Zero-coupon bond price and simple forward interest rate</a>
+  <ul class="collapse">
+  <li><a href="#rates-derivatives" id="toc-rates-derivatives" class="nav-link" data-scroll-target="#rates-derivatives">Rates derivatives</a></li>
   </ul></li>
-  <li><a href="#mathematical-framework" id="toc-mathematical-framework" class="nav-link" data-scroll-target="#mathematical-framework">Mathematical Framework</a>
-  <ul class="collapse">
-  <li><a href="#trading-strategies-and-wealth-process" id="toc-trading-strategies-and-wealth-process" class="nav-link" data-scroll-target="#trading-strategies-and-wealth-process">Trading strategies and wealth process</a></li>
-  </ul></li>
-  <li><a href="#arbitrage" id="toc-arbitrage" class="nav-link" data-scroll-target="#arbitrage">Arbitrage</a>
-  <ul class="collapse">
-  <li><a href="#risk-neutral-measure" id="toc-risk-neutral-measure" class="nav-link" data-scroll-target="#risk-neutral-measure">Risk-neutral measure</a></li>
-  <li><a href="#market-completeness" id="toc-market-completeness" class="nav-link" data-scroll-target="#market-completeness">Market completeness</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -280,11 +276,11 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Mathematical foundations of financial market modeling</h1>
-<p class="subtitle lead">Financial Markets</p>
+<p class="subtitle lead">Interest rate derivatives</p>
   <div class="quarto-categories">
     <div class="quarto-category">paper</div>
     <div class="quarto-category">m2mo</div>
-    <div class="quarto-category">derivatives</div>
+    <div class="quarto-category">yield-curve</div>
   </div>
   </div>
 
@@ -302,7 +298,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">February 10, 2026</p>
+      <p class="date">February 11, 2026</p>
     </div>
   </div>
   
@@ -314,116 +310,65 @@ window.Quarto = {
 </header>
 
 
-<p>A financial market is an institutional framework in which financial instruments are issued and exchanged. In the primary market, newly created securities such as shares or bonds are sold for the first time by firms or governments to investors. The objective of this article is to introduce the economic role of financial markets and to present the fundamental structural properties required for coherent financial modeling.</p>
-<p>For theoretical clarity, we adopt a discrete-time framework. Time is indexed by <span class="math display">\[
-t \in \{0,1,\dots,T\},
-\]</span> where <span class="math inline">\(T\)</span> denotes a fixed time horizon.</p>
-<section id="financial-markets-and-traded-assets" class="level1">
-<h1>Financial markets and traded assets</h1>
-<p>Financial markets encompass several types of instruments. The equity market consists of ownership claims on firms, such as common or preferred shares. Firms raise capital by issuing equity securities, and these securities are subsequently traded on organized exchanges such as Euronext Paris or the New York Stock Exchange. Prices are determined by supply and demand and reflect expectations regarding firm performance and economic conditions.</p>
-<p>The bond market consists of debt instruments issued by governments or corporations. A bond is a contract specifying that the issuer will repay a principal amount at maturity and pay periodic interest, referred to as coupons. Bonds provide predictable income streams and are fundamental instruments for public and private financing.</p>
-<p>The derivatives market includes financial instruments whose value depends on an underlying asset. Typical examples are options, forwards, futures, and swaps. Derivatives are used for risk management, speculative positioning, and arbitrage strategies across markets.</p>
-<p>The primary market enables capital allocation within the economy. Firms obtain financing for investment and expansion, while investors allocate resources in expectation of future returns. Financial markets also facilitate risk transfer. For example, firms exposed to commodity price risk may use derivative contracts to hedge adverse fluctuations.</p>
-<section id="structural-properties-of-a-financial-market" class="level2">
-<h2 class="anchored" data-anchor-id="structural-properties-of-a-financial-market">Structural properties of a financial market</h2>
-<p>For a financial market to function efficiently, several properties are desirable. Liquidity ensures that assets can be traded without significant price impact. Transparency guarantees that relevant information is accessible to participants. Fairness implies equal access to market information. Efficiency requires that prices reflect available information and that arbitrage opportunities do not persist.</p>
-<p>The absence of arbitrage is a central assumption in modern financial mathematics and underlies pricing theory.</p>
+<p>The interest rate market is one of the largest and most liquid segments of the financial markets. It encompasses a wide range of instruments, including government bonds, corporate bonds, interest rate swaps, and options on interest rates. The modeling of interest rates is crucial for pricing and managing the risks associated with these instruments.</p>
+<p>To understand the dynamics of interest rate, we first need to introduce the different types of interest rates that are used in creating and pricing interest rate derivatives, as well as the concept of yield curve, which is a fundamental tool for analyzing the term structure of interest rates.</p>
+<p>Moreover, we will introduce several interest rate derivatives currently traded in the market.</p>
+<section id="different-types-of-interest-rates" class="level1">
+<h1>Different types of interest rates</h1>
+<p>An interest rate can be seen as the cost of borrowing or the return on lending money. For exemple, when a counterparty A borrows, at time t, a certain amount of cash <span class="math inline">\(N\)</span> from a counterparty B with a maturity <span class="math inline">\(T\)</span>, and interest rate <span class="math inline">\(r\)</span>. Then, at maturity <span class="math inline">\(T\)</span>, A will have to pay back to B the amount <span class="math inline">\(N(1+r(T-t)) = N(1+r\tau)\)</span> with <span class="math inline">\(\tau = T-t\)</span> the time to maturity, i.e.&nbsp;<span class="math inline">\(N \mapsto N(1+r\tau)\)</span>. This is the case of a simple interest rate.</p>
+<p>In practice, one can differentiate two types of interest rates : - the simple interest rate and the compound interest rate. The simple interest rate is the one we just introduced. In continuous time, we would say <span class="math inline">\(N \mapsto N e^{r\tau}\)</span>, where <span class="math inline">\(e\)</span> is the exponential function.</p>
+<ul>
+<li>the compound interest rate is defined as follows: at time <span class="math inline">\(t\)</span>, A borrows an amount <span class="math inline">\(N\)</span> from B with a maturity <span class="math inline">\(T\)</span> and a compound interest rate <span class="math inline">\(r\)</span>. Then, at maturity <span class="math inline">\(T\)</span>, A will have to pay back to B the amount <span class="math inline">\(N(1+r)^{\tau}\)</span> with <span class="math inline">\(\tau = T-t\)</span> the time to maturity. Hence, <span class="math inline">\(N \mapsto N(1+r)^{\tau}\)</span>.</li>
+</ul>
+<p>It is also important to distinguish between the different types of interest rates that are used in the market. The most common ones are: - the <strong>spot interest rate</strong> is the interest rate that applies to a loan or deposit that starts immediately and has a maturity of <span class="math inline">\(T\)</span>.</p>
+<ul>
+<li>the <strong>forward interest rate</strong> is the interest rate that applies to a loan or deposit that starts at a future date <span class="math inline">\(T\)</span> and has a maturity of <span class="math inline">\(S\)</span>.</li>
+</ul>
 </section>
-</section>
-<section id="mathematical-framework" class="level1">
-<h1>Mathematical Framework</h1>
-<p>We consider a financial market composed of one risk-free asset and <span class="math inline">\(q\)</span> risky assets.</p>
-<p>Let <span class="math inline">\(S_t^0\)</span> denote the price of the risk-free asset. In discrete time, we assume it evolves deterministically according to <span class="math display">\[
-S_{t+1}^0 = (1 + r_t) S_t^0,
-\]</span> where <span class="math inline">\(r_t\)</span> denotes the short-term interest rate.</p>
-<p>Let <span class="math inline">\(S_t^i\)</span> for <span class="math inline">\(i=1,\dots,q\)</span> denote the prices of risky assets. Their evolution is stochastic and will be specified through an appropriate probabilistic model.</p>
-<section id="trading-strategies-and-wealth-process" class="level2">
-<h2 class="anchored" data-anchor-id="trading-strategies-and-wealth-process">Trading strategies and wealth process</h2>
-<p>A trading strategy is a predictable process <span class="math display">\[
-\delta_t = (\delta_t^0, \delta_t^1, \dots, \delta_t^q),
-\]</span> where <span class="math inline">\(\delta_t^i\)</span> represents the number of units of asset <span class="math inline">\(i\)</span> held at time <span class="math inline">\(t\)</span>.</p>
-<p>The associated wealth process is defined by <span class="math display">\[
-V_t = \sum_{i=0}^q \delta_t^i S_t^i.
+<section id="link-between-the-zero-coupon-bond-price-and-the-interest-rates" class="level1">
+<h1>Link between the Zero-coupon bond price and the interest rates</h1>
+<p>::{.callout-note} # What is a zero-coupon bond? A zero-coupon bond is a debt security that does not pay periodic interest (coupons). Instead, it is issued at a discount to its face value and pays the full face value at maturity. For example, assuming an investor buys a zero-coupon bond with a face value of <span class="math inline">\(1\)</span> and a maturity of 1 year. This means the investor will receive <span class="math inline">\(1\)</span> at the end of 1 year. Generally, the price of the zero-coupon bond will be denoted by <span class="math inline">\(B(t,T)\)</span>, where <span class="math inline">\(t\)</span> is the current time and <span class="math inline">\(T\)</span> is the maturity of the bond. :::</p>
+<section id="zero-coupon-bond-price-and-simple-spot-interest-rate" class="level2">
+<h2 class="anchored" data-anchor-id="zero-coupon-bond-price-and-simple-spot-interest-rate">Zero-coupon bond price and simple spot interest rate</h2>
+<p>Assuming we pay <span class="math inline">\(B(t,T)\)</span> at time <span class="math inline">\(t\)</span> to buy a zero-coupon bond that will pay <span class="math inline">\(1\)</span> at maturity <span class="math inline">\(T\)</span>. Hence, we have <span class="math inline">\(B(t,T) \mapsto 1\)</span> at maturity <span class="math inline">\(T\)</span>. One can also, instead of buying the zero-coupon bond, invest <span class="math inline">\(B(t,T)\)</span> in the money market account that pays the short-term interest rate <span class="math inline">\(L(t,T)\)</span>. Hence, at maturity <span class="math inline">\(T\)</span>, we will have <span class="math inline">\(B(t,T) \mapsto B(t,T)(1 - (T-t) L(t,T))\)</span>. Since, we are in a no-arbitrage framework, we must have the same payoff at maturity <span class="math inline">\(T\)</span> for both strategies, which means that <span class="math inline">\(1 = B(t,T)(1 - (T-t) L(t,T))\)</span>. Hence, we can deduce the following link between the zero-coupon bond price and the simple forward interest rate:</p>
+<p><span class="math display">\[
+L(t,T) = \frac{1}{T-t} \left( \frac{1}{B(t,T)} - 1 \right).
 \]</span></p>
-<p>A strategy is said to be self-financing if changes in wealth are solely due to variations in asset prices. In discrete time, this condition reads <span class="math display">\[
-V_{t+1} - V_t = \delta_t^0 \, dS_t^0  + \sum_{i=1}^q \delta_t^i (S_{t+1}^i - S_t^i).
-\]</span> Equivalently, <span class="math display">\[
-V_t = V_0 + \delta_t^0 \, dS_t^0  + \sum_{s=1}^{t-1} \sum_{i=0}^q \delta_s^i (S_{s+1}^i - S_s^i).
+<p>In continuous time, we have <span class="math inline">\(1 = B(t,T) e^{(T-t) R(t,T)}\)</span>, which gives us the following link between the zero-coupon bond price and the continuous forward interest rate: <span class="math display">\[
+R(t,T) = -\frac{1}{T-t} \ln(B(t,T)).
 \]</span></p>
+<p>Therefore, we call <strong>short term interest rate</strong>, the spot interest rate <span class="math inline">\(L(t,T)\)</span> or <span class="math inline">\(R(t,T)\)</span>, with <span class="math inline">\(T \rightarrow t\)</span>, i.e.&nbsp;<span class="math inline">\(lim_{T \rightarrow t} L(t,T)\)</span> = <span class="math inline">\(\lim_{T \rightarrow t} R(t,T) = r_t\)</span>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Self financing condition in continuous time
+The yield curve or the term structure of interest rates
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>In continuous time, the self-financing condition is expressed as <span class="math display">\[
-\begin{align}
-dV_t &amp;= \delta_t^0 \, dS_t^0  + \sum_{i=1}^q \delta_t^i \, dS_t^i. \\
-\Leftrightarrow
-V_t &amp;= V_0 + \delta_t^0 \, dS_t^0  + \int_1^t \sum_{i=0}^q \delta_s^i \, dS_s^i.
-\end{align}
-\]</span></p>
-<p>In the case where the risky assets give dividends, the self-financing condition must be modified to account for dividend payments. Let <span class="math inline">\(D_t^i\)</span> denote the cumulative dividends paid by asset <span class="math inline">\(i\)</span> up to time <span class="math inline">\(t\)</span>. The wealth process then satisfies : <span class="math display">\[
-dV_t = \delta_t^0 \, dS_t^0  + \sum_{i=1}^q \delta_t^i \, dS_t^i + \sum_{i=1}^q \delta_t^i \, dD_t^i.
-\]</span></p>
-<p>One can talk in term of discounted wealth process <span class="math inline">\(\tilde V_t = \frac{V_t}{S_t^0}\)</span>, which satisfies <span class="math display">\[
-d\tilde V_t = \sum_{i=1}^q \delta_t^i \, d\tilde S_t^i,
-\]</span> where <span class="math inline">\(\tilde S_t^i = \frac{S_t^i}{S_t^0} = \beta_t S_t^i\)</span> is the discounted price of the risky asset <span class="math inline">\(i\)</span>.</p>
+<p>The yield curve is a graphical representation of the relationship between interest rates and the maturity of debt securities. It is hence a function <span class="math inline">\(T \mapsto L(t,T)\)</span>, with a given date <span class="math inline">\(t\)</span>. Therefore, for each date <span class="math inline">\(t\)</span>, we can build a yield curve made of market data (Bonds, FRA, SWAP, etc.) and use it to price interest rate derivatives.</p>
 </div>
 </div>
 </section>
-</section>
-<section id="arbitrage" class="level1">
-<h1>Arbitrage</h1>
-<p>An arbitrage opportunity is defined as a self-financing strategy satisfying <span class="math display">\[
-V_0 = 0, \qquad V_T \ge 0 \text{ almost surely}, \qquad \mathbb{P}(V_T &gt; 0) &gt; 0.
-\]</span> Such a strategy generates profit without risk or initial investment. Markets admitting arbitrage are economically inconsistent, and therefore we assume the market is arbitrage-free.</p>
-<section id="risk-neutral-measure" class="level2">
-<h2 class="anchored" data-anchor-id="risk-neutral-measure">Risk-neutral measure</h2>
-<p>Under the absence of arbitrage, there exists an equivalent probability measure <span class="math inline">\(\mathcal{Q}\)</span> under which discounted asset prices are martingales. Let <span class="math display">\[
-\tilde S_t^i = \frac{S_t^i}{S_t^0}
-\]</span> denote the discounted price process. Then <span class="math display">\[
-\mathbb{E}^{\mathcal{Q}}[\tilde S_{t+1}^i \mid \mathcal{F}_t] = \tilde S_t^i.
-\]</span> This result allows derivative pricing via expectation: <span class="math display">\[
-\Pi_0 = S_0^0 \, \mathbb{E}^{\mathcal{Q}}\left[\frac{\varepsilon}{S_T^0}\right],
-\]</span> where <span class="math inline">\(\varepsilon\)</span> denotes the contingent claim payoff at maturity.</p>
-</section>
-<section id="market-completeness" class="level2">
-<h2 class="anchored" data-anchor-id="market-completeness">Market completeness</h2>
-<p>The market is said to be complete if every contingent claim <span class="math inline">\(\varepsilon\)</span> can be replicated by a self-financing strategy. In a complete market, the risk-neutral measure is unique and every derivative admits a unique arbitrage-free price. In an incomplete market, multiple risk-neutral measures may exist and perfect replication is not always possible, leading to pricing and hedging challenges.</p>
-<p>As an illustration, the payoff of a European call option with strike <span class="math inline">\(K\)</span> and maturity <span class="math inline">\(T\)</span> is given by <span class="math display">\[
-\varepsilon = \max(S_T - K, 0).
+<section id="zero-coupon-bond-price-and-simple-forward-interest-rate" class="level2">
+<h2 class="anchored" data-anchor-id="zero-coupon-bond-price-and-simple-forward-interest-rate">Zero-coupon bond price and simple forward interest rate</h2>
+<p>In order to understand the link between the zero-coupon bond price and the forward interest rate, we can refer to the fct that it is the rate that one can lock at time <span class="math inline">\(t\)</span> for a loan that will start at a future date <span class="math inline">\(T\)</span> and has a maturity of <span class="math inline">\(S\)</span>. Hence at time t, one can invest on a zero-coupon bond with maturity <span class="math inline">\(S\)</span> and get <span class="math inline">\(B(t,S) \mapsto 1\)</span> at maturity <span class="math inline">\(S\)</span>. Alternatively, one can invest on a zero-coupon bond with maturity <span class="math inline">\(T\)</span> and get <span class="math inline">\(B(t,T) \mapsto 1\)</span> at maturity <span class="math inline">\(T\)</span>, and then reinvest the proceeds in the money market account that pays the short-term interest rate <span class="math inline">\(L(t; T,S)\)</span> until maturity <span class="math inline">\(S\)</span>. Hence, at maturity <span class="math inline">\(S\)</span>, we will have <span class="math inline">\(B(t,T)(1 - (S-T) L(T,S))\)</span>.</p>
+<p>Assuming we are in a no-arbitrage framework, we must have the same payoff at maturity <span class="math inline">\(S\)</span> for both strategies, which means that <span class="math inline">\(1 = B(t,T)(1 - (S-T) L(T,S))\)</span>. Hence, we can deduce the following link between the zero-coupon bond price and the simple forward interest rate:</p>
+<p><span class="math display">\[
+L(t; T,S) = \frac{1}{S-T} \left( \frac{B(t,T)}{B(t,S)} - 1 \right).
 \]</span></p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Take away
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Financial markets play a fundamental role in capital allocation, risk transfer, and price discovery within the economy. From a mathematical perspective, their analysis relies on a structured framework built upon trading strategies, wealth dynamics, and probabilistic modeling.</p>
-<p>The <strong>absence of arbitrage</strong> constitutes the cornerstone of modern financial theory. It guarantees the existence of a risk-neutral measure under which discounted asset prices behave as martingales, thereby providing a coherent foundation for derivative pricing.</p>
-<p>Finally, the notion of <strong>market completeness</strong> determines whether contingent claims can be perfectly replicated and uniquely priced. These structural concepts form the basis of quantitative finance and underpin the development of more advanced pricing and hedging models.</p>
-</div>
-</div>
-<!-- 
-AddToAny check more: https://www.addtoany.com/buttons/for/website 
-Using includes will make edits easier, will only need to add or remove button here if needed.
-https://quarto.org/docs/authoring/includes.html
--->
-<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
-<p><a class="a2a_dd" href="https://www.addtoany.com/share"></a> <a class="a2a_button_linkedin"></a> <a class="a2a_button_bluesky"></a> <a class="a2a_button_facebook"></a> <a class="a2a_button_whatsapp"></a> <a class="a2a_button_wechat"></a> <a class="a2a_button_sina_weibo"></a> <a class="a2a_button_copy_link"></a> <a class="a2a_button_email"></a></p>
-</div>
-<script async="" src="https://static.addtoany.com/menu/page.js"></script>
+<p>Therefore, we call <strong>forward interest rate</strong>, the simple forward interest rate <span class="math inline">\(L(t; T,S)\)</span> or the continuous forward interest rate <span class="math inline">\(R(t; T,S)\)</span>, with <span class="math inline">\(S \rightarrow T\)</span>, i.e.&nbsp;<span class="math inline">\(lim_{S \rightarrow T} L(t; T,S)\)</span> = f(t,T)$.</p>
+<p>Moreover, when <span class="math inline">\(T \rightarrow t\)</span>, we have <span class="math inline">\(f(t,t) = r_t\)</span>, meaning that the forward interest rate at time <span class="math inline">\(t\)</span> for a loan that starts immediately and has a maturity of <span class="math inline">\(T\)</span> is equal to the short-term interest rate at time <span class="math inline">\(t\)</span>.</p>
+<p>::{.callout-note} 💡 We can show that the instantaneous interest rate <span class="math inline">\(f(t,T)\)</span> is equal to <span class="math inline">\(-\frac{dB(t,T)}{dT}\)</span>. Hence, we can deduce that the zero-coupon bond price can be expressed as follows: <span class="math display">\[
+B(t,T) = e^{-\int_t^T f(t,u) du}.
+\]</span> :::</p>
+<section id="rates-derivatives" class="level3">
+<h3 class="anchored" data-anchor-id="rates-derivatives">Rates derivatives</h3>
 
 
+</section>
 </section>
 </section>
 

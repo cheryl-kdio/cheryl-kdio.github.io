@@ -1,0 +1,88 @@
+---
+title: "Mathematical foundations of financial market modeling"
+subtitle: "Interest rate derivatives"
+author:
+  name: Cheryl KOUADIO
+categories: [paper,m2mo,yield-curve]
+date: "2026-02-11"
+image: "featured.png"
+---
+
+The interest rate market is one of the largest and most liquid segments of the financial markets.
+It encompasses a wide range of instruments, including government bonds, corporate bonds, interest rate swaps, and options on interest rates. The modeling of interest rates is crucial for pricing and managing the risks associated with these instruments.
+
+To understand the dynamics of interest rate, we first need to introduce the different types of interest rates that are used in creating and pricing interest rate derivatives, as well as the concept of yield curve, which is a fundamental tool for analyzing the term structure of interest rates.
+
+Moreover, we will introduce several interest rate derivatives currently traded in the market.
+
+# Different types of interest rates
+
+An interest rate can be seen as the cost of borrowing or the return on lending money. For exemple, when a counterparty A borrows, at time t, a certain amount of cash $N$ from a counterparty B with a maturity $T$, and interest rate $r$.
+Then, at maturity $T$, A will have to pay back to B the amount $N(1+r(T-t)) = N(1+r\tau)$ with $\tau = T-t$ the time to maturity, i.e. $N \mapsto N(1+r\tau)$. This is the case of a simple interest rate.
+
+In practice, one can differentiate two types of interest rates : 
+- the simple interest rate and the compound interest rate. The simple interest rate is the one we just introduced. In continuous time, we would say $N \mapsto N e^{r\tau}$, where $e$ is the exponential function.
+
+- the compound interest rate is defined as follows: at time $t$, A borrows an amount $N$ from B with a maturity $T$ and a compound interest rate $r$. Then, at maturity $T$, A will have to pay back to B the amount $N(1+r)^{\tau}$ with $\tau = T-t$ the time to maturity. Hence, $N \mapsto N(1+r)^{\tau}$.
+
+It is also important to distinguish between the different types of interest rates that are used in the market. The most common ones are:
+- the **spot interest rate** is the interest rate that applies to a loan or deposit that starts immediately and has a maturity of $T$.
+
+- the **forward interest rate** is the interest rate that applies to a loan or deposit that starts at a future date $T$ and has a maturity of $S$. 
+
+
+# Link between the Zero-coupon bond price and the interest rates
+
+::{.callout-note}
+# What is a zero-coupon bond?
+A zero-coupon bond is a debt security that does not pay periodic interest (coupons). Instead, it is issued at a discount to its face value and pays the full face value at maturity. For example, assuming an investor buys a zero-coupon bond with a face value of $1$ and a maturity of 1 year. This means the investor will receive $1$ at the end of 1 year. Generally, the price of the zero-coupon bond will be denoted by $B(t,T)$, where $t$ is the current time and $T$ is the maturity of the bond.
+:::
+
+## Zero-coupon bond price and simple spot interest rate
+
+Assuming we pay $B(t,T)$ at time $t$ to buy a zero-coupon bond that will pay $1$ at maturity $T$. Hence, we have $B(t,T) \mapsto 1$ at maturity $T$.
+One can also, instead of buying the zero-coupon bond, invest $B(t,T)$ in the money market account that pays the short-term interest rate $L(t,T)$. Hence, at maturity $T$, we will have $B(t,T) \mapsto B(t,T)(1 - (T-t) L(t,T))$.
+Since, we are in a no-arbitrage framework, we must have the same payoff at maturity $T$ for both strategies, which means that $1 = B(t,T)(1 - (T-t) L(t,T))$. Hence, we can deduce the following link between the zero-coupon bond price and the simple forward interest rate:
+
+$$
+L(t,T) = \frac{1}{T-t} \left( \frac{1}{B(t,T)} - 1 \right).
+$$
+
+In continuous time, we have $1 = B(t,T) e^{(T-t) R(t,T)}$, which gives us the following link between the zero-coupon bond price and the continuous forward interest rate: 
+$$
+R(t,T) = -\frac{1}{T-t} \ln(B(t,T)).
+$$
+
+Therefore, we call **short term interest rate**, the spot interest rate $L(t,T)$ or $R(t,T)$, with $T \rightarrow t$, i.e. $lim_{T \rightarrow t} L(t,T)$ = $\lim_{T \rightarrow t} R(t,T) = r_t$.
+
+:::{.callout-note}
+# The yield curve or the term structure of interest rates
+The yield curve is a graphical representation of the relationship between interest rates and the maturity of debt securities. It is hence a function $T \mapsto L(t,T)$, with a given date $t$.
+Therefore, for each date $t$, we can build a yield curve made of market data (Bonds, FRA, SWAP, etc.) and use it to price interest rate derivatives.
+:::
+
+## Zero-coupon bond price and simple forward interest rate
+
+In order to understand the link between the zero-coupon bond price and the forward interest rate, we can refer to the fct that it is the rate that one can lock at time $t$ for a loan that will start at a future date $T$ and has a maturity of $S$.
+Hence at time t, one can invest on a zero-coupon bond with maturity $S$ and get $B(t,S) \mapsto 1$ at maturity $S$.
+Alternatively, one can invest on a zero-coupon bond with maturity $T$ and get $B(t,T) \mapsto 1$ at maturity $T$, and then reinvest the proceeds in the money market account that pays the short-term interest rate $L(t; T,S)$ until maturity $S$. Hence, at maturity $S$, we will have $B(t,T)(1 - (S-T) L(T,S))$.
+
+Assuming we are in a no-arbitrage framework, we must have the same payoff at maturity $S$ for both strategies, which means that $1 = B(t,T)(1 - (S-T) L(T,S))$. Hence, we can deduce the following link between the zero-coupon bond price and the simple forward interest rate:
+
+$$
+L(t; T,S) = \frac{1}{S-T} \left( \frac{B(t,T)}{B(t,S)} - 1 \right).
+$$
+
+Therefore, we call **forward interest rate**, the simple forward interest rate $L(t; T,S)$ or the continuous forward interest rate $R(t; T,S)$, with $S \rightarrow T$, i.e. $lim_{S \rightarrow T} L(t; T,S)$ = f(t,T)$.
+
+Moreover, when $T \rightarrow t$, we have $f(t,t) = r_t$, meaning that the forward interest rate at time $t$ for a loan that starts immediately and has a maturity of $T$ is equal to the short-term interest rate at time $t$.
+
+::{.callout-note}
+💡 We can show that the instantaneous interest rate $f(t,T)$ is equal to $-\frac{dB(t,T)}{dT}$.
+Hence, we can deduce that the zero-coupon bond price can be expressed as follows:
+$$
+B(t,T) = e^{-\int_t^T f(t,u) du}.
+$$
+:::
+
+### Rates derivatives

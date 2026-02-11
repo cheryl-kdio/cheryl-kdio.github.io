@@ -10,6 +10,7 @@ listing:
   sort-ui: true
   filter-ui: true
   feed: true
+  image-placeholder: files/images/placeholder.png
   contents: 
       - posts
       - posts/post-links.yml

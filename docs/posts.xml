@@ -17,6 +17,106 @@
 <generator>quarto-1.6.40</generator>
 <lastBuildDate>Tue, 10 Feb 2026 23:00:00 GMT</lastBuildDate>
 <item>
+  <title>Model free pricing results</title>
+  <dc:creator>Cheryl KOUADIO</dc:creator>
+  <link>https://cheryl-kdio.github.io/posts/m2mo/derivatives/02_model_free(1).html</link>
+  <description><![CDATA[ 
+
+
+
+
+<!-- 
+AddToAny check more: https://www.addtoany.com/buttons/for/website 
+Using includes will make edits easier, will only need to add or remove button here if needed.
+https://quarto.org/docs/authoring/includes.html
+-->
+<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<p><a class="a2a_dd" href="https://www.addtoany.com/share"></a> <a class="a2a_button_linkedin"></a> <a class="a2a_button_bluesky"></a> <a class="a2a_button_facebook"></a> <a class="a2a_button_whatsapp"></a> <a class="a2a_button_wechat"></a> <a class="a2a_button_sina_weibo"></a> <a class="a2a_button_copy_link"></a> <a class="a2a_button_email"></a></p>
+</div>
+<script async="" src="https://static.addtoany.com/menu/page.js"></script>
+
+
+
+ ]]></description>
+  <category>paper</category>
+  <category>m2mo</category>
+  <category>derivatives</category>
+  <guid>https://cheryl-kdio.github.io/posts/m2mo/derivatives/02_model_free(1).html</guid>
+  <pubDate>Tue, 10 Feb 2026 23:00:00 GMT</pubDate>
+  <media:content url="https://cheryl-kdio.github.io/posts/m2mo/derivatives/featured.png" medium="image" type="image/png" height="96" width="144"/>
+</item>
+<item>
+  <title>Mathematical foundations of financial market modeling</title>
+  <dc:creator>Cheryl KOUADIO</dc:creator>
+  <link>https://cheryl-kdio.github.io/posts/m2mo/yield_curves/00_yield_curve.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>The interest rate market is one of the largest and most liquid segments of the financial markets. It encompasses a wide range of instruments, including government bonds, corporate bonds, interest rate swaps, and options on interest rates. The modeling of interest rates is crucial for pricing and managing the risks associated with these instruments.</p>
+<p>To understand the dynamics of interest rate, we first need to introduce the different types of interest rates that are used in creating and pricing interest rate derivatives, as well as the concept of yield curve, which is a fundamental tool for analyzing the term structure of interest rates.</p>
+<p>Moreover, we will introduce several interest rate derivatives currently traded in the market.</p>
+<section id="different-types-of-interest-rates" class="level1">
+<h1>Different types of interest rates</h1>
+<p>An interest rate can be seen as the cost of borrowing or the return on lending money. For exemple, when a counterparty A borrows, at time t, a certain amount of cash <img src="https://latex.codecogs.com/png.latex?N"> from a counterparty B with a maturity <img src="https://latex.codecogs.com/png.latex?T">, and interest rate <img src="https://latex.codecogs.com/png.latex?r">. Then, at maturity <img src="https://latex.codecogs.com/png.latex?T">, A will have to pay back to B the amount <img src="https://latex.codecogs.com/png.latex?N(1+r(T-t))%20=%20N(1+r%5Ctau)"> with <img src="https://latex.codecogs.com/png.latex?%5Ctau%20=%20T-t"> the time to maturity, i.e.&nbsp;<img src="https://latex.codecogs.com/png.latex?N%20%5Cmapsto%20N(1+r%5Ctau)">. This is the case of a simple interest rate.</p>
+<p>In practice, one can differentiate two types of interest rates : - the simple interest rate and the compound interest rate. The simple interest rate is the one we just introduced. In continuous time, we would say <img src="https://latex.codecogs.com/png.latex?N%20%5Cmapsto%20N%20e%5E%7Br%5Ctau%7D">, where <img src="https://latex.codecogs.com/png.latex?e"> is the exponential function.</p>
+<ul>
+<li>the compound interest rate is defined as follows: at time <img src="https://latex.codecogs.com/png.latex?t">, A borrows an amount <img src="https://latex.codecogs.com/png.latex?N"> from B with a maturity <img src="https://latex.codecogs.com/png.latex?T"> and a compound interest rate <img src="https://latex.codecogs.com/png.latex?r">. Then, at maturity <img src="https://latex.codecogs.com/png.latex?T">, A will have to pay back to B the amount <img src="https://latex.codecogs.com/png.latex?N(1+r)%5E%7B%5Ctau%7D"> with <img src="https://latex.codecogs.com/png.latex?%5Ctau%20=%20T-t"> the time to maturity. Hence, <img src="https://latex.codecogs.com/png.latex?N%20%5Cmapsto%20N(1+r)%5E%7B%5Ctau%7D">.</li>
+</ul>
+<p>It is also important to distinguish between the different types of interest rates that are used in the market. The most common ones are: - the <strong>spot interest rate</strong> is the interest rate that applies to a loan or deposit that starts immediately and has a maturity of <img src="https://latex.codecogs.com/png.latex?T">.</p>
+<ul>
+<li>the <strong>forward interest rate</strong> is the interest rate that applies to a loan or deposit that starts at a future date <img src="https://latex.codecogs.com/png.latex?T"> and has a maturity of <img src="https://latex.codecogs.com/png.latex?S">.</li>
+</ul>
+</section>
+<section id="link-between-the-zero-coupon-bond-price-and-the-interest-rates" class="level1">
+<h1>Link between the Zero-coupon bond price and the interest rates</h1>
+<p>::{.callout-note} # What is a zero-coupon bond? A zero-coupon bond is a debt security that does not pay periodic interest (coupons). Instead, it is issued at a discount to its face value and pays the full face value at maturity. For example, assuming an investor buys a zero-coupon bond with a face value of <img src="https://latex.codecogs.com/png.latex?1"> and a maturity of 1 year. This means the investor will receive <img src="https://latex.codecogs.com/png.latex?1"> at the end of 1 year. Generally, the price of the zero-coupon bond will be denoted by <img src="https://latex.codecogs.com/png.latex?B(t,T)">, where <img src="https://latex.codecogs.com/png.latex?t"> is the current time and <img src="https://latex.codecogs.com/png.latex?T"> is the maturity of the bond. :::</p>
+<section id="zero-coupon-bond-price-and-simple-spot-interest-rate" class="level2">
+<h2 class="anchored" data-anchor-id="zero-coupon-bond-price-and-simple-spot-interest-rate">Zero-coupon bond price and simple spot interest rate</h2>
+<p>Assuming we pay <img src="https://latex.codecogs.com/png.latex?B(t,T)"> at time <img src="https://latex.codecogs.com/png.latex?t"> to buy a zero-coupon bond that will pay <img src="https://latex.codecogs.com/png.latex?1"> at maturity <img src="https://latex.codecogs.com/png.latex?T">. Hence, we have <img src="https://latex.codecogs.com/png.latex?B(t,T)%20%5Cmapsto%201"> at maturity <img src="https://latex.codecogs.com/png.latex?T">. One can also, instead of buying the zero-coupon bond, invest <img src="https://latex.codecogs.com/png.latex?B(t,T)"> in the money market account that pays the short-term interest rate <img src="https://latex.codecogs.com/png.latex?L(t,T)">. Hence, at maturity <img src="https://latex.codecogs.com/png.latex?T">, we will have <img src="https://latex.codecogs.com/png.latex?B(t,T)%20%5Cmapsto%20B(t,T)(1%20-%20(T-t)%20L(t,T))">. Since, we are in a no-arbitrage framework, we must have the same payoff at maturity <img src="https://latex.codecogs.com/png.latex?T"> for both strategies, which means that <img src="https://latex.codecogs.com/png.latex?1%20=%20B(t,T)(1%20-%20(T-t)%20L(t,T))">. Hence, we can deduce the following link between the zero-coupon bond price and the simple forward interest rate:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AL(t,T)%20=%20%5Cfrac%7B1%7D%7BT-t%7D%20%5Cleft(%20%5Cfrac%7B1%7D%7BB(t,T)%7D%20-%201%20%5Cright).%0A"></p>
+<p>In continuous time, we have <img src="https://latex.codecogs.com/png.latex?1%20=%20B(t,T)%20e%5E%7B(T-t)%20R(t,T)%7D">, which gives us the following link between the zero-coupon bond price and the continuous forward interest rate: <img src="https://latex.codecogs.com/png.latex?%0AR(t,T)%20=%20-%5Cfrac%7B1%7D%7BT-t%7D%20%5Cln(B(t,T)).%0A"></p>
+<p>Therefore, we call <strong>short term interest rate</strong>, the spot interest rate <img src="https://latex.codecogs.com/png.latex?L(t,T)"> or <img src="https://latex.codecogs.com/png.latex?R(t,T)">, with <img src="https://latex.codecogs.com/png.latex?T%20%5Crightarrow%20t">, i.e.&nbsp;<img src="https://latex.codecogs.com/png.latex?lim_%7BT%20%5Crightarrow%20t%7D%20L(t,T)"> = <img src="https://latex.codecogs.com/png.latex?%5Clim_%7BT%20%5Crightarrow%20t%7D%20R(t,T)%20=%20r_t">.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+The yield curve or the term structure of interest rates
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The yield curve is a graphical representation of the relationship between interest rates and the maturity of debt securities. It is hence a function <img src="https://latex.codecogs.com/png.latex?T%20%5Cmapsto%20L(t,T)">, with a given date <img src="https://latex.codecogs.com/png.latex?t">. Therefore, for each date <img src="https://latex.codecogs.com/png.latex?t">, we can build a yield curve made of market data (Bonds, FRA, SWAP, etc.) and use it to price interest rate derivatives.</p>
+</div>
+</div>
+</section>
+<section id="zero-coupon-bond-price-and-simple-forward-interest-rate" class="level2">
+<h2 class="anchored" data-anchor-id="zero-coupon-bond-price-and-simple-forward-interest-rate">Zero-coupon bond price and simple forward interest rate</h2>
+<p>In order to understand the link between the zero-coupon bond price and the forward interest rate, we can refer to the fct that it is the rate that one can lock at time <img src="https://latex.codecogs.com/png.latex?t"> for a loan that will start at a future date <img src="https://latex.codecogs.com/png.latex?T"> and has a maturity of <img src="https://latex.codecogs.com/png.latex?S">. Hence at time t, one can invest on a zero-coupon bond with maturity <img src="https://latex.codecogs.com/png.latex?S"> and get <img src="https://latex.codecogs.com/png.latex?B(t,S)%20%5Cmapsto%201"> at maturity <img src="https://latex.codecogs.com/png.latex?S">. Alternatively, one can invest on a zero-coupon bond with maturity <img src="https://latex.codecogs.com/png.latex?T"> and get <img src="https://latex.codecogs.com/png.latex?B(t,T)%20%5Cmapsto%201"> at maturity <img src="https://latex.codecogs.com/png.latex?T">, and then reinvest the proceeds in the money market account that pays the short-term interest rate <img src="https://latex.codecogs.com/png.latex?L(t;%20T,S)"> until maturity <img src="https://latex.codecogs.com/png.latex?S">. Hence, at maturity <img src="https://latex.codecogs.com/png.latex?S">, we will have <img src="https://latex.codecogs.com/png.latex?B(t,T)(1%20-%20(S-T)%20L(T,S))">.</p>
+<p>Assuming we are in a no-arbitrage framework, we must have the same payoff at maturity <img src="https://latex.codecogs.com/png.latex?S"> for both strategies, which means that <img src="https://latex.codecogs.com/png.latex?1%20=%20B(t,T)(1%20-%20(S-T)%20L(T,S))">. Hence, we can deduce the following link between the zero-coupon bond price and the simple forward interest rate:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AL(t;%20T,S)%20=%20%5Cfrac%7B1%7D%7BS-T%7D%20%5Cleft(%20%5Cfrac%7BB(t,T)%7D%7BB(t,S)%7D%20-%201%20%5Cright).%0A"></p>
+<p>Therefore, we call <strong>forward interest rate</strong>, the simple forward interest rate <img src="https://latex.codecogs.com/png.latex?L(t;%20T,S)"> or the continuous forward interest rate <img src="https://latex.codecogs.com/png.latex?R(t;%20T,S)">, with <img src="https://latex.codecogs.com/png.latex?S%20%5Crightarrow%20T">, i.e.&nbsp;<img src="https://latex.codecogs.com/png.latex?lim_%7BS%20%5Crightarrow%20T%7D%20L(t;%20T,S)"> = f(t,T)$.</p>
+<p>Moreover, when <img src="https://latex.codecogs.com/png.latex?T%20%5Crightarrow%20t">, we have <img src="https://latex.codecogs.com/png.latex?f(t,t)%20=%20r_t">, meaning that the forward interest rate at time <img src="https://latex.codecogs.com/png.latex?t"> for a loan that starts immediately and has a maturity of <img src="https://latex.codecogs.com/png.latex?T"> is equal to the short-term interest rate at time <img src="https://latex.codecogs.com/png.latex?t">.</p>
+<p>::{.callout-note} 💡 We can show that the instantaneous interest rate <img src="https://latex.codecogs.com/png.latex?f(t,T)"> is equal to <img src="https://latex.codecogs.com/png.latex?-%5Cfrac%7BdB(t,T)%7D%7BdT%7D">. Hence, we can deduce that the zero-coupon bond price can be expressed as follows: <img src="https://latex.codecogs.com/png.latex?%0AB(t,T)%20=%20e%5E%7B-%5Cint_t%5ET%20f(t,u)%20du%7D.%0A"> :::</p>
+<section id="rates-derivatives" class="level3">
+<h3 class="anchored" data-anchor-id="rates-derivatives">Rates derivatives</h3>
+
+
+</section>
+</section>
+</section>
+
+ ]]></description>
+  <category>paper</category>
+  <category>m2mo</category>
+  <category>yield-curve</category>
+  <guid>https://cheryl-kdio.github.io/posts/m2mo/yield_curves/00_yield_curve.html</guid>
+  <pubDate>Tue, 10 Feb 2026 23:00:00 GMT</pubDate>
+  <media:content url="https://cheryl-kdio.github.io/posts/m2mo/yield_curves/featured.png" medium="image" type="image/png" height="87" width="144"/>
+</item>
+<item>
   <title>Mathematical foundations of financial market modeling</title>
   <dc:creator>Cheryl KOUADIO</dc:creator>
   <link>https://cheryl-kdio.github.io/posts/m2mo/derivatives/01_intro_market.html</link>
@@ -111,36 +211,7 @@ https://quarto.org/docs/authoring/includes.html
   <category>m2mo</category>
   <category>derivatives</category>
   <guid>https://cheryl-kdio.github.io/posts/m2mo/derivatives/01_intro_market.html</guid>
-  <pubDate>Tue, 10 Feb 2026 23:00:00 GMT</pubDate>
-  <media:content url="https://cheryl-kdio.github.io/posts/m2mo/derivatives/featured.png" medium="image" type="image/png" height="96" width="144"/>
-</item>
-<item>
-  <title>Model free pricing results</title>
-  <dc:creator>Cheryl KOUADIO</dc:creator>
-  <link>https://cheryl-kdio.github.io/posts/m2mo/derivatives/02_model_free(1).html</link>
-  <description><![CDATA[ 
-
-
-
-
-<!-- 
-AddToAny check more: https://www.addtoany.com/buttons/for/website 
-Using includes will make edits easier, will only need to add or remove button here if needed.
-https://quarto.org/docs/authoring/includes.html
--->
-<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
-<p><a class="a2a_dd" href="https://www.addtoany.com/share"></a> <a class="a2a_button_linkedin"></a> <a class="a2a_button_bluesky"></a> <a class="a2a_button_facebook"></a> <a class="a2a_button_whatsapp"></a> <a class="a2a_button_wechat"></a> <a class="a2a_button_sina_weibo"></a> <a class="a2a_button_copy_link"></a> <a class="a2a_button_email"></a></p>
-</div>
-<script async="" src="https://static.addtoany.com/menu/page.js"></script>
-
-
-
- ]]></description>
-  <category>paper</category>
-  <category>m2mo</category>
-  <category>derivatives</category>
-  <guid>https://cheryl-kdio.github.io/posts/m2mo/derivatives/02_model_free(1).html</guid>
-  <pubDate>Tue, 10 Feb 2026 23:00:00 GMT</pubDate>
+  <pubDate>Mon, 09 Feb 2026 23:00:00 GMT</pubDate>
   <media:content url="https://cheryl-kdio.github.io/posts/m2mo/derivatives/featured.png" medium="image" type="image/png" height="96" width="144"/>
 </item>
 <item>
@@ -38338,520 +38409,6 @@ font-style: inherit;">0.05</span>))</span></code></pre></div>
   <category>ensai-gdr</category>
   <guid>https://cheryl-kdio.github.io/posts/ensai/apprentisage-stat/Tp4.html</guid>
   <pubDate>Fri, 18 Oct 2024 22:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Gradient boosting</title>
-  <dc:creator>Cheryl KOUADIO</dc:creator>
-  <link>https://cheryl-kdio.github.io/posts/ensai/apprentisage-stat/Tp3.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<section id="activity-1-samme-algorithm" class="level1">
-<h1>Activity 1 : SAMME Algorithm</h1>
-<p>AdaBoost is a popular boosting algorithm that is used to boost the performance of decision trees on binary classification problems. It works by weighting the observations, putting more weight on difficult to classify instances and less on those already handled well. New weak learners are added sequentially that focus their training on the more difficult patterns. The predictions of the weak learners are then combined through a weighted majority vote to make the final prediction.</p>
-<p>Hence, for M weak learners, the final prediction is given by <img src="https://latex.codecogs.com/png.latex?g(x)%20=%20%5Csum_%7Bm=1%7D%5E%7BM%7D%20%5Calpha_m%20g_m(x)"> where <img src="https://latex.codecogs.com/png.latex?g_m(x)"> is the m-th weak learner and <img src="https://latex.codecogs.com/png.latex?%5Calpha_m"> is the weight associated with the m-th weak learner. The optimisation problem of AdaBoost is given by:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%20%5Cunderset%7B%5Calpha_m,%20g_m%20%5C,%20(m=1,%5Cdots,M)%7D%7B%5Carg%20%5Cmin%7D%20%5Csum_%7Bi=1%7D%5E%7BN%7D%20L%5Cleft(y_i,%20%5Csum_%7Bm=1%7D%5E%7BM%7D%20%5Calpha_m%20g_m(x_i)%5Cright)%20"></p>
-<p>Since, this problem is difficult to solve, AdaBoost uses a forward stagewise additive modeling approach, with the loss function <img src="https://latex.codecogs.com/png.latex?l(y,f(x))=%5Cexp(-yf(x))">, <img src="https://latex.codecogs.com/png.latex?y%20%5Cin%20%5C%7B-1,+1%5C%7D">. It adds one weak learner at a time, and at each iteration, it solves the following optimization problem :</p>
-<ul>
-<li><ol type="1">
-<li>Initialize the observation weights <img src="https://latex.codecogs.com/png.latex?w_i%5E%7B(1)%7D%20=%201/n"> for <img src="https://latex.codecogs.com/png.latex?i=1,%5Cdots,n"></li>
-</ol></li>
-<li><ol start="2" type="1">
-<li>For m=1 to M:</li>
-</ol>
-<ul>
-<li><ol type="a">
-<li>Fit a weak learner <img src="https://latex.codecogs.com/png.latex?g_m(x)"> to the training data using weights <img src="https://latex.codecogs.com/png.latex?w_i%5E%7B(m)%7D"></li>
-</ol></li>
-<li><ol start="2" type="a">
-<li>Compute the error rate <img src="https://latex.codecogs.com/png.latex?err_m%20=%20%5Csum_%7Bi=1%7D%5E%7BN%7D%20w_i%5E%7Bm%7D%201(y_i%20%5Cneq%20g_m(x_i))"> where <img src="https://latex.codecogs.com/png.latex?I"> is the indicator function</li>
-</ol></li>
-<li><ol start="3" type="a">
-<li>Compute the weight <img src="https://latex.codecogs.com/png.latex?%5Calpha_m%20=%20%5Cfrac%7B1%7D%7B2%7D%20%5Clog%20%5Cleft(%5Cfrac%7B1-err_m%7D%7Berr_m%7D%5Cright)"></li>
-</ol></li>
-<li><ol start="4" type="a">
-<li>Update the weights <img src="https://latex.codecogs.com/png.latex?w_i%5E%7B(m+1)%7D%20=%20w_i%5E%7B(m)%7D%20%5Cexp%5Cleft(%5Calpha_m%201(y_i%20%5Cneq%20g_m(x_i))%5Cright)"></li>
-</ol></li>
-</ul></li>
-</ul>
-<p>In this activity, we will implement the SAMME algorithm. SAMME stands for Stagewise Additive Modeling using a Multi-class Exponential loss function. It is a boosting algorithm that is used to boost the performance of decision trees on multi-class classification problems. It is a generalization of the AdaBoost algorithm to multi-class classification problems.</p>
-<p>To inspect how the errors and the weights vary with the number of iterations, we will the function <code>make_gaussian_quantiles</code> from <code>sklearn</code>. This function generates a multi-dimensional standard normale distribution with a given number of samples <img src="https://latex.codecogs.com/png.latex?n"> per class <img src="https://latex.codecogs.com/png.latex?K">. We will generate a dataset of size <img src="https://latex.codecogs.com/png.latex?n=2000"> with <img src="https://latex.codecogs.com/png.latex?K=3"> classes and <img src="https://latex.codecogs.com/png.latex?d=10"> features. We will then train a SAMME classifier on this dataset and plot the errors and the weights as a function of the number of iterations.</p>
-<div id="1fac1ba8" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># import make_gaussian_quantiles</span></span>
-<span id="cb1-2"></span>
-<span id="cb1-3"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">as</span> np</span>
-<span id="cb1-4"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> matplotlib.pyplot <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">as</span> plt</span>
-<span id="cb1-5"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">from</span> sklearn.datasets <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> make_gaussian_quantiles<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">;</span></span>
-<span id="cb1-6"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">from</span> sklearn.model_selection <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> train_test_split</span>
-<span id="cb1-7"></span>
-<span id="cb1-8"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Generate the dataset</span></span>
-<span id="cb1-9">X, y <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> make_gaussian_quantiles(n_samples<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2000</span>, n_features<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">10</span>, n_classes<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>)</span>
-<span id="cb1-10"></span>
-<span id="cb1-11"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Split the dataset into a training and a testing set</span></span>
-<span id="cb1-12">X_train, X_test, y_train, y_test <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> train_test_split(X, y, test_size<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.20</span>)</span></code></pre></div>
-</div>
-<section id="i.-decision-tree" class="level2">
-<h2 class="anchored" data-anchor-id="i.-decision-tree">I. Decision Tree</h2>
-<div id="561a881c" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">from</span> sklearn.ensemble <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> AdaBoostClassifier</span>
-<span id="cb2-2"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">from</span> sklearn.tree <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> DecisionTreeClassifier</span>
-<span id="cb2-3"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">from</span> sklearn.metrics <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> accuracy_score</span>
-<span id="cb2-4"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">from</span> sklearn.metrics <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> confusion_matrix</span>
-<span id="cb2-5"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> seaborn <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">as</span> sns</span>
-<span id="cb2-6"></span>
-<span id="cb2-7"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Fit normal decision tree</span></span>
-<span id="cb2-8">model_tree <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> DecisionTreeClassifier(max_leaf_nodes<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">8</span>).fit(X_train, y_train)</span>
-<span id="cb2-9">y_pred_tree <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> model_tree.predict(X_test)</span>
-<span id="cb2-10">accuracy_tree <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> accuracy_score(y_test, y_pred_tree)</span>
-<span id="cb2-11"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Accuracy: "</span>, accuracy_tree)</span>
-<span id="cb2-12"></span>
-<span id="cb2-13">cm_tree <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> confusion_matrix(y_test, y_pred_tree)</span>
-<span id="cb2-14">sns.heatmap(cm_tree, annot<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">True</span>)</span>
-<span id="cb2-15">plt.title(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Decision Tree confusion matrix'</span>)</span>
-<span id="cb2-16">plt.show()</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Accuracy:  0.475</code></pre>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://cheryl-kdio.github.io/posts/ensai/apprentisage-stat/Tp3_files/figure-html/cell-3-output-2.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="ii.-samme-algorithm-multi-class-adaboost-with-decision-treess" class="level2">
-<h2 class="anchored" data-anchor-id="ii.-samme-algorithm-multi-class-adaboost-with-decision-treess">II. SAMME Algorithm (Multi-class AdaBoost with Decision Trees)s</h2>
-<div id="30bbcd9c" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Run adaboost</span></span>
-<span id="cb4-2"></span>
-<span id="cb4-3"></span>
-<span id="cb4-4"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Create and fit an AdaBoosted decision tree</span></span>
-<span id="cb4-5">model_adaboost <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> AdaBoostClassifier(DecisionTreeClassifier(max_leaf_nodes<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">8</span>),</span>
-<span id="cb4-6">                         algorithm<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"SAMME"</span>,</span>
-<span id="cb4-7">                         n_estimators<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">300</span>).fit(X_train, y_train)</span>
-<span id="cb4-8"></span>
-<span id="cb4-9"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Predict the test set</span></span>
-<span id="cb4-10">y_pred <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> model_adaboost.predict(X_test)</span>
-<span id="cb4-11"></span>
-<span id="cb4-12"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Compute the accuracy</span></span>
-<span id="cb4-13">accuracy <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> accuracy_score(y_test, y_pred)</span>
-<span id="cb4-14"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Accuracy: "</span>, accuracy)</span>
-<span id="cb4-15"></span>
-<span id="cb4-16"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Compute the confusion matrix</span></span>
-<span id="cb4-17">cm <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> confusion_matrix(y_test, y_pred)</span>
-<span id="cb4-18"></span>
-<span id="cb4-19"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">#plot with seaborn</span></span>
-<span id="cb4-20">sns.heatmap(cm, annot<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">True</span>)</span>
-<span id="cb4-21">plt.title(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Decision Tree boosting Confusion matrix'</span>)</span>
-<span id="cb4-22">plt.show()</span>
-<span id="cb4-23"></span>
-<span id="cb4-24"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># run adaboost for decision tree with max leaves = 8 </span></span></code></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>/Users/cherylkouadio/Documents/Repositories/website/venv/lib/python3.14/site-packages/sklearn/ensemble/_weight_boosting.py:519: FutureWarning: The parameter 'algorithm' is deprecated in 1.6 and has no effect. It will be removed in version 1.8.
-  warnings.warn(</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Accuracy:  0.715</code></pre>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://cheryl-kdio.github.io/posts/ensai/apprentisage-stat/Tp3_files/figure-html/cell-4-output-3.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>As we can see, the SAMME algorithm performs well on the dataset, than a single decision tree. In fact, we have an accuracy of 76% for the SAMME algorithm, while we have an accuracy of 52% for a single decision tree. If we increase the number of iterations, we can see that the accuracy of the SAMME algorithm increases, while the accuracy of the decision tree remains the same.</p>
-<div id="d6077102" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># use of staged_predict</span></span>
-<span id="cb7-2">accuracy <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> []</span>
-<span id="cb7-3"><span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">for</span> y_pred <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> model_adaboost.staged_predict(X_test):</span>
-<span id="cb7-4">    accuracy.append(accuracy_score(y_test, y_pred))</span>
-<span id="cb7-5"></span>
-<span id="cb7-6">plt.plot(<span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">range</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">301</span>), accuracy)</span>
-<span id="cb7-7">plt.xlabel(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Number of trees'</span>)</span>
-<span id="cb7-8">plt.ylabel(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Accuracy'</span>)</span>
-<span id="cb7-9">plt.title(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Accuracy of AdaBoost as a function of the number of trees'</span>)</span>
-<span id="cb7-10">plt.show()</span></code></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://cheryl-kdio.github.io/posts/ensai/apprentisage-stat/Tp3_files/figure-html/cell-5-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Regarding the weights and errors at each iteration, we observe that the weight decreases with the number of iterations, while the error increases. This is due to the fact that at each iteration, the algorithm focuses on the difficult instances to classify. Hence, the weight of the weak learner increases, while the error increases.</p>
-<div id="2ef94740" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Visualize how the weights and errors change with the number of trees</span></span>
-<span id="cb8-2">plt.figure(figsize<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">10</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">5</span>))</span>
-<span id="cb8-3">plt.subplot(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>)</span>
-<span id="cb8-4">plt.plot(<span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">range</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">301</span>), model_adaboost.estimator_weights_,color<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'green'</span>)</span>
-<span id="cb8-5">plt.title(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Weights of the trees'</span>)</span>
-<span id="cb8-6">plt.xlabel(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Number of trees'</span>)</span>
-<span id="cb8-7">plt.ylabel(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Weight'</span>)</span>
-<span id="cb8-8"></span>
-<span id="cb8-9">plt.subplot(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>)</span>
-<span id="cb8-10">plt.plot(<span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">range</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">301</span>), model_adaboost.estimator_errors_,color<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'orange'</span>)</span>
-<span id="cb8-11">plt.xlabel(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Number of trees'</span>)</span>
-<span id="cb8-12">plt.ylabel(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Error'</span>)</span>
-<span id="cb8-13">plt.title(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Errors of the trees'</span>)</span>
-<span id="cb8-14">plt.show()</span></code></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://cheryl-kdio.github.io/posts/ensai/apprentisage-stat/Tp3_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="activity-2-boosting-with-not-so-weak-learners" class="level1">
-<h1>Activity 2 : Boosting with not so weak learners</h1>
-<p>As mentioned earlier, the boosting algorithm uses multiple weak learners. This is a crucial aspect of the algorithm, as it allows combining multiple weak learners to create a strong learner. However, we might be interested in using stronger learners instead of weak ones, and we could observe that the algorithm performs poorly.</p>
-<p>For example, let’s consider boosting with a linear regression as the base learner. In boosting, we can use the errors in two ways : either grade and reweight in the training, or either train the model on the residuals.</p>
-<p>At the first iteration, we fit a linear regression to the target variable in order to obtain the parameters <img src="https://latex.codecogs.com/png.latex?%5Cbeta">:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbeta_%7B1%7D%5E*%20=%20%5Cunderset%7B%5Cbeta_1%7D%7B%5Carg%20%5Cmin%7D%20%7C%7C%20Y%20-%20X%5Cbeta_1%20%7C%7C%5E2%0A"></p>
-<p>This gives us the first learner <img src="https://latex.codecogs.com/png.latex?g_1(x)%20=%20X%5Cbeta_1">, where <img src="https://latex.codecogs.com/png.latex?%5Cbeta_1%20=%20(X%5ETX)%5E%7B-1%7DX%5ETY">.</p>
-<p>In the following iterations, we fit a linear regression on the residuals to obtain the parameters <img src="https://latex.codecogs.com/png.latex?%5Cbeta_m">:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbeta_m%5E*%20=%20%5Cunderset%7B%5Cbeta_m%7D%7B%5Carg%20%5Cmin%7D%20%7C%7C%20Y%20-%20X%5Chat%7B%5Cbeta%7D_%7Bm-1%7D%20-%20X%5Cbeta_m%20%7C%7C%5E2%20=%20%5Cunderset%7B%5Cbeta%7D%7B%5Carg%20%5Cmin%7D%20%7C%7C%20R_%7Bm-1%7D%20-%20X%5Cbeta_m%20%7C%7C%5E2%0A"></p>
-<p>It’s easy to see that the optimal <img src="https://latex.codecogs.com/png.latex?%5Cbeta_m%20=%200">, since the residuals are orthogonal to the previous residuals. Therefore, the optimal <img src="https://latex.codecogs.com/png.latex?%5Cbeta_m%20=%200"> and the optimal <img src="https://latex.codecogs.com/png.latex?g_m(x)%20=%200">.</p>
-<p>For example, when <img src="https://latex.codecogs.com/png.latex?m=2">, we have the following optimization problem:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbeta_2%5E*%20=%20%5Cunderset%7B%5Cbeta_2%7D%7B%5Carg%20%5Cmin%7D%20%7C%7C%20Y%20-%20X%5Chat%7B%5Cbeta%7D_%7B1%7D%20-%20X%5Cbeta_2%20%7C%7C%5E2%20=%20%5Cunderset%7B%5Cbeta_2%7D%7B%5Carg%20%5Cmin%7D%20%7C%7C%20R_1%20-%20X%5Cbeta_2%20%7C%7C%5E2%0A"></p>
-<p>Thus, <img src="https://latex.codecogs.com/png.latex?%5Cbeta_2%20=%20(X%5ETX)%5E%7B-1%7DX%5ETR_1%20=%20(X%5ETX)%5E%7B-1%7DX%5ET(Y%20-%20X%5Chat%7B%5Cbeta%7D_1)%20=%20%5Chat%7B%5Cbeta%7D_1%20-%20I_d%20%5Chat%7B%5Cbeta%7D_1%20=%200">.</p>
-<p>This shows that, at the second iteration, the algorithm fails to improve because the residuals are already orthogonal, meaning the gradient direction leads to no further improvement. Essentially, this explains why using a strong learner such as linear regression in boosting can result in poor performance. In this case, the linear model fits perfectly in the first iteration, leaving no room for further improvement, as the residuals contain no additional information.</p>
-<p>Boosting algorithms like AdaBoost or Gradient Boosting rely on the fact that weak learners make small, incremental improvements, allowing the algorithm to progressively focus on harder-to-classify examples or areas where the model still has room to learn. By using a strong learner that perfectly fits the data in the first round, we lose the incremental learning aspect, which is key to the success of boosting.</p>
-</section>
-<section id="activity-3-xgboost" class="level1">
-<h1>Activity 3 : Xgboost</h1>
-<p>XGBoost (Extreme Gradient Boosting) is an optimized distributed gradient boosting library designed to be highly efficient, flexible, and portable. It implements machine learning algorithms under the Gradient Boosting framework. XGBoost provides a parallel tree boosting (also known as GBDT, GBM) that solve many data science problems in a fast and accurate way. When the dataset is higly correlated, we can still use XGBoost, as it can handle multicollinearity.</p>
-<div id="c2d17543" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> pandas <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">as</span> pd</span>
-<span id="cb9-2"></span>
-<span id="cb9-3">data_train <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> pd.read_csv(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Data/mnist_train_small.csv"</span>)</span>
-<span id="cb9-4">data_test <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> pd.read_csv(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Data/mnist_test.csv"</span>)</span>
-<span id="cb9-5"></span>
-<span id="cb9-6"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># normalize the data</span></span>
-<span id="cb9-7">X_train  <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> data_train.iloc[:, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>:]<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">255</span></span>
-<span id="cb9-8">y_train <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> data_train[<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"label"</span>]</span>
-<span id="cb9-9">X_test  <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> data_test.iloc[:, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>:]<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">255</span></span>
-<span id="cb9-10">y_test <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> data_test[<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"label"</span>]</span></code></pre></div>
-</div>
-<p>As we can see, the model performs rather well with an accuracy of 0.87 (quite similar to the one obtained with SVM). However, we can see that the model is not perfect as it makes some mistakes.</p>
-<div id="7517569c" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Train Xgboost on the data</span></span>
-<span id="cb10-2"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">from</span> xgboost <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> XGBClassifier</span>
-<span id="cb10-3">model_xgboost <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> XGBClassifier(colsample_bylevel<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.1</span>,gamma<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.1</span>).fit(X_train, y_train)</span>
-<span id="cb10-4">y_pred_xgboost <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> model_xgboost.predict(X_test)</span>
-<span id="cb10-5">accuracy_xgboost <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> accuracy_score(y_test, y_pred_xgboost)</span>
-<span id="cb10-6"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Accuracy: "</span>, accuracy_xgboost)</span>
-<span id="cb10-7"></span>
-<span id="cb10-8">cm_xgboost <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> confusion_matrix(y_test, y_pred_xgboost)</span>
-<span id="cb10-9">sns.heatmap(cm_xgboost, annot<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">True</span>)</span>
-<span id="cb10-10">plt.title(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'XGBoost confusion matrix'</span>)</span>
-<span id="cb10-11">plt.show()</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Accuracy:  0.8895</code></pre>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://cheryl-kdio.github.io/posts/ensai/apprentisage-stat/Tp3_files/figure-html/cell-8-output-2.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-
-
-</section>
-
- ]]></description>
-  <category>paper</category>
-  <category>apprentissage-stat</category>
-  <category>ensai-gdr</category>
-  <guid>https://cheryl-kdio.github.io/posts/ensai/apprentisage-stat/Tp3.html</guid>
-  <pubDate>Thu, 17 Oct 2024 22:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

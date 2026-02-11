@@ -61,4 +61,3 @@ I’m seeking guest speakers who are passionate about sharing their experiences 
 
 - [Climate Guest Speakers](https://drganghe.github.io/climate-guest-speakers/about.html) -->
 
-{{< include /files/includes/_socialshare.qmd >}}

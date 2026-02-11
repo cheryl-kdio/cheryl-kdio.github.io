@@ -4,7 +4,7 @@ subtitle: "Financial Markets"
 author:
   name: Cheryl KOUADIO
 categories: [paper,m2mo,derivatives]
-date: "2026-02-11"
+date: "2026-02-10"
 image: "featured.png"
 ---
 
