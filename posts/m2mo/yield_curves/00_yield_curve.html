@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.40">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Cheryl Kouadio">
+<meta name="dcterms.date" content="2026-02-11">
+<meta name="description" content="Cheryl Kouadio is a graduate student in stochastic modeling and quantitative finance at Université Paris Cité. Her academic interests focus on probability theory, stochastic processes, data analysis, and financial risk modeling. She studies how rigorous statistical and mathematical methods can be applied to quantify uncertainty and support decision-making in finance and risk management.">
+
+<title>Types of interest rates and rates derivatives – Cheryl Kouadio</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-3146a0984a964146c28da0a2cf78b9ad.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+<!-- 
+Load Academicons v1: https://jpswalsh.github.io/academicons/
+-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+
+<!---
+The following code are needed to show dimension citation and altmetrics.
+https://api.altmetric.com/embeds.html
+https://badge.dimensions.ai/
+--->
+
+<script type="text/javascript" src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script>
+
+<script async="" src="https://badge.dimensions.ai/badge.js" charset="utf-8"></script>
+
+<script type="text/javascript" src="//cdn.plu.mx/widget-popup.js"></script>
+<meta name="quarto:status" content="draft">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../../styles.css">
+<meta property="og:title" content="Types of interest rates and rates derivatives – Cheryl Kouadio">
+<meta property="og:description" content="Interest rate derivatives">
+<meta property="og:image" content="https://cheryl-kdio.github.io/posts/m2mo/yield_curves/featured.png">
+<meta property="og:site_name" content="Cheryl Kouadio">
+<meta property="og:image:height" content="289">
+<meta property="og:image:width" content="481">
+<meta name="twitter:title" content="Types of interest rates and rates derivatives – Cheryl Kouadio">
+<meta name="twitter:description" content="Interest rate derivatives">
+<meta name="twitter:image" content="https://cheryl-kdio.github.io/posts/m2mo/yield_curves/featured.png">
+<meta name="twitter:image-height" content="289">
+<meta name="twitter:image-width" content="481">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><div id="quarto-draft-alert" class="alert alert-warning"><i class="bi bi-pencil-square"></i>Draft</div>
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">Cheryl Kouadio</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-about" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">About</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-about">    
+        <li>
+    <a class="dropdown-item" href="../../../posts.html#category=news">
+ <span class="dropdown-text">News</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../posts.html#category=event">
+ <span class="dropdown-text">Events</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../now.html">
+ <span class="dropdown-text">Now</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-articles" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Articles</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-articles">    
+        <li>
+    <a class="dropdown-item" href="../../../publications.html">
+ <span class="dropdown-text">Reports</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../posts.html#category=paper">
+ <span class="dropdown-text">All papers</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../posts.html#category=ensai-gdr">
+ <span class="dropdown-text">Ensai</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../posts.html#category=m2mo">
+ <span class="dropdown-text">M2MO</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-outreach" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Outreach</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-outreach">    
+        <li>
+    <a class="dropdown-item" href="../../../posts.html#category=outreach">
+ <span class="dropdown-text">Policy Engagement</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../posts.html#category=presentation">
+ <span class="dropdown-text">Presentations</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../notes.html">
+ <span class="dropdown-text">Notes</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../../glossary.html"> 
+<span class="menu-text">Glossary</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../files/Cheryl-Kouadio-CV.pdf" target="_blank"> 
+<span class="menu-text">CV</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://github.com/cheryl-kdio" target="_blank"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text">Github</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.linkedin.com/in/cheryl-kouadio-251815206/" target="_blank"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text">Linkedin</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../../posts.xml" target="_blank"> <i class="bi bi-rss" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#different-types-of-interest-rates" id="toc-different-types-of-interest-rates" class="nav-link active" data-scroll-target="#different-types-of-interest-rates">Different types of interest rates</a></li>
+  <li><a href="#link-between-the-zero-coupon-bond-price-and-the-interest-rates" id="toc-link-between-the-zero-coupon-bond-price-and-the-interest-rates" class="nav-link" data-scroll-target="#link-between-the-zero-coupon-bond-price-and-the-interest-rates">Link between the Zero-coupon bond price and the interest rates</a>
+  <ul class="collapse">
+  <li><a href="#zero-coupon-bond-price-and-simple-spot-interest-rate" id="toc-zero-coupon-bond-price-and-simple-spot-interest-rate" class="nav-link" data-scroll-target="#zero-coupon-bond-price-and-simple-spot-interest-rate">Zero-coupon bond price and simple spot interest rate</a></li>
+  <li><a href="#zero-coupon-bond-price-and-simple-forward-interest-rate" id="toc-zero-coupon-bond-price-and-simple-forward-interest-rate" class="nav-link" data-scroll-target="#zero-coupon-bond-price-and-simple-forward-interest-rate">Zero-coupon bond price and simple forward interest rate</a></li>
+  </ul></li>
+  <li><a href="#rates-derivatives" id="toc-rates-derivatives" class="nav-link" data-scroll-target="#rates-derivatives">Rates derivatives</a>
+  <ul class="collapse">
+  <li><a href="#fra" id="toc-fra" class="nav-link" data-scroll-target="#fra">FRA</a></li>
+  <li><a href="#swap" id="toc-swap" class="nav-link" data-scroll-target="#swap">Swap</a></li>
+  <li><a href="#capfloor" id="toc-capfloor" class="nav-link" data-scroll-target="#capfloor">Cap/Floor</a></li>
+  <li><a href="#swaption" id="toc-swaption" class="nav-link" data-scroll-target="#swaption">Swaption</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Types of interest rates and rates derivatives</h1>
+<p class="subtitle lead">Interest rate derivatives</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">paper</div>
+    <div class="quarto-category">m2mo</div>
+    <div class="quarto-category">rates</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Cheryl KOUADIO </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">February 11, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>The interest rate market is one of the largest and most liquid segments of the financial markets.<br>
+It encompasses a wide range of instruments, including government bonds, corporate bonds, interest rate swaps, and options on interest rates. The modeling of interest rates is crucial for pricing and managing the risks associated with these instruments. To understand the dynamics of interest rates, we first introduce the different types of interest rates that are used in creating and pricing interest rate derivatives, as well as the concept of the yield curve, which is a fundamental tool for analyzing the term structure of interest rates. Moreover, we introduce several interest rate derivatives currently traded in the market.</p>
+<section id="different-types-of-interest-rates" class="level1">
+<h1>Different types of interest rates</h1>
+<p>An interest rate can be seen as the cost of borrowing or the return on lending money. For example, when a counterparty A borrows at time <span class="math inline">\(t\)</span> a certain amount of cash <span class="math inline">\(N\)</span> from a counterparty B with maturity <span class="math inline">\(T\)</span> and interest rate <span class="math inline">\(r\)</span>. Then, at maturity <span class="math inline">\(T\)</span>, A must pay back <span class="math inline">\(N(1+r(T-t)) = N(1+r\tau)\)</span> with <span class="math inline">\(\tau = T-t\)</span> the time to maturity, i.e.&nbsp;<span class="math inline">\(N \mapsto N(1+r\tau)\)</span>. This is the case of a simple interest rate.</p>
+<p>In practice, one can differentiate two types of interest rates:</p>
+<ul>
+<li><p>the simple interest rate. In continuous time, we write <span class="math inline">\(N \mapsto N e^{r\tau}\)</span>.</p></li>
+<li><p>the compound interest rate. At time <span class="math inline">\(t\)</span>, A borrows an amount <span class="math inline">\(N\)</span> from B with maturity <span class="math inline">\(T\)</span> and compound interest rate <span class="math inline">\(r\)</span>. Then at maturity <span class="math inline">\(T\)</span>, A pays back <span class="math inline">\(N(1+r)^{\tau}\)</span> with <span class="math inline">\(\tau = T-t\)</span>, i.e.&nbsp;<span class="math inline">\(N \mapsto N(1+r)^{\tau}\)</span>.</p></li>
+</ul>
+<p>It is also important to distinguish between the different types of interest rates used in the market:</p>
+<ul>
+<li><p>the <strong>spot interest rate</strong> is the rate that applies to a loan or deposit that starts immediately and has maturity <span class="math inline">\(T\)</span>.</p></li>
+<li><p>the <strong>forward interest rate</strong> is the rate that applies to a loan or deposit that starts at a future date <span class="math inline">\(T\)</span> and has maturity <span class="math inline">\(S\)</span>.</p></li>
+</ul>
+</section>
+<section id="link-between-the-zero-coupon-bond-price-and-the-interest-rates" class="level1">
+<h1>Link between the Zero-coupon bond price and the interest rates</h1>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+What is a zero-coupon bond?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A zero-coupon bond is a debt security that does not pay periodic interest (coupons). Instead, it is issued at a discount to its face value and pays its full face value at maturity. If the face value is <span class="math inline">\(1\)</span>, its price at time <span class="math inline">\(t\)</span> for maturity <span class="math inline">\(T\)</span> is denoted <span class="math inline">\(B(t,T)\)</span>.</p>
+</div>
+</div>
+<section id="zero-coupon-bond-price-and-simple-spot-interest-rate" class="level2">
+<h2 class="anchored" data-anchor-id="zero-coupon-bond-price-and-simple-spot-interest-rate">Zero-coupon bond price and simple spot interest rate</h2>
+<p>Assume we pay <span class="math inline">\(B(t,T)\)</span> at time <span class="math inline">\(t\)</span> to buy a zero-coupon bond that will pay <span class="math inline">\(1\)</span> at maturity <span class="math inline">\(T\)</span>. Hence, <span class="math inline">\(B(t,T) \mapsto 1\)</span> at maturity <span class="math inline">\(T\)</span>. Alternatively, we can invest <span class="math inline">\(B(t,T)\)</span> in the money market account that pays the simple spot rate <span class="math inline">\(L(t,T)\)</span>. At maturity <span class="math inline">\(T\)</span>, we obtain <span class="math inline">\(B(t,T)(1 + (T-t)L(t,T))\)</span>. Since we are in a no-arbitrage framework, we must have the same payoff at maturity <span class="math inline">\(T\)</span> for both strategies, which implies <span class="math inline">\(1 = B(t,T)(1 + (T-t)L(t,T))\)</span>. Hence, we deduce the following link between the zero-coupon bond price and the simple spot interest rate:</p>
+<p><span class="math display">\[
+L(t,T) = \frac{1}{T-t} \left( \frac{1}{B(t,T)} - 1 \right).
+\]</span></p>
+<p>In continuous compounding, we have <span class="math inline">\(1 = B(t,T) e^{(T-t) R(t,T)}\)</span>, which gives</p>
+<p><span class="math display">\[
+R(t,T) = -\frac{1}{T-t} \ln(B(t,T)).
+\]</span></p>
+<p>Therefore, the short-term interest rate is defined as <span class="math inline">\(\lim_{T \to t} L(t,T) = \lim_{T \to t} R(t,T) = r_t\)</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+The yield curve or the term structure of interest rates
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The yield curve is a graphical representation of the relationship between interest rates and maturities. It is the function <span class="math inline">\(T \mapsto L(t,T)\)</span> for a given date <span class="math inline">\(t\)</span>. For each date <span class="math inline">\(t\)</span>, we can build a yield curve using market instruments (bonds, FRA, swaps, etc.) and use it to price interest rate derivatives.</p>
+</div>
+</div>
+</section>
+<section id="zero-coupon-bond-price-and-simple-forward-interest-rate" class="level2">
+<h2 class="anchored" data-anchor-id="zero-coupon-bond-price-and-simple-forward-interest-rate">Zero-coupon bond price and simple forward interest rate</h2>
+<p>The forward rate is the rate that can be locked at time <span class="math inline">\(t\)</span> for a loan starting at date <span class="math inline">\(T\)</span> and ending at date <span class="math inline">\(S\)</span>. At time <span class="math inline">\(t\)</span>, one can invest in a zero-coupon bond maturing at <span class="math inline">\(S\)</span> and obtain <span class="math inline">\(B(t,S) \mapsto 1\)</span> at maturity <span class="math inline">\(S\)</span>. Alternatively, one can invest in a zero-coupon bond maturing at <span class="math inline">\(T\)</span>, obtain <span class="math inline">\(B(t,T) \mapsto 1\)</span> at time <span class="math inline">\(T\)</span>, and then reinvest the proceeds from <span class="math inline">\(T\)</span> to <span class="math inline">\(S\)</span> at the forward rate <span class="math inline">\(L(t;T,S)\)</span>. At maturity <span class="math inline">\(S\)</span>, this yields <span class="math inline">\(1 + (S-T)L(t;T,S)\)</span>. Under no-arbitrage, we must have <span class="math inline">\(B(t,S) = B(t,T)\frac{1}{1 + (S-T)L(t;T,S)}\)</span>. Hence, <span class="math display">\[
+L(t; T,S) = \frac{1}{S-T} \left( \frac{B(t,T)}{B(t,S)} - 1 \right).
+\]</span></p>
+<p>The instantaneous forward rate satisfies <span class="math inline">\(f(t,T) = -\frac{\partial}{\partial T} \ln B(t,T)\)</span>. Moreover,<span class="math inline">\(B(t,T) = e^{-\int_t^T f(t,u) du}.\)</span></p>
+</section>
+</section>
+<section id="rates-derivatives" class="level1">
+<h1>Rates derivatives</h1>
+<section id="fra" class="level2">
+<h2 class="anchored" data-anchor-id="fra">FRA</h2>
+<p>A FRA (Forward Rate Agreement) is a contract that fixes at time <span class="math inline">\(t\)</span> an interest rate <span class="math inline">\(K\)</span> for the period <span class="math inline">\([T,S]\)</span> on a nominal <span class="math inline">\(N\)</span>. Its payoff at time <span class="math inline">\(S\)</span> is</p>
+<p><span class="math display">\[
+N(S-T)(L(T,S) - K).
+\]</span></p>
+<p>Its price at time <span class="math inline">\(t\)</span> is</p>
+<p><span class="math display">\[
+\Pi^{\text{FRA}}(t,T,S,K,N) = N B(t,S) (S-T) (L(t;T,S) - K).
+\]</span></p>
+</section>
+<section id="swap" class="level2">
+<h2 class="anchored" data-anchor-id="swap">Swap</h2>
+<p>A swap exchanges fixed and floating interest rates between two counterparties over dates <span class="math inline">\(0 \le T_0 &lt; T_1 &lt; \dots &lt; T_n\)</span> on a nominal <span class="math inline">\(N\)</span>. The fixed leg pays <span class="math inline">\(N R (T_i - T_{i-1})\)</span>. The floating leg pays <span class="math inline">\(N L(T_{i-1},T_i)(T_i - T_{i-1})\)</span>. The swap can be seen as a sum of FRA. Its price is</p>
+<p><span class="math display">\[
+\begin{align}
+\Pi^{\text{SW}} (t,T_0,T_n,R,N)
+&amp;= \sum_{i=1}^n \Pi^{\text{FRA}} (t,T_{i-1},T_i,R,N) \\
+&amp;= N \left(B(t,T_0) - B(t,T_n) - \sum_{i=1}^n B(t,T_i)(T_i - T_{i-1})R \right)
+\end{align}
+\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Swap rate
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The swap rate <span class="math inline">\(S(t,T_0,T_n)\)</span> is the rate that makes the swap price equal to zero:</p>
+<p><span class="math display">\[
+S(t,T_0,T_n) = \frac{B(t,T_0) - B(t,T_n)}{\sum_{i=1}^n B(t,T_i)(T_i - T_{i-1})}.
+\]</span></p>
+</div>
+</div>
+</section>
+<section id="capfloor" class="level2">
+<h2 class="anchored" data-anchor-id="capfloor">Cap/Floor</h2>
+<p>A caplet (resp. floorlet) is an option that gives the right to the buyer to receive (resp. pay) the excess of the floating rate <span class="math inline">\(L(T_{i-1},T_i)\)</span> over a strike <span class="math inline">\(K\)</span> on a nominal <span class="math inline">\(N\)</span>. The caplet payoff is</p>
+<p><span class="math display">\[
+N (T_i - T_{i-1}) \max(L(T_{i-1},T_i) - K, 0).
+\]</span></p>
+<p>The floorlet payoff is</p>
+<p><span class="math display">\[
+N (T_i - T_{i-1}) \max(K - L(T_{i-1},T_i), 0).
+\]</span></p>
+<p>Hence a cap is a chain of caplets for <span class="math inline">\(i = 1, \dots, n\)</span>, and a floor is a chain of floorlets for <span class="math inline">\(i = 1, \dots, n\)</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caplet/Floorlet and Cap/Floor parity
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>There exists a parity called the <strong>caplet–floorlet parity</strong>.</p>
+<p>It means that a long caplet and a short floorlet with the same strike <span class="math inline">\(K\)</span> and maturity structure is equivalent to entering a payer interest rate swap with fixed rate <span class="math inline">\(K\)</span>.</p>
+<p>Mathematically,</p>
+<p><span class="math display">\[
+\begin{align}
+\Pi^{\text{Caplet}} (t,T,T + \delta,K,1)-\Pi^{\text{Floorlet}} (t,T,T + \delta,K,1) &amp;=\Pi^{\text{FRA}} (t,T,T + \delta,K,1).\\
+\Leftrightarrow
+\Pi^{\text{Cap}} (t,T,T + \delta,K,1)-\Pi^{\text{Floor}} (t,T,T + \delta,K,1) &amp;=\Pi^{\text{SW}} (t,T,T + \delta,K,1).
+\end{align}
+\]</span></p>
+</div>
+</div>
+</section>
+<section id="swaption" class="level2">
+<h2 class="anchored" data-anchor-id="swaption">Swaption</h2>
+<p>A swaption is an option based on interest rate swap of maturity <span class="math inline">\(T\)</span> and fixed rate <span class="math inline">\(R\)</span>. Assuming <span class="math inline">\(T=T_0\)</span> is the starting date of the swap, the payoff of a swaption is <span class="math display">\[
+\begin{align}
+( \Pi^{\text{SW}} (T_0,T_0,T_n,R,N) )_+ &amp;= N(1 -\sum_{i=1}^n c_i B(T_0,T_i))_+ (1)\\
+&amp;= N \sum_{i=1}^n B(T_0,T_i) (T_i,T_{i-1}) ( S(T_0,T_0,T_n) - R)_+ .
+\end{align}
+\]</span></p>
+<p>Thus, the swaption can be seen as a put option on a classical bond with coupon <span class="math inline">\(c_i\)</span></p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("^(?:http:|https:)\/\/cheryl-kdio\.github\.io\/custom");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<a href="https://github.com/cheryl-kdio">Cheryl Kouadio</a> ©
+<script>document.write(new Date().getFullYear())</script>
+</div>   
+    <div class="nav-footer-center">
+<a href="https://github.com/cheryl-kdio">Cheryl Kouadio</a> ©
+<script>document.write(new Date().getFullYear())</script>
+</div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/cheryl-kdio" target="_blank">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

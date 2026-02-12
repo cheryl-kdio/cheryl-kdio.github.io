@@ -1,0 +1,1993 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.40">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Cheryl Kouadio">
+<meta name="dcterms.date" content="2026-01-14">
+<meta name="description" content="Cheryl Kouadio is a graduate student in stochastic modeling and quantitative finance at Université Paris Cité. Her academic interests focus on probability theory, stochastic processes, data analysis, and financial risk modeling. She studies how rigorous statistical and mathematical methods can be applied to quantify uncertainty and support decision-making in finance and risk management.">
+
+<title>Finite difference Methods for European Options – Cheryl Kouadio</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-3146a0984a964146c28da0a2cf78b9ad.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+<!-- 
+Load Academicons v1: https://jpswalsh.github.io/academicons/
+-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+
+<!---
+The following code are needed to show dimension citation and altmetrics.
+https://api.altmetric.com/embeds.html
+https://badge.dimensions.ai/
+--->
+
+<script type="text/javascript" src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script>
+
+<script async="" src="https://badge.dimensions.ai/badge.js" charset="utf-8"></script>
+
+<script type="text/javascript" src="//cdn.plu.mx/widget-popup.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../../styles.css">
+<meta property="og:title" content="Finite difference Methods for European Options – Cheryl Kouadio">
+<meta property="og:description" content="EDP in finance">
+<meta property="og:image" content="https://cheryl-kdio.github.io/posts/m2mo/edp/edp_european_opt_files/figure-html/cell-8-output-1.png">
+<meta property="og:site_name" content="Cheryl Kouadio">
+<meta property="og:image:height" content="757">
+<meta property="og:image:width" content="2294">
+<meta name="twitter:title" content="Finite difference Methods for European Options – Cheryl Kouadio">
+<meta name="twitter:description" content="EDP in finance">
+<meta name="twitter:image" content="https://cheryl-kdio.github.io/posts/m2mo/edp/edp_european_opt_files/figure-html/cell-8-output-1.png">
+<meta name="twitter:image-height" content="757">
+<meta name="twitter:image-width" content="2294">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">Cheryl Kouadio</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-about" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">About</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-about">    
+        <li>
+    <a class="dropdown-item" href="../../../posts.html#category=news">
+ <span class="dropdown-text">News</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../posts.html#category=event">
+ <span class="dropdown-text">Events</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../now.html">
+ <span class="dropdown-text">Now</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-articles" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Articles</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-articles">    
+        <li>
+    <a class="dropdown-item" href="../../../publications.html">
+ <span class="dropdown-text">Reports</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../posts.html#category=paper">
+ <span class="dropdown-text">All papers</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../posts.html#category=ensai-gdr">
+ <span class="dropdown-text">Ensai</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../posts.html#category=m2mo">
+ <span class="dropdown-text">M2MO</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-outreach" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Outreach</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-outreach">    
+        <li>
+    <a class="dropdown-item" href="../../../posts.html#category=outreach">
+ <span class="dropdown-text">Policy Engagement</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../posts.html#category=presentation">
+ <span class="dropdown-text">Presentations</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../notes.html">
+ <span class="dropdown-text">Notes</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../../glossary.html"> 
+<span class="menu-text">Glossary</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../files/Cheryl-Kouadio-CV.pdf" target="_blank"> 
+<span class="menu-text">CV</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://github.com/cheryl-kdio" target="_blank"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text">Github</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.linkedin.com/in/cheryl-kouadio-251815206/" target="_blank"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text">Linkedin</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../../posts.xml" target="_blank"> <i class="bi bi-rss" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#méthodes-numériques" id="toc-méthodes-numériques" class="nav-link" data-scroll-target="#méthodes-numériques">Méthodes numériques</a>
+  <ul class="collapse">
+  <li><a href="#schéma-deuler-explicite-ee" id="toc-schéma-deuler-explicite-ee" class="nav-link" data-scroll-target="#schéma-deuler-explicite-ee">Schéma d’Euler explicite (EE)</a></li>
+  <li><a href="#schéma-deuler-implicite-ei" id="toc-schéma-deuler-implicite-ei" class="nav-link" data-scroll-target="#schéma-deuler-implicite-ei">Schéma d’Euler implicite (EI)</a></li>
+  <li><a href="#schéma-de-crank-nicolson-cn" id="toc-schéma-de-crank-nicolson-cn" class="nav-link" data-scroll-target="#schéma-de-crank-nicolson-cn">Schéma de Crank-Nicolson (CN)</a></li>
+  <li><a href="#choix-dimplémentations" id="toc-choix-dimplémentations" class="nav-link" data-scroll-target="#choix-dimplémentations">Choix d’implémentations</a></li>
+  </ul></li>
+  <li><a href="#résultats-des-schémas-numériques" id="toc-résultats-des-schémas-numériques" class="nav-link" data-scroll-target="#résultats-des-schémas-numériques">Résultats des schémas numériques</a>
+  <ul class="collapse">
+  <li><a href="#résultat-du-schéma-deuler-explicite" id="toc-résultat-du-schéma-deuler-explicite" class="nav-link" data-scroll-target="#résultat-du-schéma-deuler-explicite">Résultat du schéma d’Euler explicite</a></li>
+  <li><a href="#résultat-du-schéma-deuler-implicite-et-de-crank-nicolson" id="toc-résultat-du-schéma-deuler-implicite-et-de-crank-nicolson" class="nav-link" data-scroll-target="#résultat-du-schéma-deuler-implicite-et-de-crank-nicolson">Résultat du schéma d’Euler implicite et de Crank-Nicolson</a>
+  <ul class="collapse">
+  <li><a href="#cas-du-schéma-deuler-implicite" id="toc-cas-du-schéma-deuler-implicite" class="nav-link" data-scroll-target="#cas-du-schéma-deuler-implicite">Cas du schéma d’Euler implicite</a></li>
+  <li><a href="#cas-du-schéma-de-crank-nicolson" id="toc-cas-du-schéma-de-crank-nicolson" class="nav-link" data-scroll-target="#cas-du-schéma-de-crank-nicolson">Cas du schéma de Crank-Nicolson</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#complément-1-black-and-scholes" id="toc-complément-1-black-and-scholes" class="nav-link" data-scroll-target="#complément-1-black-and-scholes">Complément 1: Black and Scholes</a>
+  <ul class="collapse">
+  <li><a href="#méthodes" id="toc-méthodes" class="nav-link" data-scroll-target="#méthodes">Méthodes</a></li>
+  <li><a href="#résultats" id="toc-résultats" class="nav-link" data-scroll-target="#résultats">Résultats</a></li>
+  </ul></li>
+  <li><a href="#complément-2-call-option" id="toc-complément-2-call-option" class="nav-link" data-scroll-target="#complément-2-call-option">Complément 2 : Call option</a>
+  <ul class="collapse">
+  <li><a href="#choix-dimplémentations-1" id="toc-choix-dimplémentations-1" class="nav-link" data-scroll-target="#choix-dimplémentations-1">Choix d’implémentations</a></li>
+  <li><a href="#résultats-des-schémas-numériques-1" id="toc-résultats-des-schémas-numériques-1" class="nav-link" data-scroll-target="#résultats-des-schémas-numériques-1">Résultats des schémas numériques</a>
+  <ul class="collapse">
+  <li><a href="#cas-du-schéma-deuler-explicite" id="toc-cas-du-schéma-deuler-explicite" class="nav-link" data-scroll-target="#cas-du-schéma-deuler-explicite">Cas du schéma d’Euler explicite</a></li>
+  <li><a href="#cas-des-schémas-deuler-implicite-et-de-crank-nicolson" id="toc-cas-des-schémas-deuler-implicite-et-de-crank-nicolson" class="nav-link" data-scroll-target="#cas-des-schémas-deuler-implicite-et-de-crank-nicolson">Cas des schémas d’Euler implicite et de Crank-Nicolson</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Finite difference Methods for European Options</h1>
+<p class="subtitle lead">EDP in finance</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">paper</div>
+    <div class="quarto-category">m2mo</div>
+    <div class="quarto-category">edp</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Authors</div>
+    <div class="quarto-title-meta-contents">
+             <p>Cheryl KOUADIO </p>
+             <p>Marilene Kougoum </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">January 14, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>Dans ce tp, nous étudion des schémas aux différences finies pour l’équation de Black-Scholes posée dans les variables primitives, après localisation dans un rectangle dans les variables temps-spot.</p>
+<p>Ces schémas nous permettront d’obtenir une approximation numérique de la fonction de prix d’un put européen <span class="math inline">\(v(t,s)\)</span>, avec <span class="math inline">\(t \in [0,T]\)</span> et <span class="math inline">\(s \in [S_{min}, S_{max}]\)</span>. Cette fonction satisfait l’équation de Black-Scholes sur le domaine tronqué <span class="math inline">\(\Omega = [0,T] \times [S_{min}, S_{max}]\)</span> :</p>
+<p><span class="math display">\[
+\begin{cases}
+\frac{\partial v}{\partial t}
++ \frac{1}{2} \sigma^2 s^2 \frac{\partial^2 v}{\partial s^2}
++ r s \frac{\partial v}{\partial s}
+- r v = 0, \quad (t,s) \in \Omega, \\
+v(T,s) = \phi(s) = \max(K - s, 0),
+\quad s \in [S_{\min}, S_{\max}], \\
+v(t,S_{\min}) = K e^{-r(T - t)} - S_{\min},
+\quad t \in (0,T), \\
+v(t,S_{\max}) = 0,
+\quad t \in (0,T).
+\end{cases}
+\]</span></p>
+<p>Nous considérons la grille discrète suivante : <span class="math inline">\(h = \frac{S_{max} - S_{min}}{J + 1}\)</span> et <span class="math inline">\(\Delta t = \frac{T}{N}\)</span>, avec <span class="math inline">\(J\)</span> et <span class="math inline">\(N\)</span> des entiers positifs, et : - <span class="math inline">\(s_j = S_{min} + j h\)</span>, pour <span class="math inline">\(j = 0, \ldots, J + 1\)</span>, - <span class="math inline">\(t_n = n \Delta t\)</span>, pour <span class="math inline">\(n = 0, \ldots, N\)</span>.</p>
+<p>On cherche une approximation <span class="math inline">\(U_j^n \approx v(t_n, s_j)\)</span> pour <span class="math inline">\(j = 1, \ldots, J\)</span> et <span class="math inline">\(n = 0, \ldots, N\)</span>.</p>
+<p>Les schémas aux différences finies nous permettront de discrétiser l’équation de Black-Scholes du prix d’un put européen sur cette grille. Dans ce TP, nous considérons divers <span class="math inline">\(\theta\)</span>-schémas numériques pour ce problème: Le schéma d’Euler explicite, puis Euler implicite, et enfin de Crank-Nicolson. On étudie l’erreur de consistance pour ces schémas. Ces schémas conduisent à des relations de récurrence dans <span class="math inline">\(\mathbb{R}^n\)</span>, chaque pas consistant éventuellement à résoudre un système linéaire dans le cas des schémas implicites.</p>
+<p>On étudie enfin la convergence de ces <span class="math inline">\(\theta\)</span>-schémas. On verra apparaître la notion de stabilité conditionnelle (et de condition CFL) pour certains schémas tels que le schéma d’Euler Explicite, et la notion de stabilité inconditionnelle pour d’autres schémas tels que le schéma d’Euler Implicite ou de Crank-Nicolson.</p>
+</section>
+<section id="méthodes-numériques" class="level1">
+<h1>Méthodes numériques</h1>
+<section id="schéma-deuler-explicite-ee" class="level2">
+<h2 class="anchored" data-anchor-id="schéma-deuler-explicite-ee">Schéma d’Euler explicite (EE)</h2>
+<p>Le schéma d’Euler explicite est un schéma basé sur une discrétisation explicite en temps. La discrétisation de l’EDP est basée sur des approximations centrées. Dès lors, on approxime les dérivées partielles de la manière suivante :</p>
+<p><span class="math display">\[
+\begin{cases}
+\frac{U_j^{n+1} - U_j^n}{\Delta t} + \frac{1}{2} \sigma^2 s_j^2 \frac{U_{j+1}^n - 2 U_j^n + U_{j-1}^n}{h^2} + r s_j \frac{U_{j+1}^n - U_{j-1}^n}{2 h} - r U_j^n = 0, \quad j = 1, \ldots, J,\quad n = 0, \ldots, N-1. \\
+U_j^0 = \phi(s_j), \quad j = 1, \ldots, J. \\
+U_0^n = K e^{-r(T - t_n)} - S_{min}, \quad n = 0, \ldots, N. \\
+U_{J+1}^n = 0, \quad n = 0, \ldots, N.
+\end{cases}
+\]</span></p>
+<p>On peut la réécrire sous la forme matricielle afin d’extraire une solution numérique dite explicite : Sous forme matricielle, le schéma s’écrit :</p>
+<p><span class="math display">\[
+\begin{array}{l}
+\frac{U^{n+1} - A U^n}{\Delta t} +  A U^n + q(t_n) = 0, \quad n = 0, \ldots, N-1, \\
+U^0 = (\phi(s_i))_{1 \leq i \leq J},
+\end{array}
+\]</span></p>
+<p>où</p>
+<ul>
+<li><p><span class="math inline">\(A\)</span> est une matrice carrée tridiagonale de taille <span class="math inline">\(J \times J\)</span>. En posant <span class="math inline">\(\alpha_j = \frac{\sigma^2}{2} \frac{s_j^2}{h^2}\)</span> et <span class="math inline">\(\beta_j = r \frac{s_j}{2 h}\)</span>, les coefficients de la matrice <span class="math inline">\(A\)</span> sont donnés par :</p>
+<p><span class="math display">\[
+\begin{cases}
+A_{j,j-1} = -\alpha_j + \beta_j, \quad j= 2, \ldots, J, \\
+A_{j,j} = 2\alpha_j + r, \quad j = 1, \ldots, J, \\
+A_{j,j+1} = -\alpha_j - \beta_j, \quad j = 1, \ldots, J.
+\end{cases}
+\]</span></p></li>
+<li><p><span class="math inline">\(q(t_n)\)</span> un vecteur de <span class="math inline">\(\mathbb{R}^J\)</span> qui dépendent des paramètres du modèle et de la discrétisation spatiale donné par :</p>
+<p><span class="math display">\[
+q_j(t_n) =
+\begin{cases}
+(-\alpha_1 + \beta_1) U_0^n, \quad j = 1, \\
+0, \quad j = 2, \ldots, J-1, \\
+(-\alpha_J + \beta_J) U_{J+1}^n, \quad j = J.
+\end{cases}
+\]</span></p></li>
+</ul>
+<p>De fait, on obtient la relation de récurrence explicite permettant de calculer <span class="math inline">\(U^{n+1}\)</span> en fonction de <span class="math inline">\(U^n\)</span> :</p>
+<p><span class="math display">\[
+U^{n+1} = A U^n - \Delta t ( A U^n + q(t_n) ), \quad n = 0, \ldots, N-1,
+\]</span></p>
+</section>
+<section id="schéma-deuler-implicite-ei" class="level2">
+<h2 class="anchored" data-anchor-id="schéma-deuler-implicite-ei">Schéma d’Euler implicite (EI)</h2>
+<p>Le schéma d’Euler implicite est un schéma basé sur une discrétisation implicite en temps. La discrétisation de l’EDP est basée sur des approximations centrées. Dès lors, on approxime les dérivées partielles de la manière suivante :</p>
+<p><span class="math display">\[\begin{cases}
+\frac{U_j^{n+1} - U_j^n}{\Delta t} + \frac{1}{2} \sigma^2 s_j^2 \mathbf{\frac{U_{j+1}^{n+1} - 2 U_j^{n+1} + U_{j-1}^{n+1}}{h^2} + r s_j \frac{U_{j+1}^{n+1} - U_{j-1}^{n+1}}{2 h} - r U_j^{n+1}} = 0, \quad j = 1, \ldots, J,\quad n = 0, \ldots, N-1. \\
+U_j^0 = \phi(s_j), \quad j = 1, \ldots, J. \\  
+U_0^n = K e^{-r(T - t_n)} - S_{min}, \quad n = 0, \ldots, N. \\
+U_{J+1}^n = 0, \quad n = 0, \ldots, N.
+\end{cases}
+\]</span></p>
+<p>Dans ce cas, la relation de récurrence s’écrit sous la forme matricielle suivante :</p>
+<p><span class="math display">\[
+\begin{array}{l}
+\frac{U^{n+1} - A U^n}{\Delta t} +  A U^{n+1} + q(t_{n+1}) = 0, \quad n = 0, \ldots, N-1, \\
+U^0 = (\phi(s_i))_{1 \leq i \leq J},
+\end{array}
+\]</span></p>
+<p>où <span class="math inline">\(A\)</span> et <span class="math inline">\(q(t_n)\)</span> sont définis comme précédemment. On obtient ainsi la relation de récurrence implicite suivante :</p>
+<p><span class="math display">\[
+( I + \Delta t A ) U^{n+1} = U^n - \Delta t q(t_{n+1}), \quad n = 0, \ldots, N-1,
+\]</span> où <span class="math inline">\(I\)</span> est la matrice identité de taille <span class="math inline">\(J \times J\)</span>.</p>
+</section>
+<section id="schéma-de-crank-nicolson-cn" class="level2">
+<h2 class="anchored" data-anchor-id="schéma-de-crank-nicolson-cn">Schéma de Crank-Nicolson (CN)</h2>
+<p>Le schéma de Crank-Nicolson est un schéma basé sur une discrétisation implicite en temps. La discrétisation de l’EDP est basée sur des approximations centrées. Dès lors, on approxime les dérivées partielles de la manière suivante :</p>
+<p><span class="math display">\[
+\begin{cases}
+\frac{U_j^{n+1} - U_j^n}{\Delta t} + \frac{1}{2} \left( - \sigma^2 s_j^2 \frac{U_{j+1}^{n+1} - 2 U_j^{n+1} + U_{j-1}^{n+1}}{h^2}  - r s_j \frac{U_{j+1}^{n+1} - U_{j-1}^{n+1}}{2 h} + r U_j^{n+1} \right. \\
+\quad + \frac{1}{2} \left( - \sigma^2 s_j^2 \frac{U_{j+1}^n - 2 U_j^n + U_{j-1}^n}{h^2} - r s_j \frac{U_{j+1}^n - U_{j-1}^n}{2 h} + r U_j^n \right) = 0, \quad j = 1, \ldots, J,\quad n = 0, \ldots, N-1. \\
+U_j^0 = \phi(s_j), \quad j = 1, \ldots, J. \\
+U_0^n = K e^{-r(T - t_n)} - S_{min}, \quad n = 0, \ldots, N. \\
+U_{J+1}^n = 0, \quad n = 0, \ldots, N.
+\end{cases}
+\]</span></p>
+<p>La relation de récurrence s’écrit sous la forme matricielle suivante : <span class="math display">\[
+\begin{array}{l}
+\frac{U^{n+1} - A U^n}{\Delta t} +  \frac{1}{2} A ( U^{n+1} + U^n ) + \frac{1}{2} ( q(t_{n+1}) + q(t_n) ) = 0, \quad n = 0, \ldots, N-1, \\
+U^0 = (\phi(s_i))_{1 \leq i \leq J},
+\end{array}
+\]</span> où <span class="math inline">\(A\)</span> et <span class="math inline">\(q(t_n)\)</span> sont définis comme précédemment. On obtient ainsi la relation de récurrence implicite suivante : <span class="math display">\[\left( I + \frac{\Delta t}{2} A \right) U^{n+1} = \left( I - \frac{\Delta t}{2} A \right) U^n - \frac{\Delta t}{2} ( q(t_{n+1}) + q(t_n) ), \quad n = 0, \ldots, N-1,
+\]</span> où <span class="math inline">\(I\)</span> est la matrice identité de taille <span class="math inline">\(J \times J\)</span>.</p>
+</section>
+<section id="choix-dimplémentations" class="level2">
+<h2 class="anchored" data-anchor-id="choix-dimplémentations">Choix d’implémentations</h2>
+<p>Puisque les schémas implémentés partagent de nombreuses caractéristiques communes, nous définissons une classe de base abstraite <code>SchemeBase</code> qui encapsule les paramètres financiers, la grille discrète, les conditions initiales et aux limites, ainsi que la construction de la matrice <span class="math inline">\(A\)</span> et du vecteur <span class="math inline">\(q(t)\)</span>. Les schémas spécifiques hériteront de cette classe de base et implémenteront la méthode <code>solve()</code> pour résoudre le schéma numérique particulier.</p>
+<p>Trois classes filles seront ensuite définies : <code>SchemeEE</code> pour le schéma d’Euler explicite, <code>SchemeEI</code> pour le schéma d’Euler implicite, et <code>SchemeCN</code> pour le schéma de Crank-Nicolson. Chacune de ces classes implémentera la méthode <code>solve()</code> en fonction de la nature explicite ou implicite du schéma.</p>
+<p>Les codes sont retrouvés sur ce lien github <a href="https://github.com/cheryl-kdio/EDP-M2MO/tree/main/TP1">github</a>.</p>
+<div id="daeb275a" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Package imports</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy.linalg <span class="im">as</span> lng</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.sparse <span class="im">import</span> diags,eye</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> abc <span class="im">import</span> ABC, abstractmethod</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> stats</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.sparse <span class="im">import</span> csr_matrix <span class="im">as</span> sparse</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.sparse.linalg <span class="im">import</span> spsolve</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pprint <span class="im">import</span> pprint</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="fa5c2a50" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SchemeBase(ABC):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Classe de base pour les schémas numériques de l'équation de Black-Scholes.</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, r, sigma, K, T, N, J, Smin, Smax):</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Financial parameters</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.r <span class="op">=</span> r</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.sigma <span class="op">=</span> sigma</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.K <span class="op">=</span> K</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.T <span class="op">=</span> T</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Numerical parameters</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.N <span class="op">=</span> N</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.J <span class="op">=</span> J</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.Smin <span class="op">=</span> Smin</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.Smax <span class="op">=</span> Smax</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Grids</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.dt <span class="op">=</span> T <span class="op">/</span> N</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.h <span class="op">=</span> (Smax <span class="op">-</span> Smin) <span class="op">/</span> (J <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.s <span class="op">=</span> Smin <span class="op">+</span> <span class="va">self</span>.h <span class="op">*</span> np.arange(<span class="dv">1</span>, J <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Operator</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.A, <span class="va">self</span>.alpha, <span class="va">self</span>.beta <span class="op">=</span> <span class="va">self</span>._build_matrix_A()</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> phi(<span class="va">self</span>, s):</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="co">        Condition initiale (payoff) pour un put européen.</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="co">        𝜙(s) = max(K - s, 0)</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> np.maximum(<span class="va">self</span>.K <span class="op">-</span> s, <span class="dv">0</span>)</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> uleft(<span class="va">self</span>, t):</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="co">        Condition aux limites à gauche pour un put européen.</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="co">        u( t, Smin ) = K * exp(-r * t) - S</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.K <span class="op">*</span> np.exp(<span class="op">-</span><span class="va">self</span>.r <span class="op">*</span> t) <span class="op">-</span> <span class="va">self</span>.Smin</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> uright(<span class="va">self</span>, t):</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="co">        Condition aux limites à droite pour un put européen.</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="co">        u( t, Smax ) = 0</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="fl">0.0</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _build_matrix_A(<span class="va">self</span>):</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a><span class="co">        Matrice d'amplification A.</span></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>        alpha <span class="op">=</span> <span class="fl">0.5</span> <span class="op">*</span> <span class="va">self</span>.sigma<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> (<span class="va">self</span>.s<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> <span class="va">self</span>.h<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>        beta  <span class="op">=</span> <span class="va">self</span>.r <span class="op">*</span> <span class="va">self</span>.s <span class="op">/</span> (<span class="dv">2</span> <span class="op">*</span> <span class="va">self</span>.h)</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>        lower <span class="op">=</span> <span class="op">-</span>alpha[<span class="dv">1</span>:] <span class="op">+</span> beta[<span class="dv">1</span>:]        <span class="co"># sous-diagonale</span></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>        main  <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> alpha <span class="op">+</span> <span class="va">self</span>.r            <span class="co"># diagonale principale</span></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>        upper <span class="op">=</span> <span class="op">-</span>alpha[:<span class="op">-</span><span class="dv">1</span>] <span class="op">-</span> beta[:<span class="op">-</span><span class="dv">1</span>]       <span class="co"># sur-diagonale</span></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>        A <span class="op">=</span> diags(</span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>            diagonals<span class="op">=</span>[lower, main, upper],</span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>            offsets<span class="op">=</span>[<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>],</span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>            shape<span class="op">=</span>(<span class="va">self</span>.J, <span class="va">self</span>.J),</span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>            <span class="bu">format</span><span class="op">=</span><span class="st">"csr"</span></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> A, alpha, beta</span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> q(<span class="va">self</span>, t):</span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a><span class="co">        Vecteur des conditions aux limites.</span></span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> np.zeros(<span class="va">self</span>.J)</span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>        y[<span class="dv">0</span>]  <span class="op">=</span> (<span class="op">-</span><span class="va">self</span>.alpha[<span class="dv">0</span>] <span class="op">+</span> <span class="va">self</span>.beta[<span class="dv">0</span>]) <span class="op">*</span> <span class="va">self</span>.uleft(t)</span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>        y[<span class="op">-</span><span class="dv">1</span>] <span class="op">=</span> (<span class="op">-</span><span class="va">self</span>.alpha[<span class="op">-</span><span class="dv">1</span>] <span class="op">-</span> <span class="va">self</span>.beta[<span class="op">-</span><span class="dv">1</span>]) <span class="op">*</span> <span class="va">self</span>.uright(t)</span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> y</span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> interpolate(<span class="va">self</span>, Sval, U):</span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a><span class="co">        Interpolation linéaire pour obtenir la valeur approximée d'un put</span></span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a><span class="co">        en un point spot Sval donné.</span></span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> Sval <span class="op">&lt;=</span> <span class="va">self</span>.Smin:</span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">self</span>.uleft(<span class="va">self</span>.T)</span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> Sval <span class="op">&gt;=</span> <span class="va">self</span>.Smax:</span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">self</span>.uright(<span class="va">self</span>.T)</span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> np.interp(Sval, <span class="va">self</span>.s, U)</span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Abstract method</span></span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a>    <span class="at">@abstractmethod</span></span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> solve(<span class="va">self</span>):</span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a><span class="co">        Méthode abstraite de résolution du schéma numérique.</span></span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">NotImplementedError</span>(<span class="st">"Méthode solve() à implémenter dans la classe fille"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="803cce32" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SchemeEE(SchemeBase):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Schéma d'Euler explicite.</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, r, sigma, K, T, N, J, Smin, Smax):</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>(r, sigma, K, T, N, J, Smin, Smax)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.scheme_name <span class="op">=</span> <span class="st">"Euler Explicite"</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> solve(<span class="va">self</span>):</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co">        Résolution du schéma d'Euler explicite.</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>        U <span class="op">=</span> <span class="va">self</span>.phi(<span class="va">self</span>.s)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(<span class="va">self</span>.N):</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>            t <span class="op">=</span> n <span class="op">*</span> <span class="va">self</span>.dt</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>            U <span class="op">=</span> U <span class="op">-</span> <span class="va">self</span>.dt <span class="op">*</span> (<span class="va">self</span>.A <span class="op">@</span> U <span class="op">+</span> <span class="va">self</span>.q(t))</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> U,t</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="8a7401c9" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SchemeEI(SchemeBase):</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Schéma d'Euler implicite.</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, r, sigma, K, T, N, J, Smin, Smax):</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>(r, sigma, K, T, N, J, Smin, Smax)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.scheme_name <span class="op">=</span> <span class="st">"Euler Implicite"</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> solve(<span class="va">self</span>):</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        U <span class="op">=</span> <span class="va">self</span>.phi(<span class="va">self</span>.s)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        I <span class="op">=</span> eye(<span class="va">self</span>.J, <span class="bu">format</span><span class="op">=</span><span class="st">"csr"</span>)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(<span class="va">self</span>.N):</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>            t <span class="op">=</span> n <span class="op">*</span> <span class="va">self</span>.dt</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>            U <span class="op">=</span> spsolve(I <span class="op">+</span> <span class="va">self</span>.dt <span class="op">*</span> <span class="va">self</span>.A, U <span class="op">-</span> <span class="va">self</span>.dt <span class="op">*</span> <span class="va">self</span>.q(t))</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> U,t</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="5ae805c2" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SchemeCN(SchemeBase):</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Schéma de Crank-Nicolson.</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, r, sigma, K, T, N, J, Smin, Smax):</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>(r, sigma, K, T, N, J, Smin, Smax)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.scheme_name <span class="op">=</span> <span class="st">"Crank-Nicolson"</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> solve(<span class="va">self</span>):</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>        U <span class="op">=</span> <span class="va">self</span>.phi(<span class="va">self</span>.s)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>        I <span class="op">=</span> eye(<span class="va">self</span>.J, <span class="bu">format</span><span class="op">=</span><span class="st">"csr"</span>)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>        factor_minus <span class="op">=</span> I <span class="op">-</span> <span class="fl">0.5</span> <span class="op">*</span> <span class="va">self</span>.dt <span class="op">*</span> <span class="va">self</span>.A</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>        factor_plus <span class="op">=</span> I <span class="op">+</span> <span class="fl">0.5</span> <span class="op">*</span> <span class="va">self</span>.dt <span class="op">*</span> <span class="va">self</span>.A</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(<span class="va">self</span>.N):</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>            t <span class="op">=</span> n <span class="op">*</span> <span class="va">self</span>.dt</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>            U <span class="op">=</span> spsolve(factor_plus, factor_minus<span class="op">@</span>U <span class="op">-</span> <span class="va">self</span>.dt <span class="op">*</span> <span class="va">self</span>.q(t))</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> U,t</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="résultats-des-schémas-numériques" class="level1">
+<h1>Résultats des schémas numériques</h1>
+<div id="f5a9be83" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>r_ <span class="op">=</span> <span class="fl">0.1</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>sigma_ <span class="op">=</span> <span class="fl">0.2</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>K_ <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>T_ <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>Smin_ <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>Smax_ <span class="op">=</span> <span class="dv">200</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Paramètres financiers:"</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"r=</span><span class="sc">%.2f</span><span class="st">"</span> <span class="op">%</span>r_, <span class="st">"sigma=</span><span class="sc">%.2f</span><span class="st">"</span> <span class="op">%</span>sigma_, <span class="st">"K=%.0f"</span> <span class="op">%</span>K_, <span class="st">"T=%.0f"</span> <span class="op">%</span>T_)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Definition des paramètres dans un dictionnaire</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>params <span class="op">=</span> <span class="bu">dict</span>(</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    r<span class="op">=</span>r_,</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    sigma<span class="op">=</span>sigma_,</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    K<span class="op">=</span>K_,</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    T<span class="op">=</span>T_,</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    N<span class="op">=</span><span class="va">None</span>, <span class="co"># Valeur à définir plus tard</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    J<span class="op">=</span><span class="va">None</span>, <span class="co"># Valeur à définir plus tard</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    Smin<span class="op">=</span>Smin_,</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    Smax<span class="op">=</span>Smax_</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Paramètres financiers:
+r=0.10 sigma=0.20 K=100 T=1</code></pre>
+</div>
+</div>
+<section id="résultat-du-schéma-deuler-explicite" class="level2">
+<h2 class="anchored" data-anchor-id="résultat-du-schéma-deuler-explicite">Résultat du schéma d’Euler explicite</h2>
+<p>Pour étudier le comportement du schéma d’Euler explicite, nous avons réalisé des simulations en faisant varier les paramètres <span class="math inline">\(J\)</span> (nombre de points spatiaux) et <span class="math inline">\(N\)</span> (nombre de points temporels). Nous avons considéré deux cas distincts :</p>
+<ul>
+<li>Cas 1 : <span class="math inline">\(N\)</span> fixé à 10 et <span class="math inline">\(J\)</span> variant parmi les valeurs <span class="math inline">\(\{10, 20, 50\}\)</span>.</li>
+<li>Cas 2 : <span class="math inline">\(N\)</span> et <span class="math inline">\(J\)</span> variant simultanément parmi les valeurs <span class="math inline">\(\{10, 20, 50\}\)</span>, avec <span class="math inline">\(N = J\)</span>.</li>
+</ul>
+<p>Les résultats obtenus sont présentés dans les graphiques ci-dessous. Par ailleurs, pour aider à l’interprétation des résultats, le résultat de la condition de CFL (Courant-Friedrichs-Lewy) est également affiché sur chaque graphique.</p>
+<div id="10f74d9a" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cas 1 : N = 10, J varie dans `values`</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>values <span class="op">=</span> [<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">50</span>]</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>N_fixed <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>cfl_records1 <span class="op">=</span> []</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">24</span>, <span class="dv">8</span>), sharey<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> j, J_ <span class="kw">in</span> <span class="bu">enumerate</span>(values):</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    params[<span class="st">'N'</span>] <span class="op">=</span> N_fixed</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    params[<span class="st">'J'</span>] <span class="op">=</span> J_</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    ee <span class="op">=</span> SchemeEE(<span class="op">**</span>params)</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    U, t <span class="op">=</span> ee.solve()</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    s <span class="op">=</span> ee.s</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    dt <span class="op">=</span> ee.dt</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">#CFL condition</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    CFL <span class="op">=</span> dt <span class="op">/</span> (ee.h <span class="op">**</span> <span class="dv">2</span>) <span class="op">*</span> (ee.sigma <span class="op">**</span> <span class="dv">2</span>) <span class="op">*</span> (ee.Smax <span class="op">**</span> <span class="dv">2</span>)</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Enregistrement dans la table</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>    cfl_records1.append({</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>        <span class="st">"N"</span>: N_fixed,</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>        <span class="st">"J"</span>: J_,</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>        <span class="st">"CFL"</span>: CFL</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> axes[j]</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>    ax.plot(s, U, label<span class="op">=</span><span class="st">"Prix option"</span>)</span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>    ax.plot(s, ee.phi(s), <span class="st">'k--'</span>, label<span class="op">=</span><span class="st">"Payoff"</span>)</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="ss">f"N = </span><span class="sc">{</span>N_fixed<span class="sc">}</span><span class="ss">, J = </span><span class="sc">{</span>J_<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">"s"</span>)</span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> j <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>        ax.set_ylabel(<span class="st">"u(t,s)"</span>)</span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>    ax.legend()</span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>plt.suptitle(</span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"Evolution du prix du put européen -- Scheme </span><span class="sc">{</span>ee<span class="sc">.</span>scheme_name<span class="sc">}</span><span class="ss">, N fixé à </span><span class="sc">{</span>N_fixed<span class="sc">}</span><span class="ss">"</span>,</span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>    fontsize<span class="op">=</span><span class="dv">16</span></span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>plt.tight_layout(rect<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.95</span>])</span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="edp_european_opt_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="52085352" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cas 2 : N = J avec N, J dans `values`</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>values <span class="op">=</span> [<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">50</span>]</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>cfl_records2 <span class="op">=</span> []</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">24</span>, <span class="dv">8</span>), sharey<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> j, N_ <span class="kw">in</span> <span class="bu">enumerate</span>(values):</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    params[<span class="st">'N'</span>] <span class="op">=</span> N_</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    params[<span class="st">'J'</span>] <span class="op">=</span> N_</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    ee <span class="op">=</span> SchemeEE(<span class="op">**</span>params)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    U, t <span class="op">=</span> ee.solve()</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    s <span class="op">=</span> ee.s</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    dt <span class="op">=</span> ee.dt</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">#CFL condition</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    CFL <span class="op">=</span> dt <span class="op">/</span> (ee.h <span class="op">**</span> <span class="dv">2</span>) <span class="op">*</span> (ee.sigma <span class="op">**</span> <span class="dv">2</span>) <span class="op">*</span> (ee.Smax <span class="op">**</span> <span class="dv">2</span>)</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    cfl_records2.append({</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">"N"</span>: N_,</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">"J"</span>: N_,</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>        <span class="st">"CFL"</span>: CFL</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> axes[j]</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>    ax.plot(s, U, label<span class="op">=</span><span class="st">"Prix option"</span>)</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>    ax.plot(s, ee.phi(s), <span class="st">'k--'</span>, label<span class="op">=</span><span class="st">"Payoff"</span>)</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="ss">f"N = J = </span><span class="sc">{</span>N_<span class="sc">}</span><span class="ss">, CFL=</span><span class="sc">{</span>CFL<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">"s"</span>)</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> j <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>        ax.set_ylabel(<span class="st">"u(t,s)"</span>)</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>    ax.legend()</span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>plt.suptitle(</span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"Evolution du prix du put européen -- Scheme </span><span class="sc">{</span>ee<span class="sc">.</span>scheme_name<span class="sc">}</span><span class="ss">, N = J"</span>,</span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>    fontsize<span class="op">=</span><span class="dv">16</span></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>plt.tight_layout(rect<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.95</span>])</span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="edp_european_opt_files/figure-html/cell-9-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>En analysant les graphiques ci-dessus, nous constatons que le choix de <span class="math inline">\(J\)</span> et <span class="math inline">\(N\)</span>, i.e.&nbsp;le maillage spatial et temporel, influence la stabilité de l’approximation du prix du put européen.</p>
+<p>Dans le cas 1, avec <span class="math inline">\(N\)</span> fixé à 10 et <span class="math inline">\(J\)</span> variant, nous constatons que l’approximation de prix est très proche du prix du put européen pour N=J=10, ce qui est attendu pour un schéma stable. Cependant, lorsque <span class="math inline">\(J\)</span> augmente, des oscillations apparaissent dans la solution numérique, indiquant une instabilité du schéma.</p>
+<p>Par ailleurs, dans le cas 2, où <span class="math inline">\(N\)</span> et <span class="math inline">\(J\)</span> varient simultanément avec <span class="math inline">\(N=J\)</span>, nous observons également des oscillations et des instabilités pour des valeurs plus élevées de <span class="math inline">\(N\)</span> et <span class="math inline">\(J\)</span>. Ce comportement instable est similaire à celui observé dans le cas 1, lorsque <span class="math inline">\(J\)</span> augmente pour un <span class="math inline">\(N\)</span> fixé.</p>
+<p>Ces oscillations et instabilités observées dans les deux cas étudiés sont caractéristiques des schémas explicites lorsqu’ils ne respectent pas la condition de stabilité requise, dite condition CFL. En effet,le schéma d’euler explicite est stable conditionnellement au respect de la condition CFL dépendant du rapport entre <span class="math inline">\(\Delta t\)</span> et <span class="math inline">\(h^2\)</span>.</p>
+<p>La condition CFL qui, pour le schéma explicite appliqué à l’équation de Black-Scholes, peut être exprimée comme suit : <span class="math inline">\(\frac{\Delta t}{h^2} \leq \frac{1}{2 \sigma^2 Smax^2}\)</span>.Cette condition impose une relation entre le pas de temps <span class="math inline">\(\Delta t\)</span> et le pas d’espace h. De fait, lorsque J augmente et N diminue, cette condition de stabilité peut être violée. Dans notre cas, lorsque J=50 et N=10 ou N=50, la condition CFL n’est pas respectée comme on peut l’observer dans le tableau ci-dessous, ce qui explique les oscillations et l’instabilité observées dans les résultats numériques.</p>
+<div id="957a823a" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>cfl_df1 <span class="op">=</span> pd.DataFrame(cfl_records1)  <span class="co"># Cas 1 : N fixé</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>cfl_df2 <span class="op">=</span> pd.DataFrame(cfl_records2)  <span class="co"># Cas 2 : N = J</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>cfl_df1 <span class="op">=</span> cfl_df1.rename(columns<span class="op">=</span>{<span class="st">"CFL"</span>: <span class="st">"CFL (N=10)"</span>})</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>cfl_df2 <span class="op">=</span> cfl_df2.rename(columns<span class="op">=</span>{<span class="st">"CFL"</span>: <span class="st">"CFL (N=J)"</span>})</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>cfl_table <span class="op">=</span> pd.merge(</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    cfl_df1[[<span class="st">"J"</span>, <span class="st">"CFL (N=10)"</span>]],</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    cfl_df2[[<span class="st">"J"</span>, <span class="st">"CFL (N=J)"</span>]],</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    on<span class="op">=</span><span class="st">"J"</span>,</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    how<span class="op">=</span><span class="st">"inner"</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>cfl_table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">J</th>
+<th data-quarto-table-cell-role="th">CFL (N=10)</th>
+<th data-quarto-table-cell-role="th">CFL (N=J)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>10</td>
+<td>0.484</td>
+<td>0.4840</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>20</td>
+<td>1.764</td>
+<td>0.8820</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>50</td>
+<td>10.404</td>
+<td>2.0808</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Pour mieux comprendre l’origine des oscillations, nous avons étudié la matrice d’amplification du schéma explicite pour N=10 et J=50. La matrice d’amplification est définie par <span class="math inline">\(B:= I - dt*A\)</span> où A est la matrice tridiagonale associée au schéma implicite. En calculant les valeurs propres de cette matrice, nous pouvons analyser la stabilité du schéma.</p>
+<p>En effet, cette matrice intervient dans l’évolution de la solution numérique à chaque pas de temps, et on a : <span class="math display">\[
+||U^n||_2 &lt;= ||B||^n ||U^0||_2, \quad \forall n \geq 0.\]</span></p>
+<p>Si la norme de B est supérieure à 1, alors les valeurs prises par la solution numérique peuvent croître de manière exponentielle par rapport à la condition initiale, conduisant à des erreurs d’approximation possiblement importantes, des oscillations et ainsi une instabilité dans la solution numérique. Pour savoir si la norme de B est supérieure à 1, nous avons calculé le spectre de B et constaté que la valeur absolue de la plus grande valeur propre dépasse 1. Cela confirme que le schéma explicite est instable pour les paramètres choisis, ce qui explique les oscillations observées dans les résultats numériques.</p>
+<p>Pour cette raison, nous avons testé d’autres schémas numériques tels que le schéma d’Euler implicite et le schéma de Crank-Nicolson, qui sont connus pour leur stabilité inconditionnelle.</p>
+<div id="e019baf3" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Paramètres</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>params[<span class="st">'N'</span>] <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>params[<span class="st">'J'</span>] <span class="op">=</span> <span class="dv">50</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>ee <span class="op">=</span> SchemeEE(<span class="op">**</span>params)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>ee.solve()</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Matrice d'amplification</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> ee.A.toarray()</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> np.eye(ee.J) <span class="op">-</span> ee.dt <span class="op">*</span> A</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Valeurs propres</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>eigenvalues <span class="op">=</span> lng.eigvals(B)</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>spectral_radius <span class="op">=</span> np.<span class="bu">max</span>(np.<span class="bu">abs</span>(eigenvalues))</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>norm_B <span class="op">=</span> lng.norm(B, <span class="dv">2</span>)</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Tableau récapitulatif</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>df_spectrum <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Valeur propre"</span>: eigenvalues,</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">"|Valeur propre|"</span>: np.<span class="bu">abs</span>(eigenvalues)</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>}).sort_values(<span class="st">"|Valeur propre|"</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Affichage</span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"=== Analyse de stabilité du schéma explicite ===</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Paramètres numériques :"</span>)</span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"  N = </span><span class="sc">{</span>ee<span class="sc">.</span>N<span class="sc">}</span><span class="ss">,  J = </span><span class="sc">{</span>ee<span class="sc">.</span>J<span class="sc">}</span><span class="ss">,  dt = </span><span class="sc">{</span>ee<span class="sc">.</span>dt<span class="sc">:.2f}</span><span class="ss">,  h  = </span><span class="sc">{</span>ee<span class="sc">.</span>h<span class="sc">:.2f}</span><span class="ch">\n</span><span class="ss">"</span>)</span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"10 plus grandes valeurs propres de B (triées par module décroissant) :"</span>)</span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_spectrum.head(<span class="dv">10</span>).to_string(index<span class="op">=</span><span class="va">False</span>))</span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Norme matricielle induite (norme 2) :"</span>)</span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"  ||B||₂ = </span><span class="sc">{</span>norm_B<span class="sc">:.6f}</span><span class="ch">\n</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>=== Analyse de stabilité du schéma explicite ===
+
+Paramètres numériques :
+  N = 10,  J = 50,  dt = 0.10,  h  = 3.92
+
+10 plus grandes valeurs propres de B (triées par module décroissant) :
+ Valeur propre  |Valeur propre|
+    -16.469570        16.469570
+    -14.218162        14.218162
+    -12.525602        12.525602
+    -11.138073        11.138073
+     -9.955409         9.955409
+     -8.924546         8.924546
+     -8.012865         8.012865
+     -7.198391         7.198391
+     -6.465369         6.465369
+     -5.801977         5.801977
+Norme matricielle induite (norme 2) :
+  ||B||₂ = 16.473976
+</code></pre>
+</div>
+</div>
+</section>
+<section id="résultat-du-schéma-deuler-implicite-et-de-crank-nicolson" class="level2">
+<h2 class="anchored" data-anchor-id="résultat-du-schéma-deuler-implicite-et-de-crank-nicolson">Résultat du schéma d’Euler implicite et de Crank-Nicolson</h2>
+<section id="cas-du-schéma-deuler-implicite" class="level3">
+<h3 class="anchored" data-anchor-id="cas-du-schéma-deuler-implicite">Cas du schéma d’Euler implicite</h3>
+<p>Pour étudier le comportement du schéma d’Euler implicite, nous nous sommes directement placés dans le cas où N=10 et J=50, qui avait montré des oscillations dans le schéma explicite. Les résultats obtenus sont présentés dans le graphique ci-dessous. Comme on peut le constater, le schéma d’Euler implicite produit une approximation stable et sans oscillations du prix du put européen, même pour des valeurs élevées de N et J. Cela confirme la stabilité inconditionnelle du schéma implicite, qui ne dépend pas de la relation entre le pas de temps et le pas spot.</p>
+<div id="779e8bb2" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>params[<span class="st">'J'</span>] <span class="op">=</span> <span class="dv">50</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>params[<span class="st">'N'</span>] <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Paramètres financiers:"</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"r=</span><span class="sc">%.2f</span><span class="st">"</span> <span class="op">%</span>r_, <span class="st">"sigma=</span><span class="sc">%.2f</span><span class="st">"</span> <span class="op">%</span>sigma_, <span class="st">"K=%.0f"</span> <span class="op">%</span>K_, <span class="st">"T=%.0f"</span> <span class="op">%</span>T_)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Paramètres numériques:"</span>)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"J=%.0f"</span> <span class="op">%</span>params[<span class="st">'J'</span>], <span class="st">"N=%.0f"</span> <span class="op">%</span>params[<span class="st">'N'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Paramètres financiers:
+r=0.10 sigma=0.20 K=100 T=1
+Paramètres numériques:
+J=50 N=10</code></pre>
+</div>
+</div>
+<div id="2697280d" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>ei <span class="op">=</span> SchemeEI(<span class="op">**</span>params)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>U,t <span class="op">=</span> ei.solve()</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> ei.s</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>dt <span class="op">=</span> ei.dt</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">5</span>))</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>plt.plot(s,U,label<span class="op">=</span><span class="st">"t=</span><span class="sc">%.2f</span><span class="st">"</span> <span class="op">%</span>(t<span class="op">+</span>dt))</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>plt.plot(s,ei.phi(s), <span class="st">'k--'</span>, label<span class="op">=</span><span class="st">"payoff"</span>)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"s"</span>)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"u(t,s)"</span>)</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Evolution du prix du put européen au cours du temps [Euler Implicite]"</span>)</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="edp_european_opt_files/figure-html/cell-13-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="cas-du-schéma-de-crank-nicolson" class="level3">
+<h3 class="anchored" data-anchor-id="cas-du-schéma-de-crank-nicolson">Cas du schéma de Crank-Nicolson</h3>
+<p>Le schéma de Crank-Nicolson, quant à lui, est une méthode implicite qui combine les avantages des schémas explicites et implicites. Il est basé sur une moyenne pondérée des valeurs aux temps n et n+1, ce qui permet d’obtenir une meilleure précision temporelle tout en maintenant la stabilité. Lors de l’étude du schéma de Crank-Nicolson, nous avons également choisi les paramètres N=10 et J=50. Les résultats obtenus sont présentés dans le graphique ci-dessous. Comme on peut le constater, le schéma de Crank-Nicolson produit également une approximation stable et sans oscillations du prix du put européen, confirmant ainsi sa stabilité inconditionnelle.</p>
+<div id="a8024875" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>params[<span class="st">'J'</span>] <span class="op">=</span> <span class="dv">50</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>params[<span class="st">'N'</span>] <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Paramètres financiers:"</span>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"r=</span><span class="sc">%.2f</span><span class="st">"</span> <span class="op">%</span>r_, <span class="st">"sigma=</span><span class="sc">%.2f</span><span class="st">"</span> <span class="op">%</span>sigma_, <span class="st">"K=%.0f"</span> <span class="op">%</span>K_, <span class="st">"T=%.0f"</span> <span class="op">%</span>T_)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Paramètres numériques:"</span>)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"J=%.0f"</span> <span class="op">%</span>params[<span class="st">'J'</span>], <span class="st">"N=%.0f"</span> <span class="op">%</span>params[<span class="st">'N'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Paramètres financiers:
+r=0.10 sigma=0.20 K=100 T=1
+Paramètres numériques:
+J=50 N=10</code></pre>
+</div>
+</div>
+<div id="3a5bf5c8" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>cn <span class="op">=</span> SchemeCN(<span class="op">**</span>params)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>U,t <span class="op">=</span> cn.solve()</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> cn.s</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>dt <span class="op">=</span> cn.dt</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">5</span>))</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>plt.plot(s,U,label<span class="op">=</span><span class="st">"t=</span><span class="sc">%.2f</span><span class="st">"</span> <span class="op">%</span>(t<span class="op">+</span>dt))</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>plt.plot(s,cn.phi(s), <span class="st">'k--'</span>, label<span class="op">=</span><span class="st">"payoff"</span>)</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"s"</span>)</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"u(t,s)"</span>)</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Evolution du prix du put européen au cours du temps [Crank-Nicolson]"</span>)</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="edp_european_opt_files/figure-html/cell-15-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="complément-1-black-and-scholes" class="level1">
+<h1>Complément 1: Black and Scholes</h1>
+<section id="méthodes" class="level2">
+<h2 class="anchored" data-anchor-id="méthodes">Méthodes</h2>
+<p>Afin de comparer les résultats numériques obtenus avec les différents <span class="math inline">\(\theta-\)</span>schémas au prix théorique du put européen, nous avons implémenté la formule de Black and Scholes dans une fonction Python. Cette fonction calcule le prix du put en utilisant les paramètres financiers tels que le prix de l’actif sous-jacent, le prix d’exercice, le taux d’intérêt sans risque, la volatilité et le temps jusqu’à l’échéance.</p>
+<p>Nous analysons la convergence des schémas numériques considérés, ainsi que les ordres de convergence. La convergence est ensuite étudiée numériquement en comparant les prix obtenus par les schémas avec la solution analytique du put européen, et les ordres de convergence sont estimés à partir du comportement asymptotique de l’erreur lorsque les pas de temps et d’espace tendent vers zéro.</p>
+<p>Pour estimer numériquement l’ordre de convergence des schémas, on utilise la relation <span class="math inline">\(e_k \sim C h_k^\alpha\)</span>, où <span class="math inline">\(C\)</span> est une constante indépendante de <span class="math inline">\(h_k\)</span> et <span class="math inline">\(\alpha\)</span> est l’ordre de convergence du schéma, <span class="math inline">\(h_k\)</span> étant le pas de discrétisation spatial, défini par <span class="math inline">\(h_k = \frac{S_{max} - S_{min}}{J_k + 1}\)</span>, et <span class="math inline">\(J_k\)</span> le nombre de points spatiaux utilisés dans la discrétisation. De fait, on obtient l’ordre de convergence <span class="math inline">\(\alpha\)</span> en comparant les erreurs <span class="math inline">\(e_k\)</span> et <span class="math inline">\(e_{k+1}\)</span> pour deux maillages successifs. D’où <span class="math display">\[\alpha_k
+= \frac{\log\!\left(\frac{e_{k+1}}{e_k}\right)}
+       {\log\!\left(\frac{h_{k+1}}{h_k}\right)}.
+\]</span></p>
+<p>Nous considérons deux grilles de discrétisation successives définies par les couples <span class="math inline">\((N_k, J_k)\)</span>, à savoir <span class="math inline">\(N=J\)</span> et <span class="math inline">\(N = \frac{J^2}{10}\)</span>, avec <span class="math inline">\(J \in \{10, 20, 40, 80, 160\}\)</span>.</p>
+<div id="018b2ee7" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Paramètres financiers:"</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>Sval <span class="op">=</span> <span class="dv">80</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"r=</span><span class="sc">%.2f</span><span class="st">"</span> <span class="op">%</span>r_, <span class="st">"sigma=</span><span class="sc">%.2f</span><span class="st">"</span> <span class="op">%</span>sigma_, <span class="st">"K=%.0f"</span> <span class="op">%</span>K_, <span class="st">"T=%.0f"</span> <span class="op">%</span>T_, <span class="st">"Sval=</span><span class="sc">%.2f</span><span class="st">"</span> <span class="op">%</span>Sval)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Paramètres financiers:
+r=0.10 sigma=0.20 K=100 T=1 Sval=80.00</code></pre>
+</div>
+</div>
+<div id="00ec9a73" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Implementation de la formule de Black and Scholes</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> dplus(x,K,r,sigma,T,t):</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    tau <span class="op">=</span> T<span class="op">-</span>t</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    numerator <span class="op">=</span> np.log(x<span class="op">/</span>K) <span class="op">+</span> tau <span class="op">*</span> (r <span class="op">+</span> <span class="fl">0.5</span><span class="op">*</span>sigma<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    denominator <span class="op">=</span> sigma <span class="op">*</span> np.sqrt(tau)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> numerator <span class="op">/</span> denominator</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> dmoins(dplus_,sigma,tau):</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> dplus_ <span class="op">-</span> sigma <span class="op">*</span> np.sqrt(tau)</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_BS_price(x,K,r,sigma,T,t<span class="op">=</span><span class="dv">0</span>,type_<span class="op">=</span><span class="st">'call'</span>):</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>    tau <span class="op">=</span> T<span class="op">-</span>t</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>    dplus_ <span class="op">=</span> dplus(x,K,r,sigma,T,t)</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>    dmoins_ <span class="op">=</span> dmoins(dplus_,sigma,tau)</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> type_ <span class="op">==</span> <span class="st">'call'</span>:</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> x<span class="op">*</span>stats.norm.cdf(dplus_) <span class="op">-</span> K <span class="op">*</span> np.exp(<span class="op">-</span>r<span class="op">*</span>tau) <span class="op">*</span> stats.norm.cdf(dmoins_)</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> type_<span class="op">==</span><span class="st">'put'</span>:</span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> K<span class="op">*</span> np.exp(<span class="op">-</span>r<span class="op">*</span>tau)<span class="op">*</span> stats.norm.cdf(<span class="op">-</span>dmoins_) <span class="op">-</span> x <span class="op">*</span> stats.norm.cdf(<span class="op">-</span>dplus_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="64c91640" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>price_BS <span class="op">=</span> compute_BS_price(Sval, params[<span class="st">'K'</span>], params[<span class="st">'r'</span>], params[<span class="st">'sigma'</span>], params[<span class="st">'T'</span>], t<span class="op">=</span><span class="dv">0</span>, type_<span class="op">=</span><span class="st">'put'</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Prix théorique du put pour S=</span><span class="sc">%.2f</span><span class="st"> : </span><span class="sc">%.4f</span><span class="st">"</span> <span class="op">%</span>(Sval, price_BS))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Prix théorique du put pour S=80.00 : 13.2737</code></pre>
+</div>
+</div>
+<div id="e8b7556e" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_convergence_table(N_grid, J_grid, params, Sval, scheme_class):</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    est_prices <span class="op">=</span> []</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    errex <span class="op">=</span> []</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    errors <span class="op">=</span> []</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    cpu_times <span class="op">=</span> []</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Prix exact (identique pour tous)</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>    BS_price <span class="op">=</span> compute_BS_price(</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>        Sval, params[<span class="st">'K'</span>], params[<span class="st">'r'</span>],</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>        params[<span class="st">'sigma'</span>], params[<span class="st">'T'</span>],</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>        t<span class="op">=</span><span class="dv">0</span>, type_<span class="op">=</span><span class="st">'put'</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> N, J <span class="kw">in</span> <span class="bu">zip</span>(N_grid, J_grid):</span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>        params[<span class="st">'N'</span>] <span class="op">=</span> N</span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>        params[<span class="st">'J'</span>] <span class="op">=</span> J</span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>        start <span class="op">=</span> time.time()</span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>        scheme <span class="op">=</span> scheme_class(<span class="op">**</span>params)</span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>        U, _ <span class="op">=</span> scheme.solve()</span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>        tcpu <span class="op">=</span> time.time() <span class="op">-</span> start</span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>        price_est <span class="op">=</span> scheme.interpolate(Sval, U)</span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a>        est_prices.append(price_est)</span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>        errex.append(<span class="bu">abs</span>(price_est <span class="op">-</span> BS_price))</span>
+<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a>        cpu_times.append(tcpu)</span>
+<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a>    est_prices <span class="op">=</span> np.array(est_prices)</span>
+<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a>    errors <span class="op">=</span> np.zeros(<span class="bu">len</span>(est_prices))</span>
+<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a>    errors[<span class="dv">1</span>:] <span class="op">=</span> np.<span class="bu">abs</span>(np.diff(est_prices))</span>
+<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a>    errex <span class="op">=</span> np.array(errex)</span>
+<span id="cb24-34"><a href="#cb24-34" aria-hidden="true" tabindex="-1"></a>    cpu_times <span class="op">=</span> np.array(cpu_times)</span>
+<span id="cb24-35"><a href="#cb24-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-36"><a href="#cb24-36" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Ordre de convergence global</span></span>
+<span id="cb24-37"><a href="#cb24-37" aria-hidden="true" tabindex="-1"></a>    alpha <span class="op">=</span> np.zeros(<span class="bu">len</span>(errors))</span>
+<span id="cb24-38"><a href="#cb24-38" aria-hidden="true" tabindex="-1"></a>    h_step <span class="op">=</span> (params[<span class="st">"Smax"</span>] <span class="op">-</span> params[<span class="st">"Smin"</span>]) <span class="op">/</span> (J_grid <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb24-39"><a href="#cb24-39" aria-hidden="true" tabindex="-1"></a>    alpha[<span class="dv">1</span>:] <span class="op">=</span> np.log(errex[:<span class="op">-</span><span class="dv">1</span>] <span class="op">/</span> errex[<span class="dv">1</span>:]) <span class="op">/</span> np.log(h_step[:<span class="op">-</span><span class="dv">1</span>] <span class="op">/</span> h_step[<span class="dv">1</span>:])</span>
+<span id="cb24-40"><a href="#cb24-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-41"><a href="#cb24-41" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb24-42"><a href="#cb24-42" aria-hidden="true" tabindex="-1"></a>        <span class="st">"J"</span>: J_grid,</span>
+<span id="cb24-43"><a href="#cb24-43" aria-hidden="true" tabindex="-1"></a>        <span class="st">"N"</span>: N_grid,</span>
+<span id="cb24-44"><a href="#cb24-44" aria-hidden="true" tabindex="-1"></a>        <span class="st">"U(s)"</span>: est_prices,</span>
+<span id="cb24-45"><a href="#cb24-45" aria-hidden="true" tabindex="-1"></a>        <span class="st">"error"</span>: errors,</span>
+<span id="cb24-46"><a href="#cb24-46" aria-hidden="true" tabindex="-1"></a>        <span class="st">"alpha"</span>: alpha,</span>
+<span id="cb24-47"><a href="#cb24-47" aria-hidden="true" tabindex="-1"></a>        <span class="st">"errex"</span>: errex,</span>
+<span id="cb24-48"><a href="#cb24-48" aria-hidden="true" tabindex="-1"></a>        <span class="st">"tcpu"</span>: cpu_times</span>
+<span id="cb24-49"><a href="#cb24-49" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb24-50"><a href="#cb24-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-51"><a href="#cb24-51" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df.<span class="bu">round</span>(<span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="résultats" class="level2">
+<h2 class="anchored" data-anchor-id="résultats">Résultats</h2>
+<!-- On constate que par rapport au schema d'euler implicite, le schema de Crank-Nicolson offre une meilleure précision temporelle tout en maintenant la stabilité, ce qui le rend particulièrement adapté pour la résolution des EDP en finance.
+C'est le schéma qui a par ailleurs l'ordre de convergence le plus élevé parmi les deux schémas étudiés. -->
+<p>On constate que les trois schémas présentent des comportements très contrastés en termes de stabilité, ordre de convergence et coût de calcul lorsque l’on impose <span class="math inline">\(N = J\)</span>.</p>
+<p>On observe tout d’abord que le schéma d’Euler explicite ne peut pas être considéré comme fiable dans ce cadre, comme précisé précédemment. Pour des maillages grossiers, l’erreur semble initialement décroître et l’ordre estimé est proche de 2, ce qui pourrait suggérer une bonne convergence. Cependant, dès que la discrétisation devient plus fine, la solution diverge et on observe une explosion numérique à partir de <span class="math inline">\(N = J = 80\)</span> qui montre clairement que la condition de stabilité n’est plus satisfaite lorsque <span class="math inline">\(\Delta t\)</span> et <span class="math inline">\(\Delta s\)</span> sont raffinés simultanément.</p>
+<p>Le schéma d’Euler implicite est parfaitement stable sur toute la plage de discrétisations considérée. L’erreur décroît de façon régulière lorsque <span class="math inline">\(N = J\)</span> augmente, sans aucune instabilité numérique. De plus, l’ordre de convergence estimé reste inférieur à 2 et tend progressivement vers une valeur proche de 1, ce qui est cohérent avec le fait que, lorsque <span class="math inline">\(\Delta t \sim \Delta s\)</span>, l’erreur temporelle d’ordre 1 domine l’erreur spatiale.</p>
+<p>Enfin, on constate que le schéma de Crank–Nicolson présente le comportement le plus satisfaisant. Il est stable sur toute la grille, l’erreur décroît rapidement et l’ordre de convergence estimé est très proche de 2 dès les maillages intermédiaires, puis se stabilise autour de cette valeur pour les maillages fins. Ce résultat est parfaitement conforme à la théorie, puisque le schéma est d’ordre 2 à la fois en temps et en espace.</p>
+<p>Pour conclure, lorsque <span class="math inline">\(N = J\)</span>, en termes de temps de calcul, le schéma EE est certes le plus rapide sur les grilles grossières, avec des temps de simulation de l’ordre de la milliseconde, mais cet avantage est sans intérêt pratique puisque la solution devient totalement inutilisable pour des maillages fins. Le schéma implicite constitue une solution robuste mais relativement coûteuse et moins précise. En effet, il nécessite la résolution d’un système linéaire à chaque pas de temps. Cela se reflète clairement dans les temps de calcul, qui augmentent sensiblement avec le raffinement et deviennent significatifs pour les maillages fins, atteignant plus de 0.1 seconde pour <span class="math inline">\(N = J = 160\)</span>.</p>
+<p>Le schéma de Crank–Nicolson apparaît comme le meilleur compromis, combinant stabilité, convergence d’ordre 2 et temps de calcul raisonnables. En termes de coût de calcul, le schéma CN est plus cher que le schéma explicite mais reste nettement plus efficace que le schéma implicite pur. Les temps de simulation restent modérés, même pour des valeurs élevées de <span class="math inline">\(N = J\)</span>, et demeurent largement compatibles avec une utilisation pratique, tout en offrant une précision bien supérieure.</p>
+<div id="04594a31" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>N_grid <span class="op">=</span> J_grid <span class="op">=</span> np.array([<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">40</span>, <span class="dv">80</span>, <span class="dv">160</span>])</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Cas N = J</span><span class="ch">\n</span><span class="st">"</span>, <span class="st">"="</span><span class="op">*</span><span class="dv">75</span>)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Convergence Table for Scheme EE:"</span>)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(get_convergence_table(N_grid, J_grid, params, Sval, SchemeEE))</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span><span class="op">*</span><span class="dv">75</span>, <span class="st">"</span><span class="ch">\n</span><span class="st">Convergence Table for Scheme EI:"</span>)</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(get_convergence_table(N_grid, J_grid, params, Sval, SchemeEI))</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span><span class="op">*</span><span class="dv">75</span>, <span class="st">"</span><span class="ch">\n</span><span class="st">Convergence Table for Scheme CN:"</span>)</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(get_convergence_table(N_grid, J_grid, params, Sval, SchemeCN))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Cas N = J
+ ===========================================================================
+Convergence Table for Scheme EE:
+     J    N          U(s)         error       alpha         errex      tcpu
+0   10   10  1.425509e+01  0.000000e+00    0.000000  9.814290e-01  0.000212
+1   20   20  1.351532e+01  7.397760e-01    2.167407  2.416540e-01  0.000158
+2   40   40  1.332033e+01  1.949870e-01    2.457937  4.666600e-02  0.000257
+3   80   80 -1.061474e+04  1.062806e+04  -18.117778  1.062801e+04  0.000558
+4  160  160 -8.121408e+69  8.121408e+69 -220.831903  8.121408e+69  0.001096
+=========================================================================== 
+Convergence Table for Scheme EI:
+     J    N       U(s)     error     alpha     errex      tcpu
+0   10   10  14.448406  0.000000  0.000000  1.174743  0.000530
+1   20   20  13.642159  0.806247  1.792956  0.368496  0.000878
+2   40   40  13.386145  0.256015  1.773621  0.112482  0.001978
+3   80   80  13.310502  0.075642  1.639391  0.036839  0.003961
+4  160  160  13.287066  0.023436  1.471804  0.013403  0.009982
+=========================================================================== 
+Convergence Table for Scheme CN:
+     J    N       U(s)     error     alpha     errex      tcpu
+0   10   10  14.353451  0.000000  0.000000  1.079788  0.000380
+1   20   20  13.578892  0.774559  1.953920  0.305229  0.000576
+2   40   40  13.353140  0.225752  2.011209  0.079477  0.001089
+3   80   80  13.293944  0.059195  2.005878  0.020281  0.002566
+4  160  160  13.278788  0.015156  2.002416  0.005125  0.006933</code></pre>
+</div>
+</div>
+<!-- Avec $N = \frac{J^2}{10}$, on constate que le schéma explicite respecte la condition de stabilité de CFL, ce qui garantit la stabilité numérique de la solution. En revanche, lorsque $N = J$, la condition de CFL n'est pas respectée, ce qui peut entraîner des instabilités dans la solution numérique.
+Par ailleurs, les ordres de convergence obtenus dans les deux cas sont similaires, ce qui suggère que le choix de la relation entre $N$ et $J$ n'affecte pas significativement la précision du schéma dans ce contexte particulier.
+De même, nous avons des erreurs similaires pour les deux relations entre N et J, ce qui indique que le schéma de Crank-Nicolson est robuste par rapport à ces choix de maillage temporel et spatial. -->
+<p>On constate que le choix <span class="math inline">\(N = J^2/10\)</span> modifie l’analyse par rapport au cas <span class="math inline">\(N = J\)</span>, en particulier pour le schéma explicite. Alors que ce dernier était instable lorsque les pas de temps et d’espace étaient raffinés simultanément, il devient ici parfaitement stable. L’erreur décroît régulièrement et l’ordre de convergence est très proche de 2 sur l’ensemble des maillages, ce qui montre que la condition de stabilité est désormais respectée et que l’erreur spatiale domine. Le schéma EE retrouve ainsi une convergence théoriquement optimale, tout en conservant un coût de calcul globalement inférieur à celui des schémas implicites.</p>
+<p>Le schéma d’Euler implicite reste, comme précédemment, inconditionnellement stable. Cependant, contrairement au cas <span class="math inline">\(N = J\)</span>, l’ordre de convergence n’est plus limité par l’erreur temporelle et tend lui aussi vers 2 lorsque <span class="math inline">\(J\)</span> augmente. Cette amélioration de la précision se fait au prix d’un coût de calcul très élevé, les temps de simulation augmentant fortement avec <span class="math inline">\(N\)</span>, ce qui rend le schéma peu compétitif pour des grilles fines.</p>
+<p>Le schéma de Crank–Nicolson conserve un comportement très régulier et conforme à la théorie. Il est stable, présente une convergence d’ordre 2 et offre des erreurs comparables à celles du schéma explicite stabilisé. En revanche, son coût de calcul augmente sensiblement avec le raffinement et devient proche de celui du schéma implicite pour les maillages les plus fins.</p>
+<p>Ainsi, contrairement au cas <span class="math inline">\(N = J\)</span> où Crank–Nicolson apparaissait clairement comme le meilleur compromis, le régime <span class="math inline">\(N = J^2/10\)</span> met en évidence l’efficacité du schéma explicite, qui combine ici stabilité, convergence d’ordre 2 et temps de calcul plus faibles, à condition d’accepter une contrainte forte sur le pas de temps.</p>
+<div id="d60cf68f" class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>N_grid <span class="op">=</span> np.array([(j<span class="op">**</span><span class="dv">2</span>)<span class="op">/</span><span class="dv">10</span> <span class="cf">for</span> j <span class="kw">in</span> J_grid]).astype(<span class="bu">int</span>)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Cas N = J^2/10</span><span class="ch">\n</span><span class="st">"</span>, <span class="st">"="</span><span class="op">*</span><span class="dv">75</span>)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Convergence Table for Scheme EE:"</span>)</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(get_convergence_table(N_grid, J_grid, params, Sval, SchemeEE))</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span><span class="op">*</span><span class="dv">75</span>, <span class="st">"</span><span class="ch">\n</span><span class="st">Convergence Table for Scheme EI:"</span>)</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(get_convergence_table(N_grid, J_grid, params, Sval, SchemeEI))</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span><span class="op">*</span><span class="dv">75</span>, <span class="st">"</span><span class="ch">\n</span><span class="st">Convergence Table for Scheme CN:"</span>)</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(get_convergence_table(N_grid, J_grid, params, Sval, SchemeCN))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Cas N = J^2/10
+ ===========================================================================
+Convergence Table for Scheme EE:
+     J     N       U(s)     error     alpha     errex      tcpu
+0   10    10  14.255092  0.000000  0.000000  0.981429  0.000155
+1   20    40  13.547634  0.707459  1.973300  0.273971  0.000214
+2   40   160  13.345106  0.202528  2.009007  0.071443  0.000719
+3   80   640  13.291930  0.053175  2.002965  0.018267  0.002883
+4  160  2560  13.278284  0.013646  2.000790  0.004621  0.010337
+=========================================================================== 
+Convergence Table for Scheme EI:
+     J     N       U(s)     error     alpha     errex      tcpu
+0   10    10  14.448406  0.000000  0.000000  1.174743  0.000565
+1   20    40  13.611061  0.837345  1.929307  0.337398  0.001650
+2   40   160  13.361562  0.249499  2.010421  0.087899  0.006941
+3   80   640  13.296062  0.065500  2.007975  0.022399  0.031444
+4  160  2560  13.279318  0.016744  2.003733  0.005655  0.157797
+=========================================================================== 
+Convergence Table for Scheme CN:
+     J     N       U(s)     error     alpha     errex      tcpu
+0   10    10  14.353451  0.000000  0.000000  1.079788  0.000538
+1   20    40  13.579386  0.774065  1.951418  0.305723  0.001003
+2   40   160  13.353328  0.226058  2.010092  0.079665  0.003859
+3   80   640  13.293996  0.059332  2.005652  0.020333  0.019154
+4  160  2560  13.278801  0.015195  2.002383  0.005138  0.106421</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="complément-2-call-option" class="level1">
+<h1>Complément 2 : Call option</h1>
+<p>Dans ce complément, nous étendons l’étude précédente au cas de l’option call européenne, en adaptant les conditions initiales et aux limites du problème de Black–Scholes. La structure des schémas numériques aux différences finies (Euler explicite, Euler implicite et Crank–Nicolson) reste inchangée, seule la nature du payoff et des conditions aux frontières étant modifiée. Notre objectif est de vérifier que les propriétés observées précédemment pour le put européen (en particulier en termes de stabilité et de convergence) se retrouvent également dans le cas du call. Les résultats numériques obtenus et présentés ci après permettent de confirmer la robustesse des schémas étudiés vis-à-vis du type d’option considérée.</p>
+<section id="choix-dimplémentations-1" class="level2">
+<h2 class="anchored" data-anchor-id="choix-dimplémentations-1">Choix d’implémentations</h2>
+<p>L’implémentation des schémas numériques est restée globalement inchangée par rapport au cas du put européen. La même classe de base SchemeBase est utilisée pour définir la grille de discrétisation et les opérateurs numériques, tandis que seules la condition initiale, correspondant au payoff du call européen, ainsi que les conditions aux limites ont été adaptées. Les schémas d’Euler explicite, d’Euler implicite et de Crank–Nicolson sont implémentés de manière identique via les classes SchemeEE, SchemeEI et SchemeCN.</p>
+<div id="074854d1" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SchemeBase(ABC):</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Classe de base pour les schémas numériques de l'équation de Black-Scholes.</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, r, sigma, K, T, N, J, Smin, Smax):</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Financial parameters</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.r <span class="op">=</span> r</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.sigma <span class="op">=</span> sigma</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.K <span class="op">=</span> K</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.T <span class="op">=</span> T</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Numerical parameters</span></span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.N <span class="op">=</span> N</span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.J <span class="op">=</span> J</span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.Smin <span class="op">=</span> Smin</span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.Smax <span class="op">=</span> Smax</span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Grids</span></span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.dt <span class="op">=</span> T <span class="op">/</span> N</span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.h <span class="op">=</span> (Smax <span class="op">-</span> Smin) <span class="op">/</span> (J <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.s <span class="op">=</span> Smin <span class="op">+</span> <span class="va">self</span>.h <span class="op">*</span> np.arange(<span class="dv">1</span>, J <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Operator</span></span>
+<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.A, <span class="va">self</span>.alpha, <span class="va">self</span>.beta <span class="op">=</span> <span class="va">self</span>._build_matrix_A()</span>
+<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> phi(<span class="va">self</span>, s):</span>
+<span id="cb29-27"><a href="#cb29-27" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb29-28"><a href="#cb29-28" aria-hidden="true" tabindex="-1"></a><span class="co">        Condition initiale (payoff) pour un call européen.</span></span>
+<span id="cb29-29"><a href="#cb29-29" aria-hidden="true" tabindex="-1"></a><span class="co">        𝜙(s) = max(s - K, 0)</span></span>
+<span id="cb29-30"><a href="#cb29-30" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="cb29-31"><a href="#cb29-31" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> np.maximum(s<span class="op">-</span><span class="va">self</span>.K, <span class="dv">0</span>)</span>
+<span id="cb29-32"><a href="#cb29-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-33"><a href="#cb29-33" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> uleft(<span class="va">self</span>, t):</span>
+<span id="cb29-34"><a href="#cb29-34" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb29-35"><a href="#cb29-35" aria-hidden="true" tabindex="-1"></a><span class="co">        Condition aux limites à gauche pour un call européen.</span></span>
+<span id="cb29-36"><a href="#cb29-36" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="cb29-37"><a href="#cb29-37" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="fl">0.0</span></span>
+<span id="cb29-38"><a href="#cb29-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-39"><a href="#cb29-39" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> uright(<span class="va">self</span>, t):</span>
+<span id="cb29-40"><a href="#cb29-40" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb29-41"><a href="#cb29-41" aria-hidden="true" tabindex="-1"></a><span class="co">        Condition aux limites à droite pour un put européen.</span></span>
+<span id="cb29-42"><a href="#cb29-42" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="cb29-43"><a href="#cb29-43" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.Smax <span class="op">-</span> <span class="va">self</span>.K <span class="op">*</span> np.exp(<span class="op">-</span><span class="va">self</span>.r <span class="op">*</span> t)</span>
+<span id="cb29-44"><a href="#cb29-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-45"><a href="#cb29-45" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _build_matrix_A(<span class="va">self</span>):</span>
+<span id="cb29-46"><a href="#cb29-46" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb29-47"><a href="#cb29-47" aria-hidden="true" tabindex="-1"></a><span class="co">        Matrice d'amplification A.</span></span>
+<span id="cb29-48"><a href="#cb29-48" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="cb29-49"><a href="#cb29-49" aria-hidden="true" tabindex="-1"></a>        alpha <span class="op">=</span> <span class="fl">0.5</span> <span class="op">*</span> <span class="va">self</span>.sigma<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> (<span class="va">self</span>.s<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> <span class="va">self</span>.h<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb29-50"><a href="#cb29-50" aria-hidden="true" tabindex="-1"></a>        beta  <span class="op">=</span> <span class="va">self</span>.r <span class="op">*</span> <span class="va">self</span>.s <span class="op">/</span> (<span class="dv">2</span> <span class="op">*</span> <span class="va">self</span>.h)</span>
+<span id="cb29-51"><a href="#cb29-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-52"><a href="#cb29-52" aria-hidden="true" tabindex="-1"></a>        lower <span class="op">=</span> <span class="op">-</span>alpha[<span class="dv">1</span>:] <span class="op">+</span> beta[<span class="dv">1</span>:]        <span class="co"># sous-diagonale</span></span>
+<span id="cb29-53"><a href="#cb29-53" aria-hidden="true" tabindex="-1"></a>        main  <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> alpha <span class="op">+</span> <span class="va">self</span>.r            <span class="co"># diagonale principale</span></span>
+<span id="cb29-54"><a href="#cb29-54" aria-hidden="true" tabindex="-1"></a>        upper <span class="op">=</span> <span class="op">-</span>alpha[:<span class="op">-</span><span class="dv">1</span>] <span class="op">-</span> beta[:<span class="op">-</span><span class="dv">1</span>]       <span class="co"># sur-diagonale</span></span>
+<span id="cb29-55"><a href="#cb29-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-56"><a href="#cb29-56" aria-hidden="true" tabindex="-1"></a>        A <span class="op">=</span> diags(</span>
+<span id="cb29-57"><a href="#cb29-57" aria-hidden="true" tabindex="-1"></a>            diagonals<span class="op">=</span>[lower, main, upper],</span>
+<span id="cb29-58"><a href="#cb29-58" aria-hidden="true" tabindex="-1"></a>            offsets<span class="op">=</span>[<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>],</span>
+<span id="cb29-59"><a href="#cb29-59" aria-hidden="true" tabindex="-1"></a>            shape<span class="op">=</span>(<span class="va">self</span>.J, <span class="va">self</span>.J),</span>
+<span id="cb29-60"><a href="#cb29-60" aria-hidden="true" tabindex="-1"></a>            <span class="bu">format</span><span class="op">=</span><span class="st">"csr"</span></span>
+<span id="cb29-61"><a href="#cb29-61" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb29-62"><a href="#cb29-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-63"><a href="#cb29-63" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> A, alpha, beta</span>
+<span id="cb29-64"><a href="#cb29-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-65"><a href="#cb29-65" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> q(<span class="va">self</span>, t):</span>
+<span id="cb29-66"><a href="#cb29-66" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb29-67"><a href="#cb29-67" aria-hidden="true" tabindex="-1"></a><span class="co">        Vecteur des conditions aux limites.</span></span>
+<span id="cb29-68"><a href="#cb29-68" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="cb29-69"><a href="#cb29-69" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> np.zeros(<span class="va">self</span>.J)</span>
+<span id="cb29-70"><a href="#cb29-70" aria-hidden="true" tabindex="-1"></a>        y[<span class="dv">0</span>]  <span class="op">=</span> (<span class="op">-</span><span class="va">self</span>.alpha[<span class="dv">0</span>] <span class="op">+</span> <span class="va">self</span>.beta[<span class="dv">0</span>]) <span class="op">*</span> <span class="va">self</span>.uleft(t)</span>
+<span id="cb29-71"><a href="#cb29-71" aria-hidden="true" tabindex="-1"></a>        y[<span class="op">-</span><span class="dv">1</span>] <span class="op">=</span> (<span class="op">-</span><span class="va">self</span>.alpha[<span class="op">-</span><span class="dv">1</span>] <span class="op">-</span> <span class="va">self</span>.beta[<span class="op">-</span><span class="dv">1</span>]) <span class="op">*</span> <span class="va">self</span>.uright(t)</span>
+<span id="cb29-72"><a href="#cb29-72" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> y</span>
+<span id="cb29-73"><a href="#cb29-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-74"><a href="#cb29-74" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> interpolate(<span class="va">self</span>, Sval, U):</span>
+<span id="cb29-75"><a href="#cb29-75" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb29-76"><a href="#cb29-76" aria-hidden="true" tabindex="-1"></a><span class="co">        Interpolation linéaire pour obtenir la valeur approximée d'un put</span></span>
+<span id="cb29-77"><a href="#cb29-77" aria-hidden="true" tabindex="-1"></a><span class="co">        en un point spot Sval donné.</span></span>
+<span id="cb29-78"><a href="#cb29-78" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="cb29-79"><a href="#cb29-79" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> Sval <span class="op">&lt;=</span> <span class="va">self</span>.Smin:</span>
+<span id="cb29-80"><a href="#cb29-80" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">self</span>.uleft(<span class="va">self</span>.T)</span>
+<span id="cb29-81"><a href="#cb29-81" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> Sval <span class="op">&gt;=</span> <span class="va">self</span>.Smax:</span>
+<span id="cb29-82"><a href="#cb29-82" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">self</span>.uright(<span class="va">self</span>.T)</span>
+<span id="cb29-83"><a href="#cb29-83" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb29-84"><a href="#cb29-84" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> np.interp(Sval, <span class="va">self</span>.s, U)</span>
+<span id="cb29-85"><a href="#cb29-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-86"><a href="#cb29-86" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Abstract method</span></span>
+<span id="cb29-87"><a href="#cb29-87" aria-hidden="true" tabindex="-1"></a>    <span class="at">@abstractmethod</span></span>
+<span id="cb29-88"><a href="#cb29-88" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> solve(<span class="va">self</span>):</span>
+<span id="cb29-89"><a href="#cb29-89" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb29-90"><a href="#cb29-90" aria-hidden="true" tabindex="-1"></a><span class="co">        Méthode abstraite de résolution du schéma numérique.</span></span>
+<span id="cb29-91"><a href="#cb29-91" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="cb29-92"><a href="#cb29-92" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">NotImplementedError</span>(<span class="st">"Méthode solve() à implémenter dans la classe fille"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="bd22373c" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SchemeEE(SchemeBase):</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Schéma d'Euler explicite.</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, r, sigma, K, T, N, J, Smin, Smax):</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>(r, sigma, K, T, N, J, Smin, Smax)</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.scheme_name <span class="op">=</span> <span class="st">"Euler Explicite"</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> solve(<span class="va">self</span>):</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a><span class="co">        Résolution du schéma d'Euler explicite.</span></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>        U <span class="op">=</span> <span class="va">self</span>.phi(<span class="va">self</span>.s)</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(<span class="va">self</span>.N):</span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>            t <span class="op">=</span> n <span class="op">*</span> <span class="va">self</span>.dt</span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>            U <span class="op">=</span> U <span class="op">-</span> <span class="va">self</span>.dt <span class="op">*</span> (<span class="va">self</span>.A <span class="op">@</span> U <span class="op">+</span> <span class="va">self</span>.q(t))</span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> U,t</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="ea595d24" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SchemeEI(SchemeBase):</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Schéma d'Euler implicite.</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, r, sigma, K, T, N, J, Smin, Smax):</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>(r, sigma, K, T, N, J, Smin, Smax)</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.scheme_name <span class="op">=</span> <span class="st">"Euler Implicite"</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> solve(<span class="va">self</span>):</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>        U <span class="op">=</span> <span class="va">self</span>.phi(<span class="va">self</span>.s)</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>        I <span class="op">=</span> eye(<span class="va">self</span>.J, <span class="bu">format</span><span class="op">=</span><span class="st">"csr"</span>)</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(<span class="va">self</span>.N):</span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>            t <span class="op">=</span> n <span class="op">*</span> <span class="va">self</span>.dt</span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>            U <span class="op">=</span> spsolve(I <span class="op">+</span> <span class="va">self</span>.dt <span class="op">*</span> <span class="va">self</span>.A, U <span class="op">-</span> <span class="va">self</span>.dt <span class="op">*</span> <span class="va">self</span>.q(t))</span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> U,t</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="2a00a9eb" class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SchemeCN(SchemeBase):</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Schéma de Crank-Nicolson.</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, r, sigma, K, T, N, J, Smin, Smax):</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>(r, sigma, K, T, N, J, Smin, Smax)</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.scheme_name <span class="op">=</span> <span class="st">"Crank-Nicolson"</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> solve(<span class="va">self</span>):</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>        U <span class="op">=</span> <span class="va">self</span>.phi(<span class="va">self</span>.s)</span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>        I <span class="op">=</span> eye(<span class="va">self</span>.J, <span class="bu">format</span><span class="op">=</span><span class="st">"csr"</span>)</span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>        factor_minus <span class="op">=</span> I <span class="op">-</span> <span class="fl">0.5</span> <span class="op">*</span> <span class="va">self</span>.dt <span class="op">*</span> <span class="va">self</span>.A</span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>        factor_plus <span class="op">=</span> I <span class="op">+</span> <span class="fl">0.5</span> <span class="op">*</span> <span class="va">self</span>.dt <span class="op">*</span> <span class="va">self</span>.A</span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(<span class="va">self</span>.N):</span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>            t <span class="op">=</span> n <span class="op">*</span> <span class="va">self</span>.dt</span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a>            U <span class="op">=</span> spsolve(factor_plus, factor_minus<span class="op">@</span>U <span class="op">-</span> <span class="va">self</span>.dt <span class="op">*</span> <span class="va">self</span>.q(t))</span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> U,t</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="résultats-des-schémas-numériques-1" class="level2">
+<h2 class="anchored" data-anchor-id="résultats-des-schémas-numériques-1">Résultats des schémas numériques</h2>
+<section id="cas-du-schéma-deuler-explicite" class="level3">
+<h3 class="anchored" data-anchor-id="cas-du-schéma-deuler-explicite">Cas du schéma d’Euler explicite</h3>
+<p>Les résultats précédents ont montré que le schéma d’Euler explicite est conditionnellement stable en fonction de <span class="math inline">\(J\)</span>, <span class="math inline">\(N\)</span> et de la condition CFL. Ici, nous l’appliquons à un call européen en utilisant les mêmes configurations que pour le put : - (1) <span class="math inline">\(N = 10\)</span> et <span class="math inline">\(J \in {10, 20, 50}\)</span>, - (2) <span class="math inline">\(N = J \in {10, 20, 50}\)</span>.</p>
+<p>Les résultats, accompagnés de l’indication de la condition CFL, sont présentés dans les graphiques ci‑dessous.</p>
+<div id="cef2cf4f" class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cas 1 : N = 10, J varie dans `values` pour le call européen</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>values <span class="op">=</span> [<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">50</span>]</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>N_fixed <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>cfl_records1 <span class="op">=</span> []</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">24</span>, <span class="dv">8</span>), sharey<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> j, J_ <span class="kw">in</span> <span class="bu">enumerate</span>(values):</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>    params[<span class="st">'N'</span>] <span class="op">=</span> N_fixed</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>    params[<span class="st">'J'</span>] <span class="op">=</span> J_</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>    ee <span class="op">=</span> SchemeEE(<span class="op">**</span>params)</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>    U, t <span class="op">=</span> ee.solve()</span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>    s <span class="op">=</span> ee.s</span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>    dt <span class="op">=</span> ee.dt</span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Condition CFL</span></span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>    CFL <span class="op">=</span> dt <span class="op">/</span> (ee.h <span class="op">**</span> <span class="dv">2</span>) <span class="op">*</span> (ee.sigma <span class="op">**</span> <span class="dv">2</span>) <span class="op">*</span> (ee.Smax <span class="op">**</span> <span class="dv">2</span>)</span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Enregistrement</span></span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>    cfl_records1.append({</span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>        <span class="st">"N"</span>: N_fixed,</span>
+<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>        <span class="st">"J"</span>: J_,</span>
+<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a>        <span class="st">"CFL"</span>: CFL</span>
+<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> axes[j]</span>
+<span id="cb33-27"><a href="#cb33-27" aria-hidden="true" tabindex="-1"></a>    ax.plot(s, U, label<span class="op">=</span><span class="st">"Prix option"</span>)</span>
+<span id="cb33-28"><a href="#cb33-28" aria-hidden="true" tabindex="-1"></a>    ax.plot(s, ee.phi(s), <span class="st">'k--'</span>, label<span class="op">=</span><span class="st">"Payoff"</span>)</span>
+<span id="cb33-29"><a href="#cb33-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-30"><a href="#cb33-30" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="ss">f"N = </span><span class="sc">{</span>N_fixed<span class="sc">}</span><span class="ss">, J = </span><span class="sc">{</span>J_<span class="sc">}</span><span class="ss">, CFL=</span><span class="sc">{</span>CFL<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb33-31"><a href="#cb33-31" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">"s"</span>)</span>
+<span id="cb33-32"><a href="#cb33-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> j <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb33-33"><a href="#cb33-33" aria-hidden="true" tabindex="-1"></a>        ax.set_ylabel(<span class="st">"u(t,s)"</span>)</span>
+<span id="cb33-34"><a href="#cb33-34" aria-hidden="true" tabindex="-1"></a>    ax.legend()</span>
+<span id="cb33-35"><a href="#cb33-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-36"><a href="#cb33-36" aria-hidden="true" tabindex="-1"></a>plt.suptitle(</span>
+<span id="cb33-37"><a href="#cb33-37" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"Evolution du prix du call européen -- Scheme </span><span class="sc">{</span>ee<span class="sc">.</span>scheme_name<span class="sc">}</span><span class="ss">, N fixé à </span><span class="sc">{</span>N_fixed<span class="sc">}</span><span class="ss">"</span>,</span>
+<span id="cb33-38"><a href="#cb33-38" aria-hidden="true" tabindex="-1"></a>    fontsize<span class="op">=</span><span class="dv">16</span></span>
+<span id="cb33-39"><a href="#cb33-39" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb33-40"><a href="#cb33-40" aria-hidden="true" tabindex="-1"></a>plt.tight_layout(rect<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.95</span>])</span>
+<span id="cb33-41"><a href="#cb33-41" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="edp_european_opt_files/figure-html/cell-26-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="e12a1fbd" class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Cas 2 : N = J avec N, J dans `values` pour le call européen</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>cfl_records2 <span class="op">=</span> []</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">24</span>, <span class="dv">8</span>), sharey<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> j, N_ <span class="kw">in</span> <span class="bu">enumerate</span>(values):</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>    params[<span class="st">'N'</span>] <span class="op">=</span> N_</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>    params[<span class="st">'J'</span>] <span class="op">=</span> N_</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>    ee <span class="op">=</span> SchemeEE(<span class="op">**</span>params)</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>    U, t <span class="op">=</span> ee.solve()</span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>    s <span class="op">=</span> ee.s</span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>    dt <span class="op">=</span> ee.dt</span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Condition CFL</span></span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>    CFL <span class="op">=</span> dt <span class="op">/</span> (ee.h <span class="op">**</span> <span class="dv">2</span>) <span class="op">*</span> (ee.sigma <span class="op">**</span> <span class="dv">2</span>) <span class="op">*</span> (ee.Smax <span class="op">**</span> <span class="dv">2</span>)</span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>    cfl_records2.append({</span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">"N"</span>: N_,</span>
+<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">"J"</span>: N_,</span>
+<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">"CFL"</span>: CFL</span>
+<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> axes[j]</span>
+<span id="cb34-24"><a href="#cb34-24" aria-hidden="true" tabindex="-1"></a>    ax.plot(s, U, label<span class="op">=</span><span class="st">"Prix option"</span>)</span>
+<span id="cb34-25"><a href="#cb34-25" aria-hidden="true" tabindex="-1"></a>    ax.plot(s, ee.phi(s), <span class="st">'k--'</span>, label<span class="op">=</span><span class="st">"Payoff"</span>)</span>
+<span id="cb34-26"><a href="#cb34-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-27"><a href="#cb34-27" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="ss">f"N = J = </span><span class="sc">{</span>N_<span class="sc">}</span><span class="ss">, CFL=</span><span class="sc">{</span>CFL<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb34-28"><a href="#cb34-28" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">"s"</span>)</span>
+<span id="cb34-29"><a href="#cb34-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> j <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb34-30"><a href="#cb34-30" aria-hidden="true" tabindex="-1"></a>        ax.set_ylabel(<span class="st">"u(t,s)"</span>)</span>
+<span id="cb34-31"><a href="#cb34-31" aria-hidden="true" tabindex="-1"></a>    ax.legend()</span>
+<span id="cb34-32"><a href="#cb34-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-33"><a href="#cb34-33" aria-hidden="true" tabindex="-1"></a>plt.suptitle(</span>
+<span id="cb34-34"><a href="#cb34-34" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"Evolution du prix du call européen -- Scheme </span><span class="sc">{</span>ee<span class="sc">.</span>scheme_name<span class="sc">}</span><span class="ss">, N = J"</span>,</span>
+<span id="cb34-35"><a href="#cb34-35" aria-hidden="true" tabindex="-1"></a>    fontsize<span class="op">=</span><span class="dv">16</span></span>
+<span id="cb34-36"><a href="#cb34-36" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb34-37"><a href="#cb34-37" aria-hidden="true" tabindex="-1"></a>plt.tight_layout(rect<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.95</span>])</span>
+<span id="cb34-38"><a href="#cb34-38" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="edp_european_opt_files/figure-html/cell-27-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Comme pour le put, le schéma d’Euler explicite pour le call est stable pour de petites valeurs de <span class="math inline">\(J\)</span> et <span class="math inline">\(N\)</span>, et devient instable lorsque la condition CFL n’est pas respectée, entraînant des oscillations.</p>
+</section>
+<section id="cas-des-schémas-deuler-implicite-et-de-crank-nicolson" class="level3">
+<h3 class="anchored" data-anchor-id="cas-des-schémas-deuler-implicite-et-de-crank-nicolson">Cas des schémas d’Euler implicite et de Crank-Nicolson</h3>
+<p>Les schémas d’Euler implicite et de Crank-Nikolson, appliqués au cas du call européen, demeurent inconditionnellement stables. Ils sont testés sur la configuration N= 10 et J= 50, qui avait conduit à des instabilités et à des oscillations pour le schema explicite. Les résultats obtenus montrent une approximation stable et sans oscillations du prix du call.</p>
+<div id="f49045f0" class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>params[<span class="st">'J'</span>] <span class="op">=</span> <span class="dv">50</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>params[<span class="st">'N'</span>] <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Paramètres financiers:"</span>)</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"r=</span><span class="sc">%.2f</span><span class="st">"</span> <span class="op">%</span>r_, <span class="st">"sigma=</span><span class="sc">%.2f</span><span class="st">"</span> <span class="op">%</span>sigma_, <span class="st">"K=%.0f"</span> <span class="op">%</span>K_, <span class="st">"T=%.0f"</span> <span class="op">%</span>T_)</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Paramètres numériques:"</span>)</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"J=%.0f"</span> <span class="op">%</span>params[<span class="st">'J'</span>], <span class="st">"N=%.0f"</span> <span class="op">%</span>params[<span class="st">'N'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Paramètres financiers:
+r=0.10 sigma=0.20 K=100 T=1
+Paramètres numériques:
+J=50 N=10</code></pre>
+</div>
+</div>
+<div id="f0153138" class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>ei <span class="op">=</span> SchemeEI(<span class="op">**</span>params)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>U,t <span class="op">=</span> ei.solve()</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> ei.s</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>dt <span class="op">=</span> ei.dt</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">5</span>))</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>plt.plot(s,U,label<span class="op">=</span><span class="st">"t=</span><span class="sc">%.2f</span><span class="st">"</span> <span class="op">%</span>(t<span class="op">+</span>dt))</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>plt.plot(s,ei.phi(s), <span class="st">'k--'</span>, label<span class="op">=</span><span class="st">"payoff"</span>)</span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"s"</span>)</span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"u(t,s)"</span>)</span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Evolution du prix du call européen au cours du temps [Euler Implicite]"</span>)</span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="edp_european_opt_files/figure-html/cell-29-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="79632e55" class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>cn <span class="op">=</span> SchemeCN(<span class="op">**</span>params)</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>U,t <span class="op">=</span> cn.solve()</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> cn.s</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>dt <span class="op">=</span> cn.dt</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">5</span>))</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>plt.plot(s,U,label<span class="op">=</span><span class="st">"t=</span><span class="sc">%.2f</span><span class="st">"</span> <span class="op">%</span>(t<span class="op">+</span>dt))</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>plt.plot(s,cn.phi(s), <span class="st">'k--'</span>, label<span class="op">=</span><span class="st">"payoff"</span>)</span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"s"</span>)</span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"u(t,s)"</span>)</span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Evolution du prix du call européen au cours du temps [Crank-Nicolson]"</span>)</span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="edp_european_opt_files/figure-html/cell-30-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("^(?:http:|https:)\/\/cheryl-kdio\.github\.io\/custom");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<a href="https://github.com/cheryl-kdio">Cheryl Kouadio</a> ©
+<script>document.write(new Date().getFullYear())</script>
+</div>   
+    <div class="nav-footer-center">
+<a href="https://github.com/cheryl-kdio">Cheryl Kouadio</a> ©
+<script>document.write(new Date().getFullYear())</script>
+</div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/cheryl-kdio" target="_blank">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
