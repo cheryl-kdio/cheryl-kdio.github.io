@@ -117,4 +117,3 @@ Although swap rates are not strictly risk-free, they are often used as reference
 Source: john c. hull, *options, futures, and other derivatives*, 11th edition.
 
 
-{{< include /files/includes/_socialshare.qmd >}}

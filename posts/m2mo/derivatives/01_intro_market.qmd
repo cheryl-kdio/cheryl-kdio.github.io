@@ -134,4 +134,3 @@ The **absence of arbitrage** constitutes the cornerstone of modern financial the
 Finally, the notion of **market completeness** determines whether contingent claims can be perfectly replicated and uniquely priced. These structural concepts form the basis of quantitative finance and underpin the development of more advanced pricing and hedging models.
 :::
 
-{{< include /files/includes/_socialshare.qmd >}}

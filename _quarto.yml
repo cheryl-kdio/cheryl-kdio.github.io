@@ -4,8 +4,8 @@ project:
 
 execute:
   enabled: true
-  cache: false
-  freeze: false
+  cache: true
+  freeze: true
   python: venv/bin/python
   
 # Meta
@@ -75,17 +75,12 @@ website:
   
   page-footer: 
     center: "[Cheryl Kouadio](https://github.com/cheryl-kdio) &copy; <script>document.write(new Date().getFullYear())</script>"
-    # left: "[Cheryl Kouadio](https://github.com/cheryl-kdio) &copy; <script>document.write(new Date().getFullYear())</script>" 
-    # right:  
-    #   - icon: github
-    #     href: https://github.com/cheryl-kdio
-    #     target: _blank
-    #   - text: "{{< fa brands bluesky >}}" 
-    #     href: https://bsky.app/profile/hegang.bsky.social
-    #     target: _blank
-    #   - icon: rss
-    #     href: posts.xml
-    #     target: _blank  
+    left: "[Cheryl Kouadio](https://github.com/cheryl-kdio) &copy; <script>document.write(new Date().getFullYear())</script>" 
+    right:  
+      - icon: github
+        href: https://github.com/cheryl-kdio
+        target: _blank
+
   
   search:
     location: navbar
