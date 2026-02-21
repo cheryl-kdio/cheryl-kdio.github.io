@@ -1,13 +1,11 @@
 ---
 title: "Types of interest rates and rates derivatives"
-subtitle: "Interest rate derivatives"
+subtitle: "Term structure interest rate modelling"
 author:
   name: Cheryl KOUADIO
 categories: [paper,m2mo,rates]
-date: "2026-02-11"
+date: "2026-02-14"
 image: "featured.png"
-draft: true
-
 ---
 
 

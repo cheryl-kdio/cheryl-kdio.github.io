@@ -19,7 +19,7 @@
 <item>
   <title>Introducing the Vasicek model</title>
   <dc:creator>Cheryl KOUADIO</dc:creator>
-  <link>https://cheryl-kdio.github.io/posts/m2mo/yield_curves/01_term_structure.html</link>
+  <link>https://cheryl-kdio.github.io/posts/m2mo/yield_curves/01.a_term_structure_vasicek.html</link>
   <description><![CDATA[ 
 
 
@@ -59,7 +59,6 @@
 Right: An inverted yield curve occurs when short-term rates are higher than long-term rates, often reflecting recession expectations.</p>
 </div>
 <p>Interest rates are also used as discount factors. They allow us to determine the present value of money to be received at a future date. For example, if A lends 1 euro today at an interest rate <img src="https://latex.codecogs.com/png.latex?r">, it means that he will be reimbursed <img src="https://latex.codecogs.com/png.latex?1%20+%20r"> at time <img src="https://latex.codecogs.com/png.latex?T">. Therefore, the 1 euro lent today will be worth <img src="https://latex.codecogs.com/png.latex?1+r"> in the future. Conversely, by a simple proportional reasoning, 1 euro to be received in the future corresponds to a present value of <img src="https://latex.codecogs.com/png.latex?%5Cfrac%7B1%7D%7B1+r%7D"> today.</p>
-<p>To get more informations about interest rate use, check the article intitulated Types of interest rates and rates derivatives.</p>
 <p>Interest rate is not a traded product in the market. So they cannot be observe directly. Hence, one often use derivatives in other th know the quantity of the derivatives. In the case of a zero-coupon bond (ZC bond), the link between price and interest rate is particularly simple, as it is given by an analytical formula. In fact, let <img src="https://latex.codecogs.com/png.latex?B(t,T)"> be the price of a zero-coupon bond and <img src="https://latex.codecogs.com/png.latex?R(t,T)"> the interest rate associated. In continuous compounding interest rate, we have that : <img src="https://latex.codecogs.com/png.latex?%0AR(t,T)%20=%20-%5Cfrac%7B1%7D%7BT-t%7D%20%5Cln(B(t,T)).%0A"></p>
 <p>Therefore, one can represent the term structure through the zero-coupon bond prices as a function of maturity. By the way, since a zero-coupon bond is a product traded in the market, its price can be expressed as the expected discounted payoff under the risk-neutral measure:</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0AB(t,T)%20=%20%5Cmathbb%7BE%7D%5E%7B%5Cmathbb%7BQ%7D%7D%5Cleft%5B%20%5Cexp%5Cleft(-%5Cint_t%5ET%20r_s%20ds%20%5Cright)%20%5Cmiddle%7C%20%5Cmathcal%7BF%7D_t%20%5Cright%5D.%20%5Cquad%20(*)%0A"></p>
@@ -111,8 +110,144 @@ Vasicek, Oldrich. 1977. <span>“An Equilibrium Characterization of the Term Str
   <category>paper</category>
   <category>m2mo</category>
   <category>rates</category>
-  <guid>https://cheryl-kdio.github.io/posts/m2mo/yield_curves/01_term_structure.html</guid>
+  <guid>https://cheryl-kdio.github.io/posts/m2mo/yield_curves/01.a_term_structure_vasicek.html</guid>
   <pubDate>Fri, 20 Feb 2026 23:00:00 GMT</pubDate>
+  <media:content url="https://cheryl-kdio.github.io/posts/m2mo/yield_curves/featured.png" medium="image" type="image/png" height="87" width="144"/>
+</item>
+<item>
+  <title>Types of interest rates and rates derivatives</title>
+  <dc:creator>Cheryl KOUADIO</dc:creator>
+  <link>https://cheryl-kdio.github.io/posts/m2mo/yield_curves/00_intro_yield_curve.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>The interest rate market is one of the largest and most liquid segments of the financial markets.<br>
+It encompasses a wide range of instruments, including government bonds, corporate bonds, interest rate swaps, and options on interest rates. The modeling of interest rates is crucial for pricing and managing the risks associated with these instruments. To understand the dynamics of interest rates, we first introduce the different types of interest rates that are used in creating and pricing interest rate derivatives, as well as the concept of the yield curve, which is a fundamental tool for analyzing the term structure of interest rates. Moreover, we introduce several interest rate derivatives currently traded in the market.</p>
+<section id="different-types-of-interest-rates" class="level1">
+<h1>Different types of interest rates</h1>
+<p>An interest rate can be seen as the cost of borrowing or the return on lending money. For example, when a counterparty A borrows at time <img src="https://latex.codecogs.com/png.latex?t"> a certain amount of cash <img src="https://latex.codecogs.com/png.latex?N"> from a counterparty B with maturity <img src="https://latex.codecogs.com/png.latex?T"> and interest rate <img src="https://latex.codecogs.com/png.latex?r">. Then, at maturity <img src="https://latex.codecogs.com/png.latex?T">, A must pay back <img src="https://latex.codecogs.com/png.latex?N(1+r(T-t))%20=%20N(1+r%5Ctau)"> with <img src="https://latex.codecogs.com/png.latex?%5Ctau%20=%20T-t"> the time to maturity, i.e.&nbsp;<img src="https://latex.codecogs.com/png.latex?N%20%5Cmapsto%20N(1+r%5Ctau)">. This is the case of a simple interest rate.</p>
+<p>In practice, one can differentiate two types of interest rates:</p>
+<ul>
+<li><p>the simple interest rate. In continuous time, we write <img src="https://latex.codecogs.com/png.latex?N%20%5Cmapsto%20N%20e%5E%7Br%5Ctau%7D">.</p></li>
+<li><p>the compound interest rate. At time <img src="https://latex.codecogs.com/png.latex?t">, A borrows an amount <img src="https://latex.codecogs.com/png.latex?N"> from B with maturity <img src="https://latex.codecogs.com/png.latex?T"> and compound interest rate <img src="https://latex.codecogs.com/png.latex?r">. Then at maturity <img src="https://latex.codecogs.com/png.latex?T">, A pays back <img src="https://latex.codecogs.com/png.latex?N(1+r)%5E%7B%5Ctau%7D"> with <img src="https://latex.codecogs.com/png.latex?%5Ctau%20=%20T-t">, i.e.&nbsp;<img src="https://latex.codecogs.com/png.latex?N%20%5Cmapsto%20N(1+r)%5E%7B%5Ctau%7D">.</p></li>
+</ul>
+<p>It is also important to distinguish between the different types of interest rates used in the market:</p>
+<ul>
+<li><p>the <strong>spot interest rate</strong> is the rate that applies to a loan or deposit that starts immediately and has maturity <img src="https://latex.codecogs.com/png.latex?T">.</p></li>
+<li><p>the <strong>forward interest rate</strong> is the rate that applies to a loan or deposit that starts at a future date <img src="https://latex.codecogs.com/png.latex?T"> and has maturity <img src="https://latex.codecogs.com/png.latex?S">.</p></li>
+</ul>
+</section>
+<section id="link-between-the-zero-coupon-bond-price-and-the-interest-rates" class="level1">
+<h1>Link between the Zero-coupon bond price and the interest rates</h1>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+What is a zero-coupon bond?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A zero-coupon bond is a debt security that does not pay periodic interest (coupons). Instead, it is issued at a discount to its face value and pays its full face value at maturity. If the face value is <img src="https://latex.codecogs.com/png.latex?1">, its price at time <img src="https://latex.codecogs.com/png.latex?t"> for maturity <img src="https://latex.codecogs.com/png.latex?T"> is denoted <img src="https://latex.codecogs.com/png.latex?B(t,T)">.</p>
+</div>
+</div>
+<section id="zero-coupon-bond-price-and-simple-spot-interest-rate" class="level2">
+<h2 class="anchored" data-anchor-id="zero-coupon-bond-price-and-simple-spot-interest-rate">Zero-coupon bond price and simple spot interest rate</h2>
+<p>Assume we pay <img src="https://latex.codecogs.com/png.latex?B(t,T)"> at time <img src="https://latex.codecogs.com/png.latex?t"> to buy a zero-coupon bond that will pay <img src="https://latex.codecogs.com/png.latex?1"> at maturity <img src="https://latex.codecogs.com/png.latex?T">. Hence, <img src="https://latex.codecogs.com/png.latex?B(t,T)%20%5Cmapsto%201"> at maturity <img src="https://latex.codecogs.com/png.latex?T">. Alternatively, we can invest <img src="https://latex.codecogs.com/png.latex?B(t,T)"> in the money market account that pays the simple spot rate <img src="https://latex.codecogs.com/png.latex?L(t,T)">. At maturity <img src="https://latex.codecogs.com/png.latex?T">, we obtain <img src="https://latex.codecogs.com/png.latex?B(t,T)(1%20+%20(T-t)L(t,T))">. Since we are in a no-arbitrage framework, we must have the same payoff at maturity <img src="https://latex.codecogs.com/png.latex?T"> for both strategies, which implies <img src="https://latex.codecogs.com/png.latex?1%20=%20B(t,T)(1%20+%20(T-t)L(t,T))">. Hence, we deduce the following link between the zero-coupon bond price and the simple spot interest rate:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AL(t,T)%20=%20%5Cfrac%7B1%7D%7BT-t%7D%20%5Cleft(%20%5Cfrac%7B1%7D%7BB(t,T)%7D%20-%201%20%5Cright).%0A"></p>
+<p>In continuous compounding, we have <img src="https://latex.codecogs.com/png.latex?1%20=%20B(t,T)%20e%5E%7B(T-t)%20R(t,T)%7D">, which gives</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AR(t,T)%20=%20-%5Cfrac%7B1%7D%7BT-t%7D%20%5Cln(B(t,T)).%0A"></p>
+<p>Therefore, the short-term interest rate is defined as <img src="https://latex.codecogs.com/png.latex?%5Clim_%7BT%20%5Cto%20t%7D%20L(t,T)%20=%20%5Clim_%7BT%20%5Cto%20t%7D%20R(t,T)%20=%20r_t">.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+The yield curve or the term structure of interest rates
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The yield curve is a graphical representation of the relationship between interest rates and maturities. It is the function <img src="https://latex.codecogs.com/png.latex?T%20%5Cmapsto%20L(t,T)"> for a given date <img src="https://latex.codecogs.com/png.latex?t">. For each date <img src="https://latex.codecogs.com/png.latex?t">, we can build a yield curve using market instruments (bonds, FRA, swaps, etc.) and use it to price interest rate derivatives.</p>
+</div>
+</div>
+</section>
+<section id="zero-coupon-bond-price-and-simple-forward-interest-rate" class="level2">
+<h2 class="anchored" data-anchor-id="zero-coupon-bond-price-and-simple-forward-interest-rate">Zero-coupon bond price and simple forward interest rate</h2>
+<p>The forward rate is the rate that can be locked at time <img src="https://latex.codecogs.com/png.latex?t"> for a loan starting at date <img src="https://latex.codecogs.com/png.latex?T"> and ending at date <img src="https://latex.codecogs.com/png.latex?S">. At time <img src="https://latex.codecogs.com/png.latex?t">, one can invest in a zero-coupon bond maturing at <img src="https://latex.codecogs.com/png.latex?S"> and obtain <img src="https://latex.codecogs.com/png.latex?B(t,S)%20%5Cmapsto%201"> at maturity <img src="https://latex.codecogs.com/png.latex?S">. Alternatively, one can invest in a zero-coupon bond maturing at <img src="https://latex.codecogs.com/png.latex?T">, obtain <img src="https://latex.codecogs.com/png.latex?B(t,T)%20%5Cmapsto%201"> at time <img src="https://latex.codecogs.com/png.latex?T">, and then reinvest the proceeds from <img src="https://latex.codecogs.com/png.latex?T"> to <img src="https://latex.codecogs.com/png.latex?S"> at the forward rate <img src="https://latex.codecogs.com/png.latex?L(t;T,S)">. At maturity <img src="https://latex.codecogs.com/png.latex?S">, this yields <img src="https://latex.codecogs.com/png.latex?1%20+%20(S-T)L(t;T,S)">. Under no-arbitrage, we must have <img src="https://latex.codecogs.com/png.latex?B(t,S)%20=%20B(t,T)%5Cfrac%7B1%7D%7B1%20+%20(S-T)L(t;T,S)%7D">. Hence, <img src="https://latex.codecogs.com/png.latex?%0AL(t;%20T,S)%20=%20%5Cfrac%7B1%7D%7BS-T%7D%20%5Cleft(%20%5Cfrac%7BB(t,T)%7D%7BB(t,S)%7D%20-%201%20%5Cright).%0A"></p>
+<p>The instantaneous forward rate satisfies <img src="https://latex.codecogs.com/png.latex?f(t,T)%20=%20-%5Cfrac%7B%5Cpartial%7D%7B%5Cpartial%20T%7D%20%5Cln%20B(t,T)">. Moreover,<img src="https://latex.codecogs.com/png.latex?B(t,T)%20=%20e%5E%7B-%5Cint_t%5ET%20f(t,u)%20du%7D."></p>
+</section>
+</section>
+<section id="rates-derivatives" class="level1">
+<h1>Rates derivatives</h1>
+<section id="fra" class="level2">
+<h2 class="anchored" data-anchor-id="fra">FRA</h2>
+<p>A FRA (Forward Rate Agreement) is a contract that fixes at time <img src="https://latex.codecogs.com/png.latex?t"> an interest rate <img src="https://latex.codecogs.com/png.latex?K"> for the period <img src="https://latex.codecogs.com/png.latex?%5BT,S%5D"> on a nominal <img src="https://latex.codecogs.com/png.latex?N">. Its payoff at time <img src="https://latex.codecogs.com/png.latex?S"> is</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AN(S-T)(L(T,S)%20-%20K).%0A"></p>
+<p>Its price at time <img src="https://latex.codecogs.com/png.latex?t"> is</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5CPi%5E%7B%5Ctext%7BFRA%7D%7D(t,T,S,K,N)%20=%20N%20B(t,S)%20(S-T)%20(L(t;T,S)%20-%20K).%0A"></p>
+</section>
+<section id="swap" class="level2">
+<h2 class="anchored" data-anchor-id="swap">Swap</h2>
+<p>A swap exchanges fixed and floating interest rates between two counterparties over dates <img src="https://latex.codecogs.com/png.latex?0%20%5Cle%20T_0%20%3C%20T_1%20%3C%20%5Cdots%20%3C%20T_n"> on a nominal <img src="https://latex.codecogs.com/png.latex?N">. The fixed leg pays <img src="https://latex.codecogs.com/png.latex?N%20R%20(T_i%20-%20T_%7Bi-1%7D)">. The floating leg pays <img src="https://latex.codecogs.com/png.latex?N%20L(T_%7Bi-1%7D,T_i)(T_i%20-%20T_%7Bi-1%7D)">. The swap can be seen as a sum of FRA. Its price is</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Balign%7D%0A%5CPi%5E%7B%5Ctext%7BSW%7D%7D%20(t,T_0,T_n,R,N)%0A&amp;=%20%5Csum_%7Bi=1%7D%5En%20%5CPi%5E%7B%5Ctext%7BFRA%7D%7D%20(t,T_%7Bi-1%7D,T_i,R,N)%20%5C%5C%0A&amp;=%20N%20%5Cleft(B(t,T_0)%20-%20B(t,T_n)%20-%20%5Csum_%7Bi=1%7D%5En%20B(t,T_i)(T_i%20-%20T_%7Bi-1%7D)R%20%5Cright)%0A%5Cend%7Balign%7D%0A"></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Swap rate
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The swap rate <img src="https://latex.codecogs.com/png.latex?S(t,T_0,T_n)"> is the rate that makes the swap price equal to zero:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AS(t,T_0,T_n)%20=%20%5Cfrac%7BB(t,T_0)%20-%20B(t,T_n)%7D%7B%5Csum_%7Bi=1%7D%5En%20B(t,T_i)(T_i%20-%20T_%7Bi-1%7D)%7D.%0A"></p>
+</div>
+</div>
+</section>
+<section id="capfloor" class="level2">
+<h2 class="anchored" data-anchor-id="capfloor">Cap/Floor</h2>
+<p>A caplet (resp. floorlet) is an option that gives the right to the buyer to receive (resp. pay) the excess of the floating rate <img src="https://latex.codecogs.com/png.latex?L(T_%7Bi-1%7D,T_i)"> over a strike <img src="https://latex.codecogs.com/png.latex?K"> on a nominal <img src="https://latex.codecogs.com/png.latex?N">. The caplet payoff is</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AN%20(T_i%20-%20T_%7Bi-1%7D)%20%5Cmax(L(T_%7Bi-1%7D,T_i)%20-%20K,%200).%0A"></p>
+<p>The floorlet payoff is</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AN%20(T_i%20-%20T_%7Bi-1%7D)%20%5Cmax(K%20-%20L(T_%7Bi-1%7D,T_i),%200).%0A"></p>
+<p>Hence a cap is a chain of caplets for <img src="https://latex.codecogs.com/png.latex?i%20=%201,%20%5Cdots,%20n">, and a floor is a chain of floorlets for <img src="https://latex.codecogs.com/png.latex?i%20=%201,%20%5Cdots,%20n">.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caplet/Floorlet and Cap/Floor parity
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>There exists a parity called the <strong>caplet–floorlet parity</strong>.</p>
+<p>It means that a long caplet and a short floorlet with the same strike <img src="https://latex.codecogs.com/png.latex?K"> and maturity structure is equivalent to entering a payer interest rate swap with fixed rate <img src="https://latex.codecogs.com/png.latex?K">.</p>
+<p>Mathematically,</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Balign%7D%0A%5CPi%5E%7B%5Ctext%7BCaplet%7D%7D%20(t,T,T%20+%20%5Cdelta,K,1)-%5CPi%5E%7B%5Ctext%7BFloorlet%7D%7D%20(t,T,T%20+%20%5Cdelta,K,1)%20&amp;=%5CPi%5E%7B%5Ctext%7BFRA%7D%7D%20(t,T,T%20+%20%5Cdelta,K,1).%5C%5C%0A%5CLeftrightarrow%0A%5CPi%5E%7B%5Ctext%7BCap%7D%7D%20(t,T,T%20+%20%5Cdelta,K,1)-%5CPi%5E%7B%5Ctext%7BFloor%7D%7D%20(t,T,T%20+%20%5Cdelta,K,1)%20&amp;=%5CPi%5E%7B%5Ctext%7BSW%7D%7D%20(t,T,T%20+%20%5Cdelta,K,1).%0A%5Cend%7Balign%7D%0A"></p>
+</div>
+</div>
+</section>
+<section id="swaption" class="level2">
+<h2 class="anchored" data-anchor-id="swaption">Swaption</h2>
+<p>A swaption is an option based on interest rate swap of maturity <img src="https://latex.codecogs.com/png.latex?T"> and fixed rate <img src="https://latex.codecogs.com/png.latex?R">. Assuming <img src="https://latex.codecogs.com/png.latex?T=T_0"> is the starting date of the swap, the payoff of a swaption is <img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Balign%7D%0A(%20%5CPi%5E%7B%5Ctext%7BSW%7D%7D%20(T_0,T_0,T_n,R,N)%20)_+%20&amp;=%20N(1%20-%5Csum_%7Bi=1%7D%5En%20c_i%20B(T_0,T_i))_+%20(1)%5C%5C%0A&amp;=%20N%20%5Csum_%7Bi=1%7D%5En%20B(T_0,T_i)%20(T_i,T_%7Bi-1%7D)%20(%20S(T_0,T_0,T_n)%20-%20R)_+%20.%0A%5Cend%7Balign%7D%0A"></p>
+<p>Thus, the swaption can be seen as a put option on a classical bond with coupon <img src="https://latex.codecogs.com/png.latex?c_i"></p>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>paper</category>
+  <category>m2mo</category>
+  <category>rates</category>
+  <guid>https://cheryl-kdio.github.io/posts/m2mo/yield_curves/00_intro_yield_curve.html</guid>
+  <pubDate>Fri, 13 Feb 2026 23:00:00 GMT</pubDate>
   <media:content url="https://cheryl-kdio.github.io/posts/m2mo/yield_curves/featured.png" medium="image" type="image/png" height="87" width="144"/>
 </item>
 <item>
@@ -43736,1040 +43871,6 @@ sigma_eta: 1.2184</code></pre>
   <category>ensai-gdr</category>
   <guid>https://cheryl-kdio.github.io/posts/ensai/proc_stochastique/modele_log_sv-part1.html</guid>
   <pubDate>Mon, 13 Jan 2025 23:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Calibration du modèle Black-Scholes</title>
-  <link>https://cheryl-kdio.github.io/posts/ensai/proc_stochastique/modele_bs.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<section id="calibration-du-modèle-black-scholes" class="level1">
-<h1>Calibration du modèle Black-Scholes</h1>
-<p>Le modèle de Black-Scholes est un modèle mathématique qui permet de déterminer le prix d’une option à partir de plusieurs paramètres. Il est basé sur l’hypothèse que le prix de l’actif sous-jacent suit un mouvement brownien géométrique :</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AdS_t%20=%20%5Cmu%20S_t%20dt%20+%20%5Csigma%20S_t%20dW_t%0A"></p>
-<p>Avec <img src="https://latex.codecogs.com/png.latex?S_t"> le prix de l’actif, <img src="https://latex.codecogs.com/png.latex?%5Cmu"> le taux de rendement moyen, <img src="https://latex.codecogs.com/png.latex?%5Csigma"> la volatilité et <img src="https://latex.codecogs.com/png.latex?W_t"> un mouvement brownien.</p>
-<p>De ce fait, le prix d’une option européenne peut être calculé par la formule de Black-Scholes :</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AC(S_t,%20K,%20T,%20r,%20%5Csigma)%20=%20S_t%20N(d_1)%20-%20K%20e%5E%7B-rT%7D%20N(d_2)%0A"></p>
-<p>Avec <img src="https://latex.codecogs.com/png.latex?C"> le prix de l’option, <img src="https://latex.codecogs.com/png.latex?S_t"> le prix de l’actif sous-jacent, <img src="https://latex.codecogs.com/png.latex?K"> le prix d’exercice de l’option, <img src="https://latex.codecogs.com/png.latex?T"> la maturité de l’option, <img src="https://latex.codecogs.com/png.latex?r"> le taux d’intérêt sans risque, <img src="https://latex.codecogs.com/png.latex?%5Csigma"> la volatilité de l’actif, <img src="https://latex.codecogs.com/png.latex?N"> la fonction de répartition de la loi normale centrée réduite, et :</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Ad_1%20=%20%5Cfrac%7B1%7D%7B%5Csigma%20%5Csqrt%7BT%7D%7D%20%5Cleft(%20%5Cln%20%5Cleft(%20%5Cfrac%7BS_t%7D%7BK%7D%20%5Cright)%20+%20%5Cleft(%20r%20+%20%5Cfrac%7B%5Csigma%5E2%7D%7B2%7D%20%5Cright)%20T%20%5Cright)%0A"></p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Ad_2%20=%20d_1%20-%20%5Csigma%20%5Csqrt%7BT%7D%0A"></p>
-<section id="calcul-dun-call" class="level2">
-<h2 class="anchored" data-anchor-id="calcul-dun-call">1. Calcul d’un call</h2>
-<div id="c1115b45" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Calcul d'un call</span></span>
-<span id="cb1-2"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">from</span> scipy.stats <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> norm</span>
-<span id="cb1-3"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">as</span> np</span>
-<span id="cb1-4"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">from</span> scipy.optimize <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> minimize</span>
-<span id="cb1-5"></span>
-<span id="cb1-6"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> FormulaBS(S,K,r,tau,sigma):</span>
-<span id="cb1-7">    d1 <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> (np.log(S<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span>K) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> (r <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.5</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span>sigma<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">**</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>)<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span>tau ) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> (sigma <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> np.sqrt(tau))</span>
-<span id="cb1-8">    d2 <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> d1 <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> sigma <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> np.sqrt(tau)</span>
-<span id="cb1-9">    call <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> S<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span>norm.cdf(d1) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> K<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> np.exp( <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> tau <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> r) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> norm.cdf(d2)</span>
-<span id="cb1-10">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">return</span> call</span></code></pre></div>
-</div>
-<p>Lorsqu’on a pas accès à une formule analytique pour le prix d’une option, on peut utiliser la méthode de Monte-Carlo pour estimer ce prix. Pour cela, on simule un grand nombre de trajectoires du prix de l’actif sous-jacent, et on calcule la valeur de l’option à chaque date de maturité. On fait ensuite la moyenne de ces valeurs pour obtenir une estimation du prix de l’option.</p>
-<p>Le prix de l’actif sous-jacent suit un mouvement brownien géométrique, et on peut simuler ce mouvement en utilisant la formule d’Ito :</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AS_t%20=%20S_0%20e%5E%7B(%5Cmu%20-%20%5Cfrac%7B%5Csigma%5E2%7D%7B2%7D)t%20+%20%5Csigma%20W_t%7D%0A"></p>
-<div id="ea38e2e8" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> FormulaBSMC(K,r,tau,sigma,M, S0) :</span>
-<span id="cb2-2">    <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Simulation du M mouvement brownien de loi N(0, sigma*sqrt(T))</span></span>
-<span id="cb2-3">    var_brown <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> sigma <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> np.sqrt(tau)</span>
-<span id="cb2-4">    W_T<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.random.normal(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>,var_brown,M)</span>
-<span id="cb2-5"></span>
-<span id="cb2-6">    S_T <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> S0 <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> np.exp((r <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.5</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> sigma<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">**</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> tau <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> W_T)</span>
-<span id="cb2-7">    payoff <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.maximum(S_T <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> K, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>)</span>
-<span id="cb2-8"></span>
-<span id="cb2-9">    call <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.exp(<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span>r<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span>tau) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> np.mean(payoff)</span>
-<span id="cb2-10">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">return</span> call</span></code></pre></div>
-</div>
-<div id="55eecbab" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Calcul du prix d'un call lors t=O, T=6mois, S0= 42, K=40, r=10%, sigma=20%</span></span>
-<span id="cb3-2">S0 <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">42</span></span>
-<span id="cb3-3">K <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">40</span></span>
-<span id="cb3-4">r <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.1</span></span>
-<span id="cb3-5">tau <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">6</span></span>
-<span id="cb3-6">sigma <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.2</span></span>
-<span id="cb3-7"></span>
-<span id="cb3-8">call_BS <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> FormulaBS(S0,K,r,tau,sigma)</span>
-<span id="cb3-9"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">f"Le prix d'un call est de maturité </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>tau<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">mois et de strike </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>K<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;"> est de </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>call_BS<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Le prix d'un call est de maturité 6mois et de strike 40 est de 20.67722481517296</code></pre>
-</div>
-</div>
-<div id="af38329e" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">M_values <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> [<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">500</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">5000</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">50000</span>]</span>
-<span id="cb5-2"><span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">for</span> M <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> M_values:</span>
-<span id="cb5-3">    call_BSMC <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> FormulaBSMC(K, r, tau, sigma, M, S0)</span>
-<span id="cb5-4">    <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">f"Le prix d'un call avec M=</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>M<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">, de maturité </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>tau<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">mois et de strike </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>K<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;"> est de </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>call_BSMC<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Le prix d'un call avec M=500, de maturité 6mois et de strike 40 est de 20.752646541960356
-Le prix d'un call avec M=5000, de maturité 6mois et de strike 40 est de 20.7500497462893
-Le prix d'un call avec M=50000, de maturité 6mois et de strike 40 est de 20.669764558628767</code></pre>
-</div>
-</div>
-<div id="43961966" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Calcul du prix d'un call lors t=O, T=3mois, S0= 42, K=40, r=10%, sigma=20%</span></span>
-<span id="cb7-2">tau <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span></span>
-<span id="cb7-3">call_BS <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> FormulaBS(S0,K,r,tau,sigma)</span>
-<span id="cb7-4"></span>
-<span id="cb7-5"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">f"Le prix d'un call est de maturité </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>tau<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">mois et de strike </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>K<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;"> est de </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>call_BS<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>)</span>
-<span id="cb7-6"></span>
-<span id="cb7-7"><span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">for</span> M <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> M_values:</span>
-<span id="cb7-8">    call_BSMC <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> FormulaBSMC(K, r, tau, sigma, M, S0)</span>
-<span id="cb7-9">    <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">f"Le prix d'un call avec M=</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>M<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">, de maturité </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>tau<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">mois et de strike </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>K<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;"> est de </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>call_BSMC<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Le prix d'un call est de maturité 3mois et de strike 40 est de 13.362666146646749
-Le prix d'un call avec M=500, de maturité 3mois et de strike 40 est de 13.10712199610432
-Le prix d'un call avec M=5000, de maturité 3mois et de strike 40 est de 13.26963328231244
-Le prix d'un call avec M=50000, de maturité 3mois et de strike 40 est de 13.429289467911312</code></pre>
-</div>
-</div>
-<p>Comme nous pouvons le constater, les deux méthodes permettent d’avoir des résultats similaires. De plus, plus le nombre de simulations est grand, plus la précision de l’estimation est grande.</p>
-<section id="calcul-des-greeks" class="level3">
-<h3 class="anchored" data-anchor-id="calcul-des-greeks">1.1. Calcul des greeks</h3>
-<p>Les greeks sont des indicateurs qui permettent de mesurer la sensibilité du prix d’une option à différents paramètres. Les principaux greeks sont :</p>
-<ul>
-<li>Delta : mesure la sensibilité du prix de l’option par rapport au prix de l’actif sous-jacent <img src="https://latex.codecogs.com/png.latex?%0A%5CDelta%20=%20%5Cfrac%7B%5Cpartial%20C%7D%7B%5Cpartial%20S%7D%0A"></li>
-<li>Gamma : mesure la sensibilité du delta par rapport au prix de l’actif sous-jacent <img src="https://latex.codecogs.com/png.latex?%0A%5CGamma%20=%20%5Cfrac%7B%5Cpartial%5E2%20C%7D%7B%5Cpartial%20S%5E2%7D%0A"></li>
-<li>Vega : mesure la sensibilité du prix de l’option par rapport à la volatilité de l’actif <img src="https://latex.codecogs.com/png.latex?%0AVega%20=%20%5Cfrac%7B%5Cpartial%20C%7D%7B%5Cpartial%20%5Csigma%7D%0A"></li>
-</ul>
-<p>Il en existe d’autres, mais ces trois-là sont les plus couramment utilisés.</p>
-<p>Avec le modèle de Black-Scholes, on peut calculer ces greeks de manière analytique :</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5CDelta%20=%20N(d_1)%0A"></p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5CGamma%20=%20%5Cfrac%7BN(d_1)%7D%7BS_t%20%5Csigma%20%5Csqrt%7BT%7D%7D%0A"></p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AVega%20=%20S_t%20%5Csqrt%7BT%7D%20N(d_1)%0A"></p>
-<p>Cependant, lorsqu’on a pas accès à une formule analytique pour le prix de l’option, on peut utiliser la méthode de Monte-Carlo pour estimer ces greeks. Pour cela, on calcule le prix de l’option pour une petite variation de chaque paramètre, et on fait la différence entre ces deux prix pour obtenir une estimation du greek. On peut également utiliser la méthode des différences finies pour calculer ces greeks.</p>
-<div id="970a1635" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> FormulaBSGreeks(S,K,r,tau,sigma):</span>
-<span id="cb9-2">    d1 <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> (np.log(S<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span>K) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> (r <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.5</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span>sigma<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">**</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>)<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span>tau ) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> (sigma <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> np.sqrt(tau))</span>
-<span id="cb9-3">    <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># d2 = d1 - sigma * np.sqrt(tau)</span></span>
-<span id="cb9-4"></span>
-<span id="cb9-5">    delta <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> norm.cdf(d1)</span>
-<span id="cb9-6">    gamma <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> (<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span>(S<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span>sigma<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span>np.sqrt(tau))) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> norm.pdf(d1)</span>
-<span id="cb9-7">    vega <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> S <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> np.sqrt(tau) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> norm.pdf(d1)</span>
-<span id="cb9-8"></span>
-<span id="cb9-9">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">return</span> delta, gamma, vega</span></code></pre></div>
-</div>
-<div id="b9184e17" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1">S <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">100</span></span>
-<span id="cb10-2">K <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">110</span></span>
-<span id="cb10-3">r <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.1</span></span>
-<span id="cb10-4">tau <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.5</span></span>
-<span id="cb10-5">sigma <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.2</span></span>
-<span id="cb10-6"></span>
-<span id="cb10-7">delta, gamma, vega <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> FormulaBSGreeks(S<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span>S,K<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span>K,r<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span>r,tau<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span>tau,sigma<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span>sigma)</span>
-<span id="cb10-8"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">f"Les greeks d'un call sont de maturité </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>tau<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">mois et de strike </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>K<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;"> sont delta=</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>delta<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">, gamma=</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>gamma<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">, vega=</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>vega<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Les greeks d'un call sont de maturité 0.5mois et de strike 110 sont delta=0.40141715171302983, gamma=0.027343746144537384, vega=27.343746144537384</code></pre>
-</div>
-</div>
-<div id="eea06855" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Supposons qu'on a pas la formule des greeks</span></span>
-<span id="cb12-2"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># comment calculer les greeks</span></span>
-<span id="cb12-3"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Approche montecarlo </span></span>
-<span id="cb12-4"></span>
-<span id="cb12-5"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> FormulaBSGreeksMC(K,r,tau,sigma,M, S0) :</span>
-<span id="cb12-6">    d1 <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> (np.log(S<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span>K) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> (r <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.5</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span>sigma<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">**</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>)<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span>tau) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> (sigma <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> np.sqrt(tau))</span>
-<span id="cb12-7">    <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Simulation du M mouvement brownien de loi N(0, sigma*sqrt(T))</span></span>
-<span id="cb12-8">    var_brown <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> sigma <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> np.sqrt(tau)</span>
-<span id="cb12-9">    W_T<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.random.normal(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>,var_brown,M)</span>
-<span id="cb12-10"></span>
-<span id="cb12-11">    S_T <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> S0 <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> np.exp((r <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.5</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> sigma<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">**</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> tau <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> W_T)</span>
-<span id="cb12-12"></span>
-<span id="cb12-13">    delta <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.exp(<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span>r<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span>tau) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> np.mean((S_T <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&gt;</span> K) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> S_T <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> S0)</span>
-<span id="cb12-14">    gamma <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> norm.pdf(d1)<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span>(S0 <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> sigma <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> np.sqrt(tau))</span>
-<span id="cb12-15">    vega <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.exp(<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span>r<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span>tau) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> np.mean((S_T <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&gt;</span> K) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> (S_T<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span>sigma) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span>(np.log(S_T<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span>S0) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> (r <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.5</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> sigma<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">**</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>)<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span>tau))</span>
-<span id="cb12-16"></span>
-<span id="cb12-17">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">return</span> delta, gamma, vega</span>
-<span id="cb12-18"></span>
-<span id="cb12-19">delta, gamma, vega <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> FormulaBSGreeksMC(K,r,tau,sigma,<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">500</span>, S)</span>
-<span id="cb12-20"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">f"Les greeks d'un call sont de maturité </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>tau<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">mois et de strike </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>K<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;"> sont delta=</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>delta<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">, gamma=</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>gamma<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">, vega=</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>vega<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Les greeks d'un call sont de maturité 0.5mois et de strike 110 sont delta=0.4209503065079776, gamma=0.027343746144537384, vega=29.15680602998068</code></pre>
-</div>
-</div>
-<div id="0f533e40" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Mérhode de différencee finie basé sur la méthode de Taylor</span></span>
-<span id="cb14-2"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> FormulaBSGreeks_FD_num(S, K, r, tau, sigma, delta_S<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1e-5</span>):</span>
-<span id="cb14-3">    <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">"""</span></span>
-<span id="cb14-4"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">    Calcule les Grecs (Delta, Gamma, Vega) pour une option call</span></span>
-<span id="cb14-5"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">    par différences finies.</span></span>
-<span id="cb14-6"></span>
-<span id="cb14-7"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">    Paramètres:</span></span>
-<span id="cb14-8"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">    S : float - Prix actuel de l'actif sous-jacent</span></span>
-<span id="cb14-9"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">    K : float - Prix d'exercice de l'option (strike)</span></span>
-<span id="cb14-10"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">    r : float - Taux d'intérêt sans risque (annualisé)</span></span>
-<span id="cb14-11"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">    tau : float - Temps jusqu'à la maturité (en années)</span></span>
-<span id="cb14-12"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">    sigma : float - Volatilité de l'actif sous-jacent (annualisée)</span></span>
-<span id="cb14-13"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">    epsilon : float - Petit incrément pour les différences finies</span></span>
-<span id="cb14-14"></span>
-<span id="cb14-15"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">    Retour:</span></span>
-<span id="cb14-16"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">    tuple - (Delta, Gamma, Vega)</span></span>
-<span id="cb14-17"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">    """</span></span>
-<span id="cb14-18">    <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Delta</span></span>
-<span id="cb14-19">    delta <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> (FormulaBS(S <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> delta_S, K, r, tau, sigma) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> FormulaBS(S <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> delta_S, K, r, tau, sigma)) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> (<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> delta_S)</span>
-<span id="cb14-20"></span>
-<span id="cb14-21">    <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Gamma</span></span>
-<span id="cb14-22">    gamma <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> (FormulaBS(S <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> delta_S, K, r, tau, sigma) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> FormulaBS(S, K, r, tau, sigma) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> FormulaBS(S <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> delta_S, K, r, tau, sigma)) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> (delta_S<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">**</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>)</span>
-<span id="cb14-23"></span>
-<span id="cb14-24">    <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Vega</span></span>
-<span id="cb14-25">    vega <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> (FormulaBS(S, K, r, tau, sigma <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> delta_S) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> FormulaBS(S, K, r, tau, sigma <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> delta_S)) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> (<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> delta_S)</span>
-<span id="cb14-26"></span>
-<span id="cb14-27">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">return</span> delta, gamma, vega</span>
-<span id="cb14-28"></span>
-<span id="cb14-29">delta, gamma, vega <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> FormulaBSGreeks_FD_num(S,K,r,tau,sigma)</span>
-<span id="cb14-30"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">f"Les greeks d'un call sont de maturité </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>tau<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">mois et de strike </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>K<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;"> sont delta=</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>delta<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">, gamma=</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>gamma<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">, vega=</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>vega<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Les greeks d'un call sont de maturité 0.5mois et de strike 110 sont delta=0.4014171516075748, gamma=0.027142732506035824, vega=27.34374614092871</code></pre>
-</div>
-</div>
-</section>
-<section id="calibration-du-modèle-bs-calcul-de-la-volatilité-implicite" class="level3">
-<h3 class="anchored" data-anchor-id="calibration-du-modèle-bs-calcul-de-la-volatilité-implicite">1.2 Calibration du modèle BS : calcul de la volatilité implicite</h3>
-<p>L’intérêt du modèle de Black-Scholes est qu’il permet de calculer la volatilité implicite d’un actif à partir du prix de l’option. En effet, si on connait le prix de l’option, le prix de l’actif sous-jacent, le prix d’exercice de l’option, la maturité de l’option et le taux d’intérêt sans risque, on peut calculer la volatilité implicite en résolvant l’équation de Black-Scholes pour <img src="https://latex.codecogs.com/png.latex?%5Csigma"> :</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AC(S_t,%20K,%20T,%20r,%20%5Csigma)%20=%20S_t%20N(d_1)%20-%20K%20e%5E%7B-rT%7D%20N(d_2)%0A"></p>
-<div id="fe689fc4" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> ImpliedVolBS(S,K,r,tau, Call):</span>
-<span id="cb16-2">    <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># optim function</span></span>
-<span id="cb16-3">    <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> obj_func(sigma):</span>
-<span id="cb16-4">        <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">return</span> (Call <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> FormulaBS(S,K,r,tau,sigma))<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">**</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span></span>
-<span id="cb16-5">    </span>
-<span id="cb16-6">    res <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> minimize(obj_func, <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.2</span>)</span>
-<span id="cb16-7">    sigma <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> res.x[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>]</span>
-<span id="cb16-8">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">return</span> sigma</span></code></pre></div>
-</div>
-<div id="b812b77a" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Calcul de la volatilité d'une option d'achat à la monnaie de maturité 3 mois et de strike K=S=4.58 sachant que S0=100; r=5%</span></span>
-<span id="cb17-2"></span>
-<span id="cb17-3">S <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">100</span></span>
-<span id="cb17-4">K <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">100</span></span>
-<span id="cb17-5">r <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.05</span></span>
-<span id="cb17-6">tau <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">12</span></span>
-<span id="cb17-7">Call <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4.58</span></span>
-<span id="cb17-8">sigma <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> ImpliedVolBS(S,K,r,tau, Call)</span>
-<span id="cb17-9"></span>
-<span id="cb17-10"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">f"La volatilité implicite d'un call est de maturité </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>tau<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">mois et de strike </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>K<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;"> est de </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>sigma<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>La volatilité implicite d'un call est de maturité 0.25mois et de strike 100 est de 0.19821832844648876</code></pre>
-</div>
-</div>
-<div id="66755ec3" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Calcul de la volatilité d'une option d'achat à la monnaie de maturité 6 mois et de strike K=S=5.53 sachant que S0=100; r=5%</span></span>
-<span id="cb19-2"></span>
-<span id="cb19-3">S <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">100</span></span>
-<span id="cb19-4">K <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">100</span></span>
-<span id="cb19-5">r <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.05</span></span>
-<span id="cb19-6">tau <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.5</span></span>
-<span id="cb19-7">Call <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">5.53</span></span>
-<span id="cb19-8">sigma <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> ImpliedVolBS(S,K,r,tau, Call)</span>
-<span id="cb19-9"></span>
-<span id="cb19-10"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">f"La volatilité implicite d'un call est de maturité </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>tau<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">mois et de strike </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>K<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;"> est de </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>sigma<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>La volatilité implicite d'un call est de maturité 0.5mois et de strike 100 est de 0.15010660990708588</code></pre>
-</div>
-</div>
-
-
-</section>
-</section>
-</section>
-
- ]]></description>
-  <category>paper</category>
-  <category>proc-sto</category>
-  <category>ensai-gdr</category>
-  <guid>https://cheryl-kdio.github.io/posts/ensai/proc_stochastique/modele_bs.html</guid>
-  <pubDate>Sun, 05 Jan 2025 23:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

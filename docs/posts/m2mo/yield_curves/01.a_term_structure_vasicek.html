@@ -7,9 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Cheryl Kouadio">
+<meta name="dcterms.date" content="2026-02-21">
 <meta name="description" content="Cheryl Kouadio is a graduate student in stochastic modeling and quantitative finance at Université Paris Cité. Her academic interests focus on probability theory, stochastic processes, data analysis, and financial risk modeling. She studies how rigorous statistical and mathematical methods can be applied to quantify uncertainty and support decision-making in finance and risk management.">
 
-<title>Cheryl Kouadio, Msc – Cheryl Kouadio</title>
+<title>Introducing the Vasicek model – Cheryl Kouadio</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,26 +23,45 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-3146a0984a964146c28da0a2cf78b9ad.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-3146a0984a964146c28da0a2cf78b9ad.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,36 +88,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-recent-posts .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-image','listing-date','listing-title','listing-subtitle',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      page: 6,
-    pagination: { item: "<li class='page-item'><a class='page page-link' href='#'></a></li>" },
-      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-recent-posts'] = new List('listing-recent-posts', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 
 <!-- 
 Load Academicons v1: https://jpswalsh.github.io/academicons/
@@ -149,20 +139,18 @@ window.Quarto = {
 };
 </script>
 
-<link rel="stylesheet" href="styles.css">
-<meta property="og:title" content="Cheryl Kouadio, Msc – Cheryl Kouadio">
-<meta property="og:description" content="Master’s Student in Stochastic Modeling and Quantitative Finance
-Université Paris Cité
-Faculty of Mathematics and Applications
-Paris, France">
-<meta property="og:image" content="https://cheryl-kdio.github.io/files/profile/kouadio_profile.jpeg">
+<link rel="stylesheet" href="../../../styles.css">
+<meta property="og:title" content="Introducing the Vasicek model – Cheryl Kouadio">
+<meta property="og:description" content="Term structure interest rate modelling">
+<meta property="og:image" content="https://cheryl-kdio.github.io/posts/m2mo/yield_curves/featured.png">
 <meta property="og:site_name" content="Cheryl Kouadio">
-<meta name="twitter:title" content="Cheryl Kouadio, Msc – Cheryl Kouadio">
-<meta name="twitter:description" content="Master’s Student in Stochastic Modeling and Quantitative Finance
-Université Paris Cité
-Faculty of Mathematics and Applications
-Paris, France">
-<meta name="twitter:image" content="https://cheryl-kdio.github.io/files/profile/kouadio_profile.jpeg">
+<meta property="og:image:height" content="289">
+<meta property="og:image:width" content="481">
+<meta name="twitter:title" content="Introducing the Vasicek model – Cheryl Kouadio">
+<meta name="twitter:description" content="Term structure interest rate modelling">
+<meta name="twitter:image" content="https://cheryl-kdio.github.io/posts/m2mo/yield_curves/featured.png">
+<meta name="twitter:image-height" content="289">
+<meta name="twitter:image-width" content="481">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -173,7 +161,7 @@ Paris, France">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">Cheryl Kouadio</span>
     </a>
   </div>
@@ -189,15 +177,15 @@ Paris, France">
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-about">    
         <li>
-    <a class="dropdown-item" href="./posts.html#category=news">
+    <a class="dropdown-item" href="../../../posts.html#category=news">
  <span class="dropdown-text">News</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./posts.html#category=event">
+    <a class="dropdown-item" href="../../../posts.html#category=event">
  <span class="dropdown-text">Events</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./now.html">
+    <a class="dropdown-item" href="../../../now.html">
  <span class="dropdown-text">Now</span></a>
   </li>  
     </ul>
@@ -208,19 +196,19 @@ Paris, France">
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-articles">    
         <li>
-    <a class="dropdown-item" href="./publications.html">
+    <a class="dropdown-item" href="../../../publications.html">
  <span class="dropdown-text">Reports</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./posts.html#category=paper">
+    <a class="dropdown-item" href="../../../posts.html#category=paper">
  <span class="dropdown-text">All papers</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./posts.html#category=ensai-gdr">
+    <a class="dropdown-item" href="../../../posts.html#category=ensai-gdr">
  <span class="dropdown-text">Ensai</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./posts.html#category=m2mo">
+    <a class="dropdown-item" href="../../../posts.html#category=m2mo">
  <span class="dropdown-text">M2MO</span></a>
   </li>  
     </ul>
@@ -231,27 +219,27 @@ Paris, France">
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-outreach">    
         <li>
-    <a class="dropdown-item" href="./posts.html#category=outreach">
+    <a class="dropdown-item" href="../../../posts.html#category=outreach">
  <span class="dropdown-text">Policy Engagement</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./posts.html#category=presentation">
+    <a class="dropdown-item" href="../../../posts.html#category=presentation">
  <span class="dropdown-text">Presentations</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./notes.html">
+    <a class="dropdown-item" href="../../../notes.html">
  <span class="dropdown-text">Notes</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./glossary.html"> 
+    <a class="nav-link" href="../../../glossary.html"> 
 <span class="menu-text">Glossary</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./files/Cheryl-Kouadio-CV.pdf" target="_blank"> 
+    <a class="nav-link" href="../../../files/Cheryl-Kouadio-CV.pdf" target="_blank"> 
 <span class="menu-text">CV</span></a>
   </li>  
   <li class="nav-item">
@@ -265,7 +253,7 @@ Paris, France">
 <span class="menu-text">Linkedin</span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="./posts.xml" target="_blank"> <i class="bi bi-rss" role="img">
+    <a class="nav-link" href="../../../posts.xml" target="_blank"> <i class="bi bi-rss" role="img">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
@@ -282,207 +270,157 @@ Paris, France">
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-yield-curve-vs-the-zero-coupon-bond-pricing" id="toc-the-yield-curve-vs-the-zero-coupon-bond-pricing" class="nav-link active" data-scroll-target="#the-yield-curve-vs-the-zero-coupon-bond-pricing">The yield curve vs the zero-coupon bond pricing</a></li>
+  <li><a href="#a-specific-case-of-term-structure-modelling-the-vasicek-model" id="toc-a-specific-case-of-term-structure-modelling-the-vasicek-model" class="nav-link" data-scroll-target="#a-specific-case-of-term-structure-modelling-the-vasicek-model">A specific case of term structure modelling : The vasicek model</a></li>
+  <li><a href="#limitations-of-the-vasicek-model" id="toc-limitations-of-the-vasicek-model" class="nav-link" data-scroll-target="#limitations-of-the-vasicek-model">Limitations of the Vasicek model</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content column-page" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
-
-
-
-<!-- <link rel="me" href="https://mastodon.social/@hegang"> -->
-<section id="recent-posts" class="level2">
-<h2 data-anchor-id="recent-posts">Recent Posts</h2>
-<p>Check out the latest &nbsp;<a href="./posts.html#category=news">Published articles</a>&nbsp;, &nbsp;<a href="./posts.html#category=m2mo">M2MO</a>&nbsp;, &nbsp;<a href="./posts.html#category=ensai-gdr">Ensai</a>&nbsp;, and &nbsp;<a href="./posts.html">More »</a></p>
-<div id="listing-recent-posts" class="quarto-listing quarto-listing-container-grid">
-<div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-categories="cGFwZXIlMkNtMm1vJTJDcmF0ZXM=" data-listing-date-sort="1771628400000" data-listing-file-modified-sort="1771713011030" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1228">
-<a href="./posts/m2mo/yield_curves/01.a_term_structure_vasicek.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top">
-<img loading="lazy" src="./posts/m2mo/yield_curves/featured.png" class="thumbnail-image card-img" style="height: 150px;">
-</p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Introducing the Vasicek model
-</h5>
-<div class="card-subtitle listing-subtitle">
-Term structure interest rate modelling
-</div>
-<div class="card-attribution card-text-small end">
-<div class="listing-date">
-Feb 21, 2026
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="1" data-categories="cGFwZXIlMkNtMm1vJTJDcmF0ZXM=" data-listing-date-sort="1771023600000" data-listing-file-modified-sort="1771713086806" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1041">
-<a href="./posts/m2mo/yield_curves/00_intro_yield_curve.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top">
-<img loading="lazy" src="./posts/m2mo/yield_curves/featured.png" class="thumbnail-image card-img" style="height: 150px;">
-</p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Types of interest rates and rates derivatives
-</h5>
-<div class="card-subtitle listing-subtitle">
-Term structure interest rate modelling
-</div>
-<div class="card-attribution card-text-small end">
-<div class="listing-date">
-Feb 14, 2026
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="2" data-categories="cGFwZXIlMkNtMm1vJTJDZGVyaXZhdGl2ZXM=" data-listing-date-sort="1770678000000" data-listing-file-modified-sort="1770933320198" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="924">
-<a href="./posts/m2mo/derivatives/01_intro_market.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top">
-<img loading="lazy" src="./posts/m2mo/derivatives/featured.png" class="thumbnail-image card-img" style="height: 150px;">
-</p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Mathematical foundations of financial market modeling
-</h5>
-<div class="card-subtitle listing-subtitle">
-Financial Markets
-</div>
-<div class="card-attribution card-text-small end">
-<div class="listing-date">
-Feb 10, 2026
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="3" data-categories="cGFwZXIlMkNtMm1vJTJDZWRw" data-listing-date-sort="1770505200000" data-listing-file-modified-sort="1770932881552" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="39" data-listing-word-count-sort="7677">
-<a href="./posts/m2mo/edp/edp_american_opt.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="posts/m2mo/edp/edp_american_opt_files/figure-html/cell-11-output-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Finite difference Methods for American Options
-</h5>
-<div class="card-subtitle listing-subtitle">
-EDP in finance
-</div>
-<div class="card-attribution card-text-small end">
-<div class="listing-date">
-Feb 8, 2026
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="4" data-categories="cGFwZXIlMkNtMm1vJTJDZGVyaXZhdGl2ZXM=" data-listing-date-sort="1769900400000" data-listing-file-modified-sort="1770933326415" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1104">
-<a href="./posts/m2mo/derivatives/00_references.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top">
-<img loading="lazy" src="./posts/m2mo/derivatives/featured.png" class="thumbnail-image card-img" style="height: 150px;">
-</p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Introduction to financial markets
-</h5>
-<div class="card-subtitle listing-subtitle">
-Financial Markets
-</div>
-<div class="card-attribution card-text-small end">
-<div class="listing-date">
-Feb 1, 2026
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="5" data-categories="cGFwZXIlMkNtMm1vJTJDZWRw" data-listing-date-sort="1768345200000" data-listing-file-modified-sort="1770932878903" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="40" data-listing-word-count-sort="7918">
-<a href="./posts/m2mo/edp/edp_european_opt.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="posts/m2mo/edp/edp_european_opt_files/figure-html/cell-8-output-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Finite difference Methods for European Options
-</h5>
-<div class="card-subtitle listing-subtitle">
-EDP in finance
-</div>
-<div class="card-attribution card-text-small end">
-<div class="listing-date">
-Jan 14, 2026
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div>
-<p align="right">
-<a href="./posts.html">All Posts »</a>
-</p>
-</section>
-<section id="about-me" class="level2">
-<h2 data-anchor-id="about-me">About me</h2>
-<div class="quarto-about-trestles column-page">
-  <div class="about-entity">
-    <img src="files/profile/kouadio_profile.jpeg" class="about-image
-  rounded " style="width: 80%;">
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Cheryl Kouadio, Msc</h1>
-<p class="subtitle lead"></p><p>Master’s Student in Stochastic Modeling and Quantitative Finance<br>
-Université Paris Cité<br>
-Faculty of Mathematics and Applications<br>
-Paris, France</p><p></p>
-</div>
-<div class="quarto-title-meta column-page">
+<h1 class="title">Introducing the Vasicek model</h1>
+<p class="subtitle lead">Term structure interest rate modelling</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">paper</div>
+    <div class="quarto-category">m2mo</div>
+    <div class="quarto-category">rates</div>
   </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Cheryl KOUADIO </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">February 21, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
 </header>
-    <div class="about-links">
-  <a href="mailto:cheryl.s.kouadio@gmail.com" class="about-link" rel="" target="">
-    <i class="bi bi-envelope"></i>
-     <span class="about-link-text">E-mail</span>
-  </a>
-  <a href="https://github.com/cheryl-kdio" class="about-link" rel="" target="">
-    <i class="bi bi-github"></i>
-     <span class="about-link-text">Github</span>
-  </a>
-  <a href="https://linkedin.com/in/cheryl-kouadio" class="about-link" rel="" target="_blank">
-    <i class="bi bi-linkedin"></i>
-     <span class="about-link-text">LinkedIn</span>
-  </a>
-</div>
-  </div>
-  <div class="about-contents"><div id="hero-heading">
-<p>I am a graduate student in statistics and quantitative modeling, with academic and professional interests at the intersection of <strong>probability theory, stochastic modeling, data analysis, and financial risk management</strong>. I am currently completing a <strong>Master’s degree in Modélisation Aléatoire et Finance Quantitative (M2MO)</strong> at <strong>Université Paris Cité</strong>, a selective program focused on advanced probability, stochastic processes, numerical methods, and applications to finance and risk.</p>
-<p>My academic training is grounded in <strong>mathematical statistics and applied data science</strong>. I previously studied <strong>Statistics and Decision Informatics</strong>, where I developed a strong foundation in statistical inference, multivariate analysis, time series, optimization, and programming for data analysis. Throughout my studies, I have built solid technical skills in <strong>Python, R, SAS, and SQL</strong>, and I regularly use data-visualization tools to communicate quantitative results clearly and effectively.</p>
-<p>Alongside my academic training, I have gained <strong>hands-on experience in applied statistics and data analysis</strong> through professional assignments in institutional and administrative environments. My work has involved data cleaning and processing, statistical reporting, automation of analyses, and the development of dashboards to support data-driven decision-making. These experiences have strengthened my ability to bridge rigorous statistical theory with real-world applications.</p>
-<p>My current academic focus centers on <strong>stochastic processes, probabilistic modeling, numerical methods for finance, and quantitative risk analysis</strong>. I am particularly interested in how mathematically sound models can be used to quantify uncertainty, assess financial risk, and support regulatory and strategic decision frameworks. I place strong emphasis on methodological rigor, model validation, and the transparent interpretation of results.</p>
-<p>More broadly, I am building a profile oriented toward <strong>quantitative finance, risk modeling, and advanced statistical research</strong>, combining strong theoretical foundations with practical implementation skills. My goal is to use mathematics and statistics as tools to better understand complex systems, manage risk, and produce reliable and interpretable quantitative analyses.</p>
-</div></div>
-</div>
 
 
+<p>An interest rate, also referred as the term structure, represents the cost of borrowing money from another counterparty, for example a bank. It reflects the price paid for the use of capital over time. Interest rates also embed market expectations. For instance, when interest rates are low, lenders are generally willing to provide funds at a lower cost, which may reflect confidence in economic and political stability. Conversely, higher interest rates can indicate greater perceived risk, such as concerns about inflation, credit risk, or macroeconomic instability.</p>
+<p>To obtain a global view of interest rates at a given date <span class="math inline">\(t\)</span>, one typically plots the interest rate as a function of maturity. This gives rise to what is called the <em>term</em> structure of interest rates. It describes the relationship between interest rates and the time to maturity of debt. In other words, it shows the rate at which investors are willing to lend money for different horizons (i.e.&nbsp;dates of reimbursement). To extract the interest rate, it is common to use a financial product, such as a zero-coupon bond, because the link between price and interest rate is simple and determined by an analytical formula.</p>
+<p>In this article, we focus on a specific model of the term structure of interest rates: the Vasicek model. We first explain its relationship with zero-coupon bond pricing and show how to move from the short-rate dynamics to bond prices, then introduce the model and its advantages. Finally, we discuss the limitations of the model, and suggest possible extensions to better capture the observed shape of the yield curve.</p>
+<section id="the-yield-curve-vs-the-zero-coupon-bond-pricing" class="level1">
+<h1>The yield curve vs the zero-coupon bond pricing</h1>
+<p>As mentioned in the introduction, the yield curve is a function <span class="math inline">\(T \mapsto r(T)\)</span> that represents, for each given maturity, the interest rate at which an individual can borrow or is willing to lend. In normal economic conditions, the yield curve is often upward sloping, meaning that long-term interest rates are higher than short-term rates. However, during periods of economic stress or when markets anticipate a recession, the curve may flatten or even become inverted. Therefore, the shape of the yield curve provides valuable information about market expectations regarding future interest rates, economic growth, and inflation.</p>
+<div>
+
+</div>
+<div class="quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="normal_ir.png" class="img-fluid figure-img"></p>
+<figcaption>Normal yield curve</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="inverted_ir.png" class="img-fluid figure-img"></p>
+<figcaption>Inverted yield curve</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div class="figure-caption">
+<p>Left: In normal economic conditions, the yield curve is typically upward sloping, meaning that long-term rates exceed short-term rates.<br>
+Right: An inverted yield curve occurs when short-term rates are higher than long-term rates, often reflecting recession expectations.</p>
+</div>
+<p>Interest rates are also used as discount factors. They allow us to determine the present value of money to be received at a future date. For example, if A lends 1 euro today at an interest rate <span class="math inline">\(r\)</span>, it means that he will be reimbursed <span class="math inline">\(1 + r\)</span> at time <span class="math inline">\(T\)</span>. Therefore, the 1 euro lent today will be worth <span class="math inline">\(1+r\)</span> in the future. Conversely, by a simple proportional reasoning, 1 euro to be received in the future corresponds to a present value of <span class="math inline">\(\frac{1}{1+r}\)</span> today.</p>
+<p>Interest rate is not a traded product in the market. So they cannot be observe directly. Hence, one often use derivatives in other th know the quantity of the derivatives. In the case of a zero-coupon bond (ZC bond), the link between price and interest rate is particularly simple, as it is given by an analytical formula. In fact, let <span class="math inline">\(B(t,T)\)</span> be the price of a zero-coupon bond and <span class="math inline">\(R(t,T)\)</span> the interest rate associated. In continuous compounding interest rate, we have that : <span class="math display">\[
+R(t,T) = -\frac{1}{T-t} \ln(B(t,T)).
+\]</span></p>
+<p>Therefore, one can represent the term structure through the zero-coupon bond prices as a function of maturity. By the way, since a zero-coupon bond is a product traded in the market, its price can be expressed as the expected discounted payoff under the risk-neutral measure:</p>
+<p><span class="math display">\[
+B(t,T) = \mathbb{E}^{\mathbb{Q}}\left[ \exp\left(-\int_t^T r_s ds \right) \middle| \mathcal{F}_t \right]. \quad (*)
+\]</span></p>
+<p>Hence, modeling the short rate process (<span class="math inline">\(r_t\)</span>) directly determines the bond price dynamics. In other words, specifying a model for <span class="math inline">\(r_t\)</span> allows us to derive the entire term structure of interest rates and compute zero-coupon bond prices for all maturities.</p>
+</section>
+<section id="a-specific-case-of-term-structure-modelling-the-vasicek-model" class="level1">
+<h1>A specific case of term structure modelling : The vasicek model</h1>
+<p>The Vasicek model <span class="citation" data-cites="vasicek1977equilibrium">(<a href="#ref-vasicek1977equilibrium" role="doc-biblioref">Vasicek 1977</a>)</span> was introduced in 1977 by Oldřich Vašíček to model the short rate process <span class="math inline">\(r_t\)</span>. It is inspired by the Ornstein–Uhlenbeck process, which is a Gaussian Markov process.</p>
+<p>We work on <span class="math inline">\((\Omega,(\mathcal{F}_t), \mathbb{Q})\)</span>, and the model assumes that the dynamics of <span class="math inline">\(r_t\)</span> are given by:</p>
+<p><span class="math display">\[
+dr_t = k(\theta - r_t),dt + \sigma, dW_t,
+\]</span></p>
+<p>with <span class="math inline">\(W_t\)</span> a Brownian motion under the probability measure <span class="math inline">\(\mathbb{Q}\)</span>.</p>
+<p>The drift <span class="math inline">\(k(\theta - r_t)\)</span> represents the force that keeps pulling the short rate <span class="math inline">\(r_t\)</span> towards its long-term mean <span class="math inline">\(\theta\)</span>, with <span class="math inline">\(k&gt;0\)</span> as the mean-reversion speed. The process has a constant instantaneous variance <span class="math inline">\(\sigma^2\)</span>, causing the short rate to fluctuate around <span class="math inline">\(\theta\)</span>.</p>
+<p>Moreover, the SDE admits a unique strong solution since the coefficients are Lipschitz and of linear growth. Furthermore, by applying Itô’s formula to <span class="math inline">\(e^{kt}r_t\)</span>, we have for <span class="math inline">\(0 \le s \le t\)</span>:</p>
+<p><span class="math display">\[
+r_t = r_s e^{-k(t-s)} + \theta \left( 1 - e^{-k(t-s)} \right) + \sigma \int_s^t e^{-k(t-u)} dW_u.
+\]</span></p>
+<p>Hence, the conditional moments of <span class="math inline">\(r_t\)</span> are given by:</p>
+<ul>
+<li><p><span class="math inline">\(\mathbb{E}[r_t \mid \mathcal{F}_s] = r_s e^{-k(t-s)} + \theta \left( 1 - e^{-k(t-s)} \right)\)</span></p></li>
+<li><p><span class="math inline">\(\mathbb{V}[r_t \mid \mathcal{F}_s] = \frac{\sigma^2}{2k} \left( 1 - e^{-2k(t-s)} \right)\)</span>.</p></li>
+</ul>
+<p>Using the link between the short rate and the zero-coupon bond price (*), since <span class="math inline">\(\int_t^T r_u,du \mid \mathcal{F}_t\)</span> is Gaussian, pricing reduces to computing the Laplace transform of a normal random variable. Hence, omitting some computational details, the bond price can be written in an affine form with respect to the short rate:</p>
+<p><span class="math display">\[
+\begin{align}
+B(t,T) &amp;=  \mathbb{E}^{\mathbb{Q}}\left[ \exp\left(-\int_t^T r_u,du \right) \middle| \mathcal{F}_t \right] [4pt]
+&amp;= \exp\left( m(t,T) - n(t,T), r_t\right),
+\end{align}
+\]</span></p>
+<p>with <span class="math inline">\(n(t,T) := \frac{ 1 - e^{-k(T-t)}}{k},\)</span> and <span class="math inline">\(m(t,T) := \left( \theta - \frac{\sigma^2}{2k^2} \right)\left(B(t,T) - (T-t)\right) - \frac{\sigma^2}{4k},B(t,T)^2.\)</span></p>
+<p>Now, recalling the link between the zero-coupon bond price <span class="math inline">\(B(t,T)\)</span> and the term structure interest rate <span class="math inline">\(R(t,T)\)</span>, i.e.&nbsp;<span class="math inline">\(R(t,T) = -\frac{1}{T-t}\ln B(t,T)\)</span>, we obtain an analytical expression for the yield:</p>
+<p><span class="math display">\[
+R(t,T) = R(\infty) + (r_t - R(\infty)) \frac{ 1 - e^{-k(T-t)}}{k(T-t)} + \frac{\sigma^2}{4k^3 (T-t)} \left( 1 - e^{-k(T-t)} \right)^2,
+\]</span></p>
+<p>with <span class="math inline">\(R(\infty) = \lim_{T \rightarrow \infty} R(t,T) = \theta - \frac{\sigma^2}{2k^2}.\)</span></p>
+</section>
+<section id="limitations-of-the-vasicek-model" class="level1">
+<h1>Limitations of the Vasicek model</h1>
+<p>Despite its widespread use, the Vasicek model has several limitations due to the assumptions it relies on:</p>
+<ul>
+<li><p>Negative interest rates : The model allows the short rate to become negative, since it follows a Gaussian process. Historically, this was considered unrealistic. However, recent market environments with negative policy rates have made the Vasicek framework more relevant in certain contexts for modeling short-rate dynamics and extracting a yield curve.</p></li>
+<li><p>Constant volatility : The model assumes constant volatility <span class="math inline">\(\sigma\)</span>, which is often violated in real-world markets. In practice, interest rate volatility is time-dependent and state-dependent. Moreover, market data (e.g., cap and swaption prices) exhibit volatility smiles and skews, which cannot be captured by a single Gaussian factor with constant volatility.</p></li>
+<li><p>One-factor model : The Vasicek model is a one-factor model, meaning that the entire term structure is driven by a single source of randomness (one Brownian motion). This implies perfect correlation between rate movements across maturities. Such a simplification may not capture the empirical complexity of interest rate dynamics, where multiple factors (level, slope, curvature) are typically required.</p></li>
+<li><p>Calibration to the initial yield curve : Due to the small number of parameters <span class="math inline">\((k, \theta, \sigma)\)</span>, the Vasicek model cannot perfectly match the observed initial zero-coupon yield curve. To overcome this limitation, one can introduce a time-dependent mean-reversion level <span class="math inline">\(\theta(t)\)</span>. This leads to the Hull–White extension <span class="citation" data-cites="hull2001general">(<a href="#ref-hull2001general" role="doc-biblioref">Hull and White 2001</a>)</span>, which allows exact calibration to the initial term structure.</p></li>
+</ul>
 
 
 
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-hull2001general" class="csl-entry" role="listitem">
+Hull, John, and Alan White. 2001. <span>“The General Hull–White Model and Supercalibration.”</span> <em>Financial Analysts Journal</em> 57 (6): 34–43.
+</div>
+<div id="ref-vasicek1977equilibrium" class="csl-entry" role="listitem">
+Vasicek, Oldrich. 1977. <span>“An Equilibrium Characterization of the Term Structure.”</span> <em>Journal of Financial Economics</em> 5 (2): 177–88.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -503,6 +441,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
   const isCodeAnnotation = (el) => {
     for (const clz of el.classList) {
       if (clz.startsWith('code-annotation-')) {                     
