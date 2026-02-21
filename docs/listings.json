@@ -31,6 +31,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/m2mo/yield_curves/01_term_structure.html",
       "/posts/m2mo/derivatives/01_intro_market.html",
       "/posts/m2mo/edp/edp_american_opt.html",
       "/posts/m2mo/derivatives/00_references.html",
@@ -65,6 +66,7 @@
   {
     "listing": "/posts.html",
     "items": [
+      "/posts/m2mo/yield_curves/01_term_structure.html",
       "/posts/m2mo/derivatives/01_intro_market.html",
       "/posts/m2mo/edp/edp_american_opt.html",
       "/posts/m2mo/derivatives/00_references.html",

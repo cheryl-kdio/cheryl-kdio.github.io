@@ -4,6 +4,7 @@ subtitle: "Posts about papers, events, news, and more"
 description-meta: "Posts about papers, events, news, and more"
 listing: 
   sort: "date desc"
+  fields: [image, date, title, author, reading-time,description]
   type: default
   page-size: 100
   categories: true

@@ -79,7 +79,7 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-subtitle','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-image','listing-date','listing-title','listing-author','listing-reading-time','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
       searchColumns: ["listing-date","listing-title","listing-author","listing-subtitle","listing-image","listing-description","listing-categories"],
     };
@@ -152,15 +152,15 @@ window.Quarto = {
 <link rel="stylesheet" href="styles.css">
 <link rel="alternate" type="application/rss+xml" title="Cheryl Kouadio" href="posts.xml" data-external="1"><meta property="og:title" content="What’s New &amp; Updated – Cheryl Kouadio">
 <meta property="og:description" content="Posts about papers, events, news, and more">
-<meta property="og:image" content="https://cheryl-kdio.github.io/posts/m2mo/derivatives/featured.png">
+<meta property="og:image" content="https://cheryl-kdio.github.io/posts/m2mo/yield_curves/featured.png">
 <meta property="og:site_name" content="Cheryl Kouadio">
-<meta property="og:image:height" content="1024">
-<meta property="og:image:width" content="1536">
+<meta property="og:image:height" content="289">
+<meta property="og:image:width" content="481">
 <meta name="twitter:title" content="What’s New &amp; Updated – Cheryl Kouadio">
 <meta name="twitter:description" content="Posts about papers, events, news, and more">
-<meta name="twitter:image" content="https://cheryl-kdio.github.io/posts/m2mo/derivatives/featured.png">
-<meta name="twitter:image-height" content="1024">
-<meta name="twitter:image-width" content="1536">
+<meta name="twitter:image" content="https://cheryl-kdio.github.io/posts/m2mo/yield_curves/featured.png">
+<meta name="twitter:image-height" content="289">
+<meta name="twitter:image-width" content="481">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -285,7 +285,7 @@ window.Quarto = {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(30)</span></div><div class="category" data-category="YXBwcmVudGlzc2FnZS1zdGF0">apprentissage-stat <span class="quarto-category-count">(4)</span></div><div class="category" data-category="YXNzZXQtbWFuYWdlbWVudA==">asset-management <span class="quarto-category-count">(3)</span></div><div class="category" data-category="ZGVyaXZhdGl2ZXM=">derivatives <span class="quarto-category-count">(2)</span></div><div class="category" data-category="ZWRw">edp <span class="quarto-category-count">(2)</span></div><div class="category" data-category="ZW5zYWktZ2Ry">ensai-gdr <span class="quarto-category-count">(23)</span></div><div class="category" data-category="bTJtbw==">m2mo <span class="quarto-category-count">(4)</span></div><div class="category" data-category="bmV3cw==">news <span class="quarto-category-count">(1)</span></div><div class="category" data-category="b3RoZXI=">other <span class="quarto-category-count">(3)</span></div><div class="category" data-category="cGFwZXI=">paper <span class="quarto-category-count">(28)</span></div><div class="category" data-category="cHJvYy1zdG8=">proc-sto <span class="quarto-category-count">(6)</span></div><div class="category" data-category="cmlzcXVlcy1maW4=">risques-fin <span class="quarto-category-count">(7)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(31)</span></div><div class="category" data-category="YXBwcmVudGlzc2FnZS1zdGF0">apprentissage-stat <span class="quarto-category-count">(4)</span></div><div class="category" data-category="YXNzZXQtbWFuYWdlbWVudA==">asset-management <span class="quarto-category-count">(3)</span></div><div class="category" data-category="ZGVyaXZhdGl2ZXM=">derivatives <span class="quarto-category-count">(2)</span></div><div class="category" data-category="ZWRw">edp <span class="quarto-category-count">(2)</span></div><div class="category" data-category="ZW5zYWktZ2Ry">ensai-gdr <span class="quarto-category-count">(23)</span></div><div class="category" data-category="bTJtbw==">m2mo <span class="quarto-category-count">(5)</span></div><div class="category" data-category="bmV3cw==">news <span class="quarto-category-count">(1)</span></div><div class="category" data-category="b3RoZXI=">other <span class="quarto-category-count">(3)</span></div><div class="category" data-category="cGFwZXI=">paper <span class="quarto-category-count">(29)</span></div><div class="category" data-category="cHJvYy1zdG8=">proc-sto <span class="quarto-category-count">(6)</span></div><div class="category" data-category="cmF0ZXM=">rates <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cmlzcXVlcy1maW4=">risques-fin <span class="quarto-category-count">(7)</span></div></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -342,7 +342,38 @@ window.Quarto = {
     </div>
 </div>
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="cGFwZXIlMkNtMm1vJTJDZGVyaXZhdGl2ZXM=" data-listing-date-sort="1770678000000" data-listing-file-modified-sort="1770933320198" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="924">
+<div class="quarto-post image-right" data-index="0" data-categories="cGFwZXIlMkNtMm1vJTJDcmF0ZXM=" data-listing-date-sort="1771628400000" data-listing-file-modified-sort="1771712858006" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1246">
+<div class="thumbnail">
+<p><a href="./posts/m2mo/yield_curves/01_term_structure.html" class="no-external"></a></p><a href="./posts/m2mo/yield_curves/01_term_structure.html" class="no-external">
+<p><img loading="lazy" src="./posts/m2mo/yield_curves/featured.png" class="thumbnail-image"></p>
+</a><p><a href="./posts/m2mo/yield_curves/01_term_structure.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/m2mo/yield_curves/01_term_structure.html" class="no-external">Introducing the Vasicek model</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/m2mo/yield_curves/01_term_structure.html" class="no-external">Term structure interest rate modelling</a>
+</div>
+<div class="listing-description">
+<a href="./posts/m2mo/yield_curves/01_term_structure.html" class="no-external">An interest rate, also referred as the term structure, represents the cost of borrowing money from another counterparty, for example a bank. It reflects the price paid for…</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/m2mo/yield_curves/01_term_structure.html" class="no-external">
+<div class="listing-date">
+Feb 21, 2026
+</div>
+<div class="listing-author">
+Cheryl KOUADIO
+</div>
+<div class="listing-reading-time">
+7 min
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="cGFwZXIlMkNtMm1vJTJDZGVyaXZhdGl2ZXM=" data-listing-date-sort="1770678000000" data-listing-file-modified-sort="1770933320198" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="924">
 <div class="thumbnail">
 <p><a href="./posts/m2mo/derivatives/01_intro_market.html" class="no-external"></a></p><a href="./posts/m2mo/derivatives/01_intro_market.html" class="no-external">
 <p><img loading="lazy" src="./posts/m2mo/derivatives/featured.png" class="thumbnail-image"></p>
@@ -354,17 +385,6 @@ window.Quarto = {
 </h3>
 <div class="listing-subtitle">
 <a href="./posts/m2mo/derivatives/01_intro_market.html" class="no-external">Financial Markets</a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('cGFwZXI='); return false;">
-paper
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('bTJtbw=='); return false;">
-m2mo
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('ZGVyaXZhdGl2ZXM='); return false;">
-derivatives
-</div>
 </div>
 <div class="listing-description">
 <a href="./posts/m2mo/derivatives/01_intro_market.html" class="no-external">A financial market is an institutional framework in which financial instruments are issued and exchanged. In the primary market, newly created securities such as shares or…</a>
@@ -378,10 +398,13 @@ Feb 10, 2026
 <div class="listing-author">
 Cheryl KOUADIO
 </div>
+<div class="listing-reading-time">
+5 min
+</div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-categories="cGFwZXIlMkNtMm1vJTJDZWRw" data-listing-date-sort="1770505200000" data-listing-file-modified-sort="1770932881552" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="39" data-listing-word-count-sort="7677">
+<div class="quarto-post image-right" data-index="2" data-categories="cGFwZXIlMkNtMm1vJTJDZWRw" data-listing-date-sort="1770505200000" data-listing-file-modified-sort="1770932881552" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="39" data-listing-word-count-sort="7677">
 <div class="thumbnail">
 <p><a href="./posts/m2mo/edp/edp_american_opt.html" class="no-external"></a></p><a href="./posts/m2mo/edp/edp_american_opt.html" class="no-external">
 <p class="card-img-top"><img src="posts/m2mo/edp/edp_american_opt_files/figure-html/cell-11-output-1.png"  class="thumbnail-image card-img"/></p>
@@ -393,17 +416,6 @@ Cheryl KOUADIO
 </h3>
 <div class="listing-subtitle">
 <a href="./posts/m2mo/edp/edp_american_opt.html" class="no-external">EDP in finance</a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('cGFwZXI='); return false;">
-paper
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('bTJtbw=='); return false;">
-m2mo
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('ZWRw'); return false;">
-edp
-</div>
 </div>
 <div class="listing-description">
 <a href="./posts/m2mo/edp/edp_american_opt.html" class="no-external">Dans ce TP, on étudie des schémas numériques permettant d’approcher la solution de l’équation de Black-Scholes pour les options américaines. On considerera en particulier…</a>
@@ -417,10 +429,13 @@ Feb 8, 2026
 <div class="listing-author">
 Cheryl KOUADIO, Marilene Kougoum
 </div>
+<div class="listing-reading-time">
+39 min
+</div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="2" data-categories="cGFwZXIlMkNtMm1vJTJDZGVyaXZhdGl2ZXM=" data-listing-date-sort="1769900400000" data-listing-file-modified-sort="1770933326415" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1104">
+<div class="quarto-post image-right" data-index="3" data-categories="cGFwZXIlMkNtMm1vJTJDZGVyaXZhdGl2ZXM=" data-listing-date-sort="1769900400000" data-listing-file-modified-sort="1770933326415" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1104">
 <div class="thumbnail">
 <p><a href="./posts/m2mo/derivatives/00_references.html" class="no-external"></a></p><a href="./posts/m2mo/derivatives/00_references.html" class="no-external">
 <p><img loading="lazy" src="./posts/m2mo/derivatives/featured.png" class="thumbnail-image"></p>
@@ -432,17 +447,6 @@ Cheryl KOUADIO, Marilene Kougoum
 </h3>
 <div class="listing-subtitle">
 <a href="./posts/m2mo/derivatives/00_references.html" class="no-external">Financial Markets</a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('cGFwZXI='); return false;">
-paper
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('bTJtbw=='); return false;">
-m2mo
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('ZGVyaXZhdGl2ZXM='); return false;">
-derivatives
-</div>
 </div>
 <div class="listing-description">
 <a href="./posts/m2mo/derivatives/00_references.html" class="no-external">In the financial sector, a market refers to the place where the supply and demand for financial products and services meet. It brings together numerous participants…</a>
@@ -456,10 +460,13 @@ Feb 1, 2026
 <div class="listing-author">
 Cheryl KOUADIO
 </div>
+<div class="listing-reading-time">
+6 min
+</div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="3" data-categories="cGFwZXIlMkNtMm1vJTJDZWRw" data-listing-date-sort="1768345200000" data-listing-file-modified-sort="1770932878903" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="40" data-listing-word-count-sort="7918">
+<div class="quarto-post image-right" data-index="4" data-categories="cGFwZXIlMkNtMm1vJTJDZWRw" data-listing-date-sort="1768345200000" data-listing-file-modified-sort="1770932878903" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="40" data-listing-word-count-sort="7918">
 <div class="thumbnail">
 <p><a href="./posts/m2mo/edp/edp_european_opt.html" class="no-external"></a></p><a href="./posts/m2mo/edp/edp_european_opt.html" class="no-external">
 <p class="card-img-top"><img src="posts/m2mo/edp/edp_european_opt_files/figure-html/cell-8-output-1.png"  class="thumbnail-image card-img"/></p>
@@ -471,17 +478,6 @@ Cheryl KOUADIO
 </h3>
 <div class="listing-subtitle">
 <a href="./posts/m2mo/edp/edp_european_opt.html" class="no-external">EDP in finance</a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('cGFwZXI='); return false;">
-paper
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('bTJtbw=='); return false;">
-m2mo
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('ZWRw'); return false;">
-edp
-</div>
 </div>
 <div class="listing-description">
 <a href="./posts/m2mo/edp/edp_european_opt.html" class="no-external">Dans ce tp, nous étudion des schémas aux différences finies pour l’équation de Black-Scholes posée dans les variables primitives, après localisation dans un rectangle dans…</a>
@@ -495,10 +491,13 @@ Jan 14, 2026
 <div class="listing-author">
 Cheryl KOUADIO, Marilene Kougoum
 </div>
+<div class="listing-reading-time">
+40 min
+</div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="4" data-categories="bmV3cw==" data-listing-date-sort="1765753200000">
+<div class="quarto-post image-right" data-index="5" data-categories="bmV3cw==" data-listing-date-sort="1765753200000">
 <div class="thumbnail">
 <p><a href="https://ascopubs.org/doi/10.1200/CCI-25-00084" class="no-external"></a></p><a href="https://ascopubs.org/doi/10.1200/CCI-25-00084" class="no-external">
 <p><img loading="lazy" src="https://ascopubs.org/cms/10.1200/CCI-25-00084/asset/d0c5b157-fe4e-42e3-b911-27a37c390406/assets/images/large/cci-25-00084f1.jpg" class="thumbnail-image"></p>
@@ -510,11 +509,6 @@ Cheryl KOUADIO, Marilene Kougoum
 </h3>
 <div class="listing-subtitle">
 <a href="https://ascopubs.org/doi/10.1200/CCI-25-00084" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('bmV3cw=='); return false;">
-news
-</div>
 </div>
 <div class="listing-description">
 <a href="https://ascopubs.org/doi/10.1200/CCI-25-00084" class="no-external">To evaluate the appropriateness of a cure model when analyzing right-censored end points of a randomized clinical trial (RCT) in malignancy in the presence of long-term survivors. We aim to derive how the ratio estimation of censored cured subjects (RECeUS), previously proposed for a homogeneous population, could be extended for use in RCTs.</a>
@@ -531,7 +525,7 @@ Cheryl Kouadio, Msc, Subodh Selukar, PhD, Megan Othus, PhD, and Sylvie Chevret, 
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="5" data-categories="cGFwZXIlMkNhc3NldC1tYW5hZ2VtZW50JTJDZW5zYWktZ2Ry" data-listing-date-sort="1742684400000" data-listing-file-modified-sort="1770775138113" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="33" data-listing-word-count-sort="6568">
+<div class="quarto-post image-right" data-index="6" data-categories="cGFwZXIlMkNhc3NldC1tYW5hZ2VtZW50JTJDZW5zYWktZ2Ry" data-listing-date-sort="1742684400000" data-listing-file-modified-sort="1770775138113" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="33" data-listing-word-count-sort="6568">
 <div class="thumbnail">
 <p><a href="./posts/ensai/gestion_actifs/TP-3.html" class="no-external"></a></p><a href="./posts/ensai/gestion_actifs/TP-3.html" class="no-external">
 <p class="card-img-top"><img src="posts/ensai/gestion_actifs/TP-3_files/figure-html/cell-8-output-2.png"  class="thumbnail-image card-img"/></p>
@@ -543,17 +537,6 @@ Cheryl Kouadio, Msc, Subodh Selukar, PhD, Megan Othus, PhD, and Sylvie Chevret, 
 </h3>
 <div class="listing-subtitle">
 <a href="./posts/ensai/gestion_actifs/TP-3.html" class="no-external">Risque de crédit</a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('cGFwZXI='); return false;">
-paper
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('YXNzZXQtbWFuYWdlbWVudA=='); return false;">
-asset-management
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('ZW5zYWktZ2Ry'); return false;">
-ensai-gdr
-</div>
 </div>
 <div class="listing-description">
 <a href="./posts/ensai/gestion_actifs/TP-3.html" class="no-external">Le risque de valorisation est le risque que la valeur d’un actif financier soit inférieure à sa valeur comptable ou à sa valeur de marché. Ce risque peut être causé par des…</a>
@@ -567,10 +550,13 @@ Mar 23, 2025
 <div class="listing-author">
 Cheryl KOUADIO
 </div>
+<div class="listing-reading-time">
+33 min
+</div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="6" data-categories="cGFwZXIlMkNyaXNxdWVzLWZpbiUyQ2Vuc2FpLWdkcg==" data-listing-date-sort="1741820400000" data-listing-file-modified-sort="1770775189677" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="29" data-listing-word-count-sort="5796">
+<div class="quarto-post image-right" data-index="7" data-categories="cGFwZXIlMkNyaXNxdWVzLWZpbiUyQ2Vuc2FpLWdkcg==" data-listing-date-sort="1741820400000" data-listing-file-modified-sort="1770775189677" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="29" data-listing-word-count-sort="5796">
 <div class="thumbnail">
 <p><a href="./posts/ensai/risques_financiers/value-at-risk/pj_copules.html" class="no-external"></a></p><a href="./posts/ensai/risques_financiers/value-at-risk/pj_copules.html" class="no-external">
 <p class="card-img-top"><img src="posts/ensai/risques_financiers/value-at-risk/pj_copules_files/figure-html/cell-3-output-3.png"  class="thumbnail-image card-img"/></p>
@@ -582,17 +568,6 @@ Cheryl KOUADIO
 </h3>
 <div class="listing-subtitle">
 <a href="./posts/ensai/risques_financiers/value-at-risk/pj_copules.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('cGFwZXI='); return false;">
-paper
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('cmlzcXVlcy1maW4='); return false;">
-risques-fin
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('ZW5zYWktZ2Ry'); return false;">
-ensai-gdr
-</div>
 </div>
 <div class="listing-description">
 <a href="./posts/ensai/risques_financiers/value-at-risk/pj_copules.html" class="no-external">Les banques jouent un rôle central dans l’économie nationale et internationale. En effet, elles assurent l’intermédiation entre les agents disposant d’un excédent de…</a>
@@ -606,10 +581,13 @@ Mar 13, 2025
 <div class="listing-author">
 Cheryl Kouadio, Mariyam Ouyassin
 </div>
+<div class="listing-reading-time">
+29 min
+</div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="7" data-categories="cGFwZXIlMkNwcm9jLXN0byUyQ2Vuc2FpLWdkcg==" data-listing-date-sort="1741042800000" data-listing-file-modified-sort="1770775174459" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="43" data-listing-word-count-sort="8600">
+<div class="quarto-post image-right" data-index="8" data-categories="cGFwZXIlMkNwcm9jLXN0byUyQ2Vuc2FpLWdkcg==" data-listing-date-sort="1741042800000" data-listing-file-modified-sort="1770775174459" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="43" data-listing-word-count-sort="8600">
 <div class="thumbnail">
 <p><a href="./posts/ensai/proc_stochastique/pj_courbe_tx.html" class="no-external"></a></p><a href="./posts/ensai/proc_stochastique/pj_courbe_tx.html" class="no-external">
 <p class="card-img-top"><img src="posts/ensai/proc_stochastique/pj_courbe_tx_files/figure-html/cell-5-output-1.png"  class="thumbnail-image card-img"/></p>
@@ -622,17 +600,6 @@ Cheryl Kouadio, Mariyam Ouyassin
 <div class="listing-subtitle">
 <a href="./posts/ensai/proc_stochastique/pj_courbe_tx.html" class="no-external"></a>
 </div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('cGFwZXI='); return false;">
-paper
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('cHJvYy1zdG8='); return false;">
-proc-sto
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('ZW5zYWktZ2Ry'); return false;">
-ensai-gdr
-</div>
-</div>
 <div class="listing-description">
 <a href="./posts/ensai/proc_stochastique/pj_courbe_tx.html" class="no-external">Que ce soit pour les banques, les assureurs ou les fonds de pension, la courbe de taux zéro-coupon constitue la brique de base pour la valorisation de nombreux instruments…</a>
 </div>
@@ -642,10 +609,13 @@ ensai-gdr
 <div class="listing-date">
 Mar 4, 2025
 </div>
+<div class="listing-reading-time">
+43 min
+</div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="8" data-categories="cGFwZXIlMkNyaXNxdWVzLWZpbiUyQ2Vuc2FpLWdkcg==" data-listing-date-sort="1740697200000" data-listing-file-modified-sort="1770775201311" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="20" data-listing-word-count-sort="3972">
+<div class="quarto-post image-right" data-index="9" data-categories="cGFwZXIlMkNyaXNxdWVzLWZpbiUyQ2Vuc2FpLWdkcg==" data-listing-date-sort="1740697200000" data-listing-file-modified-sort="1770775201311" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="20" data-listing-word-count-sort="3972">
 <div class="thumbnail">
 <p><a href="./posts/ensai/risques_financiers/value-at-risk/var_garch.html" class="no-external"></a></p><a href="./posts/ensai/risques_financiers/value-at-risk/var_garch.html" class="no-external">
 <p class="card-img-top"><img src="posts/ensai/risques_financiers/value-at-risk/var_garch_files/figure-html/cell-5-output-1.png"  class="thumbnail-image card-img"/></p>
@@ -657,17 +627,6 @@ Mar 4, 2025
 </h3>
 <div class="listing-subtitle">
 <a href="./posts/ensai/risques_financiers/value-at-risk/var_garch.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('cGFwZXI='); return false;">
-paper
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('cmlzcXVlcy1maW4='); return false;">
-risques-fin
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('ZW5zYWktZ2Ry'); return false;">
-ensai-gdr
-</div>
 </div>
 <div class="listing-description">
 <a href="./posts/ensai/risques_financiers/value-at-risk/var_garch.html" class="no-external">Ce TP est une continuité du TP-1 et du TP-2 dans lequel on souhaitait implémenter la VaR (Value at Risk) et l’ES (Expected Shortfall) en utilisant les méthodes classiques…</a>
@@ -681,10 +640,13 @@ Feb 28, 2025
 <div class="listing-author">
 Cheryl Kouadio
 </div>
+<div class="listing-reading-time">
+20 min
+</div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="9" data-categories="cGFwZXIlMkNyaXNxdWVzLWZpbiUyQ2Vuc2FpLWdkcg==" data-listing-date-sort="1740697200000" data-listing-file-modified-sort="1770775199169" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="17" data-listing-word-count-sort="3213">
+<div class="quarto-post image-right" data-index="10" data-categories="cGFwZXIlMkNyaXNxdWVzLWZpbiUyQ2Vuc2FpLWdkcg==" data-listing-date-sort="1740697200000" data-listing-file-modified-sort="1770775199169" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="17" data-listing-word-count-sort="3213">
 <div class="thumbnail">
 <p><a href="./posts/ensai/risques_financiers/value-at-risk/var_evt.html" class="no-external"></a></p><a href="./posts/ensai/risques_financiers/value-at-risk/var_evt.html" class="no-external">
 <p class="card-img-top"><img src="posts/ensai/risques_financiers/value-at-risk/var_evt_files/figure-html/cell-5-output-1.png"  class="thumbnail-image card-img"/></p>
@@ -696,17 +658,6 @@ Cheryl Kouadio
 </h3>
 <div class="listing-subtitle">
 <a href="./posts/ensai/risques_financiers/value-at-risk/var_evt.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('cGFwZXI='); return false;">
-paper
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('cmlzcXVlcy1maW4='); return false;">
-risques-fin
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('ZW5zYWktZ2Ry'); return false;">
-ensai-gdr
-</div>
 </div>
 <div class="listing-description">
 <a href="./posts/ensai/risques_financiers/value-at-risk/var_evt.html" class="no-external">Ce TP est une continuité du TP-1 dans lequel on souhaitait implémenter la VaR (Value at Risk) et l’ES (Expected Shortfall) en utilisant les méthodes classiques proposées…</a>
@@ -720,10 +671,13 @@ Feb 28, 2025
 <div class="listing-author">
 Cheryl Kouadio
 </div>
+<div class="listing-reading-time">
+17 min
+</div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="10" data-categories="cGFwZXIlMkNyaXNxdWVzLWZpbiUyQ2Vuc2FpLWdkcg==" data-listing-date-sort="1740697200000" data-listing-file-modified-sort="1770775193543" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="37" data-listing-word-count-sort="7331">
+<div class="quarto-post image-right" data-index="11" data-categories="cGFwZXIlMkNyaXNxdWVzLWZpbiUyQ2Vuc2FpLWdkcg==" data-listing-date-sort="1740697200000" data-listing-file-modified-sort="1770775193543" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="37" data-listing-word-count-sort="7331">
 <div class="thumbnail">
 <p><a href="./posts/ensai/risques_financiers/value-at-risk/var_classiques.html" class="no-external"></a></p><a href="./posts/ensai/risques_financiers/value-at-risk/var_classiques.html" class="no-external">
 <p class="card-img-top"><img src="posts/ensai/risques_financiers/value-at-risk/var_classiques_files/figure-html/cell-8-output-1.png"  class="thumbnail-image card-img"/></p>
@@ -735,17 +689,6 @@ Cheryl Kouadio
 </h3>
 <div class="listing-subtitle">
 <a href="./posts/ensai/risques_financiers/value-at-risk/var_classiques.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('cGFwZXI='); return false;">
-paper
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('cmlzcXVlcy1maW4='); return false;">
-risques-fin
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('ZW5zYWktZ2Ry'); return false;">
-ensai-gdr
-</div>
 </div>
 <div class="listing-description">
 <a href="./posts/ensai/risques_financiers/value-at-risk/var_classiques.html" class="no-external">Ce TP est fait dans le but de modéliser la Value at Risk qui est une mesure de risque financier. La Value at Risk (VaR) est une mesure essentielle du risque de marché qui…<span class="math inline"></span></a>
@@ -759,10 +702,13 @@ Feb 28, 2025
 <div class="listing-author">
 Cheryl Kouadio
 </div>
+<div class="listing-reading-time">
+37 min
+</div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="11" data-categories="cGFwZXIlMkNwcm9jLXN0byUyQ2Vuc2FpLWdkcg==" data-listing-date-sort="1740524400000" data-listing-file-modified-sort="1770775166946" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="25" data-listing-word-count-sort="4805">
+<div class="quarto-post image-right" data-index="12" data-categories="cGFwZXIlMkNwcm9jLXN0byUyQ2Vuc2FpLWdkcg==" data-listing-date-sort="1740524400000" data-listing-file-modified-sort="1770775166946" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="25" data-listing-word-count-sort="4805">
 <div class="thumbnail">
 <p><a href="./posts/ensai/proc_stochastique/APF_filter.html" class="no-external"></a></p><a href="./posts/ensai/proc_stochastique/APF_filter.html" class="no-external">
 <p class="card-img-top"><img src="posts/ensai/proc_stochastique/APF_filter_files/figure-html/heston-sim-plots-1.png"  class="thumbnail-image card-img"/></p>
@@ -774,17 +720,6 @@ Cheryl Kouadio
 </h3>
 <div class="listing-subtitle">
 <a href="./posts/ensai/proc_stochastique/APF_filter.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('cGFwZXI='); return false;">
-paper
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('cHJvYy1zdG8='); return false;">
-proc-sto
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('ZW5zYWktZ2Ry'); return false;">
-ensai-gdr
-</div>
 </div>
 <div class="listing-description">
 <a href="./posts/ensai/proc_stochastique/APF_filter.html" class="no-external">Le filtre particulaire APF (Auxiliary Particle Filter) est un filtre particulaire qui utilise des particules auxiliaires pour estimer la densité de probabilité de l’état…</a>
@@ -798,10 +733,13 @@ Feb 26, 2025
 <div class="listing-author">
 -Cheryl Kouadio -Safa Bouzayene -Mariyam Ouyassin
 </div>
+<div class="listing-reading-time">
+25 min
+</div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="12" data-categories="cGFwZXIlMkNvdGhlciUyQ2Vuc2FpLWdkcg==" data-listing-date-sort="1738882800000" data-listing-file-modified-sort="1770775154506" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="647">
+<div class="quarto-post image-right" data-index="13" data-categories="cGFwZXIlMkNvdGhlciUyQ2Vuc2FpLWdkcg==" data-listing-date-sort="1738882800000" data-listing-file-modified-sort="1770775154506" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="647">
 <div class="thumbnail">
 <p><a href="./posts/ensai/others/spearman-pearson.html" class="no-external"></a></p><a href="./posts/ensai/others/spearman-pearson.html" class="no-external">
 <p class="card-img-top"><img src="posts/ensai/others/spearman-pearson_files/figure-html/unnamed-chunk-1-1.png"  class="thumbnail-image card-img"/></p>
@@ -813,17 +751,6 @@ Feb 26, 2025
 </h3>
 <div class="listing-subtitle">
 <a href="./posts/ensai/others/spearman-pearson.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('cGFwZXI='); return false;">
-paper
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('b3RoZXI='); return false;">
-other
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('ZW5zYWktZ2Ry'); return false;">
-ensai-gdr
-</div>
 </div>
 <div class="listing-description">
 <a href="./posts/ensai/others/spearman-pearson.html" class="no-external">La corrélation de Spearman est une mesure de corrélation non paramétrique qui permet de mesurer la relation monotone entre deux variables. Elle est souvent utilisée pour…</a>
@@ -837,10 +764,13 @@ Feb 7, 2025
 <div class="listing-author">
 Cheryl KOUADIO
 </div>
+<div class="listing-reading-time">
+4 min
+</div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="13" data-categories="cGFwZXIlMkNwcm9jLXN0byUyQ2Vuc2FpLWdkcg==" data-listing-date-sort="1738796400000" data-listing-file-modified-sort="1770775169841" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1771">
+<div class="quarto-post image-right" data-index="14" data-categories="cGFwZXIlMkNwcm9jLXN0byUyQ2Vuc2FpLWdkcg==" data-listing-date-sort="1738796400000" data-listing-file-modified-sort="1770775169841" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1771">
 <div class="thumbnail">
 <p><a href="./posts/ensai/proc_stochastique/modele_heston.html" class="no-external"></a></p><a href="./posts/ensai/proc_stochastique/modele_heston.html" class="no-external">
 <p class="card-img-top"><img src="posts/ensai/proc_stochastique/modele_heston_files/figure-html/unnamed-chunk-4-1.png"  class="thumbnail-image card-img"/></p>
@@ -853,17 +783,6 @@ Cheryl KOUADIO
 <div class="listing-subtitle">
 <a href="./posts/ensai/proc_stochastique/modele_heston.html" class="no-external"></a>
 </div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('cGFwZXI='); return false;">
-paper
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('cHJvYy1zdG8='); return false;">
-proc-sto
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('ZW5zYWktZ2Ry'); return false;">
-ensai-gdr
-</div>
-</div>
 <div class="listing-description">
 <a href="./posts/ensai/proc_stochastique/modele_heston.html" class="no-external">Le but de ce TP est de calculer des prix d’options sous le modèle d’Heston puis de calibrer ce modèle par filtrage. On considère le modèle suivant :</a>
 </div>
@@ -873,10 +792,13 @@ ensai-gdr
 <div class="listing-date">
 Feb 6, 2025
 </div>
+<div class="listing-reading-time">
+9 min
+</div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="14" data-categories="cGFwZXIlMkNhc3NldC1tYW5hZ2VtZW50JTJDZW5zYWktZ2Ry" data-listing-date-sort="1737932400000" data-listing-file-modified-sort="1770799759891" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2009">
+<div class="quarto-post image-right" data-index="15" data-categories="cGFwZXIlMkNhc3NldC1tYW5hZ2VtZW50JTJDZW5zYWktZ2Ry" data-listing-date-sort="1737932400000" data-listing-file-modified-sort="1770799759891" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2009">
 <div class="thumbnail">
 <p><a href="./posts/ensai/gestion_actifs/TP-1.html" class="no-external"></a></p><a href="./posts/ensai/gestion_actifs/TP-1.html" class="no-external">
 <p class="card-img-top"><img src="posts/ensai/gestion_actifs/TP-1_files/figure-html/cell-9-output-1.png"  class="thumbnail-image card-img"/></p>
@@ -888,17 +810,6 @@ Feb 6, 2025
 </h3>
 <div class="listing-subtitle">
 <a href="./posts/ensai/gestion_actifs/TP-1.html" class="no-external">Risque de crédit</a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('cGFwZXI='); return false;">
-paper
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('YXNzZXQtbWFuYWdlbWVudA=='); return false;">
-asset-management
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('ZW5zYWktZ2Ry'); return false;">
-ensai-gdr
-</div>
 </div>
 <div class="listing-description">
 <a href="./posts/ensai/gestion_actifs/TP-1.html" class="no-external">La gestion d’actifs (ou <em>asset management</em>) est l’art de gérer un portefeuille d’actifs financiers. Il s’agit de gérer l’argent de clients — particuliers ou institutionnels —…</a>
@@ -912,10 +823,13 @@ Jan 27, 2025
 <div class="listing-author">
 Cheryl KOUADIO
 </div>
+<div class="listing-reading-time">
+11 min
+</div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="15" data-categories="cGFwZXIlMkNhc3NldC1tYW5hZ2VtZW50JTJDZW5zYWktZ2Ry" data-listing-date-sort="1737932400000" data-listing-file-modified-sort="1770775132358" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="28" data-listing-word-count-sort="5546">
+<div class="quarto-post image-right" data-index="16" data-categories="cGFwZXIlMkNhc3NldC1tYW5hZ2VtZW50JTJDZW5zYWktZ2Ry" data-listing-date-sort="1737932400000" data-listing-file-modified-sort="1770775132358" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="28" data-listing-word-count-sort="5546">
 <div class="thumbnail">
 <p><a href="./posts/ensai/gestion_actifs/TP-2.html" class="no-external"></a></p><a href="./posts/ensai/gestion_actifs/TP-2.html" class="no-external">
 <p class="card-img-top"><img src="posts/ensai/gestion_actifs/TP-2_files/figure-html/cell-13-output-1.png"  class="thumbnail-image card-img"/></p>
@@ -927,17 +841,6 @@ Cheryl KOUADIO
 </h3>
 <div class="listing-subtitle">
 <a href="./posts/ensai/gestion_actifs/TP-2.html" class="no-external">Risque de crédit</a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('cGFwZXI='); return false;">
-paper
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('YXNzZXQtbWFuYWdlbWVudA=='); return false;">
-asset-management
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('ZW5zYWktZ2Ry'); return false;">
-ensai-gdr
-</div>
 </div>
 <div class="listing-description">
 <a href="./posts/ensai/gestion_actifs/TP-2.html" class="no-external">Le risque de liquidité est l’une des quatre grandes catégories de risques auxquels une banque peut être exposée. Il concerne à la fois la liquidité du marché et le risque…</a>
@@ -951,10 +854,13 @@ Jan 27, 2025
 <div class="listing-author">
 Cheryl KOUADIO
 </div>
+<div class="listing-reading-time">
+28 min
+</div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="16" data-categories="cGFwZXIlMkNwcm9jLXN0byUyQ2Vuc2FpLWdkcg==" data-listing-date-sort="1737414000000" data-listing-file-modified-sort="1770775172892" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="15" data-listing-word-count-sort="2870">
+<div class="quarto-post image-right" data-index="17" data-categories="cGFwZXIlMkNwcm9jLXN0byUyQ2Vuc2FpLWdkcg==" data-listing-date-sort="1737414000000" data-listing-file-modified-sort="1770775172892" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="15" data-listing-word-count-sort="2870">
 <div class="thumbnail">
 <p><a href="./posts/ensai/proc_stochastique/modele_log_sv-part2.html" class="no-external"></a></p><a href="./posts/ensai/proc_stochastique/modele_log_sv-part2.html" class="no-external">
 <p class="card-img-top"><img src="posts/ensai/proc_stochastique/modele_log_sv-part2_files/figure-html/unnamed-chunk-2-1.png"  class="thumbnail-image card-img"/></p>
@@ -967,17 +873,6 @@ Cheryl KOUADIO
 <div class="listing-subtitle">
 <a href="./posts/ensai/proc_stochastique/modele_log_sv-part2.html" class="no-external"></a>
 </div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('cGFwZXI='); return false;">
-paper
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('cHJvYy1zdG8='); return false;">
-proc-sto
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('ZW5zYWktZ2Ry'); return false;">
-ensai-gdr
-</div>
-</div>
 <div class="listing-description">
 <a href="./posts/ensai/proc_stochastique/modele_log_sv-part2.html" class="no-external">Le modèle classique de volatilité stochastique est défini par les équations suivantes :</a>
 </div>
@@ -987,10 +882,13 @@ ensai-gdr
 <div class="listing-date">
 Jan 21, 2025
 </div>
+<div class="listing-reading-time">
+15 min
+</div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="17" data-categories="cGFwZXIlMkNwcm9jLXN0byUyQ2Vuc2FpLWdkcg==" data-listing-date-sort="1736809200000" data-listing-file-modified-sort="1770775171257" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1500">
+<div class="quarto-post image-right" data-index="18" data-categories="cGFwZXIlMkNwcm9jLXN0byUyQ2Vuc2FpLWdkcg==" data-listing-date-sort="1736809200000" data-listing-file-modified-sort="1770775171257" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1500">
 <div class="thumbnail">
 <p><a href="./posts/ensai/proc_stochastique/modele_log_sv-part1.html" class="no-external"></a></p><a href="./posts/ensai/proc_stochastique/modele_log_sv-part1.html" class="no-external">
 <p class="card-img-top"><img src="posts/ensai/proc_stochastique/modele_log_sv-part1_files/figure-html/cell-3-output-1.png"  class="thumbnail-image card-img"/></p>
@@ -1003,17 +901,6 @@ Jan 21, 2025
 <div class="listing-subtitle">
 <a href="./posts/ensai/proc_stochastique/modele_log_sv-part1.html" class="no-external"></a>
 </div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('cGFwZXI='); return false;">
-paper
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('cHJvYy1zdG8='); return false;">
-proc-sto
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('ZW5zYWktZ2Ry'); return false;">
-ensai-gdr
-</div>
-</div>
 <div class="listing-description">
 <a href="./posts/ensai/proc_stochastique/modele_log_sv-part1.html" class="no-external">Le modèle à volatilité stochastique de Taylor est un modèle de volatilité stochastique qui est utilisé pour modéliser la volatilité des actifs financiers. Le modèle est…</a>
 </div>
@@ -1023,10 +910,13 @@ ensai-gdr
 <div class="listing-date">
 Jan 14, 2025
 </div>
+<div class="listing-reading-time">
+8 min
+</div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="18" data-categories="cGFwZXIlMkNwcm9jLXN0byUyQ2Vuc2FpLWdkcg==" data-listing-date-sort="1736118000000" data-listing-file-modified-sort="1770820495269" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1449">
+<div class="quarto-post image-right" data-index="19" data-categories="cGFwZXIlMkNwcm9jLXN0byUyQ2Vuc2FpLWdkcg==" data-listing-date-sort="1736118000000" data-listing-file-modified-sort="1770820495269" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1449">
 <div class="thumbnail">
 <p><a href="./posts/ensai/proc_stochastique/modele_bs.html" class="no-external"></a></p><a href="./posts/ensai/proc_stochastique/modele_bs.html" class="no-external">
 <p class="card-img-top"><img src="files/images/placeholder.png"  class="thumbnail-image card-img"/></p>
@@ -1039,17 +929,6 @@ Jan 14, 2025
 <div class="listing-subtitle">
 <a href="./posts/ensai/proc_stochastique/modele_bs.html" class="no-external"></a>
 </div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('cGFwZXI='); return false;">
-paper
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('cHJvYy1zdG8='); return false;">
-proc-sto
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('ZW5zYWktZ2Ry'); return false;">
-ensai-gdr
-</div>
-</div>
 <div class="listing-description">
 <a href="./posts/ensai/proc_stochastique/modele_bs.html" class="no-external">Le modèle de Black-Scholes est un modèle mathématique qui permet de déterminer le prix d’une option à partir de plusieurs paramètres. Il est basé sur l’hypothèse que le prix…</a>
 </div>
@@ -1059,10 +938,13 @@ ensai-gdr
 <div class="listing-date">
 Jan 6, 2025
 </div>
+<div class="listing-reading-time">
+8 min
+</div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="19" data-categories="cGFwZXIlMkNhcHByZW50aXNzYWdlLXN0YXQlMkNlbnNhaS1nZHI=" data-listing-date-sort="1729288800000" data-listing-file-modified-sort="1770775093829" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2123">
+<div class="quarto-post image-right" data-index="20" data-categories="cGFwZXIlMkNhcHByZW50aXNzYWdlLXN0YXQlMkNlbnNhaS1nZHI=" data-listing-date-sort="1729288800000" data-listing-file-modified-sort="1770775093829" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2123">
 <div class="thumbnail">
 <p><a href="./posts/ensai/apprentisage-stat/Tp4.html" class="no-external"></a></p><a href="./posts/ensai/apprentisage-stat/Tp4.html" class="no-external">
 <p class="card-img-top"><img src="posts/ensai/apprentisage-stat/Tp4_files/figure-html/cell-3-output-1.png"  class="thumbnail-image card-img"/></p>
@@ -1074,17 +956,6 @@ Jan 6, 2025
 </h3>
 <div class="listing-subtitle">
 <a href="./posts/ensai/apprentisage-stat/Tp4.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('cGFwZXI='); return false;">
-paper
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('YXBwcmVudGlzc2FnZS1zdGF0'); return false;">
-apprentissage-stat
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('ZW5zYWktZ2Ry'); return false;">
-ensai-gdr
-</div>
 </div>
 <div class="listing-description">
 <a href="./posts/ensai/apprentisage-stat/Tp4.html" class="no-external">Feature selection is a process where you automatically or manually select those features which contribute most to your prediction variable or output in which you are…</a>
@@ -1098,10 +969,13 @@ Oct 19, 2024
 <div class="listing-author">
 Cheryl KOUADIO
 </div>
+<div class="listing-reading-time">
+11 min
+</div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="20" data-categories="cGFwZXIlMkNhcHByZW50aXNzYWdlLXN0YXQlMkNlbnNhaS1nZHI=" data-listing-date-sort="1729202400000" data-listing-file-modified-sort="1770775089600" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1274">
+<div class="quarto-post image-right" data-index="21" data-categories="cGFwZXIlMkNhcHByZW50aXNzYWdlLXN0YXQlMkNlbnNhaS1nZHI=" data-listing-date-sort="1729202400000" data-listing-file-modified-sort="1770775089600" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1274">
 <div class="thumbnail">
 <p><a href="./posts/ensai/apprentisage-stat/Tp3.html" class="no-external"></a></p><a href="./posts/ensai/apprentisage-stat/Tp3.html" class="no-external">
 <p class="card-img-top"><img src="posts/ensai/apprentisage-stat/Tp3_files/figure-html/cell-3-output-2.png"  class="thumbnail-image card-img"/></p>
@@ -1113,17 +987,6 @@ Cheryl KOUADIO
 </h3>
 <div class="listing-subtitle">
 <a href="./posts/ensai/apprentisage-stat/Tp3.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('cGFwZXI='); return false;">
-paper
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('YXBwcmVudGlzc2FnZS1zdGF0'); return false;">
-apprentissage-stat
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('ZW5zYWktZ2Ry'); return false;">
-ensai-gdr
-</div>
 </div>
 <div class="listing-description">
 <a href="./posts/ensai/apprentisage-stat/Tp3.html" class="no-external">AdaBoost is a popular boosting algorithm that is used to boost the performance of decision trees on binary classification problems. It works by weighting the observations…</a>
@@ -1137,10 +1000,13 @@ Oct 18, 2024
 <div class="listing-author">
 Cheryl KOUADIO
 </div>
+<div class="listing-reading-time">
+7 min
+</div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="21" data-categories="cGFwZXIlMkNhcHByZW50aXNzYWdlLXN0YXQlMkNlbnNhaS1nZHI=" data-listing-date-sort="1727992800000" data-listing-file-modified-sort="1770775084926" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2112">
+<div class="quarto-post image-right" data-index="22" data-categories="cGFwZXIlMkNhcHByZW50aXNzYWdlLXN0YXQlMkNlbnNhaS1nZHI=" data-listing-date-sort="1727992800000" data-listing-file-modified-sort="1770775084926" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2112">
 <div class="thumbnail">
 <p><a href="./posts/ensai/apprentisage-stat/Tp2.html" class="no-external"></a></p><a href="./posts/ensai/apprentisage-stat/Tp2.html" class="no-external">
 <p class="card-img-top"><img src="posts/ensai/apprentisage-stat/Tp2_files/figure-html/cell-7-output-1.png"  class="thumbnail-image card-img"/></p>
@@ -1152,17 +1018,6 @@ Cheryl KOUADIO
 </h3>
 <div class="listing-subtitle">
 <a href="./posts/ensai/apprentisage-stat/Tp2.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('cGFwZXI='); return false;">
-paper
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('YXBwcmVudGlzc2FnZS1zdGF0'); return false;">
-apprentissage-stat
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('ZW5zYWktZ2Ry'); return false;">
-ensai-gdr
-</div>
 </div>
 <div class="listing-description">
 <a href="./posts/ensai/apprentisage-stat/Tp2.html" class="no-external">In regression and classification, we often use linear models to predict the target variable. However, in many cases, the relationship between the target variable and the…</a>
@@ -1176,10 +1031,13 @@ Oct 4, 2024
 <div class="listing-author">
 Cheryl KOUADIO
 </div>
+<div class="listing-reading-time">
+11 min
+</div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="22" data-categories="cGFwZXIlMkNhcHByZW50aXNzYWdlLXN0YXQlMkNlbnNhaS1nZHI=" data-listing-date-sort="1727215200000" data-listing-file-modified-sort="1770799754693" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="12" data-listing-word-count-sort="2353">
+<div class="quarto-post image-right" data-index="23" data-categories="cGFwZXIlMkNhcHByZW50aXNzYWdlLXN0YXQlMkNlbnNhaS1nZHI=" data-listing-date-sort="1727215200000" data-listing-file-modified-sort="1770799754693" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="12" data-listing-word-count-sort="2353">
 <div class="thumbnail">
 <p><a href="./posts/ensai/apprentisage-stat/Tp1.html" class="no-external"></a></p><a href="./posts/ensai/apprentisage-stat/Tp1.html" class="no-external">
 <p class="card-img-top"><img src="posts/ensai/apprentisage-stat/Tp1_files/figure-html/cell-5-output-1.png"  class="thumbnail-image card-img"/></p>
@@ -1191,17 +1049,6 @@ Cheryl KOUADIO
 </h3>
 <div class="listing-subtitle">
 <a href="./posts/ensai/apprentisage-stat/Tp1.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('cGFwZXI='); return false;">
-paper
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('YXBwcmVudGlzc2FnZS1zdGF0'); return false;">
-apprentissage-stat
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('ZW5zYWktZ2Ry'); return false;">
-ensai-gdr
-</div>
 </div>
 <div class="listing-description">
 <a href="./posts/ensai/apprentisage-stat/Tp1.html" class="no-external">The ridge regression is a variant of the linear regression that is used to prevent multicolinearity coming from the covariables in the dataset and thus prevent overfitting.…<span class="math inline"></span></a>
@@ -1215,10 +1062,13 @@ Sep 25, 2024
 <div class="listing-author">
 Cheryl KOUADIO
 </div>
+<div class="listing-reading-time">
+12 min
+</div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="23" data-categories="cGFwZXI=" data-listing-date-sort="1719784800000" data-listing-file-modified-sort="1770764321372" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-word-count-sort="1864">
+<div class="quarto-post image-right" data-index="24" data-categories="cGFwZXI=" data-listing-date-sort="1719784800000" data-listing-file-modified-sort="1770764321372" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-word-count-sort="1864">
 <div class="thumbnail">
 <p><a href="./posts/ensai/analyses_financieres/reglementation_prudentielle.html" class="no-external"></a></p><a href="./posts/ensai/analyses_financieres/reglementation_prudentielle.html" class="no-external">
 <p class="card-img-top"><img src="files/images/placeholder.png"  class="thumbnail-image card-img"/></p>
@@ -1230,11 +1080,6 @@ Cheryl KOUADIO
 </h3>
 <div class="listing-subtitle">
 <a href="./posts/ensai/analyses_financieres/reglementation_prudentielle.html" class="no-external">Risque de crédit</a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('cGFwZXI='); return false;">
-paper
-</div>
 </div>
 <div class="listing-description">
 <a href="./posts/ensai/analyses_financieres/reglementation_prudentielle.html" class="no-external">La réglementation prudentielle a été initiée par le développement des marchés financiers et des chocs alimentés par diverses crises financières. Face à ce constat, les…</a>
@@ -1248,10 +1093,13 @@ Jul 1, 2024
 <div class="listing-author">
 Cheryl KOUADIO
 </div>
+<div class="listing-reading-time">
+10 min
+</div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="24" data-categories="cGFwZXIlMkNvdGhlciUyQ2Vuc2FpLWdkcg==" data-listing-date-sort="1719525600000" data-listing-file-modified-sort="1770777250004" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1093">
+<div class="quarto-post image-right" data-index="25" data-categories="cGFwZXIlMkNvdGhlciUyQ2Vuc2FpLWdkcg==" data-listing-date-sort="1719525600000" data-listing-file-modified-sort="1770777250004" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1093">
 <div class="thumbnail">
 <p><a href="./posts/ensai/others/ISR.html" class="no-external"></a></p><a href="./posts/ensai/others/ISR.html" class="no-external">
 <p class="card-img-top"><img src="files/images/placeholder.png"  class="thumbnail-image card-img"/></p>
@@ -1263,17 +1111,6 @@ Cheryl KOUADIO
 </h3>
 <div class="listing-subtitle">
 <a href="./posts/ensai/others/ISR.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('cGFwZXI='); return false;">
-paper
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('b3RoZXI='); return false;">
-other
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('ZW5zYWktZ2Ry'); return false;">
-ensai-gdr
-</div>
 </div>
 <div class="listing-description">
 <a href="./posts/ensai/others/ISR.html" class="no-external">L’Investissement Socialement Responsable (ISR) représente une approche d’investissement qui privilégie l’intégration de critères extra-financiers, notamment les critères ESG…</a>
@@ -1287,10 +1124,13 @@ Jun 28, 2024
 <div class="listing-author">
 Cheryl KOUADIO
 </div>
+<div class="listing-reading-time">
+6 min
+</div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="25" data-categories="cGFwZXIlMkNyaXNxdWVzLWZpbiUyQ2Vuc2FpLWdkcg==" data-listing-date-sort="1719266400000" data-listing-file-modified-sort="1770775205542" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1385">
+<div class="quarto-post image-right" data-index="26" data-categories="cGFwZXIlMkNyaXNxdWVzLWZpbiUyQ2Vuc2FpLWdkcg==" data-listing-date-sort="1719266400000" data-listing-file-modified-sort="1770775205542" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1385">
 <div class="thumbnail">
 <p><a href="./posts/ensai/risques_financiers/risque_def.html" class="no-external"></a></p><a href="./posts/ensai/risques_financiers/risque_def.html" class="no-external">
 <p class="card-img-top"><img src="files/images/placeholder.png"  class="thumbnail-image card-img"/></p>
@@ -1302,17 +1142,6 @@ Cheryl KOUADIO
 </h3>
 <div class="listing-subtitle">
 <a href="./posts/ensai/risques_financiers/risque_def.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('cGFwZXI='); return false;">
-paper
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('cmlzcXVlcy1maW4='); return false;">
-risques-fin
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('ZW5zYWktZ2Ry'); return false;">
-ensai-gdr
-</div>
 </div>
 <div class="listing-description">
 <a href="./posts/ensai/risques_financiers/risque_def.html" class="no-external">En finance, le risque peut être défini comme la survenance d’un événement incertain qui peut avoir des conséquences négatives sur le bilan, ou le compte de résultat d’une…</a>
@@ -1326,10 +1155,13 @@ Jun 25, 2024
 <div class="listing-author">
 Cheryl Kouadio
 </div>
+<div class="listing-reading-time">
+7 min
+</div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="26" data-categories="cGFwZXI=" data-listing-date-sort="1715724000000" data-listing-file-modified-sort="1770764305348" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="27" data-listing-word-count-sort="5398">
+<div class="quarto-post image-right" data-index="27" data-categories="cGFwZXI=" data-listing-date-sort="1715724000000" data-listing-file-modified-sort="1770764305348" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="27" data-listing-word-count-sort="5398">
 <div class="thumbnail">
 <p><a href="./posts/ensai/analyses_financieres/bilan_entreprise.html" class="no-external"></a></p><a href="./posts/ensai/analyses_financieres/bilan_entreprise.html" class="no-external">
 <p class="card-img-top"><img src="files/images/placeholder.png"  class="thumbnail-image card-img"/></p>
@@ -1341,11 +1173,6 @@ Cheryl Kouadio
 </h3>
 <div class="listing-subtitle">
 <a href="./posts/ensai/analyses_financieres/bilan_entreprise.html" class="no-external">Analyse financière</a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('cGFwZXI='); return false;">
-paper
-</div>
 </div>
 <div class="listing-description">
 <a href="./posts/ensai/analyses_financieres/bilan_entreprise.html" class="no-external">L’analyse financière constitue l’ensemble des outils permettant de donner un avis objectif d’une organisation (entreprises, fondations, etc.) sur la santé finanière et les…</a>
@@ -1359,10 +1186,13 @@ May 15, 2024
 <div class="listing-author">
 Cheryl KOUADIO
 </div>
+<div class="listing-reading-time">
+27 min
+</div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="27" data-categories="cGFwZXIlMkNyaXNxdWVzLWZpbiUyQ2Vuc2FpLWdkcg==" data-listing-date-sort="1715292000000" data-listing-file-modified-sort="1770775191505" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-word-count-sort="1957">
+<div class="quarto-post image-right" data-index="28" data-categories="cGFwZXIlMkNyaXNxdWVzLWZpbiUyQ2Vuc2FpLWdkcg==" data-listing-date-sort="1715292000000" data-listing-file-modified-sort="1770775191505" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-word-count-sort="1957">
 <div class="thumbnail">
 <p><a href="./posts/ensai/risques_financiers/value-at-risk/var_application.html" class="no-external"></a></p><a href="./posts/ensai/risques_financiers/value-at-risk/var_application.html" class="no-external">
 <p class="card-img-top"><img src="posts/ensai/risques_financiers/value-at-risk/var_application_files/figure-html/cell-4-output-2.png"  class="thumbnail-image card-img"/></p>
@@ -1374,17 +1204,6 @@ Cheryl KOUADIO
 </h3>
 <div class="listing-subtitle">
 <a href="./posts/ensai/risques_financiers/value-at-risk/var_application.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('cGFwZXI='); return false;">
-paper
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('cmlzcXVlcy1maW4='); return false;">
-risques-fin
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('ZW5zYWktZ2Ry'); return false;">
-ensai-gdr
-</div>
 </div>
 <div class="listing-description">
 <a href="./posts/ensai/risques_financiers/value-at-risk/var_application.html" class="no-external">Nous allons ici nous intéresser aux applications de la Value at Risk (VaR) en finance. La VaR est une mesure de risque qui permet d’estimer les pertes maximales potentielles…</a>
@@ -1398,10 +1217,13 @@ May 10, 2024
 <div class="listing-author">
 Cheryl Kouadio
 </div>
+<div class="listing-reading-time">
+10 min
+</div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="28" data-categories="cGFwZXIlMkNyaXNxdWVzLWZpbiUyQ2Vuc2FpLWdkcg==" data-listing-date-sort="1714946400000" data-listing-file-modified-sort="1770775196692" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="20" data-listing-word-count-sort="3932">
+<div class="quarto-post image-right" data-index="29" data-categories="cGFwZXIlMkNyaXNxdWVzLWZpbiUyQ2Vuc2FpLWdkcg==" data-listing-date-sort="1714946400000" data-listing-file-modified-sort="1770775196692" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="20" data-listing-word-count-sort="3932">
 <div class="thumbnail">
 <p><a href="./posts/ensai/risques_financiers/value-at-risk/var_def.html" class="no-external"></a></p><a href="./posts/ensai/risques_financiers/value-at-risk/var_def.html" class="no-external">
 <p class="card-img-top"><img src="files/images/placeholder.png"  class="thumbnail-image card-img"/></p>
@@ -1413,17 +1235,6 @@ Cheryl Kouadio
 </h3>
 <div class="listing-subtitle">
 <a href="./posts/ensai/risques_financiers/value-at-risk/var_def.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('cGFwZXI='); return false;">
-paper
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('cmlzcXVlcy1maW4='); return false;">
-risques-fin
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('ZW5zYWktZ2Ry'); return false;">
-ensai-gdr
-</div>
 </div>
 <div class="listing-description">
 <a href="./posts/ensai/risques_financiers/value-at-risk/var_def.html" class="no-external">La mesure de risque réglementaire correspond à la valeur en risque ou value at-risk (VaR) qui est le quantile de perte (ou perte maximale subie). Il s’agit dans cette…</a>
@@ -1437,10 +1248,13 @@ May 6, 2024
 <div class="listing-author">
 Cheryl Kouadio
 </div>
+<div class="listing-reading-time">
+20 min
+</div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="29" data-categories="b3RoZXIlMkNlbnNhaS1nZHI=" data-listing-date-sort="1709334000000" data-listing-file-modified-sort="1770777253959" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1099">
+<div class="quarto-post image-right" data-index="30" data-categories="b3RoZXIlMkNlbnNhaS1nZHI=" data-listing-date-sort="1709334000000" data-listing-file-modified-sort="1770777253959" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1099">
 <div class="thumbnail">
 <p><a href="./posts/ensai/others/finance_durable.html" class="no-external"></a></p><a href="./posts/ensai/others/finance_durable.html" class="no-external">
 <p class="card-img-top"><img src="files/images/placeholder.png"  class="thumbnail-image card-img"/></p>
@@ -1453,14 +1267,6 @@ Cheryl Kouadio
 <div class="listing-subtitle">
 <a href="./posts/ensai/others/finance_durable.html" class="no-external"></a>
 </div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('b3RoZXI='); return false;">
-other
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('ZW5zYWktZ2Ry'); return false;">
-ensai-gdr
-</div>
-</div>
 <div class="listing-description">
 <a href="./posts/ensai/others/finance_durable.html" class="no-external">La finance durable vise à concilier rentabilité financière et prise en compte des enjeux environnementaux, sociaux et de gouvernance (ESG). Elle repose sur trois grands…</a>
 </div>
@@ -1472,6 +1278,9 @@ Mar 2, 2024
 </div>
 <div class="listing-author">
 Cheryl KOUADIO
+</div>
+<div class="listing-reading-time">
+6 min
 </div>
 </a>
 </div>
@@ -1907,9 +1716,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<a href="https://github.com/cheryl-kdio">Cheryl Kouadio</a> ©
-<script>document.write(new Date().getFullYear())</script>
-</div>   
+      &nbsp;
+    </div>   
     <div class="nav-footer-center">
 <a href="https://github.com/cheryl-kdio">Cheryl Kouadio</a> ©
 <script>document.write(new Date().getFullYear())</script>

@@ -75,7 +75,6 @@ website:
   
   page-footer: 
     center: "[Cheryl Kouadio](https://github.com/cheryl-kdio) &copy; <script>document.write(new Date().getFullYear())</script>"
-    left: "[Cheryl Kouadio](https://github.com/cheryl-kdio) &copy; <script>document.write(new Date().getFullYear())</script>" 
     right:  
       - icon: github
         href: https://github.com/cheryl-kdio
