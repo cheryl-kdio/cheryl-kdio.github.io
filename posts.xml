@@ -17,6 +17,150 @@
 <generator>quarto-1.6.40</generator>
 <lastBuildDate>Sat, 02 May 2026 22:00:00 GMT</lastBuildDate>
 <item>
+  <title>Options made simple: what they are and why they matter and how do we price them?</title>
+  <dc:creator>Cheryl KOUADIO</dc:creator>
+  <link>https://cheryl-kdio.github.io/posts/m2mo/derivatives/03_options_made_simple.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>In a trading floor, exchanges take place continuously between different counterparties ,states, corporations, financial institutions, and individual investors, etc. ,with the aim of transferring, managing, or valuing risks related to price, rate, or currency fluctuations or even more simple : to make money.</p>
+<p>These exchanges involve derivatives, i.e.&nbsp;contracts concluded between two parties that define rights and monetary obligations. Each derivative has a price, determined by market conditions and the expectations of market participants.</p>
+<p>There are generally three main categories of derivative instruments: forwards, options, and swaps. In this article, we focus on options, and more specifically on call options and put options, in order to understand how they are priced, what factors influence their value, and how they are used for hedging or speculation.</p>
+<section id="what-is-an-option" class="level1">
+<h1>What is an option ?</h1>
+<p>An option is a financial contract concluded between a buyer and a seller, which gives the buyer a right ,but not an obligation ,to buy or sell an underlying asset at a price fixed in advance (called the exercise price or strike), at a predetermined future date (in the case of a European option) or up to that date (in the case of an American option). It is important to emphasize that it is not an obligation, meaning that the buyer can decide not to apply the contract ,“exercise” in the jargon. However, the seller has the obligation to respect the contract if the buyer decides to exercise their right.</p>
+<p>There are two main categories of options:</p>
+<ul>
+<li><p>A <strong>call option</strong> gives its holder the right to buy the underlying asset at a pre-agreed price. The seller (or writer) of the call has the obligation to sell the asset if the buyer decides to exercise their right. It is advantageous for the buyer to exercise their right only when the asset price is greater than the strike.</p></li>
+<li><p>A <strong>put option</strong> gives its holder the right to sell the underlying asset at a predetermined price. The seller of the put has the obligation to buy the asset if the buyer decides to exercise their right. It is advantageous for the buyer to exercise their right only when the asset price is lower than the strike.</p></li>
+</ul>
+</section>
+<section id="what-is-an-option-used-for" class="level1">
+<h1>What is an option used for?</h1>
+<p>An option can be used to hedge against risk, speculate, or exploit arbitrage opportunities. To better understand the uses of an option, we illustrate each case with a call option example.</p>
+<section id="hedging" class="level4">
+<h4 class="anchored" data-anchor-id="hedging">Hedging</h4>
+<p>A French company needs to purchase oil in three months to supply its factories, but fears that the price per barrel may rise in the meantime. To protect itself, it buys a call option on oil with a strike price fixed today at $80.</p>
+<ul>
+<li>If in three months the barrel price rises to $95, the company exercises its call and buys at $80. Hence, the company has avoided the price increase.</li>
+<li>If the price stays at $75, it does not exercise the option and buys directly on the market, meaning the company has only lost the option premium.</li>
+</ul>
+</section>
+<section id="speculation" class="level4">
+<h4 class="anchored" data-anchor-id="speculation">Speculation</h4>
+<p>An investor anticipates a rise in a given stock, currently at $200. Rather than buying the stock outright, they buy a call with a strike of $210, which costs $8.</p>
+<ul>
+<li>If the stock rises to $230, they exercise the option: they buy at $210 what is worth $230. This represents a gain of $20 for an initial outlay of only $8, illustrating the leverage effect of options.</li>
+<li>If the stock stays below $210, they do not exercise and only lose the $8 premium.</li>
+</ul>
+<p>The option allows one to benefit from an anticipated rise without investing the full amount, while capping the maximum loss at the premium paid.</p>
+</section>
+<section id="arbitrage" class="level4">
+<h4 class="anchored" data-anchor-id="arbitrage">Arbitrage</h4>
+<p>Consider a stock worth €105, with a call and a put both struck at €100, priced at €12 and €6 respectively, and a zero risk-free rate. The call–put parity states that:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BCall%7D%20-%20%5Ctext%7BPut%7D%20=%20S%20-%20K%0A"></p>
+<p>In our case, <img src="https://latex.codecogs.com/png.latex?%5Ctext%7BCall%7D%20-%20%5Ctext%7BPut%7D%20=%2012%20-%206%20=%206">, but <img src="https://latex.codecogs.com/png.latex?S%20-%20K%20=%20105%20-%20100%20=%205">. There is a €1 discrepancy: the call is overpriced. An investor can therefore build the following arbitrage portfolio today:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Action</th>
+<th>Cash flow today</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Sell the call</td>
+<td>+€12</td>
+</tr>
+<tr class="even">
+<td>Buy the put</td>
+<td>−€6</td>
+</tr>
+<tr class="odd">
+<td>Buy the stock</td>
+<td>−€105</td>
+</tr>
+<tr class="even">
+<td>Borrow €100 at zero rate</td>
+<td>+€100</td>
+</tr>
+<tr class="odd">
+<td><strong>Net</strong></td>
+<td><strong>+€1</strong></td>
+</tr>
+</tbody>
+</table>
+<p>At maturity, the stock is delivered against the strike of €100, repaying the loan exactly, and the portfolio closes flat regardless of the final stock price. The investor locks in a risk-free gain of €1 today ,a textbook arbitrage.</p>
+</section>
+</section>
+<section id="how-do-we-price-an-option" class="level1">
+<h1>How do we price an option?</h1>
+<p>To price an option, i.e.&nbsp;assign it a value today, we first determine what is called the <strong>payoff</strong> ,the cash flow received by the buyer at maturity <img src="https://latex.codecogs.com/png.latex?T">.</p>
+<p>In the case of a call option, when the price of the underlying <img src="https://latex.codecogs.com/png.latex?S_T"> exceeds the strike <img src="https://latex.codecogs.com/png.latex?K">, the buyer exercises their right and receives <img src="https://latex.codecogs.com/png.latex?(S_T%20-%20K)">. Otherwise (<img src="https://latex.codecogs.com/png.latex?S_T%20%5Cleq%20K">), the buyer does not exercise and receives nothing. The payoff is therefore:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BPayoff%7D_%7B%5Ctext%7BCall%7D%7D%20=%20%5Cmax(S_T%20-%20K,%5C%200).%0A"></p>
+<p>Symmetrically, the payoff of a put option is:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BPayoff%7D_%7B%5Ctext%7BPut%7D%7D%20=%20%5Cmax(K%20-%20S_T,%5C%200).%0A"></p>
+<p>Note that in both cases the payoff is always non-negative ,the buyer can never be forced to take a loss, which is precisely what distinguishes an option from a forward contract.</p>
+<p>From the seller’s perspective, writing such a contract implies bearing a potentially unlimited loss. The seller will therefore only agree to enter the transaction in exchange for a <strong>premium</strong> ,the price of the option paid upfront by the buyer.</p>
+<p>To determine this premium, one must compute the present value of the expected future payoff. However, this expectation is not taken under the real-world probability measure, but under the <strong>risk-neutral measure</strong> <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%7BQ%7D"> ,the probability measure under which all assets grow at the risk-free rate <img src="https://latex.codecogs.com/png.latex?r">, ensuring the absence of arbitrage:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5CPi_%7B%5Ctext%7BCall%7D%7D(t)%20=%20e%5E%7B-r(T-t)%7D%5C,%20%5Cmathbb%7BE%7D%5E%7B%5Cmathbb%7BQ%7D%7D%5C!%5Cleft%5B%5Cmax(S_T%20-%20K,%5C%200)%5C%20%5Cmiddle%7C%5C%20%5Cmathcal%7BF%7D_t%5Cright%5D.%0A"></p>
+<p>In order to compute this expectation, it is necessary to know the law of <img src="https://latex.codecogs.com/png.latex?S_T">. A famous model used for <img src="https://latex.codecogs.com/png.latex?S_t"> is the so-called Black-Scholes model.</p>
+<section id="black-scholes-model" class="level2">
+<h2 class="anchored" data-anchor-id="black-scholes-model">Black scholes model</h2>
+<p>The Black-Scholes model <span class="citation" data-cites="black1973pricing">(Black and Scholes 1973)</span> was published in 1973 by Fischer Black and Myron Scholes to provide a theoretical valuation formula for options. Under this model, the underlying asset is assumed to follow a geometric Brownian motion:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AdS_t%20=%20%5Cmu%20S_t%5C,%20dt%20+%20%5Csigma%20S_t%5C,%20dW_t,%0A"></p>
+<p>under the historical probability measure <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%7BP%7D">, where <img src="https://latex.codecogs.com/png.latex?%5Cmu%20%5Cin%20%5Cmathbb%7BR%7D"> is the drift and <img src="https://latex.codecogs.com/png.latex?%5Csigma%20%3E%200"> is the constant volatility.</p>
+<p>By Girsanov’s theorem, there exists a risk-neutral probability measure <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%7BQ%7D"> under which the discounted asset price is a martingale. The change of measure is characterized by the market price of risk <img src="https://latex.codecogs.com/png.latex?%5Clambda%20=%20%5Cfrac%7B%5Cmu%20-%20r%7D%7B%5Csigma%7D">, and under <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%7BQ%7D"> the dynamics become:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AdS_t%20=%20r%20S_t%5C,%20dt%20+%20%5Csigma%20S_t%5C,%20d%5Ctilde%7BW%7D_t,%0A"></p>
+<p>where <img src="https://latex.codecogs.com/png.latex?%5Ctilde%7BW%7D_t%20=%20W_t%20+%20%5Clambda%20t"> is a Brownian motion under <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%7BQ%7D">, and <img src="https://latex.codecogs.com/png.latex?r"> is the risk-free rate.</p>
+<p>This means that under <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%7BQ%7D">, the stock grows on average at the risk-free rate <img src="https://latex.codecogs.com/png.latex?r"> — not because investors are assumed to be risk-neutral, but because the change of measure absorbs the risk premium, making discounted prices martingales for pricing purposes. The remaining <img src="https://latex.codecogs.com/png.latex?%5Csigma%20S_t%5C,%20d%5Ctilde%7BW%7D_t"> term captures the random fluctuations of the stock price.</p>
+<p>By applying Itô’s formula to <img src="https://latex.codecogs.com/png.latex?%5Cln%20S_t">, we obtain an analytical expression for <img src="https://latex.codecogs.com/png.latex?S_t">:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AS_t%20=%20S_0%20%5Cexp%5C!%5Cleft(%20%5Cleft(r%20-%20%5Cfrac%7B%5Csigma%5E2%7D%7B2%7D%5Cright)t%20+%20%5Csigma%20%5Ctilde%7BW%7D_t%20%5Cright).%0A"></p>
+<p>Since <img src="https://latex.codecogs.com/png.latex?%5Ctilde%7BW%7D_t"> is a Brownian motion under <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%7BQ%7D">, it follows a normal distribution <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BN%7D(0,%20t)">. Hence, <img src="https://latex.codecogs.com/png.latex?%5Cln%20S_t"> is normally distributed:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cln%20S_t%20%5Csim%20%5Cmathcal%7BN%7D%5C!%5Cleft(%20%5Cln%20S_0%20+%20%5Cleft(r%20-%20%5Cfrac%7B%5Csigma%5E2%7D%7B2%7D%5Cright)t,%5C%20%5Csigma%5E2%20t%20%5Cright),%0A"></p>
+<p>and <img src="https://latex.codecogs.com/png.latex?S_t"> follows a log-normal distribution.</p>
+<p>Knowing this, the price of a call option can be computed explicitly :</p>
+<p><img src="https://latex.codecogs.com/png.latex?%5Cbegin%7Balign*%7D%0A%5CPi_%7B%5Ctext%7BCall%7D%7D(t)%20&amp;=%20e%5E%7B-r(T-t)%7D%5C,%20%5Cmathbb%7BE%7D%5E%7B%5Cmathbb%7BQ%7D%7D%5C!%5Cleft%5B%5Cmax(S_T%20-%20K,%5C%200)%5C%20%5Cmiddle%7C%5C%20%5Cmathcal%7BF%7D_t%5Cright%5D%20%5C%5C%0A%0A&amp;=%20S_t%5C,%20%5CPhi(d_+)%20-%20K%20e%5E%7B-r%5Ctau%7D%5C,%20%5CPhi(d_-),%0A%5Cend%7Balign*%7D"></p>
+<p>where <img src="https://latex.codecogs.com/png.latex?%5CPhi"> is the cumulative distribution function of the standard normal distribution, and:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Ad_%5Cpm%20=%20%5Cfrac%7B%5Cln(S_t%20/%20K)%20+%20%5Cleft(r%20%5Cpm%20%5Cfrac%7B%5Csigma%5E2%7D%7B2%7D%5Cright)%5Ctau%7D%7B%5Csigma%5Csqrt%7B%5Ctau%7D%7D,%0A"></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Good to know
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><img src="https://latex.codecogs.com/png.latex?%5CPhi(d_-)"> can be interpreted as the risk-neutral probability that the option expires in the money, i.e.&nbsp;<img src="https://latex.codecogs.com/png.latex?%5Cmathbb%7BQ%7D(S_T%20%3E%20K%20%5Cmid%20%5Cmathcal%7BF%7D_t)">.</li>
+<li><img src="https://latex.codecogs.com/png.latex?S_t%5C,%5CPhi(d_+)"> represents the present value of receiving the stock conditionally on exercising the option.</li>
+<li><img src="https://latex.codecogs.com/png.latex?Ke%5E%7B-r%5Ctau%7D%5CPhi(d_-)"> represents the present value of paying the strike conditionally on exercising the option.</li>
+</ul>
+</div>
+</div>
+
+
+
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="ref-black1973pricing" class="csl-entry">
+Black, Fischer, and Myron Scholes. 1973. <span>“The Pricing of Options and Corporate Liabilities.”</span> <em>Journal of Political Economy</em> 81 (3): 637–54.
+</div>
+</div></section></div> ]]></description>
+  <category>paper</category>
+  <category>m2mo</category>
+  <category>options</category>
+  <guid>https://cheryl-kdio.github.io/posts/m2mo/derivatives/03_options_made_simple.html</guid>
+  <pubDate>Sat, 02 May 2026 22:00:00 GMT</pubDate>
+  <media:content url="https://cheryl-kdio.github.io/posts/m2mo/derivatives/featured.png" medium="image" type="image/png" height="96" width="144"/>
+</item>
+<item>
   <title>On the modelling of interest rates</title>
   <dc:creator>Cheryl KOUADIO</dc:creator>
   <link>https://cheryl-kdio.github.io/posts/m2mo/yield_curves/01.a_vasicek_model.html</link>
@@ -3970,7 +4114,6 @@ font-style: inherit;">"Evolution du prix du put européen au cours du temps [BDF
   <category>derivatives</category>
   <guid>https://cheryl-kdio.github.io/posts/m2mo/derivatives/00_references.html</guid>
   <pubDate>Sat, 31 Jan 2026 23:00:00 GMT</pubDate>
-  <media:content url="https://cheryl-kdio.github.io/posts/m2mo/derivatives/featured.png" medium="image" type="image/png" height="96" width="144"/>
 </item>
 <item>
   <title>Finite difference Methods for European Options</title>
@@ -43022,879 +43165,6 @@ font-style: inherit;">"n"</span>)</span></code></pre></div>
   <category>ensai-gdr</category>
   <guid>https://cheryl-kdio.github.io/posts/ensai/proc_stochastique/modele_log_sv-part2.html</guid>
   <pubDate>Mon, 20 Jan 2025 23:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Calibration du modèle à volatilité stochastique de Taylor : Filtre de Kalman</title>
-  <link>https://cheryl-kdio.github.io/posts/ensai/proc_stochastique/modele_log_sv-part1.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<section id="calibration-du-modèle-à-volatilité-stochastique-de-taylor---filtre-de-kalman" class="level1">
-<h1>Calibration du modèle à volatilité stochastique de Taylor - Filtre de Kalman</h1>
-<p>Le modèle à volatilité stochastique de Taylor est un modèle de volatilité stochastique qui est utilisé pour modéliser la volatilité des actifs financiers. Le modèle est défini par l’équation suivante :</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Baligned%7D%0Ar_t%20&amp;=%20%5Cexp(x_t/2)%20%5Ccdot%20%5Cvarepsilon_t,%20%5Cquad%20%5Cvarepsilon_t%20%5Csim%20%5Ctext%7BN%7D(0,1)%20%5C%5C%0Ax_t%20&amp;=%20%5Cmu%20+%20%5Cphi%20%5Ccdot%20x_%7Bt-1%7D%20+%20%5Csigma_t%20%5Ccdot%20%5Ceta_t%0A%5Cend%7Baligned%7D%0A"></p>
-<p>où <img src="https://latex.codecogs.com/png.latex?r_t"> est le rendement de l’actif financier à l’instant <img src="https://latex.codecogs.com/png.latex?t">, <img src="https://latex.codecogs.com/png.latex?x_t"> est la volatilité de l’actif financier à l’instant <img src="https://latex.codecogs.com/png.latex?t">, <img src="https://latex.codecogs.com/png.latex?%5Cmu"> est la moyenne de la volatilité, <img src="https://latex.codecogs.com/png.latex?%5Cphi"> est le coefficient d’autorégression, <img src="https://latex.codecogs.com/png.latex?%5Csigma_t"> est l’écart-type de la volatilité à l’instant <img src="https://latex.codecogs.com/png.latex?t">, <img src="https://latex.codecogs.com/png.latex?%5Ceta_t"> est un bruit blanc gaussien, et <img src="https://latex.codecogs.com/png.latex?%5Cvarepsilon_t"> est un bruit blanc gaussien.</p>
-<p>Pour extraire la volatilité, nous utilisons le filtre de Kalman sur le logarithme des rendements au carré <img src="https://latex.codecogs.com/png.latex?y_t%20=%20%5Clog(r_t%5E2)">, afin de linéariser le modèle. Le modèle linéarisé est défini par l’équation suivante :</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Ay_t%20=%20x_t%20+%20%5Cvarepsilon_t%0A"></p>
-<p>où <img src="https://latex.codecogs.com/png.latex?y_t"> est le logarithme des rendements au carré à l’instant <img src="https://latex.codecogs.com/png.latex?t">, <img src="https://latex.codecogs.com/png.latex?x_t"> est la volatilité de l’actif financier à l’instant <img src="https://latex.codecogs.com/png.latex?t">, et <img src="https://latex.codecogs.com/png.latex?%5Cvarepsilon_t"> est un bruit blanc de loi log-<img src="https://latex.codecogs.com/png.latex?%5Cchi%5E2">.</p>
-<p>De ce fait, nous pouvons utiliser le filtre de Kalman pour estimer la volatilité de l’actif financier en utilisant les rendements observés. En effet, le filtre de Kalman est un algorithme récursif qui permet d’estimer l’état caché d’un système dynamique à partir d’observations bruitées. Il s’applique à des modèles linéaires dont le bruit est gaussien. Dans notre cas, nous avons linéarisé le modèle pour qu’il soit compatible avec le filtre de Kalman. Cependant, le bruit n’est pas gaussien, mais log-<img src="https://latex.codecogs.com/png.latex?%5Cchi%5E2">. L’objectif de ce notebook est d’observer le comportement du filtre de Kalman où le bruit n’est pas gaussien.</p>
-<p>Nous possédons déjà d’un fichier avec les rendements de l’actif financier et la vraie volatilité simulés avec les paramètres suivants <img src="https://latex.codecogs.com/png.latex?%5Cmu%20=%20-0.8">, <img src="https://latex.codecogs.com/png.latex?%5Cphi%20=%200.9">, <img src="https://latex.codecogs.com/png.latex?%5Csigma%20=%200.09">. Nous allons donc utiliser ces données pour estimer la volatilité de l’actif financier en utilisant le filtre de Kalman. Néanmoins, le code est également fourni pour simuler les données si vous souhaitez tester le filtre de Kalman sur d’autres paramètres.</p>
-<div id="a6920c7f" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Simulation d'un modèle à vol stochastique de Taylor</span></span>
-<span id="cb1-2"></span>
-<span id="cb1-3"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># r_t = exp(x_t/2)*eps_t (eps_t iid N(0,1))</span></span>
-<span id="cb1-4"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># x_t = mu + phi * x_{t-1} + sigma_t * eta_t  (eta_t iid N(0,1))</span></span>
-<span id="cb1-5"></span>
-<span id="cb1-6"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">as</span> np</span>
-<span id="cb1-7"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> pandas <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">as</span> pd</span>
-<span id="cb1-8"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> warnings</span>
-<span id="cb1-9">warnings.filterwarnings(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"ignore"</span>)</span>
-<span id="cb1-10"></span>
-<span id="cb1-11"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Paramètres</span></span>
-<span id="cb1-12">n <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">252</span></span>
-<span id="cb1-13">mu <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.8</span></span>
-<span id="cb1-14">phi <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.9</span></span>
-<span id="cb1-15">sigma_squared <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.09</span></span>
-<span id="cb1-16"></span>
-<span id="cb1-17"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Simulation</span></span>
-<span id="cb1-18"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># np.random.seed(0)</span></span>
-<span id="cb1-19"></span>
-<span id="cb1-20"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># x = np.zeros(n)</span></span>
-<span id="cb1-21"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># r = np.zeros(n)</span></span>
-<span id="cb1-22"></span>
-<span id="cb1-23"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># for t in range(0, n):</span></span>
-<span id="cb1-24"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">#     if t == 0:</span></span>
-<span id="cb1-25"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">#         x[t] = np.random.normal(loc= mu/(1-phi), scale=np.sqrt(sigma_squared/(1-phi**2))) # Densité de transition stationnaire de x_t</span></span>
-<span id="cb1-26"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">#     else:</span></span>
-<span id="cb1-27"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">#         x[t] = mu + phi * x[t-1] + np.sqrt(sigma_squared) * np.random.normal(loc=0, scale=1)</span></span>
-<span id="cb1-28"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">#     r[t] = np.exp(x[t]/2) * np.random.normal(loc=0, scale=1)</span></span>
-<span id="cb1-29"></span>
-<span id="cb1-30">data  <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> pd.read_csv(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'true_sv_taylor.csv'</span>)</span>
-<span id="cb1-31">r <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> data[<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'r'</span>]</span>
-<span id="cb1-32">x <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> data[<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'x'</span>]</span></code></pre></div>
-</div>
-<div id="afb13627" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Affichage des trajectoires</span></span>
-<span id="cb2-2"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> matplotlib.pyplot <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">as</span> plt</span>
-<span id="cb2-3"></span>
-<span id="cb2-4">plt.plot(r, color<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"black"</span>)</span>
-<span id="cb2-5">plt.title(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Trajectoire des rendements"</span>)</span>
-<span id="cb2-6">plt.show()</span>
-<span id="cb2-7"></span>
-<span id="cb2-8">plt.plot(x, color<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'red'</span>)</span>
-<span id="cb2-9">plt.title(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Trajectoire de log-volatilité"</span>)</span>
-<span id="cb2-10">plt.show()</span></code></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://cheryl-kdio.github.io/posts/ensai/proc_stochastique/modele_log_sv-part1_files/figure-html/cell-3-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://cheryl-kdio.github.io/posts/ensai/proc_stochastique/modele_log_sv-part1_files/figure-html/cell-3-output-2.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<div id="10e24e05" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Construction du modèle log-SV (modèle de Taylor)</span></span>
-<span id="cb3-2"></span>
-<span id="cb3-3"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Pour appliquer le filtre de Kalman, il faut que les bruits soient centrés.</span></span>
-<span id="cb3-4">mu_r_squared <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1.27</span> <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># car log(eps**2) suit une log chi-deux</span></span>
-<span id="cb3-5">y <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.log(r<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">**</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> mu_r_squared</span></code></pre></div>
-</div>
-<section id="filtre-de-kalman-avec-paramètres-connus" class="level2">
-<h2 class="anchored" data-anchor-id="filtre-de-kalman-avec-paramètres-connus">Filtre de Kalman avec paramètres connus</h2>
-<p>Le filtre de Kalman fonctionne en deux étapes : prédiction et mise à jour. La prédiction consiste à prédire l’état caché du système à l’instant <img src="https://latex.codecogs.com/png.latex?t"> en utilisant les observations jusqu’à l’instant <img src="https://latex.codecogs.com/png.latex?t-1">. La mise à jour consiste à mettre à jour l’estimation de l’état caché en utilisant l’observation à l’instant <img src="https://latex.codecogs.com/png.latex?t">. Posons :</p>
-<ul>
-<li><img src="https://latex.codecogs.com/png.latex?x_%7B%5Ctext%7Bhat%7D%5Bt%5D%7D"> l’estimation de la volatilité à l’instant <img src="https://latex.codecogs.com/png.latex?t">,</li>
-<li><img src="https://latex.codecogs.com/png.latex?P%5Bt%5D"> la matrice de covariance de l’estimation de la volatilité à l’instant <img src="https://latex.codecogs.com/png.latex?t">,</li>
-<li><img src="https://latex.codecogs.com/png.latex?x_%7B%5Ctext%7Bhat%5C_m%7D%7D"> la prédiction de la volatilité à l’instant <img src="https://latex.codecogs.com/png.latex?t">,</li>
-<li><img src="https://latex.codecogs.com/png.latex?P_m"> la matrice de covariance de la prédiction de la volatilité à l’instant <img src="https://latex.codecogs.com/png.latex?t">,</li>
-<li><img src="https://latex.codecogs.com/png.latex?y%5Bt%5D"> l’observation à l’instant <img src="https://latex.codecogs.com/png.latex?t">,</li>
-<li><img src="https://latex.codecogs.com/png.latex?K"> le gain de Kalman.</li>
-</ul>
-$$
-<img src="https://latex.codecogs.com/png.latex?%5Cbegin%7Baligned%7D%0A%5Ctext%7BPr%C3%A9diction%7D%20&amp;%20:%20%5C%5C%0Ax_%7B%5Ctext%7Bhat%5C_m%7D%7D%20&amp;=%20%5Cmu%20+%20%5Cphi%20%5Ccdot%20x_%7B%5Ctext%7Bhat%7D%5Bt-1%5D%7D%20%5C%5C%0AP_m%20&amp;=%20%5Cphi%5E2%20%5Ccdot%20P%5Bt-1%5D%20+%20%5Csigma%5E2%20%5C%5C%0Ay_m%20&amp;=%20x_%7B%5Ctext%7Bhat%5C_m%7D%7D%20%5C%5C%0A%0A%5Ctext%7BMise%20%C3%A0%20jour%7D%20&amp;%20:%20%5C%5C%0AK%20&amp;=%20%5Cfrac%7BP_m%7D%7BP_m%20+%20%5Cpi%5E2/2%7D%20%5C%5C%0AP%5Bt%5D%20&amp;=%20(1%20-%20K)%20%5Ccdot%20P_m%20%5C%5C%0Ax_%7B%5Ctext%7Bhat%7D%5Bt%5D%7D%20&amp;=%20x_%7B%5Ctext%7Bhat%5C_m%7D%7D%20+%20K%20%5Ccdot%20(y%5Bt%5D%20-%20y_m)%0A%5Cend%7Baligned%7D">
-<p>$$</p>
-<p>Pour initialiser le filtre de Kalman, il est conseillé de connaitre la loi stationnaire de la volatilité. En effet, la volatilité suit une loi normale stationnaire de paramètre <img src="https://latex.codecogs.com/png.latex?%5Cmu/(1%20-%20%5Cphi)"> et <img src="https://latex.codecogs.com/png.latex?%5Csigma%5E2/(1%20-%20%5Cphi%5E2)">. Par conséquent, nous pouvons initialiser le filtre de Kalman avec ces paramètres. En ce qui concerne la matrice de covariance de l’état initial, nous pouvons la fixer à une valeur élevée, par exemple <img src="https://latex.codecogs.com/png.latex?10%5E2">.</p>
-<p>Dans notre cas, nous allons tester deux initialisations différentes : une initialisation avec les paramètres stationnaires et une initialisation avec des paramètres aléatoires.</p>
-<div id="4f052587" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Script de filtre de kalman pour estimer la volatilité à chaque instant t en supposant les paramètres connus</span></span>
-<span id="cb4-2"></span>
-<span id="cb4-3"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> kalman_filter(y, mu, phi, sigma_squared, n, init_x, init_P):</span>
-<span id="cb4-4">    x_hat <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.zeros(n)</span>
-<span id="cb4-5">    P <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.zeros(n)</span>
-<span id="cb4-6"></span>
-<span id="cb4-7">    <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Initialisation</span></span>
-<span id="cb4-8">    x_hat[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>] <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> init_x</span>
-<span id="cb4-9">    P[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>] <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> init_P <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Plus P est grand moins on fait confiance à l'apriori sur la valeur de la volatilité</span></span>
-<span id="cb4-10"></span>
-<span id="cb4-11">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">for</span> t <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">range</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, n):</span>
-<span id="cb4-12">        <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Prédiction</span></span>
-<span id="cb4-13">        x_hat_m <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> mu <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> phi <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> x_hat[t<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>] </span>
-<span id="cb4-14">        P_m <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> phi<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">**</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> P[t<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>] <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> sigma_squared</span>
-<span id="cb4-15">        y_m <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> x_hat_m</span>
-<span id="cb4-16"></span>
-<span id="cb4-17">        <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Mise à jour</span></span>
-<span id="cb4-18">        K <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> P_m <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> (P_m <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> (np.pi<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">**</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>)<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>)</span>
-<span id="cb4-19">        P[t] <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> (<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> K) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> P_m</span>
-<span id="cb4-20">        x_hat[t] <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> x_hat_m <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> K <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> (y[t] <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> y_m)</span>
-<span id="cb4-21">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">return</span> x_hat, P, K</span></code></pre></div>
-</div>
-<div id="22c02554" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Initialisation à 0 et 0.01</span></span>
-<span id="cb5-2">init_x <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span></span>
-<span id="cb5-3">init_P <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.01</span></span>
-<span id="cb5-4">x_hat, P, K <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> kalman_filter(y, mu, phi, sigma_squared, n, init_x, init_P)</span>
-<span id="cb5-5">plt.plot(x_hat, color<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'grey'</span>, label<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Volatilité estimée'</span>)</span></code></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://cheryl-kdio.github.io/posts/ensai/proc_stochastique/modele_log_sv-part1_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<div id="c3d78e3b" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Initialisation à x_0 et sigma_squared/(1-phi**2)</span></span>
-<span id="cb6-2">init_x <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> x[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>]</span>
-<span id="cb6-3">init_P <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> sigma_squared<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span>phi<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">**</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>)</span>
-<span id="cb6-4">x_hat, P, K <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> kalman_filter(y, mu, phi, sigma_squared, n, init_x, init_P)</span>
-<span id="cb6-5">plt.plot(x_hat, color<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'red'</span>, label<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Volatilité estimée'</span>)</span>
-<span id="cb6-6">plt.plot(x, color<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'grey'</span>, label <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Volatilité réelle'</span>)</span>
-<span id="cb6-7">plt.legend()</span>
-<span id="cb6-8"></span>
-<span id="cb6-9"></span>
-<span id="cb6-10"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Compute MSE, MAE, and RMSE</span></span>
-<span id="cb6-11">mse <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.mean((x <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> x_hat)<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">**</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>)</span>
-<span id="cb6-12">mae <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.mean(np.<span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">abs</span>(x <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> x_hat))</span>
-<span id="cb6-13">rmse <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.sqrt(mse)</span>
-<span id="cb6-14"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"MSE = "</span>, mse)</span>
-<span id="cb6-15"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"MAE = "</span>, mae)</span>
-<span id="cb6-16"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"RMSE = "</span>, rmse)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>MSE =  0.2794557366826766
-MAE =  0.4120099778966342
-RMSE =  0.5286357315606622</code></pre>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://cheryl-kdio.github.io/posts/ensai/proc_stochastique/modele_log_sv-part1_files/figure-html/cell-7-output-2.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<div id="8b8ba1cd" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Initialisation à mu/(1-phi) et sigma_squared/(1-phi**2)</span></span>
-<span id="cb8-2">init_x <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> mu<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span>phi)</span>
-<span id="cb8-3">init_P <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> sigma_squared<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span>phi<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">**</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>)</span>
-<span id="cb8-4">x_hat, P, K <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> kalman_filter(y, mu, phi, sigma_squared, n, init_x, init_P)</span>
-<span id="cb8-5">plt.plot(x_hat, color<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'red'</span>, label<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Volatilité estimée'</span>)</span>
-<span id="cb8-6">plt.plot(x, color<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'grey'</span>, label <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Volatilité réelle'</span>)</span>
-<span id="cb8-7">plt.legend()</span>
-<span id="cb8-8"></span>
-<span id="cb8-9"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Compute MSE, MAE, RMSE</span></span>
-<span id="cb8-10">mse <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.mean((x <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> x_hat)<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">**</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>)</span>
-<span id="cb8-11">mae <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.mean(np.<span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">abs</span>(x <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> x_hat))</span>
-<span id="cb8-12">rmse <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.sqrt(mse)</span>
-<span id="cb8-13"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"MSE = "</span>, mse)</span>
-<span id="cb8-14"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"MAE = "</span>, mae)</span>
-<span id="cb8-15"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"RMSE = "</span>, rmse)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>MSE =  0.27543214871007066
-MAE =  0.4078063371140131
-RMSE =  0.5248162999660649</code></pre>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://cheryl-kdio.github.io/posts/ensai/proc_stochastique/modele_log_sv-part1_files/figure-html/cell-8-output-2.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="filtre-de-kalman-avec-paramètres-inconnus" class="level2">
-<h2 class="anchored" data-anchor-id="filtre-de-kalman-avec-paramètres-inconnus">Filtre de Kalman avec paramètres inconnus</h2>
-<p>Dans le cas où les paramètres du modèle sont inconnus, nous pouvons les estimer en utilisant le filtre de Kalman. En effet, nous pouvons utiliser l’algorithme EM pour estimer les paramètres du modèle. L’algorithme EM est un algorithme itératif qui permet d’estimer les paramètres d’un modèle en maximisant la vraisemblance des données observées. Dans notre cas, nous allons utiliser l’algorithme EM pour estimer les paramètres <img src="https://latex.codecogs.com/png.latex?%5Cmu">, <img src="https://latex.codecogs.com/png.latex?%5Cphi"> et <img src="https://latex.codecogs.com/png.latex?%5Csigma"> du modèle.</p>
-<div id="75e0191b" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">as</span> np</span>
-<span id="cb10-2"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">from</span> scipy.optimize <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> minimize</span>
-<span id="cb10-3"></span>
-<span id="cb10-4"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Define the log-likelihood function for the log-SV model with Kalman filter</span></span>
-<span id="cb10-5"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> log_sv_kalman(params, y):</span>
-<span id="cb10-6">    <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Extract parameters</span></span>
-<span id="cb10-7">    mu, phi, sigma_eta <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> params</span>
-<span id="cb10-8"></span>
-<span id="cb10-9">    <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Number of observations</span></span>
-<span id="cb10-10">    n <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">len</span>(y)</span>
-<span id="cb10-11"></span>
-<span id="cb10-12">    <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Initialize state and variance</span></span>
-<span id="cb10-13">    x_t <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> mu  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Initial state (log-volatility)</span></span>
-<span id="cb10-14">    P_t <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> sigma_eta<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">**</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> (<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> phi<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">**</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>)  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Initial variance (stationarity assumption)</span></span>
-<span id="cb10-15"></span>
-<span id="cb10-16">    <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Log-likelihood accumulator</span></span>
-<span id="cb10-17">    log_likelihood <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span></span>
-<span id="cb10-18"></span>
-<span id="cb10-19">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">for</span> t <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">range</span>(n):</span>
-<span id="cb10-20">        <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Observation equation: y_t ~ x_t + nu_t</span></span>
-<span id="cb10-21"></span>
-<span id="cb10-22">        <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Prediction step</span></span>
-<span id="cb10-23">        y_t_pred <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> x_t</span>
-<span id="cb10-24">        F_t <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> P_t <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> np.pi<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">**</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Variance of observation noise</span></span>
-<span id="cb10-25"></span>
-<span id="cb10-26">        <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Update step</span></span>
-<span id="cb10-27">        v_t <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> y[t] <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> y_t_pred  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Prediction error</span></span>
-<span id="cb10-28">        K_t <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> P_t <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> F_t  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Kalman gain</span></span>
-<span id="cb10-29">        x_t <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> x_t <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> K_t <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> v_t</span>
-<span id="cb10-30">        P_t <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> (<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> K_t) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> P_t <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> sigma_eta<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">**</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Update variance</span></span>
-<span id="cb10-31"></span>
-<span id="cb10-32">        <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Update log-likelihood</span></span>
-<span id="cb10-33">        log_likelihood <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+=</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.5</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> (np.log(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> np.pi) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> np.log(F_t) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> (v_t<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">**</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> F_t))</span>
-<span id="cb10-34"></span>
-<span id="cb10-35">        <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># State evolution</span></span>
-<span id="cb10-36">        x_t <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> mu <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> phi <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> (x_t <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> mu)  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># State equation</span></span>
-<span id="cb10-37"></span>
-<span id="cb10-38">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">return</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span>log_likelihood  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Negative log-likelihood for minimization</span></span>
-<span id="cb10-39"></span>
-<span id="cb10-40"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Initial parameter guesses</span></span>
-<span id="cb10-41">initial_params <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> [<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.7</span>, <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.8</span>, np.sqrt(<span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.05</span>)]</span>
-<span id="cb10-42"></span>
-<span id="cb10-43"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Constrain phi between -1 and 1 and sigma_eta &gt; 0</span></span>
-<span id="cb10-44">bounds <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> [(<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span>np.inf, np.inf), (<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>), (<span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1e-6</span>, np.inf)]</span>
-<span id="cb10-45"></span>
-<span id="cb10-46"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Optimize parameters using the log-likelihood function</span></span>
-<span id="cb10-47">result <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> minimize(log_sv_kalman, initial_params, args<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span>(y,), bounds<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span>bounds, method<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'L-BFGS-B'</span>)</span>
-<span id="cb10-48"></span>
-<span id="cb10-49"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Extract estimated parameters</span></span>
-<span id="cb10-50">mu_est, phi_est, sigma_eta_est <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> result.x</span>
-<span id="cb10-51"></span>
-<span id="cb10-52"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Print results</span></span>
-<span id="cb10-53"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Estimated parameters:"</span>)</span>
-<span id="cb10-54"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">f"mu: </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>mu_est<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:.4f}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>)</span>
-<span id="cb10-55"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">f"phi: </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>phi_est<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:.4f}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>)</span>
-<span id="cb10-56"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">f"sigma_eta: </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>sigma_eta_est<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:.4f}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Estimated parameters:
-mu: -0.8021
-phi: 0.8001
-sigma_eta: 1.2184</code></pre>
-</div>
-</div>
-
-
-</section>
-</section>
-
- ]]></description>
-  <category>paper</category>
-  <category>proc-sto</category>
-  <category>ensai-gdr</category>
-  <guid>https://cheryl-kdio.github.io/posts/ensai/proc_stochastique/modele_log_sv-part1.html</guid>
-  <pubDate>Mon, 13 Jan 2025 23:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
