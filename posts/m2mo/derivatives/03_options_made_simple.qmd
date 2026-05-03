@@ -130,8 +130,7 @@ Knowing this, the price of a call option can be computed explicitly :
 
 \begin{align*}
 \Pi_{\text{Call}}(t) &= e^{-r(T-t)}\, \mathbb{E}^{\mathbb{Q}}\!\left[\max(S_T - K,\ 0)\ \middle|\ \mathcal{F}_t\right] \\
-
- &= S_t\, \Phi(d_+) - K e^{-r\tau}\, \Phi(d_-),
+&= S_t\, \Phi(d_+) - K e^{-r\tau}\, \Phi(d_-),
 \end{align*}
 
 

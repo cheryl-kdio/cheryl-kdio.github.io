@@ -10,7 +10,7 @@
 <meta name="dcterms.date" content="2026-05-03">
 <meta name="description" content="Cheryl Kouadio is a graduate student in stochastic modeling and quantitative finance at Université Paris Cité. Her academic interests focus on probability theory, stochastic processes, data analysis, and financial risk modeling. She studies how rigorous statistical and mathematical methods can be applied to quantify uncertainty and support decision-making in finance and risk management.">
 
-<title>Options made simple: what they are and why they matter and how do we price them? – Cheryl Kouadio</title>
+<title>Interest rates made simple – Cheryl Kouadio</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -139,17 +139,17 @@ window.Quarto = {
 </script>
 
 <link rel="stylesheet" href="../../../styles.css">
-<meta property="og:title" content="Options made simple: what they are and why they matter and how do we price them? – Cheryl Kouadio">
-<meta property="og:description" content="A practical introduction to derivatives pricing">
-<meta property="og:image" content="https://cheryl-kdio.github.io/posts/m2mo/derivatives/featured.png">
+<meta property="og:title" content="Interest rates made simple – Cheryl Kouadio">
+<meta property="og:description" content="Term structure interest rate modelling">
+<meta property="og:image" content="https://cheryl-kdio.github.io/posts/m2mo/yield_curves/covers/yield_curves.png">
 <meta property="og:site_name" content="Cheryl Kouadio">
-<meta property="og:image:height" content="1024">
-<meta property="og:image:width" content="1536">
-<meta name="twitter:title" content="Options made simple: what they are and why they matter and how do we price them? – Cheryl Kouadio">
-<meta name="twitter:description" content="A practical introduction to derivatives pricing">
-<meta name="twitter:image" content="https://cheryl-kdio.github.io/posts/m2mo/derivatives/featured.png">
-<meta name="twitter:image-height" content="1024">
-<meta name="twitter:image-width" content="1536">
+<meta property="og:image:height" content="1194">
+<meta property="og:image:width" content="1603">
+<meta name="twitter:title" content="Interest rates made simple – Cheryl Kouadio">
+<meta name="twitter:description" content="Term structure interest rate modelling">
+<meta name="twitter:image" content="https://cheryl-kdio.github.io/posts/m2mo/yield_curves/covers/yield_curves.png">
+<meta name="twitter:image-height" content="1194">
+<meta name="twitter:image-width" content="1603">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -277,12 +277,10 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#what-is-an-option" id="toc-what-is-an-option" class="nav-link active" data-scroll-target="#what-is-an-option">What is an option ?</a></li>
-  <li><a href="#what-is-an-option-used-for" id="toc-what-is-an-option-used-for" class="nav-link" data-scroll-target="#what-is-an-option-used-for">What is an option used for?</a></li>
-  <li><a href="#how-do-we-price-an-option" id="toc-how-do-we-price-an-option" class="nav-link" data-scroll-target="#how-do-we-price-an-option">How do we price an option?</a>
-  <ul class="collapse">
-  <li><a href="#black-scholes-model" id="toc-black-scholes-model" class="nav-link" data-scroll-target="#black-scholes-model">Black scholes model</a></li>
-  </ul></li>
+  <li><a href="#interest-rates-bonds-xx-year-treasury-yield-what-does-all-that-mean" id="toc-interest-rates-bonds-xx-year-treasury-yield-what-does-all-that-mean" class="nav-link active" data-scroll-target="#interest-rates-bonds-xx-year-treasury-yield-what-does-all-that-mean">Interest rates, bonds, XX-year treasury yield — what does all that mean?</a></li>
+  <li><a href="#the-link-between-bonds-and-interest-rates" id="toc-the-link-between-bonds-and-interest-rates" class="nav-link" data-scroll-target="#the-link-between-bonds-and-interest-rates">The link between bonds and interest rates</a></li>
+  <li><a href="#why-is-it-important-to-model-the-interest-rate-curve" id="toc-why-is-it-important-to-model-the-interest-rate-curve" class="nav-link" data-scroll-target="#why-is-it-important-to-model-the-interest-rate-curve">Why is it important to model the interest rate curve?</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
     </div>
@@ -291,12 +289,12 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Options made simple: what they are and why they matter and how do we price them?</h1>
-<p class="subtitle lead">A practical introduction to derivatives pricing</p>
+<h1 class="title">Interest rates made simple</h1>
+<p class="subtitle lead">Term structure interest rate modelling</p>
   <div class="quarto-categories">
     <div class="quarto-category">paper</div>
     <div class="quarto-category">m2mo</div>
-    <div class="quarto-category">options</div>
+    <div class="quarto-category">rates</div>
   </div>
   </div>
 
@@ -326,155 +324,63 @@ window.Quarto = {
 </header>
 
 
-<p>In a trading floor, exchanges take place continuously between different counterparties ,states, corporations, financial institutions, and individual investors, etc. ,with the aim of transferring, managing, or valuing risks related to price, rate, or currency fluctuations or even more simple : to make money.</p>
-<p>These exchanges involve derivatives, i.e.&nbsp;contracts concluded between two parties that define rights and monetary obligations. Each derivative has a price, determined by market conditions and the expectations of market participants.</p>
-<p>There are generally three main categories of derivative instruments: forwards, options, and swaps. In this article, we focus on options, and more specifically on call options and put options, in order to understand how they are priced, what factors influence their value, and how they are used for hedging or speculation.</p>
-<section id="what-is-an-option" class="level1">
-<h1>What is an option ?</h1>
-<p>An option is a financial contract concluded between a buyer and a seller, which gives the buyer a right ,but not an obligation ,to buy or sell an underlying asset at a price fixed in advance (called the exercise price or strike), at a predetermined future date (in the case of a European option) or up to that date (in the case of an American option). It is important to emphasize that it is not an obligation, meaning that the buyer can decide not to apply the contract ,“exercise” in the jargon. However, the seller has the obligation to respect the contract if the buyer decides to exercise their right.</p>
-<p>There are two main categories of options:</p>
+<section id="interest-rates-bonds-xx-year-treasury-yield-what-does-all-that-mean" class="level2">
+<h2 class="anchored" data-anchor-id="interest-rates-bonds-xx-year-treasury-yield-what-does-all-that-mean">Interest rates, bonds, XX-year treasury yield — what does all that mean?</h2>
+<p>Interest rates are key indicators that reveal a great deal about what is happening in the world. For example, during the 2008 financial crisis, interest rates rose significantly. In contrast, during the COVID-19 crisis in 2020, we observed a drastic decline in interest rates, with some even turning negative. More recently, during tensions between Iran and the United States, movements in 10-year bond yields raised concerns about potential inflation.</p>
+<p>Until recently, you may have been unfamiliar with terms such as “bonds,” “XX-year bond yields,” and “interest rates,” as well as their impact on the economy. If so, you are in the right place. In this article, we aim to demystify the concept of interest rates.</p>
+<p>According to the concept of time value of money, a dollar today is worth more than a dollar tomorrow. This can be explained by different mechanisms. For example, since the future is uncertain, a dollar promised tomorrow carries more risk than a dollar received today. Hence, what can justify lending money — and thus forgoing its immediate use? Interest rates.</p>
+<p>An interest rate can be seen as the cost of borrowing or the return on lending. For example, suppose a counterparty A lends money today to B, who must reimburse it in five days. To compensate for the renunciation of liquidity now, B reimburses A, at what we call the maturity date, the initial amount plus a fraction of the sum borrowed. This fraction is the interest rate.</p>
+<p>Another instrument illustrates the same mechanism: the zero-coupon bond. Here, rather than specifying an interest rate explicitly, the compensation for waiting is embedded in the price. A zero-coupon bond is a contract that guarantees its holder one dollar at maturity date <span class="math inline">\(T\)</span> — with no intermediate payments. Since that dollar is received in the future, the buyer pays less than one dollar for it today. The difference between the price paid and the dollar received at <span class="math inline">\(T\)</span> is precisely what compensates the lender for the time and risk of waiting.</p>
+</section>
+<section id="the-link-between-bonds-and-interest-rates" class="level2">
+<h2 class="anchored" data-anchor-id="the-link-between-bonds-and-interest-rates">The link between bonds and interest rates</h2>
+<p>The link between bonds and interest rates is quite simple. In order to understand this, let’s consider two investment strategies that should, in a no-arbitrage world, yield the same return.</p>
+<p>To formalize the example, let’s denote <span class="math inline">\(r(t,T)\)</span> the simple interest rate fixed at time <span class="math inline">\(t\)</span> and applying until <span class="math inline">\(T\)</span>. A sum <span class="math inline">\(X\)</span> invested at time <span class="math inline">\(t\)</span> will therefore be worth <span class="math inline">\(X + X \cdot r(t,T) \cdot (T-t)\)</span> at time <span class="math inline">\(T\)</span>.</p>
+<p>Now consider a zero-coupon bond: we pay <span class="math inline">\(B(t,T)\)</span> at time <span class="math inline">\(t\)</span> to receive <span class="math inline">\(1\)</span> at maturity <span class="math inline">\(T\)</span>. Alternatively, we can invest the same amount <span class="math inline">\(B(t,T)\)</span> in a money market account that pays the simple spot rate <span class="math inline">\(r(t,T)\)</span>. At maturity <span class="math inline">\(T\)</span>, this second strategy yields <span class="math inline">\(B(t,T) \cdot (1 + (T-t) \cdot r(t,T))\)</span>.</p>
+<p>Since we are in a no-arbitrage framework, both strategies must produce the same payoff at maturity <span class="math inline">\(T\)</span>, which gives:</p>
+<p><span class="math display">\[
+1 = B(t,T) \cdot (1 + (T-t) \cdot r(t,T)) \quad \Longleftrightarrow \quad r(t,T) = \frac{1}{T-t} \left( \frac{1}{B(t,T)} - 1 \right).
+\]</span></p>
+<p>In practice, continuous compounding is generally preferred. To emphasize this change in convention, we will denote <span class="math inline">\(R(t,T)\)</span> the continuously compounded rate, as opposed to the simple rate <span class="math inline">\(r(t,T)\)</span>. Writing <span class="math inline">\(B(t,T) = e^{-(T-t) R(t,T)}\)</span> and identifying with the expression above, we obtain the following equivalent relationship:</p>
+<p><span class="math display">\[
+1 = B(t,T) \cdot e^{(T-t) R(t,T)} \quad \Longleftrightarrow \quad R(t,T) = -\frac{1}{T-t} \ln B(t,T).
+\]</span></p>
+<p>As one can see, there is an inversely proportional relationship between the interest rate and the zero-coupon bond price. Under normal conditions, we tend to observe an increasing term structure of interest rates, meaning that lenders are willing to lend their money over the long term only if they receive a higher rate of return as compensation for time and risk. Consequently, the zero-coupon bond price curve will be decreasing and convex, meaning that bond prices decline as maturity increases, but at a decreasing rate.</p>
+<p>Since both <span class="math inline">\(r(t,T)\)</span> and <span class="math inline">\(B(t,T)\)</span> depend on <span class="math inline">\(t\)</span> and <span class="math inline">\(T\)</span>, in order to obtain a curve one needs to fix one of the two parameters. The most common convention is to fix the observation date <span class="math inline">\(t\)</span> and let the maturity <span class="math inline">\(T\)</span> vary — this gives rise to what is called the <strong>yield curve</strong> (or term structure of interest rates), which represents the interest rate as a function of maturity <span class="citation" data-cites="ecbyieldcurve">(<a href="#ref-ecbyieldcurve" role="doc-biblioref">European Central Bank, n.d.b</a>)</span>.</p>
+<p>Conversely, fixing <span class="math inline">\(T\)</span> and varying <span class="math inline">\(t\)</span> gives the time evolution of the rate for a given maturity, giving rise to what is called a <span class="math inline">\(T\)</span>-year bond rate curve <span class="citation" data-cites="ecbsr10y">(<a href="#ref-ecbsr10y" role="doc-biblioref">European Central Bank, n.d.a</a>)</span>. It is called the <span class="math inline">\(T\)</span>-year Treasury yield when the bond used as reference is a US government bond (issued by the US Department of the Treasury).</p>
+</section>
+<section id="why-is-it-important-to-model-the-interest-rate-curve" class="level2">
+<h2 class="anchored" data-anchor-id="why-is-it-important-to-model-the-interest-rate-curve">Why is it important to model the interest rate curve?</h2>
+<p>It is important to model the interest rate curve because it is a fundamental input in almost every area of finance. It allows us to price and value a wide range of financial instruments — from simple bonds to complex interest rate derivatives — by providing the discount rates needed to bring future cash flows back to their present value. Knowing that 1 euro today will be worth <span class="math inline">\(1 + r \cdot T\)</span> in <span class="math inline">\(T\)</span> years, we can derive the present value of 1 euro received at time <span class="math inline">\(T\)</span>, which is simply <span class="math inline">\(1/(1 + r \cdot T)\)</span> today. One of the famous model used for interest rate is the vasicek model for the short rate process <span class="math inline">\(r_t\)</span>, which is basically the interest rate <span class="math inline">\(r(t, t+dt)\)</span> applied over an infinitesimally small period of time <span class="math inline">\(dt\)</span>.</p>
+<p>Depending on the conditions of the economy, we will observe various types of interest rate curves:</p>
 <ul>
-<li><p>A <strong>call option</strong> gives its holder the right to buy the underlying asset at a pre-agreed price. The seller (or writer) of the call has the obligation to sell the asset if the buyer decides to exercise their right. It is advantageous for the buyer to exercise their right only when the asset price is greater than the strike.</p></li>
-<li><p>A <strong>put option</strong> gives its holder the right to sell the underlying asset at a predetermined price. The seller of the put has the obligation to buy the asset if the buyer decides to exercise their right. It is advantageous for the buyer to exercise their right only when the asset price is lower than the strike.</p></li>
+<li><p><strong>Normal curve</strong>: the yield curve is upward sloping, meaning long-term rates are higher than short-term rates. This reflects the typical expectation that lenders demand higher compensation for tying up their money over longer periods, and that the economy is in a healthy growth regime.</p></li>
+<li><p><strong>Inverted curve</strong>: short-term rates exceed long-term rates, producing a downward sloping curve. This is often interpreted as a signal that markets expect economic slowdown or recession ahead, as investors anticipate that central banks will cut rates in the future and therefore want higher compensation now.</p></li>
+<li><p><strong>Steepening curve</strong>: the difference between long-term and short-term rates widens, meaning that investors demand higher compensation for long-term lending. This typically occurs when markets expect stronger growth or higher inflation ahead, causing long-term rates to rise faster than short-term rates.</p></li>
+<li><p><strong>Flattening curve</strong>: the difference between long-term and short-term rates narrows. This often signals that the market expects a slowdown, typically occurring when central banks raise short-term rates aggressively to cool the economy while long-term rates remain relatively stable.</p></li>
 </ul>
-</section>
-<section id="what-is-an-option-used-for" class="level1">
-<h1>What is an option used for?</h1>
-<p>An option can be used to hedge against risk, speculate, or exploit arbitrage opportunities. To better understand the uses of an option, we illustrate each case with a call option example.</p>
-<section id="hedging" class="level4">
-<h4 class="anchored" data-anchor-id="hedging">Hedging</h4>
-<p>A French company needs to purchase oil in three months to supply its factories, but fears that the price per barrel may rise in the meantime. To protect itself, it buys a call option on oil with a strike price fixed today at $80.</p>
-<ul>
-<li>If in three months the barrel price rises to $95, the company exercises its call and buys at $80. Hence, the company has avoided the price increase.</li>
-<li>If the price stays at $75, it does not exercise the option and buys directly on the market, meaning the company has only lost the option premium.</li>
-</ul>
-</section>
-<section id="speculation" class="level4">
-<h4 class="anchored" data-anchor-id="speculation">Speculation</h4>
-<p>An investor anticipates a rise in a given stock, currently at $200. Rather than buying the stock outright, they buy a call with a strike of $210, which costs $8.</p>
-<ul>
-<li>If the stock rises to $230, they exercise the option: they buy at $210 what is worth $230. This represents a gain of $20 for an initial outlay of only $8, illustrating the leverage effect of options.</li>
-<li>If the stock stays below $210, they do not exercise and only lose the $8 premium.</li>
-</ul>
-<p>The option allows one to benefit from an anticipated rise without investing the full amount, while capping the maximum loss at the premium paid.</p>
-</section>
-<section id="arbitrage" class="level4">
-<h4 class="anchored" data-anchor-id="arbitrage">Arbitrage</h4>
-<p>Consider a stock worth €105, with a call and a put both struck at €100, priced at €12 and €6 respectively, and a zero risk-free rate. The call–put parity states that:</p>
-<p><span class="math display">\[
-\text{Call} - \text{Put} = S - K
-\]</span></p>
-<p>In our case, <span class="math inline">\(\text{Call} - \text{Put} = 12 - 6 = 6\)</span>, but <span class="math inline">\(S - K = 105 - 100 = 5\)</span>. There is a €1 discrepancy: the call is overpriced. An investor can therefore build the following arbitrage portfolio today:</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Action</th>
-<th>Cash flow today</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Sell the call</td>
-<td>+€12</td>
-</tr>
-<tr class="even">
-<td>Buy the put</td>
-<td>−€6</td>
-</tr>
-<tr class="odd">
-<td>Buy the stock</td>
-<td>−€105</td>
-</tr>
-<tr class="even">
-<td>Borrow €100 at zero rate</td>
-<td>+€100</td>
-</tr>
-<tr class="odd">
-<td><strong>Net</strong></td>
-<td><strong>+€1</strong></td>
-</tr>
-</tbody>
-</table>
-<p>At maturity, the stock is delivered against the strike of €100, repaying the loan exactly, and the portfolio closes flat regardless of the final stock price. The investor locks in a risk-free gain of €1 today ,a textbook arbitrage.</p>
-</section>
-</section>
-<section id="how-do-we-price-an-option" class="level1">
-<h1>How do we price an option?</h1>
-<p>To price an option, i.e.&nbsp;assign it a value today, we first determine what is called the <strong>payoff</strong> ,the cash flow received by the buyer at maturity <span class="math inline">\(T\)</span>.</p>
-<p>In the case of a call option, when the price of the underlying <span class="math inline">\(S_T\)</span> exceeds the strike <span class="math inline">\(K\)</span>, the buyer exercises their right and receives <span class="math inline">\((S_T - K)\)</span>. Otherwise (<span class="math inline">\(S_T \leq K\)</span>), the buyer does not exercise and receives nothing. The payoff is therefore:</p>
-<p><span class="math display">\[
-\text{Payoff}_{\text{Call}} = \max(S_T - K,\ 0).
-\]</span></p>
-<p>Symmetrically, the payoff of a put option is:</p>
-<p><span class="math display">\[
-\text{Payoff}_{\text{Put}} = \max(K - S_T,\ 0).
-\]</span></p>
-<p>Note that in both cases the payoff is always non-negative ,the buyer can never be forced to take a loss, which is precisely what distinguishes an option from a forward contract.</p>
-<p>From the seller’s perspective, writing such a contract implies bearing a potentially unlimited loss. The seller will therefore only agree to enter the transaction in exchange for a <strong>premium</strong> ,the price of the option paid upfront by the buyer.</p>
-<p>To determine this premium, one must compute the present value of the expected future payoff. However, this expectation is not taken under the real-world probability measure, but under the <strong>risk-neutral measure</strong> <span class="math inline">\(\mathbb{Q}\)</span> ,the probability measure under which all assets grow at the risk-free rate <span class="math inline">\(r\)</span>, ensuring the absence of arbitrage:</p>
-<p><span class="math display">\[
-\Pi_{\text{Call}}(t) = e^{-r(T-t)}\, \mathbb{E}^{\mathbb{Q}}\!\left[\max(S_T - K,\ 0)\ \middle|\ \mathcal{F}_t\right].
-\]</span></p>
-<p>In order to compute this expectation, it is necessary to know the law of <span class="math inline">\(S_T\)</span>. A famous model used for <span class="math inline">\(S_t\)</span> is the so-called Black-Scholes model.</p>
-<section id="black-scholes-model" class="level2">
-<h2 class="anchored" data-anchor-id="black-scholes-model">Black scholes model</h2>
-<p>The Black-Scholes model <span class="citation" data-cites="black1973pricing">(<a href="#ref-black1973pricing" role="doc-biblioref">Black and Scholes 1973</a>)</span> was published in 1973 by Fischer Black and Myron Scholes to provide a theoretical valuation formula for options. Under this model, the underlying asset is assumed to follow a geometric Brownian motion:</p>
-<p><span class="math display">\[
-dS_t = \mu S_t\, dt + \sigma S_t\, dW_t,
-\]</span></p>
-<p>under the historical probability measure <span class="math inline">\(\mathbb{P}\)</span>, where <span class="math inline">\(\mu \in \mathbb{R}\)</span> is the drift and <span class="math inline">\(\sigma &gt; 0\)</span> is the constant volatility.</p>
-<p>By Girsanov’s theorem, there exists a risk-neutral probability measure <span class="math inline">\(\mathbb{Q}\)</span> under which the discounted asset price is a martingale. The change of measure is characterized by the market price of risk <span class="math inline">\(\lambda = \frac{\mu - r}{\sigma}\)</span>, and under <span class="math inline">\(\mathbb{Q}\)</span> the dynamics become:</p>
-<p><span class="math display">\[
-dS_t = r S_t\, dt + \sigma S_t\, d\tilde{W}_t,
-\]</span></p>
-<p>where <span class="math inline">\(\tilde{W}_t = W_t + \lambda t\)</span> is a Brownian motion under <span class="math inline">\(\mathbb{Q}\)</span>, and <span class="math inline">\(r\)</span> is the risk-free rate.</p>
-<p>This means that under <span class="math inline">\(\mathbb{Q}\)</span>, the stock grows on average at the risk-free rate <span class="math inline">\(r\)</span> — not because investors are assumed to be risk-neutral, but because the change of measure absorbs the risk premium, making discounted prices martingales for pricing purposes. The remaining <span class="math inline">\(\sigma S_t\, d\tilde{W}_t\)</span> term captures the random fluctuations of the stock price.</p>
-<p>By applying Itô’s formula to <span class="math inline">\(\ln S_t\)</span>, we obtain an analytical expression for <span class="math inline">\(S_t\)</span>:</p>
-<p><span class="math display">\[
-S_t = S_0 \exp\!\left( \left(r - \frac{\sigma^2}{2}\right)t + \sigma \tilde{W}_t \right).
-\]</span></p>
-<p>Since <span class="math inline">\(\tilde{W}_t\)</span> is a Brownian motion under <span class="math inline">\(\mathbb{Q}\)</span>, it follows a normal distribution <span class="math inline">\(\mathcal{N}(0, t)\)</span>. Hence, <span class="math inline">\(\ln S_t\)</span> is normally distributed:</p>
-<p><span class="math display">\[
-\ln S_t \sim \mathcal{N}\!\left( \ln S_0 + \left(r - \frac{\sigma^2}{2}\right)t,\ \sigma^2 t \right),
-\]</span></p>
-<p>and <span class="math inline">\(S_t\)</span> follows a log-normal distribution.</p>
-<p>Knowing this, the price of a call option can be computed explicitly :</p>
-<p><span class="math display">\[\begin{align*}
-\Pi_{\text{Call}}(t) &amp;= e^{-r(T-t)}\, \mathbb{E}^{\mathbb{Q}}\!\left[\max(S_T - K,\ 0)\ \middle|\ \mathcal{F}_t\right] \\
-&amp;= S_t\, \Phi(d_+) - K e^{-r\tau}\, \Phi(d_-),
-\end{align*}\]</span></p>
-<p>where <span class="math inline">\(\Phi\)</span> is the cumulative distribution function of the standard normal distribution, and:</p>
-<p><span class="math display">\[
-d_\pm = \frac{\ln(S_t / K) + \left(r \pm \frac{\sigma^2}{2}\right)\tau}{\sigma\sqrt{\tau}},
-\]</span></p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="covers/yield_curves.png" class="img-fluid figure-img"></p>
+<figcaption>Inversion, Steepening and Flattening of the Yield Curve</figcaption>
+</figure>
 </div>
-<div class="callout-title-container flex-fill">
-Good to know
+</section>
+<section id="references" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="references">References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-ecbsr10y" class="csl-entry" role="listitem">
+European Central Bank. n.d.a. <span>“10-Year Spot Rate for Euro Area.”</span> <a href="https://data.ecb.europa.eu/data/datasets/YC/YC.B.U2.EUR.4F.G_N_A.SV_C_YM.SR_10Y">https://data.ecb.europa.eu/data/datasets/YC/YC.B.U2.EUR.4F.G_N_A.SV_C_YM.SR_10Y</a>.
 </div>
-</div>
-<div class="callout-body-container callout-body">
-<ul>
-<li><span class="math inline">\(\Phi(d_-)\)</span> can be interpreted as the risk-neutral probability that the option expires in the money, i.e.&nbsp;<span class="math inline">\(\mathbb{Q}(S_T &gt; K \mid \mathcal{F}_t)\)</span>.</li>
-<li><span class="math inline">\(S_t\,\Phi(d_+)\)</span> represents the present value of receiving the stock conditionally on exercising the option.</li>
-<li><span class="math inline">\(Ke^{-r\tau}\Phi(d_-)\)</span> represents the present value of paying the strike conditionally on exercising the option.</li>
-</ul>
+<div id="ref-ecbyieldcurve" class="csl-entry" role="listitem">
+———. n.d.b. <span>“Euro Area Yield Curves.”</span> <a href="https://www.ecb.europa.eu/stats/financial_markets_and_interest_rates/euro_area_yield_curves/html/index.en.html">https://www.ecb.europa.eu/stats/financial_markets_and_interest_rates/euro_area_yield_curves/html/index.en.html</a>.
 </div>
 </div>
 
 
-
-</section>
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-black1973pricing" class="csl-entry" role="listitem">
-Black, Fischer, and Myron Scholes. 1973. <span>“The Pricing of Options and Corporate Liabilities.”</span> <em>Journal of Political Economy</em> 81 (3): 637–54.
-</div>
-</div></section></div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

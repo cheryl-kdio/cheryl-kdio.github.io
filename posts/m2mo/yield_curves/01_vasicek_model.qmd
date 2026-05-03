@@ -1,0 +1,77 @@
+---
+title: "On the modelling of interest rates : The vasicek model"
+subtitle: "Term structure interest rate modelling"
+author:
+  name: Cheryl KOUADIO
+categories: [paper,m2mo,rates]
+date: "2026-05-03"
+jupyter: python3
+draft : True
+# image : "covers/yield_curves.png"
+---
+
+## The Vasicek model
+
+The Vasicek model [@vasicek1977equilibrium] was introduced in 1977 by Oldřich Vašíček to model the short rate process $r_t$, which is basically the interest rate $r(t, t+dt)$ applied over an infinitesimally small period of time $dt$. In other words, it represents the cost of borrowing money instantaneously at time $t$, and from which the entire yield curve $R(t,T)$ can be reconstructed for any maturity $T$.
+
+It is inspired by the Ornstein–Uhlenbeck process, which is a Gaussian Markov process. We work on $(\Omega, (\mathcal{F}_t), \mathbb{Q})$, and the model assumes that the dynamics of $r_t$ are given by:
+
+$$
+dr_t = k(\theta - r_t)\,dt + \sigma\,dW_t,
+$$
+
+with $W_t$ a Brownian motion under the probability measure $\mathbb{Q}$.
+
+The drift $k(\theta - r_t)$ represents the force that keeps pulling the short rate $r_t$ towards its long-term mean $\theta$, with $k > 0$ as the mean-reversion speed. The process has a constant instantaneous variance $\sigma^2$, causing the short rate to fluctuate around $\theta$.
+
+Moreover, the SDE admits a unique strong solution since the coefficients are Lipschitz and of linear growth. Furthermore, by applying Itô's formula to $e^{kt} r_t$, we have an analytical expression of the short rate:
+
+$$
+r_t = r_s e^{-k(t-s)} + \theta\left(1 - e^{-k(t-s)}\right) + \sigma \int_s^t e^{-k(t-u)}\,dW_u, \quad 0 \leq s \leq t.
+$$
+
+Hence, the conditional moments of $r_t$ are given by:
+
+$$
+\mathbb{E}[r_t \mid \mathcal{F}_s] = r_s e^{-k(t-s)} + \theta\left(1 - e^{-k(t-s)}\right),
+$$
+
+$$
+\mathbb{V}[r_t \mid \mathcal{F}_s] = \frac{\sigma^2}{2k}\left(1 - e^{-2k(t-s)}\right).
+$$
+
+Using the link between the short rate and the zero-coupon bond price, since $\int_t^T r_u\,du \mid \mathcal{F}_t$ is Gaussian, pricing reduces to computing the Laplace transform of a normal random variable. Hence, omitting some computational details, the bond price can be written in an affine form with respect to the short rate:
+
+$$
+B(t,T) = \mathbb{E}^{\mathbb{Q}}\!\left[\exp\!\left(-\int_t^T r_u\,du\right) \middle| \mathcal{F}_t \right] = \exp\!\left(m(t,T) - n(t,T)\,r_t\right),
+$$
+
+with:
+
+$$
+n(t,T) := \frac{1 - e^{-k(T-t)}}{k}, \qquad m(t,T) := \left(\theta - \frac{\sigma^2}{2k^2}\right)\!\left(n(t,T) - (T-t)\right) - \frac{\sigma^2}{4k}\,n(t,T)^2.
+$$
+
+Now, recalling the link between the zero-coupon bond price $B(t,T)$ and the term structure interest rate $R(t,T)$, i.e. $R(t,T) = -\frac{1}{T-t}\ln B(t,T)$, we obtain an analytical expression for the yield:
+
+$$
+R(t,T) = R(\infty) + \left(r_t - R(\infty)\right) \frac{1 - e^{-k(T-t)}}{k(T-t)} + \frac{\sigma^2}{4k^3(T-t)}\left(1 - e^{-k(T-t)}\right)^2,
+$$
+
+with:
+
+$$
+R(\infty) = \lim_{T \to \infty} R(t,T) = \theta - \frac{\sigma^2}{2k^2}.
+$$
+
+### Limitations of the Vasicek model
+
+Despite its widespread use, the Vasicek model has several limitations due to the assumptions it relies on:
+
+* Negative interest rates : The model allows the short rate to become negative, since it follows a Gaussian process. Historically, this was considered unrealistic. However, recent market environments with negative policy rates have made the Vasicek framework more relevant in certain contexts for modeling short-rate dynamics and extracting a yield curve.
+
+* Constant volatility : The model assumes constant volatility $\sigma$, which is often violated in real-world markets. In practice, interest rate volatility is time-dependent and state-dependent. Moreover, market data (e.g., cap and swaption prices) exhibit volatility smiles and skews, which cannot be captured by a single Gaussian factor with constant volatility.
+
+* One-factor model : The Vasicek model is a one-factor model, meaning that the entire term structure is driven by a single source of randomness (one Brownian motion). This implies perfect correlation between rate movements across maturities. Such a simplification may not capture the empirical complexity of interest rate dynamics, where multiple factors (level, slope, curvature) are typically required.
+
+* Calibration to the initial yield curve : Due to the small number of parameters $(k, \theta, \sigma)$, the Vasicek model cannot perfectly match the observed initial zero-coupon yield curve. To overcome this limitation, one can introduce a time-dependent mean-reversion level $\theta(t)$. This leads to the Hull–White extension [@hull2001general], which allows exact calibration to the initial term structure.
