@@ -31,7 +31,7 @@
   {
     "listing": "/index.html",
     "items": [
-      "/posts/m2mo/yield_curves/01.a_vasicek_model.html",
+      "/posts/m2mo/yield_curves/interest_rates_made_simple.html",
       "/posts/m2mo/derivatives/03_options_made_simple.html",
       "/posts/m2mo/yield_curves/00_intro_yield_curve.html",
       "/posts/m2mo/derivatives/01_intro_market.html",
@@ -69,7 +69,7 @@
     "listing": "/posts.html",
     "items": [
       "/posts/m2mo/derivatives/03_options_made_simple.html",
-      "/posts/m2mo/yield_curves/01.a_vasicek_model.html",
+      "/posts/m2mo/yield_curves/interest_rates_made_simple.html",
       "/posts/m2mo/yield_curves/00_intro_yield_curve.html",
       "/posts/m2mo/derivatives/01_intro_market.html",
       "/posts/m2mo/edp/edp_american_opt.html",

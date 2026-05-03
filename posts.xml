@@ -122,7 +122,7 @@
 <p><img src="https://latex.codecogs.com/png.latex?%0A%5Cln%20S_t%20%5Csim%20%5Cmathcal%7BN%7D%5C!%5Cleft(%20%5Cln%20S_0%20+%20%5Cleft(r%20-%20%5Cfrac%7B%5Csigma%5E2%7D%7B2%7D%5Cright)t,%5C%20%5Csigma%5E2%20t%20%5Cright),%0A"></p>
 <p>and <img src="https://latex.codecogs.com/png.latex?S_t"> follows a log-normal distribution.</p>
 <p>Knowing this, the price of a call option can be computed explicitly :</p>
-<p><img src="https://latex.codecogs.com/png.latex?%5Cbegin%7Balign*%7D%0A%5CPi_%7B%5Ctext%7BCall%7D%7D(t)%20&amp;=%20e%5E%7B-r(T-t)%7D%5C,%20%5Cmathbb%7BE%7D%5E%7B%5Cmathbb%7BQ%7D%7D%5C!%5Cleft%5B%5Cmax(S_T%20-%20K,%5C%200)%5C%20%5Cmiddle%7C%5C%20%5Cmathcal%7BF%7D_t%5Cright%5D%20%5C%5C%0A%0A&amp;=%20S_t%5C,%20%5CPhi(d_+)%20-%20K%20e%5E%7B-r%5Ctau%7D%5C,%20%5CPhi(d_-),%0A%5Cend%7Balign*%7D"></p>
+<p><img src="https://latex.codecogs.com/png.latex?%5Cbegin%7Balign*%7D%0A%5CPi_%7B%5Ctext%7BCall%7D%7D(t)%20&amp;=%20e%5E%7B-r(T-t)%7D%5C,%20%5Cmathbb%7BE%7D%5E%7B%5Cmathbb%7BQ%7D%7D%5C!%5Cleft%5B%5Cmax(S_T%20-%20K,%5C%200)%5C%20%5Cmiddle%7C%5C%20%5Cmathcal%7BF%7D_t%5Cright%5D%20%5C%5C%0A&amp;=%20S_t%5C,%20%5CPhi(d_+)%20-%20K%20e%5E%7B-r%5Ctau%7D%5C,%20%5CPhi(d_-),%0A%5Cend%7Balign*%7D"></p>
 <p>where <img src="https://latex.codecogs.com/png.latex?%5CPhi"> is the cumulative distribution function of the standard normal distribution, and:</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0Ad_%5Cpm%20=%20%5Cfrac%7B%5Cln(S_t%20/%20K)%20+%20%5Cleft(r%20%5Cpm%20%5Cfrac%7B%5Csigma%5E2%7D%7B2%7D%5Cright)%5Ctau%7D%7B%5Csigma%5Csqrt%7B%5Ctau%7D%7D,%0A"></p>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -161,9 +161,9 @@ Black, Fischer, and Myron Scholes. 1973. <span>“The Pricing of Options and Cor
   <media:content url="https://cheryl-kdio.github.io/posts/m2mo/derivatives/featured.png" medium="image" type="image/png" height="96" width="144"/>
 </item>
 <item>
-  <title>On the modelling of interest rates</title>
+  <title>Interest rates made simple</title>
   <dc:creator>Cheryl KOUADIO</dc:creator>
-  <link>https://cheryl-kdio.github.io/posts/m2mo/yield_curves/01.a_vasicek_model.html</link>
+  <link>https://cheryl-kdio.github.io/posts/m2mo/yield_curves/interest_rates_made_simple.html</link>
   <description><![CDATA[ 
 
 
@@ -172,7 +172,7 @@ Black, Fischer, and Myron Scholes. 1973. <span>“The Pricing of Options and Cor
 <section id="interest-rates-bonds-xx-year-treasury-yield-what-does-all-that-mean" class="level2">
 <h2 class="anchored" data-anchor-id="interest-rates-bonds-xx-year-treasury-yield-what-does-all-that-mean">Interest rates, bonds, XX-year treasury yield — what does all that mean?</h2>
 <p>Interest rates are key indicators that reveal a great deal about what is happening in the world. For example, during the 2008 financial crisis, interest rates rose significantly. In contrast, during the COVID-19 crisis in 2020, we observed a drastic decline in interest rates, with some even turning negative. More recently, during tensions between Iran and the United States, movements in 10-year bond yields raised concerns about potential inflation.</p>
-<p>Until recently, you may have been unfamiliar with terms such as “bonds,” “XX-year bond yields,” and “interest rates,” as well as their impact on the economy. If so, you are in the right place. In this article, we aim to demystify the concept of interest rates. We will also introduce the fundamental models used to describe them, along with some illustrative coding examples.</p>
+<p>Until recently, you may have been unfamiliar with terms such as “bonds,” “XX-year bond yields,” and “interest rates,” as well as their impact on the economy. If so, you are in the right place. In this article, we aim to demystify the concept of interest rates.</p>
 <p>According to the concept of time value of money, a dollar today is worth more than a dollar tomorrow. This can be explained by different mechanisms. For example, since the future is uncertain, a dollar promised tomorrow carries more risk than a dollar received today. Hence, what can justify lending money — and thus forgoing its immediate use? Interest rates.</p>
 <p>An interest rate can be seen as the cost of borrowing or the return on lending. For example, suppose a counterparty A lends money today to B, who must reimburse it in five days. To compensate for the renunciation of liquidity now, B reimburses A, at what we call the maturity date, the initial amount plus a fraction of the sum borrowed. This fraction is the interest rate.</p>
 <p>Another instrument illustrates the same mechanism: the zero-coupon bond. Here, rather than specifying an interest rate explicitly, the compensation for waiting is embedded in the price. A zero-coupon bond is a contract that guarantees its holder one dollar at maturity date <img src="https://latex.codecogs.com/png.latex?T"> — with no intermediate payments. Since that dollar is received in the future, the buyer pays less than one dollar for it today. The difference between the price paid and the dollar received at <img src="https://latex.codecogs.com/png.latex?T"> is precisely what compensates the lender for the time and risk of waiting.</p>
@@ -192,7 +192,7 @@ Black, Fischer, and Myron Scholes. 1973. <span>“The Pricing of Options and Cor
 </section>
 <section id="why-is-it-important-to-model-the-interest-rate-curve" class="level2">
 <h2 class="anchored" data-anchor-id="why-is-it-important-to-model-the-interest-rate-curve">Why is it important to model the interest rate curve?</h2>
-<p>It is important to model the interest rate curve because it is a fundamental input in almost every area of finance. It allows us to price and value a wide range of financial instruments — from simple bonds to complex interest rate derivatives — by providing the discount rates needed to bring future cash flows back to their present value. Knowing that 1 euro today will be worth <img src="https://latex.codecogs.com/png.latex?1%20+%20r%20%5Ccdot%20T"> in <img src="https://latex.codecogs.com/png.latex?T"> years, we can derive the present value of 1 euro received at time <img src="https://latex.codecogs.com/png.latex?T">, which is simply <img src="https://latex.codecogs.com/png.latex?1/(1%20+%20r%20%5Ccdot%20T)"> today.</p>
+<p>It is important to model the interest rate curve because it is a fundamental input in almost every area of finance. It allows us to price and value a wide range of financial instruments — from simple bonds to complex interest rate derivatives — by providing the discount rates needed to bring future cash flows back to their present value. Knowing that 1 euro today will be worth <img src="https://latex.codecogs.com/png.latex?1%20+%20r%20%5Ccdot%20T"> in <img src="https://latex.codecogs.com/png.latex?T"> years, we can derive the present value of 1 euro received at time <img src="https://latex.codecogs.com/png.latex?T">, which is simply <img src="https://latex.codecogs.com/png.latex?1/(1%20+%20r%20%5Ccdot%20T)"> today. One of the famous model used for interest rate is the vasicek model for the short rate process <img src="https://latex.codecogs.com/png.latex?r_t">, which is basically the interest rate <img src="https://latex.codecogs.com/png.latex?r(t,%20t+dt)"> applied over an infinitesimally small period of time <img src="https://latex.codecogs.com/png.latex?dt">.</p>
 <p>Depending on the conditions of the economy, we will observe various types of interest rate curves:</p>
 <ul>
 <li><p><strong>Normal curve</strong>: the yield curve is upward sloping, meaning long-term rates are higher than short-term rates. This reflects the typical expectation that lenders demand higher compensation for tying up their money over longer periods, and that the economy is in a healthy growth regime.</p></li>
@@ -207,37 +207,6 @@ Black, Fischer, and Myron Scholes. 1973. <span>“The Pricing of Options and Cor
 </figure>
 </div>
 </section>
-<section id="the-vasicek-model" class="level2">
-<h2 class="anchored" data-anchor-id="the-vasicek-model">The Vasicek model</h2>
-<p>The Vasicek model <span class="citation" data-cites="vasicek1977equilibrium">(Vasicek 1977)</span> was introduced in 1977 by Oldřich Vašíček to model the short rate process <img src="https://latex.codecogs.com/png.latex?r_t">, which is basically the interest rate <img src="https://latex.codecogs.com/png.latex?r(t,%20t+dt)"> applied over an infinitesimally small period of time <img src="https://latex.codecogs.com/png.latex?dt">. In other words, it represents the cost of borrowing money instantaneously at time <img src="https://latex.codecogs.com/png.latex?t">, and from which the entire yield curve <img src="https://latex.codecogs.com/png.latex?R(t,T)"> can be reconstructed for any maturity <img src="https://latex.codecogs.com/png.latex?T">.</p>
-<p>It is inspired by the Ornstein–Uhlenbeck process, which is a Gaussian Markov process. We work on <img src="https://latex.codecogs.com/png.latex?(%5COmega,%20(%5Cmathcal%7BF%7D_t),%20%5Cmathbb%7BQ%7D)">, and the model assumes that the dynamics of <img src="https://latex.codecogs.com/png.latex?r_t"> are given by:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Adr_t%20=%20k(%5Ctheta%20-%20r_t)%5C,dt%20+%20%5Csigma%5C,dW_t,%0A"></p>
-<p>with <img src="https://latex.codecogs.com/png.latex?W_t"> a Brownian motion under the probability measure <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%7BQ%7D">.</p>
-<p>The drift <img src="https://latex.codecogs.com/png.latex?k(%5Ctheta%20-%20r_t)"> represents the force that keeps pulling the short rate <img src="https://latex.codecogs.com/png.latex?r_t"> towards its long-term mean <img src="https://latex.codecogs.com/png.latex?%5Ctheta">, with <img src="https://latex.codecogs.com/png.latex?k%20%3E%200"> as the mean-reversion speed. The process has a constant instantaneous variance <img src="https://latex.codecogs.com/png.latex?%5Csigma%5E2">, causing the short rate to fluctuate around <img src="https://latex.codecogs.com/png.latex?%5Ctheta">.</p>
-<p>Moreover, the SDE admits a unique strong solution since the coefficients are Lipschitz and of linear growth. Furthermore, by applying Itô’s formula to <img src="https://latex.codecogs.com/png.latex?e%5E%7Bkt%7D%20r_t">, we have an analytical expression of the short rate:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Ar_t%20=%20r_s%20e%5E%7B-k(t-s)%7D%20+%20%5Ctheta%5Cleft(1%20-%20e%5E%7B-k(t-s)%7D%5Cright)%20+%20%5Csigma%20%5Cint_s%5Et%20e%5E%7B-k(t-u)%7D%5C,dW_u,%20%5Cquad%200%20%5Cleq%20s%20%5Cleq%20t.%0A"></p>
-<p>Hence, the conditional moments of <img src="https://latex.codecogs.com/png.latex?r_t"> are given by:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathbb%7BE%7D%5Br_t%20%5Cmid%20%5Cmathcal%7BF%7D_s%5D%20=%20r_s%20e%5E%7B-k(t-s)%7D%20+%20%5Ctheta%5Cleft(1%20-%20e%5E%7B-k(t-s)%7D%5Cright),%0A"></p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathbb%7BV%7D%5Br_t%20%5Cmid%20%5Cmathcal%7BF%7D_s%5D%20=%20%5Cfrac%7B%5Csigma%5E2%7D%7B2k%7D%5Cleft(1%20-%20e%5E%7B-2k(t-s)%7D%5Cright).%0A"></p>
-<p>Using the link between the short rate and the zero-coupon bond price, since <img src="https://latex.codecogs.com/png.latex?%5Cint_t%5ET%20r_u%5C,du%20%5Cmid%20%5Cmathcal%7BF%7D_t"> is Gaussian, pricing reduces to computing the Laplace transform of a normal random variable. Hence, omitting some computational details, the bond price can be written in an affine form with respect to the short rate:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AB(t,T)%20=%20%5Cmathbb%7BE%7D%5E%7B%5Cmathbb%7BQ%7D%7D%5C!%5Cleft%5B%5Cexp%5C!%5Cleft(-%5Cint_t%5ET%20r_u%5C,du%5Cright)%20%5Cmiddle%7C%20%5Cmathcal%7BF%7D_t%20%5Cright%5D%20=%20%5Cexp%5C!%5Cleft(m(t,T)%20-%20n(t,T)%5C,r_t%5Cright),%0A"></p>
-<p>with:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0An(t,T)%20:=%20%5Cfrac%7B1%20-%20e%5E%7B-k(T-t)%7D%7D%7Bk%7D,%20%5Cqquad%20m(t,T)%20:=%20%5Cleft(%5Ctheta%20-%20%5Cfrac%7B%5Csigma%5E2%7D%7B2k%5E2%7D%5Cright)%5C!%5Cleft(n(t,T)%20-%20(T-t)%5Cright)%20-%20%5Cfrac%7B%5Csigma%5E2%7D%7B4k%7D%5C,n(t,T)%5E2.%0A"></p>
-<p>Now, recalling the link between the zero-coupon bond price <img src="https://latex.codecogs.com/png.latex?B(t,T)"> and the term structure interest rate <img src="https://latex.codecogs.com/png.latex?R(t,T)">, i.e.&nbsp;<img src="https://latex.codecogs.com/png.latex?R(t,T)%20=%20-%5Cfrac%7B1%7D%7BT-t%7D%5Cln%20B(t,T)">, we obtain an analytical expression for the yield:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AR(t,T)%20=%20R(%5Cinfty)%20+%20%5Cleft(r_t%20-%20R(%5Cinfty)%5Cright)%20%5Cfrac%7B1%20-%20e%5E%7B-k(T-t)%7D%7D%7Bk(T-t)%7D%20+%20%5Cfrac%7B%5Csigma%5E2%7D%7B4k%5E3(T-t)%7D%5Cleft(1%20-%20e%5E%7B-k(T-t)%7D%5Cright)%5E2,%0A"></p>
-<p>with:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AR(%5Cinfty)%20=%20%5Clim_%7BT%20%5Cto%20%5Cinfty%7D%20R(t,T)%20=%20%5Ctheta%20-%20%5Cfrac%7B%5Csigma%5E2%7D%7B2k%5E2%7D.%0A"></p>
-<section id="limitations-of-the-vasicek-model" class="level3">
-<h3 class="anchored" data-anchor-id="limitations-of-the-vasicek-model">Limitations of the Vasicek model</h3>
-<p>Despite its widespread use, the Vasicek model has several limitations due to the assumptions it relies on:</p>
-<ul>
-<li><p>Negative interest rates : The model allows the short rate to become negative, since it follows a Gaussian process. Historically, this was considered unrealistic. However, recent market environments with negative policy rates have made the Vasicek framework more relevant in certain contexts for modeling short-rate dynamics and extracting a yield curve.</p></li>
-<li><p>Constant volatility : The model assumes constant volatility <img src="https://latex.codecogs.com/png.latex?%5Csigma">, which is often violated in real-world markets. In practice, interest rate volatility is time-dependent and state-dependent. Moreover, market data (e.g., cap and swaption prices) exhibit volatility smiles and skews, which cannot be captured by a single Gaussian factor with constant volatility.</p></li>
-<li><p>One-factor model : The Vasicek model is a one-factor model, meaning that the entire term structure is driven by a single source of randomness (one Brownian motion). This implies perfect correlation between rate movements across maturities. Such a simplification may not capture the empirical complexity of interest rate dynamics, where multiple factors (level, slope, curvature) are typically required.</p></li>
-<li><p>Calibration to the initial yield curve : Due to the small number of parameters <img src="https://latex.codecogs.com/png.latex?(k,%20%5Ctheta,%20%5Csigma)">, the Vasicek model cannot perfectly match the observed initial zero-coupon yield curve. To overcome this limitation, one can introduce a time-dependent mean-reversion level <img src="https://latex.codecogs.com/png.latex?%5Ctheta(t)">. This leads to the Hull–White extension <span class="citation" data-cites="hull2001general">(Hull and White 2001)</span>, which allows exact calibration to the initial term structure.</p></li>
-</ul>
-</section>
-</section>
 <section id="references" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="references">References</h2>
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
@@ -246,12 +215,6 @@ European Central Bank. n.d.a. <span>“10-Year Spot Rate for Euro Area.”</span
 </div>
 <div id="ref-ecbyieldcurve" class="csl-entry">
 ———. n.d.b. <span>“Euro Area Yield Curves.”</span> <a href="https://www.ecb.europa.eu/stats/financial_markets_and_interest_rates/euro_area_yield_curves/html/index.en.html">https://www.ecb.europa.eu/stats/financial_markets_and_interest_rates/euro_area_yield_curves/html/index.en.html</a>.
-</div>
-<div id="ref-hull2001general" class="csl-entry">
-Hull, John, and Alan White. 2001. <span>“The General Hull–White Model and Supercalibration.”</span> <em>Financial Analysts Journal</em> 57 (6): 34–43.
-</div>
-<div id="ref-vasicek1977equilibrium" class="csl-entry">
-Vasicek, Oldrich. 1977. <span>“An Equilibrium Characterization of the Term Structure.”</span> <em>Journal of Financial Economics</em> 5 (2): 177–88.
 </div>
 </div>
 
@@ -262,7 +225,7 @@ Vasicek, Oldrich. 1977. <span>“An Equilibrium Characterization of the Term Str
   <category>paper</category>
   <category>m2mo</category>
   <category>rates</category>
-  <guid>https://cheryl-kdio.github.io/posts/m2mo/yield_curves/01.a_vasicek_model.html</guid>
+  <guid>https://cheryl-kdio.github.io/posts/m2mo/yield_curves/interest_rates_made_simple.html</guid>
   <pubDate>Sat, 02 May 2026 22:00:00 GMT</pubDate>
   <media:content url="https://cheryl-kdio.github.io/posts/m2mo/yield_curves/covers/yield_curves.png" medium="image" type="image/png" height="107" width="144"/>
 </item>

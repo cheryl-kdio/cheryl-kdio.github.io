@@ -10,7 +10,7 @@
 <meta name="dcterms.date" content="2026-05-03">
 <meta name="description" content="Cheryl Kouadio is a graduate student in stochastic modeling and quantitative finance at Université Paris Cité. Her academic interests focus on probability theory, stochastic processes, data analysis, and financial risk modeling. She studies how rigorous statistical and mathematical methods can be applied to quantify uncertainty and support decision-making in finance and risk management.">
 
-<title>On the modelling of interest rates – Cheryl Kouadio</title>
+<title>On the modelling of interest rates : The vasicek model – Cheryl Kouadio</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -107,6 +107,7 @@ https://badge.dimensions.ai/
 <script async="" src="https://badge.dimensions.ai/badge.js" charset="utf-8"></script>
 
 <script type="text/javascript" src="//cdn.plu.mx/widget-popup.js"></script>
+<meta name="quarto:status" content="draft">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -139,24 +140,20 @@ window.Quarto = {
 </script>
 
 <link rel="stylesheet" href="../../../styles.css">
-<meta property="og:title" content="On the modelling of interest rates – Cheryl Kouadio">
+<meta property="og:title" content="On the modelling of interest rates : The vasicek model – Cheryl Kouadio">
 <meta property="og:description" content="Term structure interest rate modelling">
-<meta property="og:image" content="https://cheryl-kdio.github.io/posts/m2mo/yield_curves/covers/yield_curves.png">
+<meta property="og:image" content="https://cheryl-kdio.github.io/files/profile/kouadio_profile.jpeg">
 <meta property="og:site_name" content="Cheryl Kouadio">
-<meta property="og:image:height" content="1194">
-<meta property="og:image:width" content="1603">
-<meta name="twitter:title" content="On the modelling of interest rates – Cheryl Kouadio">
+<meta name="twitter:title" content="On the modelling of interest rates : The vasicek model – Cheryl Kouadio">
 <meta name="twitter:description" content="Term structure interest rate modelling">
-<meta name="twitter:image" content="https://cheryl-kdio.github.io/posts/m2mo/yield_curves/covers/yield_curves.png">
-<meta name="twitter:image-height" content="1194">
-<meta name="twitter:image-width" content="1603">
+<meta name="twitter:image" content="https://cheryl-kdio.github.io/files/profile/kouadio_profile.jpeg">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
+  <header id="quarto-header" class="headroom fixed-top"><div id="quarto-draft-alert" class="alert alert-warning"><i class="bi bi-pencil-square"></i>Draft</div>
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
@@ -277,14 +274,10 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#interest-rates-bonds-xx-year-treasury-yield-what-does-all-that-mean" id="toc-interest-rates-bonds-xx-year-treasury-yield-what-does-all-that-mean" class="nav-link active" data-scroll-target="#interest-rates-bonds-xx-year-treasury-yield-what-does-all-that-mean">Interest rates, bonds, XX-year treasury yield — what does all that mean?</a></li>
-  <li><a href="#the-link-between-bonds-and-interest-rates" id="toc-the-link-between-bonds-and-interest-rates" class="nav-link" data-scroll-target="#the-link-between-bonds-and-interest-rates">The link between bonds and interest rates</a></li>
-  <li><a href="#why-is-it-important-to-model-the-interest-rate-curve" id="toc-why-is-it-important-to-model-the-interest-rate-curve" class="nav-link" data-scroll-target="#why-is-it-important-to-model-the-interest-rate-curve">Why is it important to model the interest rate curve?</a></li>
-  <li><a href="#the-vasicek-model" id="toc-the-vasicek-model" class="nav-link" data-scroll-target="#the-vasicek-model">The Vasicek model</a>
+  <li><a href="#the-vasicek-model" id="toc-the-vasicek-model" class="nav-link active" data-scroll-target="#the-vasicek-model">The Vasicek model</a>
   <ul class="collapse">
   <li><a href="#limitations-of-the-vasicek-model" id="toc-limitations-of-the-vasicek-model" class="nav-link" data-scroll-target="#limitations-of-the-vasicek-model">Limitations of the Vasicek model</a></li>
   </ul></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
     </div>
@@ -293,7 +286,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">On the modelling of interest rates</h1>
+<h1 class="title">On the modelling of interest rates : The vasicek model</h1>
 <p class="subtitle lead">Term structure interest rate modelling</p>
   <div class="quarto-categories">
     <div class="quarto-category">paper</div>
@@ -328,48 +321,6 @@ window.Quarto = {
 </header>
 
 
-<section id="interest-rates-bonds-xx-year-treasury-yield-what-does-all-that-mean" class="level2">
-<h2 class="anchored" data-anchor-id="interest-rates-bonds-xx-year-treasury-yield-what-does-all-that-mean">Interest rates, bonds, XX-year treasury yield — what does all that mean?</h2>
-<p>Interest rates are key indicators that reveal a great deal about what is happening in the world. For example, during the 2008 financial crisis, interest rates rose significantly. In contrast, during the COVID-19 crisis in 2020, we observed a drastic decline in interest rates, with some even turning negative. More recently, during tensions between Iran and the United States, movements in 10-year bond yields raised concerns about potential inflation.</p>
-<p>Until recently, you may have been unfamiliar with terms such as “bonds,” “XX-year bond yields,” and “interest rates,” as well as their impact on the economy. If so, you are in the right place. In this article, we aim to demystify the concept of interest rates. We will also introduce the fundamental models used to describe them, along with some illustrative coding examples.</p>
-<p>According to the concept of time value of money, a dollar today is worth more than a dollar tomorrow. This can be explained by different mechanisms. For example, since the future is uncertain, a dollar promised tomorrow carries more risk than a dollar received today. Hence, what can justify lending money — and thus forgoing its immediate use? Interest rates.</p>
-<p>An interest rate can be seen as the cost of borrowing or the return on lending. For example, suppose a counterparty A lends money today to B, who must reimburse it in five days. To compensate for the renunciation of liquidity now, B reimburses A, at what we call the maturity date, the initial amount plus a fraction of the sum borrowed. This fraction is the interest rate.</p>
-<p>Another instrument illustrates the same mechanism: the zero-coupon bond. Here, rather than specifying an interest rate explicitly, the compensation for waiting is embedded in the price. A zero-coupon bond is a contract that guarantees its holder one dollar at maturity date <span class="math inline">\(T\)</span> — with no intermediate payments. Since that dollar is received in the future, the buyer pays less than one dollar for it today. The difference between the price paid and the dollar received at <span class="math inline">\(T\)</span> is precisely what compensates the lender for the time and risk of waiting.</p>
-</section>
-<section id="the-link-between-bonds-and-interest-rates" class="level2">
-<h2 class="anchored" data-anchor-id="the-link-between-bonds-and-interest-rates">The link between bonds and interest rates</h2>
-<p>The link between bonds and interest rates is quite simple. In order to understand this, let’s consider two investment strategies that should, in a no-arbitrage world, yield the same return.</p>
-<p>To formalize the example, let’s denote <span class="math inline">\(r(t,T)\)</span> the simple interest rate fixed at time <span class="math inline">\(t\)</span> and applying until <span class="math inline">\(T\)</span>. A sum <span class="math inline">\(X\)</span> invested at time <span class="math inline">\(t\)</span> will therefore be worth <span class="math inline">\(X + X \cdot r(t,T) \cdot (T-t)\)</span> at time <span class="math inline">\(T\)</span>.</p>
-<p>Now consider a zero-coupon bond: we pay <span class="math inline">\(B(t,T)\)</span> at time <span class="math inline">\(t\)</span> to receive <span class="math inline">\(1\)</span> at maturity <span class="math inline">\(T\)</span>. Alternatively, we can invest the same amount <span class="math inline">\(B(t,T)\)</span> in a money market account that pays the simple spot rate <span class="math inline">\(r(t,T)\)</span>. At maturity <span class="math inline">\(T\)</span>, this second strategy yields <span class="math inline">\(B(t,T) \cdot (1 + (T-t) \cdot r(t,T))\)</span>.</p>
-<p>Since we are in a no-arbitrage framework, both strategies must produce the same payoff at maturity <span class="math inline">\(T\)</span>, which gives:</p>
-<p><span class="math display">\[
-1 = B(t,T) \cdot (1 + (T-t) \cdot r(t,T)) \quad \Longleftrightarrow \quad r(t,T) = \frac{1}{T-t} \left( \frac{1}{B(t,T)} - 1 \right).
-\]</span></p>
-<p>In practice, continuous compounding is generally preferred. To emphasize this change in convention, we will denote <span class="math inline">\(R(t,T)\)</span> the continuously compounded rate, as opposed to the simple rate <span class="math inline">\(r(t,T)\)</span>. Writing <span class="math inline">\(B(t,T) = e^{-(T-t) R(t,T)}\)</span> and identifying with the expression above, we obtain the following equivalent relationship:</p>
-<p><span class="math display">\[
-1 = B(t,T) \cdot e^{(T-t) R(t,T)} \quad \Longleftrightarrow \quad R(t,T) = -\frac{1}{T-t} \ln B(t,T).
-\]</span></p>
-<p>As one can see, there is an inversely proportional relationship between the interest rate and the zero-coupon bond price. Under normal conditions, we tend to observe an increasing term structure of interest rates, meaning that lenders are willing to lend their money over the long term only if they receive a higher rate of return as compensation for time and risk. Consequently, the zero-coupon bond price curve will be decreasing and convex, meaning that bond prices decline as maturity increases, but at a decreasing rate.</p>
-<p>Since both <span class="math inline">\(r(t,T)\)</span> and <span class="math inline">\(B(t,T)\)</span> depend on <span class="math inline">\(t\)</span> and <span class="math inline">\(T\)</span>, in order to obtain a curve one needs to fix one of the two parameters. The most common convention is to fix the observation date <span class="math inline">\(t\)</span> and let the maturity <span class="math inline">\(T\)</span> vary — this gives rise to what is called the <strong>yield curve</strong> (or term structure of interest rates), which represents the interest rate as a function of maturity <span class="citation" data-cites="ecbyieldcurve">(<a href="#ref-ecbyieldcurve" role="doc-biblioref">European Central Bank, n.d.b</a>)</span>.</p>
-<p>Conversely, fixing <span class="math inline">\(T\)</span> and varying <span class="math inline">\(t\)</span> gives the time evolution of the rate for a given maturity, giving rise to what is called a <span class="math inline">\(T\)</span>-year bond rate curve <span class="citation" data-cites="ecbsr10y">(<a href="#ref-ecbsr10y" role="doc-biblioref">European Central Bank, n.d.a</a>)</span>. It is called the <span class="math inline">\(T\)</span>-year Treasury yield when the bond used as reference is a US government bond (issued by the US Department of the Treasury).</p>
-</section>
-<section id="why-is-it-important-to-model-the-interest-rate-curve" class="level2">
-<h2 class="anchored" data-anchor-id="why-is-it-important-to-model-the-interest-rate-curve">Why is it important to model the interest rate curve?</h2>
-<p>It is important to model the interest rate curve because it is a fundamental input in almost every area of finance. It allows us to price and value a wide range of financial instruments — from simple bonds to complex interest rate derivatives — by providing the discount rates needed to bring future cash flows back to their present value. Knowing that 1 euro today will be worth <span class="math inline">\(1 + r \cdot T\)</span> in <span class="math inline">\(T\)</span> years, we can derive the present value of 1 euro received at time <span class="math inline">\(T\)</span>, which is simply <span class="math inline">\(1/(1 + r \cdot T)\)</span> today.</p>
-<p>Depending on the conditions of the economy, we will observe various types of interest rate curves:</p>
-<ul>
-<li><p><strong>Normal curve</strong>: the yield curve is upward sloping, meaning long-term rates are higher than short-term rates. This reflects the typical expectation that lenders demand higher compensation for tying up their money over longer periods, and that the economy is in a healthy growth regime.</p></li>
-<li><p><strong>Inverted curve</strong>: short-term rates exceed long-term rates, producing a downward sloping curve. This is often interpreted as a signal that markets expect economic slowdown or recession ahead, as investors anticipate that central banks will cut rates in the future and therefore want higher compensation now.</p></li>
-<li><p><strong>Steepening curve</strong>: the difference between long-term and short-term rates widens, meaning that investors demand higher compensation for long-term lending. This typically occurs when markets expect stronger growth or higher inflation ahead, causing long-term rates to rise faster than short-term rates.</p></li>
-<li><p><strong>Flattening curve</strong>: the difference between long-term and short-term rates narrows. This often signals that the market expects a slowdown, typically occurring when central banks raise short-term rates aggressively to cool the economy while long-term rates remain relatively stable.</p></li>
-</ul>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="covers/yield_curves.png" class="img-fluid figure-img"></p>
-<figcaption>Inversion, Steepening and Flattening of the Yield Curve</figcaption>
-</figure>
-</div>
-</section>
 <section id="the-vasicek-model" class="level2">
 <h2 class="anchored" data-anchor-id="the-vasicek-model">The Vasicek model</h2>
 <p>The Vasicek model <span class="citation" data-cites="vasicek1977equilibrium">(<a href="#ref-vasicek1977equilibrium" role="doc-biblioref">Vasicek 1977</a>)</span> was introduced in 1977 by Oldřich Vašíček to model the short rate process <span class="math inline">\(r_t\)</span>, which is basically the interest rate <span class="math inline">\(r(t, t+dt)\)</span> applied over an infinitesimally small period of time <span class="math inline">\(dt\)</span>. In other words, it represents the cost of borrowing money instantaneously at time <span class="math inline">\(t\)</span>, and from which the entire yield curve <span class="math inline">\(R(t,T)\)</span> can be reconstructed for any maturity <span class="math inline">\(T\)</span>.</p>
@@ -415,29 +366,20 @@ R(\infty) = \lim_{T \to \infty} R(t,T) = \theta - \frac{\sigma^2}{2k^2}.
 <li><p>One-factor model : The Vasicek model is a one-factor model, meaning that the entire term structure is driven by a single source of randomness (one Brownian motion). This implies perfect correlation between rate movements across maturities. Such a simplification may not capture the empirical complexity of interest rate dynamics, where multiple factors (level, slope, curvature) are typically required.</p></li>
 <li><p>Calibration to the initial yield curve : Due to the small number of parameters <span class="math inline">\((k, \theta, \sigma)\)</span>, the Vasicek model cannot perfectly match the observed initial zero-coupon yield curve. To overcome this limitation, one can introduce a time-dependent mean-reversion level <span class="math inline">\(\theta(t)\)</span>. This leads to the Hull–White extension <span class="citation" data-cites="hull2001general">(<a href="#ref-hull2001general" role="doc-biblioref">Hull and White 2001</a>)</span>, which allows exact calibration to the initial term structure.</p></li>
 </ul>
+
+
+
 </section>
 </section>
-<section id="references" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="references">References</h2>
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-ecbsr10y" class="csl-entry" role="listitem">
-European Central Bank. n.d.a. <span>“10-Year Spot Rate for Euro Area.”</span> <a href="https://data.ecb.europa.eu/data/datasets/YC/YC.B.U2.EUR.4F.G_N_A.SV_C_YM.SR_10Y">https://data.ecb.europa.eu/data/datasets/YC/YC.B.U2.EUR.4F.G_N_A.SV_C_YM.SR_10Y</a>.
-</div>
-<div id="ref-ecbyieldcurve" class="csl-entry" role="listitem">
-———. n.d.b. <span>“Euro Area Yield Curves.”</span> <a href="https://www.ecb.europa.eu/stats/financial_markets_and_interest_rates/euro_area_yield_curves/html/index.en.html">https://www.ecb.europa.eu/stats/financial_markets_and_interest_rates/euro_area_yield_curves/html/index.en.html</a>.
-</div>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-hull2001general" class="csl-entry" role="listitem">
 Hull, John, and Alan White. 2001. <span>“The General Hull–White Model and Supercalibration.”</span> <em>Financial Analysts Journal</em> 57 (6): 34–43.
 </div>
 <div id="ref-vasicek1977equilibrium" class="csl-entry" role="listitem">
 Vasicek, Oldrich. 1977. <span>“An Equilibrium Characterization of the Term Structure.”</span> <em>Journal of Financial Economics</em> 5 (2): 177–88.
 </div>
-</div>
-
-
-</section>
-
-</main> <!-- /main -->
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
