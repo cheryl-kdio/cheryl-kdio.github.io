@@ -5,7 +5,7 @@ author:
   name: Cheryl KOUADIO
 categories: [paper,m2mo,derivatives]
 date: "2026-02-01"
-image: "featured.png"
+# image: "featured.png"
 ---
 
 

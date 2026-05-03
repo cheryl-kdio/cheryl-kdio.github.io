@@ -1,0 +1,149 @@
+---
+title: "Options made simple: what they are and why they matter and how do we price them?"
+subtitle: "A practical introduction to derivatives pricing"
+author:
+  name: Cheryl KOUADIO
+categories: [paper, m2mo, options]
+date: "2026-05-03"
+image: "featured.png"
+---
+
+In a trading floor, exchanges take place continuously between different counterparties ,states, corporations, financial institutions, and individual investors, etc. ,with the aim of transferring, managing, or valuing risks related to price, rate, or currency fluctuations or even more simple : to make money.
+
+These exchanges involve derivatives, i.e. contracts concluded between two parties that define rights and monetary obligations. Each derivative has a price, determined by market conditions and the expectations of market participants.
+
+There are generally three main categories of derivative instruments: forwards, options, and swaps. In this article, we focus on options, and more specifically on call options and put options, in order to understand how they are priced, what factors influence their value, and how they are used for hedging or speculation.
+
+# What is an option ?
+
+An option is a financial contract concluded between a buyer and a seller, which gives the buyer a right ,but not an obligation ,to buy or sell an underlying asset at a price fixed in advance (called the exercise price or strike), at a predetermined future date (in the case of a European option) or up to that date (in the case of an American option). It is important to emphasize that it is not an obligation, meaning that the buyer can decide not to apply the contract ,"exercise" in the jargon. However, the seller has the obligation to respect the contract if the buyer decides to exercise their right.
+
+There are two main categories of options:
+
+- A **call option** gives its holder the right to buy the underlying asset at a pre-agreed price. The seller (or writer) of the call has the obligation to sell the asset if the buyer decides to exercise their right. It is advantageous for the buyer to exercise their right only when the asset price is greater than the strike.
+
+- A **put option** gives its holder the right to sell the underlying asset at a predetermined price. The seller of the put has the obligation to buy the asset if the buyer decides to exercise their right. It is advantageous for the buyer to exercise their right only when the asset price is lower than the strike.
+
+# What is an option used for?
+
+An option can be used to hedge against risk, speculate, or exploit arbitrage opportunities. To better understand the uses of an option, we illustrate each case with a call option example.
+
+#### Hedging
+
+A French company needs to purchase oil in three months to supply its factories, but fears that the price per barrel may rise in the meantime. To protect itself, it buys a call option on oil with a strike price fixed today at $80.
+
+- If in three months the barrel price rises to $95, the company exercises its call and buys at $80. Hence, the company has avoided the price increase.
+- If the price stays at $75, it does not exercise the option and buys directly on the market, meaning the company has only lost the option premium.
+
+#### Speculation
+
+An investor anticipates a rise in a given stock, currently at $200. Rather than buying the stock outright, they buy a call with a strike of $210, which costs $8.
+
+- If the stock rises to $230, they exercise the option: they buy at $210 what is worth $230. This represents a gain of $20 for an initial outlay of only $8, illustrating the leverage effect of options.
+- If the stock stays below $210, they do not exercise and only lose the $8 premium.
+
+The option allows one to benefit from an anticipated rise without investing the full amount, while capping the maximum loss at the premium paid.
+
+#### Arbitrage
+
+Consider a stock worth €105, with a call and a put both struck at €100, priced at €12 and €6 respectively, and a zero risk-free rate. The call–put parity states that:
+
+$$
+\text{Call} - \text{Put} = S - K
+$$
+
+In our case, $\text{Call} - \text{Put} = 12 - 6 = 6$, but $S - K = 105 - 100 = 5$. There is a €1 discrepancy: the call is overpriced. An investor can therefore build the following arbitrage portfolio today:
+
+| Action | Cash flow today |
+|---|---|
+| Sell the call | +€12 |
+| Buy the put | −€6 |
+| Buy the stock | −€105 |
+| Borrow €100 at zero rate | +€100 |
+| **Net** | **+€1** |
+
+At maturity, the stock is delivered against the strike of €100, repaying the loan exactly, and the portfolio closes flat regardless of the final stock price. The investor locks in a risk-free gain of €1 today ,a textbook arbitrage.
+
+# How do we price an option?
+
+To price an option, i.e. assign it a value today, we first determine what is called the **payoff** ,the cash flow received by the buyer at maturity $T$.
+
+In the case of a call option, when the price of the underlying $S_T$ exceeds the strike $K$, the buyer exercises their right and receives $(S_T - K)$. Otherwise ($S_T \leq K$), the buyer does not exercise and receives nothing. The payoff is therefore:
+
+$$
+\text{Payoff}_{\text{Call}} = \max(S_T - K,\ 0).
+$$
+
+Symmetrically, the payoff of a put option is:
+
+$$
+\text{Payoff}_{\text{Put}} = \max(K - S_T,\ 0).
+$$
+
+Note that in both cases the payoff is always non-negative ,the buyer can never be forced to take a loss, which is precisely what distinguishes an option from a forward contract.
+
+From the seller's perspective, writing such a contract implies bearing a potentially unlimited loss. The seller will therefore only agree to enter the transaction in exchange for a **premium** ,the price of the option paid upfront by the buyer.
+
+To determine this premium, one must compute the present value of the expected future payoff. However, this expectation is not taken under the real-world probability measure, but under the **risk-neutral measure** $\mathbb{Q}$ ,the probability measure under which all assets grow at the risk-free rate $r$, ensuring the absence of arbitrage:
+
+$$
+\Pi_{\text{Call}}(t) = e^{-r(T-t)}\, \mathbb{E}^{\mathbb{Q}}\!\left[\max(S_T - K,\ 0)\ \middle|\ \mathcal{F}_t\right].
+$$
+
+In order to compute this expectation, it is necessary to know the law of $S_T$. A famous model used for $S_t$ is the so-called Black-Scholes model.
+
+## Black scholes model
+
+The Black-Scholes model [@black1973pricing] was published in 1973 by Fischer Black and Myron Scholes to provide a theoretical valuation formula for options. Under this model, the underlying asset is assumed to follow a geometric Brownian motion:
+
+$$
+dS_t = \mu S_t\, dt + \sigma S_t\, dW_t,
+$$
+
+under the historical probability measure $\mathbb{P}$, where $\mu \in \mathbb{R}$ is the drift and $\sigma > 0$ is the constant volatility.
+
+By Girsanov's theorem, there exists a risk-neutral probability measure $\mathbb{Q}$ under which the discounted asset price is a martingale. The change of measure is characterized by the market price of risk $\lambda = \frac{\mu - r}{\sigma}$, and under $\mathbb{Q}$ the dynamics become:
+
+$$
+dS_t = r S_t\, dt + \sigma S_t\, d\tilde{W}_t,
+$$
+
+where $\tilde{W}_t = W_t + \lambda t$ is a Brownian motion under $\mathbb{Q}$, and $r$ is the risk-free rate.
+
+This means that under $\mathbb{Q}$, the stock grows on average at the risk-free rate $r$ — not because investors are assumed to be risk-neutral, but because the change of measure absorbs the risk premium, making discounted prices martingales for pricing purposes. The remaining $\sigma S_t\, d\tilde{W}_t$ term captures the random fluctuations of the stock price.
+
+By applying Itô's formula to $\ln S_t$, we obtain an analytical expression for $S_t$:
+
+$$
+S_t = S_0 \exp\!\left( \left(r - \frac{\sigma^2}{2}\right)t + \sigma \tilde{W}_t \right).
+$$
+
+Since $\tilde{W}_t$ is a Brownian motion under $\mathbb{Q}$, it follows a normal distribution $\mathcal{N}(0, t)$. Hence, $\ln S_t$ is normally distributed:
+
+$$
+\ln S_t \sim \mathcal{N}\!\left( \ln S_0 + \left(r - \frac{\sigma^2}{2}\right)t,\ \sigma^2 t \right),
+$$
+
+and $S_t$ follows a log-normal distribution.
+
+Knowing this, the price of a call option can be computed explicitly :
+
+\begin{align*}
+\Pi_{\text{Call}}(t) &= e^{-r(T-t)}\, \mathbb{E}^{\mathbb{Q}}\!\left[\max(S_T - K,\ 0)\ \middle|\ \mathcal{F}_t\right] \\
+
+ &= S_t\, \Phi(d_+) - K e^{-r\tau}\, \Phi(d_-),
+\end{align*}
+
+
+where $\Phi$ is the cumulative distribution function of the standard normal distribution, and:
+
+$$
+d_\pm = \frac{\ln(S_t / K) + \left(r \pm \frac{\sigma^2}{2}\right)\tau}{\sigma\sqrt{\tau}},
+$$
+
+:::{.callout-note}
+# Good to know
+- $\Phi(d_-)$ can be interpreted as the risk-neutral probability that the option expires in the money, i.e. $\mathbb{Q}(S_T > K \mid \mathcal{F}_t)$.
+- $S_t\,\Phi(d_+)$ represents the present value of receiving the stock conditionally on exercising the option.
+- $Ke^{-r\tau}\Phi(d_-)$ represents the present value of paying the strike conditionally on exercising the option.
+:::
