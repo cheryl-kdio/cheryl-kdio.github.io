@@ -4,7 +4,7 @@ project:
 
 execute:
   enabled: true
-  cache: true
+  # cache: true
   freeze: true
   python: venv/bin/python
   
@@ -18,7 +18,6 @@ website:
   description: "Cheryl Kouadio is a graduate student in stochastic modeling and quantitative finance at Université Paris Cité. Her academic interests focus on probability theory, stochastic processes, data analysis, and financial risk modeling. She studies how rigorous statistical and mathematical methods can be applied to quantify uncertainty and support decision-making in finance and risk management."
   navbar:
     background: light
-
     left:
 #      - text: Home
 #        href: index.qmd

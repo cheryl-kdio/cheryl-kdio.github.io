@@ -1,11 +1,11 @@
 ---
-title: "Types of interest rates and rates derivatives"
+title: "Interest rates market - Key instruments"
 subtitle: "Term structure interest rate modelling"
 author:
   name: Cheryl KOUADIO
 categories: [paper,m2mo,rates]
 date: "2026-02-14"
-image: "featured.png"
+image: "covers/rates_types_cover.png"
 ---
 
 
@@ -51,7 +51,7 @@ $$
 L(t,T) = \frac{1}{T-t} \left( \frac{1}{B(t,T)} - 1 \right).
 $$
 
-In continuous compounding, we have $1 = B(t,T) e^{(T-t) R(t,T)}$, which gives
+In continuous compounding, we have $1 = B(t,T) e^{(T-t) R(t,T)}$, which gives :
 
 $$
 R(t,T) = -\frac{1}{T-t} \ln(B(t,T)).
@@ -165,3 +165,11 @@ $$
 $$
 
 Thus, the swaption can be seen as a put option on a classical bond with coupon $c_i$
+
+# Take away
+
+:::{.callout-note}
+# Take away
+To summarize everything covered in this article, a visual recap is provided below:
+![Summary poster](covers/summary_rates_types.png)
+:::

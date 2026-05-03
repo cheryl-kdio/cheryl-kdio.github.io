@@ -49,15 +49,6 @@ listing:
 
 <!-- <link rel="me" href="https://mastodon.social/@hegang"> -->
 
-## Recent Posts
-Check out the latest &nbsp;[Published articles](posts.qmd#category=news)&nbsp;, &nbsp;[M2MO](posts.qmd#category=m2mo)&nbsp;, &nbsp;[Ensai](posts.qmd#category=ensai-gdr)&nbsp;, and &nbsp;[More »](/posts.qmd)
-
-:::{#recent-posts}
-:::
-
-<p align="right">[All Posts »](/posts.qmd)</p>
-
-## About me
 
 :::{#hero-heading}
 
@@ -73,3 +64,12 @@ More broadly, I am building a profile oriented toward **quantitative finance, ri
 
 :::
 
+
+## Recent Posts
+
+:::{#recent-posts}
+:::
+
+Check out the latest &nbsp;[Published articles](posts.qmd#category=news)&nbsp;, &nbsp;[M2MO](posts.qmd#category=m2mo)&nbsp;, &nbsp;[Ensai](posts.qmd#category=ensai-gdr)&nbsp;, and &nbsp;[More »](/posts.qmd)
+
+<p align="right">[All Posts »](/posts.qmd)</p>

@@ -10,7 +10,7 @@
 <meta name="dcterms.date" content="2026-02-14">
 <meta name="description" content="Cheryl Kouadio is a graduate student in stochastic modeling and quantitative finance at Université Paris Cité. Her academic interests focus on probability theory, stochastic processes, data analysis, and financial risk modeling. She studies how rigorous statistical and mathematical methods can be applied to quantify uncertainty and support decision-making in finance and risk management.">
 
-<title>Types of interest rates and rates derivatives – Cheryl Kouadio</title>
+<title>Interest rates market - Key instruments – Cheryl Kouadio</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -68,7 +68,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-
 <!-- 
 Load Academicons v1: https://jpswalsh.github.io/academicons/
 -->
@@ -120,17 +119,17 @@ window.Quarto = {
 </script>
 
 <link rel="stylesheet" href="../../../styles.css">
-<meta property="og:title" content="Types of interest rates and rates derivatives – Cheryl Kouadio">
+<meta property="og:title" content="Interest rates market - Key instruments – Cheryl Kouadio">
 <meta property="og:description" content="Term structure interest rate modelling">
-<meta property="og:image" content="https://cheryl-kdio.github.io/posts/m2mo/yield_curves/featured.png">
+<meta property="og:image" content="https://cheryl-kdio.github.io/posts/m2mo/yield_curves/covers/rates_types_cover.png">
 <meta property="og:site_name" content="Cheryl Kouadio">
-<meta property="og:image:height" content="289">
-<meta property="og:image:width" content="481">
-<meta name="twitter:title" content="Types of interest rates and rates derivatives – Cheryl Kouadio">
+<meta property="og:image:height" content="963">
+<meta property="og:image:width" content="2291">
+<meta name="twitter:title" content="Interest rates market - Key instruments – Cheryl Kouadio">
 <meta name="twitter:description" content="Term structure interest rate modelling">
-<meta name="twitter:image" content="https://cheryl-kdio.github.io/posts/m2mo/yield_curves/featured.png">
-<meta name="twitter:image-height" content="289">
-<meta name="twitter:image-width" content="481">
+<meta name="twitter:image" content="https://cheryl-kdio.github.io/posts/m2mo/yield_curves/covers/rates_types_cover.png">
+<meta name="twitter:image-height" content="963">
+<meta name="twitter:image-width" content="2291">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -271,6 +270,7 @@ window.Quarto = {
   <li><a href="#capfloor" id="toc-capfloor" class="nav-link" data-scroll-target="#capfloor">Cap/Floor</a></li>
   <li><a href="#swaption" id="toc-swaption" class="nav-link" data-scroll-target="#swaption">Swaption</a></li>
   </ul></li>
+  <li><a href="#take-away" id="toc-take-away" class="nav-link" data-scroll-target="#take-away">Take away</a></li>
   </ul>
 </nav>
     </div>
@@ -279,7 +279,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Types of interest rates and rates derivatives</h1>
+<h1 class="title">Interest rates market - Key instruments</h1>
 <p class="subtitle lead">Term structure interest rate modelling</p>
   <div class="quarto-categories">
     <div class="quarto-category">paper</div>
@@ -351,7 +351,7 @@ What is a zero-coupon bond?
 <p><span class="math display">\[
 L(t,T) = \frac{1}{T-t} \left( \frac{1}{B(t,T)} - 1 \right).
 \]</span></p>
-<p>In continuous compounding, we have <span class="math inline">\(1 = B(t,T) e^{(T-t) R(t,T)}\)</span>, which gives</p>
+<p>In continuous compounding, we have <span class="math inline">\(1 = B(t,T) e^{(T-t) R(t,T)}\)</span>, which gives :</p>
 <p><span class="math display">\[
 R(t,T) = -\frac{1}{T-t} \ln(B(t,T)).
 \]</span></p>
@@ -461,9 +461,25 @@ Caplet/Floorlet and Cap/Floor parity
 \end{align}
 \]</span></p>
 <p>Thus, the swaption can be seen as a put option on a classical bond with coupon <span class="math inline">\(c_i\)</span></p>
-
-
 </section>
+</section>
+<section id="take-away" class="level1">
+<h1>Take away</h1>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Take away
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>To summarize everything covered in this article, a visual recap is provided below: <img src="covers/summary_rates_types.png" class="img-fluid" alt="Summary poster"></p>
+</div>
+</div>
+
+
 </section>
 
 </main> <!-- /main -->

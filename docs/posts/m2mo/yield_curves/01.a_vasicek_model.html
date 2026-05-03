@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Cheryl Kouadio">
-<meta name="dcterms.date" content="2026-02-21">
+<meta name="dcterms.date" content="2026-05-03">
 <meta name="description" content="Cheryl Kouadio is a graduate student in stochastic modeling and quantitative finance at Université Paris Cité. Her academic interests focus on probability theory, stochastic processes, data analysis, and financial risk modeling. She studies how rigorous statistical and mathematical methods can be applied to quantify uncertainty and support decision-making in finance and risk management.">
 
-<title>Introducing the Vasicek model – Cheryl Kouadio</title>
+<title>On the modelling of interest rates – Cheryl Kouadio</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -88,7 +88,6 @@ div.csl-indent {
     "search-label": "Search"
   }
 }</script>
-
 <!-- 
 Load Academicons v1: https://jpswalsh.github.io/academicons/
 -->
@@ -140,17 +139,17 @@ window.Quarto = {
 </script>
 
 <link rel="stylesheet" href="../../../styles.css">
-<meta property="og:title" content="Introducing the Vasicek model – Cheryl Kouadio">
+<meta property="og:title" content="On the modelling of interest rates – Cheryl Kouadio">
 <meta property="og:description" content="Term structure interest rate modelling">
-<meta property="og:image" content="https://cheryl-kdio.github.io/posts/m2mo/yield_curves/featured.png">
+<meta property="og:image" content="https://cheryl-kdio.github.io/posts/m2mo/yield_curves/covers/yield_curves.png">
 <meta property="og:site_name" content="Cheryl Kouadio">
-<meta property="og:image:height" content="289">
-<meta property="og:image:width" content="481">
-<meta name="twitter:title" content="Introducing the Vasicek model – Cheryl Kouadio">
+<meta property="og:image:height" content="1194">
+<meta property="og:image:width" content="1603">
+<meta name="twitter:title" content="On the modelling of interest rates – Cheryl Kouadio">
 <meta name="twitter:description" content="Term structure interest rate modelling">
-<meta name="twitter:image" content="https://cheryl-kdio.github.io/posts/m2mo/yield_curves/featured.png">
-<meta name="twitter:image-height" content="289">
-<meta name="twitter:image-width" content="481">
+<meta name="twitter:image" content="https://cheryl-kdio.github.io/posts/m2mo/yield_curves/covers/yield_curves.png">
+<meta name="twitter:image-height" content="1194">
+<meta name="twitter:image-width" content="1603">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -278,9 +277,14 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#the-yield-curve-vs-the-zero-coupon-bond-pricing" id="toc-the-yield-curve-vs-the-zero-coupon-bond-pricing" class="nav-link active" data-scroll-target="#the-yield-curve-vs-the-zero-coupon-bond-pricing">The yield curve vs the zero-coupon bond pricing</a></li>
-  <li><a href="#a-specific-case-of-term-structure-modelling-the-vasicek-model" id="toc-a-specific-case-of-term-structure-modelling-the-vasicek-model" class="nav-link" data-scroll-target="#a-specific-case-of-term-structure-modelling-the-vasicek-model">A specific case of term structure modelling : The vasicek model</a></li>
+  <li><a href="#interest-rates-bonds-xx-year-treasury-yield-what-does-all-that-mean" id="toc-interest-rates-bonds-xx-year-treasury-yield-what-does-all-that-mean" class="nav-link active" data-scroll-target="#interest-rates-bonds-xx-year-treasury-yield-what-does-all-that-mean">Interest rates, bonds, XX-year treasury yield — what does all that mean?</a></li>
+  <li><a href="#the-link-between-bonds-and-interest-rates" id="toc-the-link-between-bonds-and-interest-rates" class="nav-link" data-scroll-target="#the-link-between-bonds-and-interest-rates">The link between bonds and interest rates</a></li>
+  <li><a href="#why-is-it-important-to-model-the-interest-rate-curve" id="toc-why-is-it-important-to-model-the-interest-rate-curve" class="nav-link" data-scroll-target="#why-is-it-important-to-model-the-interest-rate-curve">Why is it important to model the interest rate curve?</a></li>
+  <li><a href="#the-vasicek-model" id="toc-the-vasicek-model" class="nav-link" data-scroll-target="#the-vasicek-model">The Vasicek model</a>
+  <ul class="collapse">
   <li><a href="#limitations-of-the-vasicek-model" id="toc-limitations-of-the-vasicek-model" class="nav-link" data-scroll-target="#limitations-of-the-vasicek-model">Limitations of the Vasicek model</a></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
     </div>
@@ -289,7 +293,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Introducing the Vasicek model</h1>
+<h1 class="title">On the modelling of interest rates</h1>
 <p class="subtitle lead">Term structure interest rate modelling</p>
   <div class="quarto-categories">
     <div class="quarto-category">paper</div>
@@ -312,7 +316,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">February 21, 2026</p>
+      <p class="date">May 3, 2026</p>
     </div>
   </div>
   
@@ -324,84 +328,86 @@ window.Quarto = {
 </header>
 
 
-<p>An interest rate, also referred as the term structure, represents the cost of borrowing money from another counterparty, for example a bank. It reflects the price paid for the use of capital over time. Interest rates also embed market expectations. For instance, when interest rates are low, lenders are generally willing to provide funds at a lower cost, which may reflect confidence in economic and political stability. Conversely, higher interest rates can indicate greater perceived risk, such as concerns about inflation, credit risk, or macroeconomic instability.</p>
-<p>To obtain a global view of interest rates at a given date <span class="math inline">\(t\)</span>, one typically plots the interest rate as a function of maturity. This gives rise to what is called the <em>term</em> structure of interest rates. It describes the relationship between interest rates and the time to maturity of debt. In other words, it shows the rate at which investors are willing to lend money for different horizons (i.e.&nbsp;dates of reimbursement). To extract the interest rate, it is common to use a financial product, such as a zero-coupon bond, because the link between price and interest rate is simple and determined by an analytical formula.</p>
-<p>In this article, we focus on a specific model of the term structure of interest rates: the Vasicek model. We first explain its relationship with zero-coupon bond pricing and show how to move from the short-rate dynamics to bond prices, then introduce the model and its advantages. Finally, we discuss the limitations of the model, and suggest possible extensions to better capture the observed shape of the yield curve.</p>
-<section id="the-yield-curve-vs-the-zero-coupon-bond-pricing" class="level1">
-<h1>The yield curve vs the zero-coupon bond pricing</h1>
-<p>As mentioned in the introduction, the yield curve is a function <span class="math inline">\(T \mapsto r(T)\)</span> that represents, for each given maturity, the interest rate at which an individual can borrow or is willing to lend. In normal economic conditions, the yield curve is often upward sloping, meaning that long-term interest rates are higher than short-term rates. However, during periods of economic stress or when markets anticipate a recession, the curve may flatten or even become inverted. Therefore, the shape of the yield curve provides valuable information about market expectations regarding future interest rates, economic growth, and inflation.</p>
-<div>
-
-</div>
-<div class="quarto-layout-panel" data-layout-ncol="2">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="normal_ir.png" class="img-fluid figure-img"></p>
-<figcaption>Normal yield curve</figcaption>
-</figure>
-</div>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="inverted_ir.png" class="img-fluid figure-img"></p>
-<figcaption>Inverted yield curve</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div class="figure-caption">
-<p>Left: In normal economic conditions, the yield curve is typically upward sloping, meaning that long-term rates exceed short-term rates.<br>
-Right: An inverted yield curve occurs when short-term rates are higher than long-term rates, often reflecting recession expectations.</p>
-</div>
-<p>Interest rates are also used as discount factors. They allow us to determine the present value of money to be received at a future date. For example, if A lends 1 euro today at an interest rate <span class="math inline">\(r\)</span>, it means that he will be reimbursed <span class="math inline">\(1 + r\)</span> at time <span class="math inline">\(T\)</span>. Therefore, the 1 euro lent today will be worth <span class="math inline">\(1+r\)</span> in the future. Conversely, by a simple proportional reasoning, 1 euro to be received in the future corresponds to a present value of <span class="math inline">\(\frac{1}{1+r}\)</span> today.</p>
-<p>To get more informations about interest rate use, check the article intitulated Types of interest rates and rates derivatives.</p>
-<p>Interest rate is not a traded product in the market. So they cannot be observe directly. Hence, one often use derivatives in other th know the quantity of the derivatives. In the case of a zero-coupon bond (ZC bond), the link between price and interest rate is particularly simple, as it is given by an analytical formula. In fact, let <span class="math inline">\(B(t,T)\)</span> be the price of a zero-coupon bond and <span class="math inline">\(R(t,T)\)</span> the interest rate associated. In continuous compounding interest rate, we have that : <span class="math display">\[
-R(t,T) = -\frac{1}{T-t} \ln(B(t,T)).
-\]</span></p>
-<p>Therefore, one can represent the term structure through the zero-coupon bond prices as a function of maturity. By the way, since a zero-coupon bond is a product traded in the market, its price can be expressed as the expected discounted payoff under the risk-neutral measure:</p>
-<p><span class="math display">\[
-B(t,T) = \mathbb{E}^{\mathbb{Q}}\left[ \exp\left(-\int_t^T r_s ds \right) \middle| \mathcal{F}_t \right]. \quad (*)
-\]</span></p>
-<p>Hence, modeling the short rate process (<span class="math inline">\(r_t\)</span>) directly determines the bond price dynamics. In other words, specifying a model for <span class="math inline">\(r_t\)</span> allows us to derive the entire term structure of interest rates and compute zero-coupon bond prices for all maturities.</p>
+<section id="interest-rates-bonds-xx-year-treasury-yield-what-does-all-that-mean" class="level2">
+<h2 class="anchored" data-anchor-id="interest-rates-bonds-xx-year-treasury-yield-what-does-all-that-mean">Interest rates, bonds, XX-year treasury yield — what does all that mean?</h2>
+<p>Interest rates are key indicators that reveal a great deal about what is happening in the world. For example, during the 2008 financial crisis, interest rates rose significantly. In contrast, during the COVID-19 crisis in 2020, we observed a drastic decline in interest rates, with some even turning negative. More recently, during tensions between Iran and the United States, movements in 10-year bond yields raised concerns about potential inflation.</p>
+<p>Until recently, you may have been unfamiliar with terms such as “bonds,” “XX-year bond yields,” and “interest rates,” as well as their impact on the economy. If so, you are in the right place. In this article, we aim to demystify the concept of interest rates. We will also introduce the fundamental models used to describe them, along with some illustrative coding examples.</p>
+<p>According to the concept of time value of money, a dollar today is worth more than a dollar tomorrow. This can be explained by different mechanisms. For example, since the future is uncertain, a dollar promised tomorrow carries more risk than a dollar received today. Hence, what can justify lending money — and thus forgoing its immediate use? Interest rates.</p>
+<p>An interest rate can be seen as the cost of borrowing or the return on lending. For example, suppose a counterparty A lends money today to B, who must reimburse it in five days. To compensate for the renunciation of liquidity now, B reimburses A, at what we call the maturity date, the initial amount plus a fraction of the sum borrowed. This fraction is the interest rate.</p>
+<p>Another instrument illustrates the same mechanism: the zero-coupon bond. Here, rather than specifying an interest rate explicitly, the compensation for waiting is embedded in the price. A zero-coupon bond is a contract that guarantees its holder one dollar at maturity date <span class="math inline">\(T\)</span> — with no intermediate payments. Since that dollar is received in the future, the buyer pays less than one dollar for it today. The difference between the price paid and the dollar received at <span class="math inline">\(T\)</span> is precisely what compensates the lender for the time and risk of waiting.</p>
 </section>
-<section id="a-specific-case-of-term-structure-modelling-the-vasicek-model" class="level1">
-<h1>A specific case of term structure modelling : The vasicek model</h1>
-<p>The Vasicek model <span class="citation" data-cites="vasicek1977equilibrium">(<a href="#ref-vasicek1977equilibrium" role="doc-biblioref">Vasicek 1977</a>)</span> was introduced in 1977 by Oldřich Vašíček to model the short rate process <span class="math inline">\(r_t\)</span>. It is inspired by the Ornstein–Uhlenbeck process, which is a Gaussian Markov process.</p>
-<p>We work on <span class="math inline">\((\Omega,(\mathcal{F}_t), \mathbb{Q})\)</span>, and the model assumes that the dynamics of <span class="math inline">\(r_t\)</span> are given by:</p>
+<section id="the-link-between-bonds-and-interest-rates" class="level2">
+<h2 class="anchored" data-anchor-id="the-link-between-bonds-and-interest-rates">The link between bonds and interest rates</h2>
+<p>The link between bonds and interest rates is quite simple. In order to understand this, let’s consider two investment strategies that should, in a no-arbitrage world, yield the same return.</p>
+<p>To formalize the example, let’s denote <span class="math inline">\(r(t,T)\)</span> the simple interest rate fixed at time <span class="math inline">\(t\)</span> and applying until <span class="math inline">\(T\)</span>. A sum <span class="math inline">\(X\)</span> invested at time <span class="math inline">\(t\)</span> will therefore be worth <span class="math inline">\(X + X \cdot r(t,T) \cdot (T-t)\)</span> at time <span class="math inline">\(T\)</span>.</p>
+<p>Now consider a zero-coupon bond: we pay <span class="math inline">\(B(t,T)\)</span> at time <span class="math inline">\(t\)</span> to receive <span class="math inline">\(1\)</span> at maturity <span class="math inline">\(T\)</span>. Alternatively, we can invest the same amount <span class="math inline">\(B(t,T)\)</span> in a money market account that pays the simple spot rate <span class="math inline">\(r(t,T)\)</span>. At maturity <span class="math inline">\(T\)</span>, this second strategy yields <span class="math inline">\(B(t,T) \cdot (1 + (T-t) \cdot r(t,T))\)</span>.</p>
+<p>Since we are in a no-arbitrage framework, both strategies must produce the same payoff at maturity <span class="math inline">\(T\)</span>, which gives:</p>
 <p><span class="math display">\[
-dr_t = k(\theta - r_t),dt + \sigma, dW_t,
+1 = B(t,T) \cdot (1 + (T-t) \cdot r(t,T)) \quad \Longleftrightarrow \quad r(t,T) = \frac{1}{T-t} \left( \frac{1}{B(t,T)} - 1 \right).
+\]</span></p>
+<p>In practice, continuous compounding is generally preferred. To emphasize this change in convention, we will denote <span class="math inline">\(R(t,T)\)</span> the continuously compounded rate, as opposed to the simple rate <span class="math inline">\(r(t,T)\)</span>. Writing <span class="math inline">\(B(t,T) = e^{-(T-t) R(t,T)}\)</span> and identifying with the expression above, we obtain the following equivalent relationship:</p>
+<p><span class="math display">\[
+1 = B(t,T) \cdot e^{(T-t) R(t,T)} \quad \Longleftrightarrow \quad R(t,T) = -\frac{1}{T-t} \ln B(t,T).
+\]</span></p>
+<p>As one can see, there is an inversely proportional relationship between the interest rate and the zero-coupon bond price. Under normal conditions, we tend to observe an increasing term structure of interest rates, meaning that lenders are willing to lend their money over the long term only if they receive a higher rate of return as compensation for time and risk. Consequently, the zero-coupon bond price curve will be decreasing and convex, meaning that bond prices decline as maturity increases, but at a decreasing rate.</p>
+<p>Since both <span class="math inline">\(r(t,T)\)</span> and <span class="math inline">\(B(t,T)\)</span> depend on <span class="math inline">\(t\)</span> and <span class="math inline">\(T\)</span>, in order to obtain a curve one needs to fix one of the two parameters. The most common convention is to fix the observation date <span class="math inline">\(t\)</span> and let the maturity <span class="math inline">\(T\)</span> vary — this gives rise to what is called the <strong>yield curve</strong> (or term structure of interest rates), which represents the interest rate as a function of maturity <span class="citation" data-cites="ecbyieldcurve">(<a href="#ref-ecbyieldcurve" role="doc-biblioref">European Central Bank, n.d.b</a>)</span>.</p>
+<p>Conversely, fixing <span class="math inline">\(T\)</span> and varying <span class="math inline">\(t\)</span> gives the time evolution of the rate for a given maturity, giving rise to what is called a <span class="math inline">\(T\)</span>-year bond rate curve <span class="citation" data-cites="ecbsr10y">(<a href="#ref-ecbsr10y" role="doc-biblioref">European Central Bank, n.d.a</a>)</span>. It is called the <span class="math inline">\(T\)</span>-year Treasury yield when the bond used as reference is a US government bond (issued by the US Department of the Treasury).</p>
+</section>
+<section id="why-is-it-important-to-model-the-interest-rate-curve" class="level2">
+<h2 class="anchored" data-anchor-id="why-is-it-important-to-model-the-interest-rate-curve">Why is it important to model the interest rate curve?</h2>
+<p>It is important to model the interest rate curve because it is a fundamental input in almost every area of finance. It allows us to price and value a wide range of financial instruments — from simple bonds to complex interest rate derivatives — by providing the discount rates needed to bring future cash flows back to their present value. Knowing that 1 euro today will be worth <span class="math inline">\(1 + r \cdot T\)</span> in <span class="math inline">\(T\)</span> years, we can derive the present value of 1 euro received at time <span class="math inline">\(T\)</span>, which is simply <span class="math inline">\(1/(1 + r \cdot T)\)</span> today.</p>
+<p>Depending on the conditions of the economy, we will observe various types of interest rate curves:</p>
+<ul>
+<li><p><strong>Normal curve</strong>: the yield curve is upward sloping, meaning long-term rates are higher than short-term rates. This reflects the typical expectation that lenders demand higher compensation for tying up their money over longer periods, and that the economy is in a healthy growth regime.</p></li>
+<li><p><strong>Inverted curve</strong>: short-term rates exceed long-term rates, producing a downward sloping curve. This is often interpreted as a signal that markets expect economic slowdown or recession ahead, as investors anticipate that central banks will cut rates in the future and therefore want higher compensation now.</p></li>
+<li><p><strong>Steepening curve</strong>: the difference between long-term and short-term rates widens, meaning that investors demand higher compensation for long-term lending. This typically occurs when markets expect stronger growth or higher inflation ahead, causing long-term rates to rise faster than short-term rates.</p></li>
+<li><p><strong>Flattening curve</strong>: the difference between long-term and short-term rates narrows. This often signals that the market expects a slowdown, typically occurring when central banks raise short-term rates aggressively to cool the economy while long-term rates remain relatively stable.</p></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="covers/yield_curves.png" class="img-fluid figure-img"></p>
+<figcaption>Inversion, Steepening and Flattening of the Yield Curve</figcaption>
+</figure>
+</div>
+</section>
+<section id="the-vasicek-model" class="level2">
+<h2 class="anchored" data-anchor-id="the-vasicek-model">The Vasicek model</h2>
+<p>The Vasicek model <span class="citation" data-cites="vasicek1977equilibrium">(<a href="#ref-vasicek1977equilibrium" role="doc-biblioref">Vasicek 1977</a>)</span> was introduced in 1977 by Oldřich Vašíček to model the short rate process <span class="math inline">\(r_t\)</span>, which is basically the interest rate <span class="math inline">\(r(t, t+dt)\)</span> applied over an infinitesimally small period of time <span class="math inline">\(dt\)</span>. In other words, it represents the cost of borrowing money instantaneously at time <span class="math inline">\(t\)</span>, and from which the entire yield curve <span class="math inline">\(R(t,T)\)</span> can be reconstructed for any maturity <span class="math inline">\(T\)</span>.</p>
+<p>It is inspired by the Ornstein–Uhlenbeck process, which is a Gaussian Markov process. We work on <span class="math inline">\((\Omega, (\mathcal{F}_t), \mathbb{Q})\)</span>, and the model assumes that the dynamics of <span class="math inline">\(r_t\)</span> are given by:</p>
+<p><span class="math display">\[
+dr_t = k(\theta - r_t)\,dt + \sigma\,dW_t,
 \]</span></p>
 <p>with <span class="math inline">\(W_t\)</span> a Brownian motion under the probability measure <span class="math inline">\(\mathbb{Q}\)</span>.</p>
-<p>The drift <span class="math inline">\(k(\theta - r_t)\)</span> represents the force that keeps pulling the short rate <span class="math inline">\(r_t\)</span> towards its long-term mean <span class="math inline">\(\theta\)</span>, with <span class="math inline">\(k&gt;0\)</span> as the mean-reversion speed. The process has a constant instantaneous variance <span class="math inline">\(\sigma^2\)</span>, causing the short rate to fluctuate around <span class="math inline">\(\theta\)</span>.</p>
-<p>Moreover, the SDE admits a unique strong solution since the coefficients are Lipschitz and of linear growth. Furthermore, by applying Itô’s formula to <span class="math inline">\(e^{kt}r_t\)</span>, we have for <span class="math inline">\(0 \le s \le t\)</span>:</p>
+<p>The drift <span class="math inline">\(k(\theta - r_t)\)</span> represents the force that keeps pulling the short rate <span class="math inline">\(r_t\)</span> towards its long-term mean <span class="math inline">\(\theta\)</span>, with <span class="math inline">\(k &gt; 0\)</span> as the mean-reversion speed. The process has a constant instantaneous variance <span class="math inline">\(\sigma^2\)</span>, causing the short rate to fluctuate around <span class="math inline">\(\theta\)</span>.</p>
+<p>Moreover, the SDE admits a unique strong solution since the coefficients are Lipschitz and of linear growth. Furthermore, by applying Itô’s formula to <span class="math inline">\(e^{kt} r_t\)</span>, we have an analytical expression of the short rate:</p>
 <p><span class="math display">\[
-r_t = r_s e^{-k(t-s)} + \theta \left( 1 - e^{-k(t-s)} \right) + \sigma \int_s^t e^{-k(t-u)} dW_u.
+r_t = r_s e^{-k(t-s)} + \theta\left(1 - e^{-k(t-s)}\right) + \sigma \int_s^t e^{-k(t-u)}\,dW_u, \quad 0 \leq s \leq t.
 \]</span></p>
 <p>Hence, the conditional moments of <span class="math inline">\(r_t\)</span> are given by:</p>
-<ul>
-<li><p><span class="math inline">\(\mathbb{E}[r_t \mid \mathcal{F}_s] = r_s e^{-k(t-s)} + \theta \left( 1 - e^{-k(t-s)} \right)\)</span></p></li>
-<li><p><span class="math inline">\(\mathbb{V}[r_t \mid \mathcal{F}_s] = \frac{\sigma^2}{2k} \left( 1 - e^{-2k(t-s)} \right)\)</span>.</p></li>
-</ul>
-<p>Using the link between the short rate and the zero-coupon bond price (*), since <span class="math inline">\(\int_t^T r_u,du \mid \mathcal{F}_t\)</span> is Gaussian, pricing reduces to computing the Laplace transform of a normal random variable. Hence, omitting some computational details, the bond price can be written in an affine form with respect to the short rate:</p>
 <p><span class="math display">\[
-\begin{align}
-B(t,T) &amp;=  \mathbb{E}^{\mathbb{Q}}\left[ \exp\left(-\int_t^T r_u,du \right) \middle| \mathcal{F}_t \right] [4pt]
-&amp;= \exp\left( m(t,T) - n(t,T), r_t\right),
-\end{align}
+\mathbb{E}[r_t \mid \mathcal{F}_s] = r_s e^{-k(t-s)} + \theta\left(1 - e^{-k(t-s)}\right),
 \]</span></p>
-<p>with <span class="math inline">\(n(t,T) := \frac{ 1 - e^{-k(T-t)}}{k},\)</span> and <span class="math inline">\(m(t,T) := \left( \theta - \frac{\sigma^2}{2k^2} \right)\left(B(t,T) - (T-t)\right) - \frac{\sigma^2}{4k},B(t,T)^2.\)</span></p>
+<p><span class="math display">\[
+\mathbb{V}[r_t \mid \mathcal{F}_s] = \frac{\sigma^2}{2k}\left(1 - e^{-2k(t-s)}\right).
+\]</span></p>
+<p>Using the link between the short rate and the zero-coupon bond price, since <span class="math inline">\(\int_t^T r_u\,du \mid \mathcal{F}_t\)</span> is Gaussian, pricing reduces to computing the Laplace transform of a normal random variable. Hence, omitting some computational details, the bond price can be written in an affine form with respect to the short rate:</p>
+<p><span class="math display">\[
+B(t,T) = \mathbb{E}^{\mathbb{Q}}\!\left[\exp\!\left(-\int_t^T r_u\,du\right) \middle| \mathcal{F}_t \right] = \exp\!\left(m(t,T) - n(t,T)\,r_t\right),
+\]</span></p>
+<p>with:</p>
+<p><span class="math display">\[
+n(t,T) := \frac{1 - e^{-k(T-t)}}{k}, \qquad m(t,T) := \left(\theta - \frac{\sigma^2}{2k^2}\right)\!\left(n(t,T) - (T-t)\right) - \frac{\sigma^2}{4k}\,n(t,T)^2.
+\]</span></p>
 <p>Now, recalling the link between the zero-coupon bond price <span class="math inline">\(B(t,T)\)</span> and the term structure interest rate <span class="math inline">\(R(t,T)\)</span>, i.e.&nbsp;<span class="math inline">\(R(t,T) = -\frac{1}{T-t}\ln B(t,T)\)</span>, we obtain an analytical expression for the yield:</p>
 <p><span class="math display">\[
-R(t,T) = R(\infty) + (r_t - R(\infty)) \frac{ 1 - e^{-k(T-t)}}{k(T-t)} + \frac{\sigma^2}{4k^3 (T-t)} \left( 1 - e^{-k(T-t)} \right)^2,
+R(t,T) = R(\infty) + \left(r_t - R(\infty)\right) \frac{1 - e^{-k(T-t)}}{k(T-t)} + \frac{\sigma^2}{4k^3(T-t)}\left(1 - e^{-k(T-t)}\right)^2,
 \]</span></p>
-<p>with <span class="math inline">\(R(\infty) = \lim_{T \rightarrow \infty} R(t,T) = \theta - \frac{\sigma^2}{2k^2}.\)</span></p>
-</section>
-<section id="limitations-of-the-vasicek-model" class="level1">
-<h1>Limitations of the Vasicek model</h1>
+<p>with:</p>
+<p><span class="math display">\[
+R(\infty) = \lim_{T \to \infty} R(t,T) = \theta - \frac{\sigma^2}{2k^2}.
+\]</span></p>
+<section id="limitations-of-the-vasicek-model" class="level3">
+<h3 class="anchored" data-anchor-id="limitations-of-the-vasicek-model">Limitations of the Vasicek model</h3>
 <p>Despite its widespread use, the Vasicek model has several limitations due to the assumptions it relies on:</p>
 <ul>
 <li><p>Negative interest rates : The model allows the short rate to become negative, since it follows a Gaussian process. Historically, this was considered unrealistic. However, recent market environments with negative policy rates have made the Vasicek framework more relevant in certain contexts for modeling short-rate dynamics and extracting a yield curve.</p></li>
@@ -409,19 +415,29 @@ R(t,T) = R(\infty) + (r_t - R(\infty)) \frac{ 1 - e^{-k(T-t)}}{k(T-t)} + \frac{\
 <li><p>One-factor model : The Vasicek model is a one-factor model, meaning that the entire term structure is driven by a single source of randomness (one Brownian motion). This implies perfect correlation between rate movements across maturities. Such a simplification may not capture the empirical complexity of interest rate dynamics, where multiple factors (level, slope, curvature) are typically required.</p></li>
 <li><p>Calibration to the initial yield curve : Due to the small number of parameters <span class="math inline">\((k, \theta, \sigma)\)</span>, the Vasicek model cannot perfectly match the observed initial zero-coupon yield curve. To overcome this limitation, one can introduce a time-dependent mean-reversion level <span class="math inline">\(\theta(t)\)</span>. This leads to the Hull–White extension <span class="citation" data-cites="hull2001general">(<a href="#ref-hull2001general" role="doc-biblioref">Hull and White 2001</a>)</span>, which allows exact calibration to the initial term structure.</p></li>
 </ul>
-
-
-
 </section>
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+</section>
+<section id="references" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="references">References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-ecbsr10y" class="csl-entry" role="listitem">
+European Central Bank. n.d.a. <span>“10-Year Spot Rate for Euro Area.”</span> <a href="https://data.ecb.europa.eu/data/datasets/YC/YC.B.U2.EUR.4F.G_N_A.SV_C_YM.SR_10Y">https://data.ecb.europa.eu/data/datasets/YC/YC.B.U2.EUR.4F.G_N_A.SV_C_YM.SR_10Y</a>.
+</div>
+<div id="ref-ecbyieldcurve" class="csl-entry" role="listitem">
+———. n.d.b. <span>“Euro Area Yield Curves.”</span> <a href="https://www.ecb.europa.eu/stats/financial_markets_and_interest_rates/euro_area_yield_curves/html/index.en.html">https://www.ecb.europa.eu/stats/financial_markets_and_interest_rates/euro_area_yield_curves/html/index.en.html</a>.
+</div>
 <div id="ref-hull2001general" class="csl-entry" role="listitem">
 Hull, John, and Alan White. 2001. <span>“The General Hull–White Model and Supercalibration.”</span> <em>Financial Analysts Journal</em> 57 (6): 34–43.
 </div>
 <div id="ref-vasicek1977equilibrium" class="csl-entry" role="listitem">
 Vasicek, Oldrich. 1977. <span>“An Equilibrium Characterization of the Term Structure.”</span> <em>Journal of Financial Economics</em> 5 (2): 177–88.
 </div>
-</div></section></div></main> <!-- /main -->
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
