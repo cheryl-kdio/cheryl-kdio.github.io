@@ -31,6 +31,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/m2mo/vol/implied_vol.html",
       "/posts/m2mo/yield_curves/interest_rates_made_simple.html",
       "/posts/m2mo/derivatives/03_options_made_simple.html",
       "/posts/m2mo/yield_curves/00_intro_yield_curve.html",
@@ -68,6 +69,7 @@
   {
     "listing": "/posts.html",
     "items": [
+      "/posts/m2mo/vol/implied_vol.html",
       "/posts/m2mo/derivatives/03_options_made_simple.html",
       "/posts/m2mo/yield_curves/interest_rates_made_simple.html",
       "/posts/m2mo/yield_curves/00_intro_yield_curve.html",
