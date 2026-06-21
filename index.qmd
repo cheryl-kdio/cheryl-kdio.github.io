@@ -6,7 +6,7 @@ subtitle: |
   Faculty of Mathematics and Applications \
   Paris, France
 description-meta: "Cheryl Kouadio is a graduate student in stochastic modeling and quantitative finance at Université Paris Cité. Her academic interests focus on probability theory, stochastic processes, data analysis, and financial risk modeling. She studies how rigorous statistical and mathematical methods can be applied to quantify uncertainty and support decision-making in finance and risk management."
-image: "files/profile/kouadio_profile.jpeg"
+# image: "files/profile/kouadio_profile.jpg"
 page-navigation: false
 toc: false
 #sidebar: false
@@ -15,7 +15,8 @@ page-layout: full
 about:
   id: hero-heading
   template: trestles
-  image-width: 80%
+  image-width: 50%
+  image-shape: round
   links:
   - icon: envelope
     text: E-mail
@@ -49,19 +50,13 @@ listing:
 
 <!-- <link rel="me" href="https://mastodon.social/@hegang"> -->
 
-
 :::{#hero-heading}
 
-I am a graduate student in statistics and quantitative modeling, with academic and professional interests at the intersection of **probability theory, stochastic modeling, data analysis, and financial risk management**. I am currently completing a **Master’s degree in Modélisation Aléatoire et Finance Quantitative (M2MO)** at **Université Paris Cité**, a selective program focused on advanced probability, stochastic processes, numerical methods, and applications to finance and risk.
+<p align="center" style="font-size: 2em; font-weight: bold;">Hi there! 🤗</p>
 
-My academic training is grounded in **mathematical statistics and applied data science**. I previously studied **Statistics and Decision Informatics**, where I developed a strong foundation in statistical inference, multivariate analysis, time series, optimization, and programming for data analysis. Throughout my studies, I have built solid technical skills in **Python, R, SAS, and SQL**, and I regularly use data-visualization tools to communicate quantitative results clearly and effectively.
+I'm a graduate student passionate about mathematics, statistics, and their applications to finance and risk. I'm currently completing a Master's degree in Modélisation Aléatoire et Finance Quantitative (M2MO) at Université Paris Cité, a program centered on probability theory, stochastic processes, numerical methods, and quantitative finance. Previously, I studied at ENSAI, where I specialized in financial risk management.
 
-Alongside my academic training, I have gained **hands-on experience in applied statistics and data analysis** through professional assignments in institutional and administrative environments. My work has involved data cleaning and processing, statistical reporting, automation of analyses, and the development of dashboards to support data-driven decision-making. These experiences have strengthened my ability to bridge rigorous statistical theory with real-world applications.
-
-My current academic focus centers on **stochastic processes, probabilistic modeling, numerical methods for finance, and quantitative risk analysis**. I am particularly interested in how mathematically sound models can be used to quantify uncertainty, assess financial risk, and support regulatory and strategic decision frameworks. I place strong emphasis on methodological rigor, model validation, and the transparent interpretation of results.
-
-More broadly, I am building a profile oriented toward **quantitative finance, risk modeling, and advanced statistical research**, combining strong theoretical foundations with practical implementation skills. My goal is to use mathematics and statistics as tools to better understand complex systems, manage risk, and produce reliable and interpretable quantitative analyses.
-
+This website is my little corner of the internet, a place where I share what I learn through coursework, projects, and personal exploration in mathematics, statistics, and quantitative finance. I hope it can also be useful to other students walking a similar path!
 :::
 
 

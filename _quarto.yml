@@ -40,14 +40,14 @@ website:
           - text: M2MO
             href: posts.qmd#category=m2mo
       
-      - text: Outreach
-        menu:
-        - text: Policy Engagement
-          href: posts.qmd#category=outreach       
-        - text: Presentations
-          href: posts.qmd#category=presentation            
-        - text: Notes
-          href: notes.qmd          
+      # - text: Outreach
+      #   menu:
+      #   - text: Policy Engagement
+      #     href: posts.qmd#category=outreach       
+      #   - text: Presentations
+      #     href: posts.qmd#category=presentation            
+      #   - text: Notes
+      #     href: notes.qmd          
       - text : Glossary
         href: glossary.qmd    
 

@@ -1,0 +1,1561 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.40">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Cheryl Kouadio">
+<meta name="dcterms.date" content="2026-06-21">
+<meta name="description" content="Cheryl Kouadio is a graduate student in stochastic modeling and quantitative finance at Université Paris Cité. Her academic interests focus on probability theory, stochastic processes, data analysis, and financial risk modeling. She studies how rigorous statistical and mathematical methods can be applied to quantify uncertainty and support decision-making in finance and risk management.">
+
+<title>Particle method for stochastic local volatility valibration – Cheryl Kouadio</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-3146a0984a964146c28da0a2cf78b9ad.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<!-- 
+Load Academicons v1: https://jpswalsh.github.io/academicons/
+-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+
+<!---
+The following code are needed to show dimension citation and altmetrics.
+https://api.altmetric.com/embeds.html
+https://badge.dimensions.ai/
+--->
+
+<script type="text/javascript" src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script>
+
+<script async="" src="https://badge.dimensions.ai/badge.js" charset="utf-8"></script>
+
+<script type="text/javascript" src="//cdn.plu.mx/widget-popup.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../../styles.css">
+<meta property="og:title" content="Particle method for stochastic local volatility valibration – Cheryl Kouadio">
+<meta property="og:description" content="A numerical implementation of Guyon &amp; Henry-Labordère (2011)">
+<meta property="og:image" content="https://cheryl-kdio.github.io/posts/m2mo/vol/slv_paths.png">
+<meta property="og:site_name" content="Cheryl Kouadio">
+<meta property="og:image:height" content="390">
+<meta property="og:image:width" content="1189">
+<meta name="twitter:title" content="Particle method for stochastic local volatility valibration – Cheryl Kouadio">
+<meta name="twitter:description" content="A numerical implementation of Guyon &amp; Henry-Labordère (2011)">
+<meta name="twitter:image" content="https://cheryl-kdio.github.io/posts/m2mo/vol/slv_paths.png">
+<meta name="twitter:image-height" content="390">
+<meta name="twitter:image-width" content="1189">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">Cheryl Kouadio</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-about" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">About</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-about">    
+        <li>
+    <a class="dropdown-item" href="../../../posts.html#category=news">
+ <span class="dropdown-text">News</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../posts.html#category=event">
+ <span class="dropdown-text">Events</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../now.html">
+ <span class="dropdown-text">Now</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-articles" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Articles</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-articles">    
+        <li>
+    <a class="dropdown-item" href="../../../publications.html">
+ <span class="dropdown-text">Reports</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../posts.html#category=paper">
+ <span class="dropdown-text">All papers</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../posts.html#category=ensai-gdr">
+ <span class="dropdown-text">Ensai</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../posts.html#category=m2mo">
+ <span class="dropdown-text">M2MO</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../../glossary.html"> 
+<span class="menu-text">Glossary</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../files/Cheryl-Kouadio-CV.pdf" target="_blank"> 
+<span class="menu-text">CV</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://github.com/cheryl-kdio" target="_blank"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text">Github</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.linkedin.com/in/cheryl-kouadio-251815206/" target="_blank"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text">Linkedin</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../../posts.xml" target="_blank"> <i class="bi bi-rss" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#from-blackscholes-constant-volatility-to-stochastic-local-volatility-a-brief-theoretical-background" id="toc-from-blackscholes-constant-volatility-to-stochastic-local-volatility-a-brief-theoretical-background" class="nav-link active" data-scroll-target="#from-blackscholes-constant-volatility-to-stochastic-local-volatility-a-brief-theoretical-background">From Black–Scholes Constant Volatility to Stochastic Local Volatility: a brief theoretical background</a>
+  <ul class="collapse">
+  <li><a href="#blackscholes-model" id="toc-blackscholes-model" class="nav-link" data-scroll-target="#blackscholes-model">Black–Scholes model</a></li>
+  <li><a href="#local-volatility-dupire-model" id="toc-local-volatility-dupire-model" class="nav-link" data-scroll-target="#local-volatility-dupire-model">Local Volatility: Dupire model</a></li>
+  <li><a href="#stochastic-volatility-models" id="toc-stochastic-volatility-models" class="nav-link" data-scroll-target="#stochastic-volatility-models">Stochastic volatility models</a></li>
+  <li><a href="#stochastic-local-volatility-models" id="toc-stochastic-local-volatility-models" class="nav-link" data-scroll-target="#stochastic-local-volatility-models">Stochastic local volatility models</a></li>
+  </ul></li>
+  <li><a href="#the-particle-method-for-smile-calibration" id="toc-the-particle-method-for-smile-calibration" class="nav-link" data-scroll-target="#the-particle-method-for-smile-calibration">The Particle Method for Smile Calibration</a></li>
+  <li><a href="#illustrative-example" id="toc-illustrative-example" class="nav-link" data-scroll-target="#illustrative-example">Illustrative example</a>
+  <ul class="collapse">
+  <li><a href="#monte-carlo-scheme" id="toc-monte-carlo-scheme" class="nav-link" data-scroll-target="#monte-carlo-scheme">Monte carlo scheme</a></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
+  </ul></li>
+  <li><a href="#appendices" id="toc-appendices" class="nav-link" data-scroll-target="#appendices">Appendices</a>
+  <ul class="collapse">
+  <li><a href="#python-codes" id="toc-python-codes" class="nav-link" data-scroll-target="#python-codes">Python codes</a></li>
+  <li><a href="#mathematical-details-of-simulation" id="toc-mathematical-details-of-simulation" class="nav-link" data-scroll-target="#mathematical-details-of-simulation">Mathematical details of simulation</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Particle method for stochastic local volatility valibration</h1>
+<p class="subtitle lead">A numerical implementation of Guyon &amp; Henry-Labordère (2011)</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">paper</div>
+    <div class="quarto-category">m2mo</div>
+    <div class="quarto-category">options</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Cheryl KOUADIO </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">June 21, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Derivatives are financial instruments whose value depends on one or several underlying risk factors. Their contractual cash flows are determined by a payoff function, possibly path-dependent, which specifies how future payments depend on the evolution of the underlying asset. As market prices are unpredictable, models are needed to attempt to understand the explicable structure of price formation while accounting for its unexplainable part. This can, for example, help to hedge efficiently.</p>
+<p>A foundational model in option pricing is the Black–Scholes model <span class="citation" data-cites="black1973pricing">(<a href="#ref-black1973pricing" role="doc-biblioref">Black and Scholes 1973</a>)</span>, introduced in 1973. It assumes that the underlying asset follows a geometric Brownian motion with constant volatility <span class="math inline">\(\sigma\)</span>, deterministic interest rate <span class="math inline">\(r\)</span>, and standard Brownian motion <span class="math inline">\(W_t\)</span>. This framework yields closed-form formulae for European call and put options, making it possible to infer an implied volatility from observed option prices. Through this model, one can try to understand the effect of many factors on price formation. This is what is referred to as the Greeks.</p>
+<p>One major limitation of the Black–Scholes model is its constant volatility assumption, meaning volatility has a constant impact on price formation. However, market option prices imply volatilities that vary across strikes and maturities, forming smiles and skews that are inconsistent with the use of a single constant volatility parameter. To address this shortcoming, several classes of models have been developed: local volatility models, where volatility depends on time and the underlying price; stochastic volatility models, where volatility follows its own random dynamics; and stochastic local volatility models, which combine both approaches. However, the central difficulty remains the calibration of these richer volatility models to the observed implied volatility surface.</p>
+<p>In this article, we focus on the particle method proposed by Guyon and Henry-Labordère <span class="citation" data-cites="guyon2011smile">(<a href="#ref-guyon2011smile" role="doc-biblioref">Guyon and Henry-Labordere 2011</a>)</span> for the calibration of stochastic local volatility models. More precisely, the method aims at estimating the leverage function that allows the model to reproduce the market smile while preserving a chosen stochastic volatility dynamics. We first trace the evolution from Black–Scholes to stochastic local volatility models. We then present the particle method and its implementation on a numerical example.</p>
+<section id="from-blackscholes-constant-volatility-to-stochastic-local-volatility-a-brief-theoretical-background" class="level2">
+<h2 class="anchored" data-anchor-id="from-blackscholes-constant-volatility-to-stochastic-local-volatility-a-brief-theoretical-background">From Black–Scholes Constant Volatility to Stochastic Local Volatility: a brief theoretical background</h2>
+<section id="blackscholes-model" class="level3">
+<h3 class="anchored" data-anchor-id="blackscholes-model">Black–Scholes model</h3>
+<p>The Black–Scholes model <span class="citation" data-cites="black1973pricing">(<a href="#ref-black1973pricing" role="doc-biblioref">Black and Scholes 1973</a>)</span>, introduced in 1973, is a foundational model in option pricing. Its main idea is to model the underlying asset price through a lognormal dynamics. Under the risk-neutral measure, the asset price follows the stochastic differential equation</p>
+<p><span class="math display">\[
+dS_t = rS_tdt + \sigma S_tdW_t,
+\]</span></p>
+<p>where <span class="math inline">\(\sigma\)</span> is a constant volatility, <span class="math inline">\(r\)</span> is a deterministic risk-free rate, and <span class="math inline">\(W_t\)</span> is a standard Brownian motion, that is normally distributed with law <span class="math inline">\(\mathcal{N}(0,t)\)</span>.</p>
+<p>That being said, one can obtain an explicit expression for the spot price <span class="math inline">\(S_t = S_0 \exp\left(\left(r-\frac{\sigma^2}{2}\right)t + \sigma W_t\right)\)</span>.</p>
+<p>Taking a close look at this formulae, we can identify a log normal structure of spot price that allows European option prices to be computed explicitly. For example, for a European call option with strike <span class="math inline">\(K\)</span> and maturity <span class="math inline">\(T\)</span>, the risk-neutral price at time <span class="math inline">\(t\)</span> is</p>
+<p><span class="math display">\[
+\begin{align*}
+\Pi_{\mathrm{Call}}(t) &amp;= e^{-r(T-t)} \mathbb{E}^{\mathbb{Q}} \left[ \max(S_T-K,0) \mid \mathcal{F}_t \right] \\
+&amp;= S_t\Phi(d_+) - Ke^{-r\tau}\Phi(d_-).
+\end{align*}
+\]</span></p>
+<p>where <span class="math inline">\(\tau = T-t\)</span>, <span class="math inline">\(\Phi\)</span> is the cumulative distribution function of the standard normal distribution, and $ d_= $.</p>
+<p>The main limitation of this model is the assumption that volatility is constant. In practice, market option prices imply different volatilities for different strikes and maturities, producing the well-known implied volatility smile or skew. This observation motivates the introduction of richer volatility models.</p>
+</section>
+<section id="local-volatility-dupire-model" class="level3">
+<h3 class="anchored" data-anchor-id="local-volatility-dupire-model">Local Volatility: Dupire model</h3>
+<p>To address the empirical fact that volatility is not constant across strikes and maturities, Bruno Dupire introduced the local volatility model in 1994 <span class="citation" data-cites="dupire1994pricing">(<a href="#ref-dupire1994pricing" role="doc-biblioref">Dupire et al. 1994</a>)</span>. In this framework, the volatility is no longer constant, but is instead a deterministic function of time and the underlying asset price. The asset price dynamics are given by</p>
+<p><span class="math display">\[
+dS_t = rS_tdt + \sigma_{\mathrm{loc}}(t,S_t)S_tdW_t.
+\]</span></p>
+<!-- This framework preserves market completeness in the idealized Black–Scholes sense, since the only source of randomness is the Brownian motion driving the underlying asset. As a result, contingent claims can in principle be replicated by dynamic trading in the underlying asset and the risk-free asset. -->
+<p>Allowing the volatility to depend on both <span class="math inline">\(t\)</span> and <span class="math inline">\(S_t\)</span> is particularly useful because it gives enough flexibility to match the full implied volatility surface observed in the market. However, market quotes are not directly expressed as functions of the future spot process <span class="math inline">\(S_t\)</span>. Instead, European option prices are observed as a function of strike <span class="math inline">\(K\)</span> and maturity <span class="math inline">\(T\)</span>. We can therefore view market call prices as a surface <span class="math inline">\(\Pi_{\mathrm{Call}}(t) = C(K,T).\)</span></p>
+<p>By differentiating this surface with respect to strike and maturity, Dupire derived a formula linking the observed option price surface to the local volatility function. Assuming constant interest rate <span class="math inline">\(r\)</span>, the local volatility is given by</p>
+<p><span class="math display">\[
+\sigma_{\mathrm{loc}}^2(K,T) = \frac{ \partial_T C(K,T) + r K\partial_K C(K,T)}{
+    \frac{1}{2}K^2\partial_{KK}C(K,T)}.
+\]</span></p>
+<p>This formula shows that, under suitable regularity and no-arbitrage conditions, the local volatility surface can be recovered from European call prices. The local volatility model can therefore be calibrated exactly to the market implied volatility surface at the initial calibration date. Its main drawback, however, is dynamic. Although the model perfectly reproduces today’s vanilla option prices, the future evolution of the smile generated by the model is generally not consistent with the forward smile dynamics observed in the market. This limitation motivates the introduction of stochastic volatility models and, ultimately, stochastic local volatility models.</p>
+</section>
+<section id="stochastic-volatility-models" class="level3">
+<h3 class="anchored" data-anchor-id="stochastic-volatility-models">Stochastic volatility models</h3>
+<p>Stochastic volatility models were introduced to better reproduce the empirical dynamics of financial markets by allowing volatility itself to evolve randomly over time. Unlike the Black–Scholes model, where volatility is constant, these models introduce additional state variables that generate richer smile dynamics and more realistic volatility behavior. However, by adding a second source of randomness, they generally lead to market incompleteness. This mean, we could not perfectly hedge a derivative with the spot as underlying. Moreover, when specified with a finite number of parameters, they usually cannot fit an arbitrary implied volatility surface exactly.</p>
+<p>In such models, the spot price typically follows a dynamics of the form : <span class="math inline">\(dS_t = rS_tdt + \sigma_t S_tdW_t\)</span>, where <span class="math inline">\(\sigma_t\)</span> is now a stochastic process. Several stochastic volatility models have been proposed in the literature. One of the most widely used is the Heston model, introduced by Steven Heston. Under the risk-neutral measure, its dynamics are given by</p>
+<p><span class="math display">\[
+dS_t = rS_tdt + \sqrt{v_t}S_tdW_t^S, \\
+dv_t = \kappa(\theta-v_t)dt + \xi\sqrt{v_t}dW_t^v, \\
+d\langle W^S, W^v\rangle_t = \rho dt,
+\]</span></p>
+<p>where <span class="math inline">\(v_t\)</span> denotes the instantaneous variance. The parameter <span class="math inline">\(\kappa\)</span> is the mean-reversion speed, <span class="math inline">\(\theta\)</span> is the long-term variance level, <span class="math inline">\(\xi\)</span> is the volatility of volatility, and <span class="math inline">\(\rho\)</span> is the instantaneous correlation between the Brownian motion driving the asset price and the Brownian motion driving the variance. Through these parameters, the model captures the stylized features of volatility dynamics.</p>
+<!-- The parameters $\kappa$ and $\theta$ encode the assumption that variance tends to revert toward a long-run level $\theta$. The larger $\kappa$ is, the faster this mean reversion occurs. The parameter $\xi$ controls the magnitude of random fluctuations in variance. Finally, the correlation parameter $\rho$ plays a crucial role in shaping the implied volatility skew. A negative value of $\rho$ captures the leverage effect: downward shocks in the spot price tend to be associated with upward shocks in variance, which typically produces a negative skew in implied volatilities. -->
+</section>
+<section id="stochastic-local-volatility-models" class="level3">
+<h3 class="anchored" data-anchor-id="stochastic-local-volatility-models">Stochastic local volatility models</h3>
+<p>Knowing the respective advantages and drawbacks of local and stochastic volatility models, the stochastic local volatility framework was developed to combine the exact calibration capability of local volatility models with the richer smile dynamics generated by stochastic volatility models. A stochastic local volatility model can be written as follows :</p>
+<p><span class="math display">\[
+dS_t = rS_tdt + a_t l(t,S_t)S_tdW_t^S,
+\]</span></p>
+<p>where <span class="math inline">\(a_t\)</span> is a stochastic volatility factor and <span class="math inline">\(l(t,S)\)</span> is a deterministic function called the leverage function.</p>
+<p>The goal of introducing the stochastic factor <span class="math inline">\(a_t\)</span> is to capture featurs of stochastic volatility models. That is to reproduce more realistic forward smile dynamics and volatility clustering effects observed in the market, while retaining enough flexibility to calibrate the model to vanilla option prices. The leverage function <span class="math inline">\(l(t,S)\)</span> is then chosen so that the SLV model matches the market prices of European vanilla options, or equivalently, the market implied volatility surface.</p>
+<p>More precisely, the leverage function is calibrated so that the one-dimensional marginal distributions of the SLV model coincide with those implied by the corresponding local volatility model. This condition leads to the relation</p>
+<p><span class="math display">\[
+l^2(t,S) = \frac{\sigma_{\mathrm{loc}}^2(t,S)}{\mathbb{E}\left[a_t^2 \mid S_t=S\right]},
+\]</span></p>
+<p>where <span class="math inline">\(\sigma_{\mathrm{loc}}(t,S)\)</span> denotes the local volatility surface obtained from Dupire’s formula.</p>
+<p>Hence, the local volatility component ensures exact calibration to European vanilla option prices, while the stochastic volatility factor provides more realistic dynamics for exotic derivatives and forward smiles. The main numerical difficulty lies in the conditional expectation appearing in the denominator, since it depends on the joint distribution of the spot and the stochastic volatility factor. This is precisely where the particle method of Guyon and Henry-Labordère becomes useful.</p>
+<p>The calibration problem is therefore transformed into the numerical estimation of a conditional expectation. Since this expectation depends on the law of the process being calibrated, the resulting dynamics are nonlinear in the McKean sense. Guyon and Henry-Labordère propose a particle method to approximate this nonlinear dynamics and recover the leverage function iteratively.</p>
+</section>
+</section>
+<section id="the-particle-method-for-smile-calibration" class="level2">
+<h2 class="anchored" data-anchor-id="the-particle-method-for-smile-calibration">The Particle Method for Smile Calibration</h2>
+<p>As shown in the previous section, the stochastic local volatility framework combines both local and stochastic volatility components. It can be written as</p>
+<p><span class="math display">\[
+dS_t = rS_tdt + a_t l(t,S_t)S_tdW_t^S,
+\]</span></p>
+<p>where <span class="math inline">\(a_t\)</span> is a stochastic volatility factor and <span class="math inline">\(l(t,S)\)</span> is the deterministic leverage function. This framework contains some simpler models as limiting cases. If <span class="math inline">\(l(t,S)=1\)</span>, the model reduces to a pure stochastic volatility model. Equivalently, if <span class="math inline">\(a_t \equiv 1\)</span>, it reduces to a pure local volatility model.</p>
+<p>The particle method of Guyon and Henry-Labordère is mainly designed for the calibration of stochastic local volatility models. More precisely, its purpose is to estimate the leverage function <span class="math inline">\(l(t,S)\)</span> so that the SLV model reproduces the market implied volatility surface while keeping the chosen stochastic volatility dynamics.</p>
+<p>The key calibration relation is</p>
+<p><span class="math display">\[
+l^2(t,S)
+=
+\frac{
+\sigma_{\mathrm{loc}}^2(t,S)
+}{
+\mathbb{E}\left[a_t^2 \mid S_t=S\right]
+},
+\]</span></p>
+<p>where <span class="math inline">\(\sigma_{\mathrm{loc}}(t,S)\)</span> is the local volatility surface obtained from Dupire’s formula. The main numerical difficulty comes from the conditional expectation in the denominator. Indeed, this expectation depends on the joint distribution of <span class="math inline">\((S_t,a_t)\)</span>, which itself depends on the leverage function that we are trying to compute. This circular dependence makes the problem nonlinear in the McKean sense.</p>
+<p>The idea of the particle method is to approximate the law of the process by simulating a large number of interacting particles. At each time step, the conditional expectation <span class="math inline">\(\mathbb{E}\left[a_t^2 \mid S_t=S\right]\)</span> is estimated from the simulated particles using a kernel regression method, typically a Nadaraya–Watson estimator. The leverage function is then updated on a spot grid and used to simulate the next time step.</p>
+<p>Let <span class="math inline">\(\{t_k\}_{k=0}^{M}\)</span> denote a time discretization of <span class="math inline">\([0,T]\)</span>, with <span class="math inline">\(t_k = k\Delta t.\)</span></p>
+<p>The particle algorithm proceeds as follows.</p>
+<ol type="1">
+<li><p>Initialize the algorithm at <span class="math inline">\(t_0=0\)</span>. Since all particles start from the same initial spot <span class="math inline">\(S_0\)</span> and the same initial volatility factor <span class="math inline">\(a_0\)</span>, the leverage function is initialized by</p>
+<p><span class="math display">\[
+l_N(0,S)
+=
+\frac{\sigma_{\mathrm{loc}}(0,S)}{a_0}.
+\]</span></p>
+<p>In practice, this value is used on the first time interval <span class="math inline">\([t_0,t_1]\)</span>.</p></li>
+<li><p>Simulate <span class="math inline">\(N\)</span> particles</p>
+<p><span class="math display">\[
+\left\{S_t^{i,N},a_t^{i,N}\right\}_{1\leq i\leq N}
+\]</span></p>
+<p>from <span class="math inline">\(t_{k-1}\)</span> to <span class="math inline">\(t_k\)</span> using a time discretization scheme, for example a log-Euler scheme for the spot process. Each particle represents one simulated trajectory of the stochastic local volatility model.</p></li>
+<li><p>At time <span class="math inline">\(t_k\)</span>, estimate the conditional expectation <span class="math inline">\(m(t_k,S) = \mathbb{E}\left[a_{t_k}^2 \mid S_{t_k}=S\right]\)</span> on a spot grid <span class="math inline">\(G_{S,t_k}\)</span>. This can be done with a Nadaraya–Watson kernel estimator:</p>
+<p><span class="math display">\[
+\widehat{m}(t_k,S) = \frac{\displaystyle\sum_{i=1}^{N} K_h\left(S_{t_k}^{i,N}-S\right) \left(a_{t_k}^{i,N}\right)^2
+}{
+\displaystyle\sum_{i=1}^{N} K_h\left(S_{t_k}^{i,N}-S\right)
+},
+\]</span></p>
+<p>where <span class="math inline">\(K_h(x)=K\left(\frac{x}{h}\right)\)</span> and <span class="math inline">\(h\)</span> is the bandwidth parameter. Typically, the bandwidth associated with the discretization date <span class="math inline">\(t_k\)</span> is chosen as <span class="math inline">\(h_{t_k,N} = \kappa S_0 \sigma_{\mathrm{VS}}(t_k) \sqrt{\max(t_k,t_{\min})}N^{-1/5},\)</span> where <span class="math inline">\(\kappa\)</span> is a tuning constant, <span class="math inline">\(S_0\)</span> is the initial spot price, <span class="math inline">\(\sigma_{\mathrm{VS}}(t_k)\)</span> denotes the variance swap volatility at maturity <span class="math inline">\(t_k\)</span>, and <span class="math inline">\(t_{\min}\)</span> is a lower time threshold used to avoid an excessively small bandwidth near the initial date.</p>
+<p>The leverage function is then computed on the grid through</p>
+<p><span class="math display">\[
+l_N^2(t_k,S) = \frac{ \sigma_{\mathrm{loc}}^2(t_k,S) }{ \widehat{m}(t_k,S)}.
+\]</span></p>
+<p>Equivalently,</p>
+<p><span class="math display">\[
+l_N(t_k,S) = \frac{ \sigma_{\mathrm{loc}}(t_k,S) }{\sqrt{\widehat{m}(t_k,S)}}.
+\]</span></p>
+<p>The values of <span class="math inline">\(l_N(t_k,S)\)</span> are then interpolated on the spot grid, for example using cubic splines. Outside the grid, one can use flat extrapolation to avoid unstable values in regions where few particles are available. Finally, the leverage function is frozen on the next interval:</p>
+<p><span class="math display">\[
+l_N(t,S) = l_N(t_k,S), \qquad t \in [t_k,t_{k+1}].
+\]</span></p></li>
+<li><p>Set <span class="math inline">\(k:=k+1\)</span> and repeat steps 2 and 3 until the final maturity <span class="math inline">\(T\)</span>.</p></li>
+</ol>
+</section>
+<section id="illustrative-example" class="level2">
+<h2 class="anchored" data-anchor-id="illustrative-example">Illustrative example</h2>
+<p>In order to illustrate the particle method, let us consider the following stochastic local volatility (SLV) model:</p>
+<p><span class="math display">\[
+\begin{array}{l}
+dS_t = a_t l(t,S_t)S_t dW_t^{(1)}, \\[4pt]
+a_t = \sigma_0 e^{Y_t}, \\[4pt]
+dY_t = -\kappa Y_tdt + \gamma dW_t^{(2)}, \\[4pt]
+d\langle W^{(1)},W^{(2)}\rangle_t = \rho dt.
+\end{array}
+\]</span></p>
+<p>For simplicity, we work here with zero interest rate and zero dividend yield. Equivalently, the spot process can be interpreted as a forward price process under the risk-neutral measure.</p>
+<p>The numerical values for the model parameters are <span class="math inline">\(T = 1,\ S_0 = 100,\ \sigma_0 = 15\%,\ Y_0 = 0,\ \rho = -50\%,\ \gamma = 50\%,\ \kappa = 1.\)</span></p>
+<p>The goal is to find a leverage function <span class="math inline">\(l(t,S)\)</span> such that the SLV model matches the market prices of European vanilla options. For the sake of simplicity, we assume that the market implied volatility surface is flat, i.e.&nbsp;<span class="math inline">\(\sigma_{\mathrm{Market}}(t,K) \equiv 15\%\)</span>. In this case, the corresponding Dupire local volatility is also constant: <span class="math inline">\(\sigma_{\mathrm{Dup}}(t,S) \equiv 15\%\)</span>.</p>
+<section id="monte-carlo-scheme" class="level3">
+<h3 class="anchored" data-anchor-id="monte-carlo-scheme">Monte carlo scheme</h3>
+<p>We now describe a Monte Carlo simulation scheme for the SLV model. Let <span class="math inline">\((t_i)_{0\leq i\leq n}\)</span> be a discretization of the interval <span class="math inline">\([0,T]\)</span>, with time steps <span class="math inline">\(\Delta t_i = t_i - t_{i-1},\ 1\leq i\leq 100\)</span>. In order to simulate both volatility and the spot process, we will use respectively the conditional moments of the euler discretisation and the log-euler discretisation scheme knowing <span class="math inline">\(F_t-1\)</span> since the processes followed a normal distribution. In order to take in account the correlation between both processes, we use the conditional correlation between <span class="math inline">\((Y_{t_i},\log S_{t_i}) \mid (S_{t_{i-1}},Y_{t_{i-1}})\)</span> by using a cholesky decomposition which is : <span class="math display">\[
+\bar{\rho} = \rho \sqrt{ \frac{ 2(1-e^{-\kappa\Delta t_i})}{ \kappa\Delta t_i(1+e^{-\kappa\Delta t_i})}}.
+\]</span></p>
+<p>Hence, one can jointly simulate <span class="math inline">\((\log S_{t_i},Y_{t_i})\)</span> by generating two independent standard Gaussian random variables <span class="math inline">\(Z_1\)</span> and <span class="math inline">\(Z_2\)</span>.</p>
+<p>The simulation scheme is then</p>
+<p><span class="math display">\[
+\begin{cases}
+\log S_{t_i} = \log S_{t_{i-1}} - \frac12 \sigma_0^2 e^{2Y_{t_{i-1}}} l^2(t_{i-1},S_{t_{i-1}}) \Delta t_i +
+    \sigma_0 e^{Y_{t_{i-1}}} l(t_{i-1},S_{t_{i-1}}) \sqrt{\Delta t_i} \left( \sqrt{1-\bar{\rho}^2}Z_1+\bar{\rho}Z_2 \right), \\[8pt]
+Y_{t_i} = e^{-\kappa\Delta t_i}Y_{t_{i-1}} + \gamma \sqrt{ \frac{1-e^{-2\kappa\Delta t_i}}{2\kappa} } Z_2.
+\end{cases}
+\]</span></p>
+<p>This procedure is repeated sequentially over all time intervals <span class="math inline">\([t_{i-1},t_i]\)</span> in order to generate Monte Carlo trajectories of the SLV model.</p>
+The following figure shows 100 simulated paths of the spot price and the stochastic volatility factor <span class="math inline">\(a_t\)</span>:
+<p align="center">
+<img src="slv_paths.png" width="800">
+</p>
+</section>
+<section id="results" class="level3">
+<h3 class="anchored" data-anchor-id="results">Results</h3>
+<p>To calibrate the leverage function, we simulate <span class="math inline">\(N=10,000\)</span> paths. For the minimum and maximum values of <span class="math inline">\(G_{t_k}\)</span>, take the 0.1% and 99.9% quantiles of the risk-neutral distribution of <span class="math inline">\(S\)</span> at <span class="math inline">\(t_k\)</span>, i.e., since the smile is flat at <span class="math inline">\(\sigma_{\textrm{Market}}\)</span>, of the distribution of <span class="math inline">\(S_0\exp(\sigma_{\textrm{Market}}\sqrt{t_k}G - \frac12 \sigma_{\textrm{Market}}^2 t_k)\)</span>, with <span class="math inline">\(G\)</span> a standard Gaussian random variable. We suggest that the grid <span class="math inline">\(G_{t_k}\)</span> contain 30 equally spaced spot values. We also use the quartic kernel to perform kernel regression to estimate the conditional expectation, while fine-tuning the dimensionless bandwidth parameter <span class="math inline">\(\kappa\)</span>. The kernel is defined as follows: <span class="math display">\[
+K(x)=(x+1)^2(1-x)^2\quad\text{for }-1\leq x\leq 1\quad\text{and}\quad0\quad\text{ elsewhere}
+\]</span></p>
+<p>To check that the resulting model is indeed calibrated to the market implied volatilities <span class="math inline">\(\sigma_{\textrm{Market}} \equiv 15\%\)</span>, we compute estimates of the call prices (maturity <span class="math inline">\(T=1\)</span>) in the calibrated model for strikes <span class="math inline">\(70, 80, 90, 100, 110, 120, 130, 140\)</span>, and invert the Black-Scholes formula to get the corresponding estimation of the implied volatilities <span class="math inline">\(\hat\sigma(T,K)\)</span>. To estimate the call prices in the calibrated model, we simulated a new set of independent paths with the calibrated leverage function <span class="math inline">\(l\)</span> and <span class="math inline">\(N_2 = 100,000\)</span> paths.</p>
+<p>As shown in the following results, the SLV model calibrated via the particle method reproduces vanilla option prices with an implied volatility close to the market input. The mean absolute error is 12.3 bp, with the largest deviations occurring at deep in-the-money and out-of-the-money strikes, as expected.</p>
+<p align="center">
+<img src="result_particle_slv.png" width="500">
+</p>
+<p>The leverage function <span class="math inline">\(l(t, K)\)</span> (blue) is strongly increasing with the spot price, ranging from approximately 0.5 near <span class="math inline">\(S_t = 60\)</span> to values above 1.5 at the right tail. This shape reflects the correction that the leverage function must apply to compensate for the stochastic volatility factor <span class="math inline">\(a_t\)</span>: since <span class="math inline">\(a_t\)</span> (orange) is itself decreasing with the spot level, <span class="math inline">\(l(t, K)\)</span> must increase to ensure that their product remains consistent with the market implied volatility surface.</p>
+<p>The total volatility <span class="math inline">\(\sigma(t, K) = l(t, K) \cdot a_t\)</span> (green) remains remarkably flat across the entire spot range, hovering around 0.15. This is precisely the calibration objective: the particle method has successfully determined a leverage function such that the SLV model reproduces a flat implied volatility surface consistent with the market input <span class="math inline">\(\sigma_{\mathrm{mkt}} = 15\%\)</span>.</p>
+<p align="center">
+<img src="slv_decomp.png" width="800">
+</p>
+</section>
+</section>
+<section id="appendices" class="level2">
+<h2 class="anchored" data-anchor-id="appendices">Appendices</h2>
+<section id="python-codes" class="level3">
+<h3 class="anchored" data-anchor-id="python-codes">Python codes</h3>
+<section id="kernel-regression-implementation" class="level4">
+<h4 class="anchored" data-anchor-id="kernel-regression-implementation">Kernel regression implementation</h4>
+<p>The following code implements the Nadaraya–Watson regression used to estimate the conditional expectation <span class="math inline">\(\mathbb{E}[a_t^2 \mid S_t=S]\)</span>, together with a leave-one-out cross-validation procedure for selecting the bandwidth parameter. The leave-one-out step avoids using a particle to predict itself when selecting the bandwidth. Once the optimal multiplier <span class="math inline">\(\kappa_{\mathrm{bw}}\)</span> is obtained, the bandwidth <span class="math inline">\(h\)</span> is computed and used in the Nadaraya–Watson estimator to approximate the conditional expectation appearing in the denominator of the leverage function.</p>
+<div id="aaef3879" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> minimize_scalar</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> quartic_kernel(x):</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">    Quartic kernel used in the Nadaraya-Watson regression.</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Values outside [-1, 1] are clipped, which gives zero weight at the boundary.</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> np.clip(x, <span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (x <span class="op">+</span> <span class="dv">1</span>)<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> x)<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> bandwidth(kappa_bw, tk, sigma_tk, S0, N):</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">    Compute the kernel bandwidth in spot-price units.</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> kappa_bw <span class="op">*</span> sigma_tk <span class="op">*</span> S0 <span class="op">*</span> np.sqrt(<span class="bu">max</span>(tk, <span class="fl">0.15</span>)) <span class="op">*</span> N<span class="op">**</span>(<span class="op">-</span><span class="fl">0.2</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cv_bandwidth(S_particles,a2_particles,tk,sigma_tk,S0,N,kernel<span class="op">=</span>quartic_kernel,bounds<span class="op">=</span>(<span class="fl">0.3</span>, <span class="fl">3.0</span>)):</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">    Select the bandwidth multiplier by leave-one-out cross-validation.</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> cv_loss(kappa_bw):</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Convert the bandwidth multiplier into an actual bandwidth.</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>        h <span class="op">=</span> bandwidth(kappa_bw, tk, sigma_tk, S0, N)</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Compute pairwise normalized distances between particles.</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>        u <span class="op">=</span> (S_particles[<span class="va">None</span>, :] <span class="op">-</span> S_particles[:, <span class="va">None</span>]) <span class="op">/</span> h</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Kernel weights between particles.</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>        W <span class="op">=</span> kernel(u)</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Exclude each particle from its own regression estimate.</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>        np.fill_diagonal(W, <span class="fl">0.0</span>)</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Nadaraya-Watson numerator and denominator.</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>        num_loo <span class="op">=</span> W <span class="op">@</span> a2_particles</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>        den_loo <span class="op">=</span> W.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Use the global mean if too few neighbours are available.</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>        valid <span class="op">=</span> den_loo <span class="op">&gt;</span> <span class="fl">1e-10</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>        m_hat <span class="op">=</span> np.full_like(a2_particles, a2_particles.mean(), dtype<span class="op">=</span><span class="bu">float</span>)</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>        m_hat[valid] <span class="op">=</span> num_loo[valid] <span class="op">/</span> den_loo[valid]</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Cross-validation error.</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> np.mean((a2_particles <span class="op">-</span> m_hat) <span class="op">**</span> <span class="dv">2</span>)</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> minimize_scalar(cv_loss, bounds<span class="op">=</span>bounds, method<span class="op">=</span><span class="st">"bounded"</span>)</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result.x</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> kernel_regression(S_particles, a2_particles, grid, h, kernel<span class="op">=</span>quartic_kernel):</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="co">    Estimate E[a_t^2 | S_t = s] on a spot grid.</span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Compute normalized distances between grid points and particles.</span></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>    u <span class="op">=</span> (S_particles[<span class="va">None</span>, :] <span class="op">-</span> grid[:, <span class="va">None</span>]) <span class="op">/</span> h</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Kernel weights around each grid point.</span></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>    W <span class="op">=</span> kernel(u)</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Nadaraya-Watson numerator and denominator.</span></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>    num <span class="op">=</span> W <span class="op">@</span> a2_particles</span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>    denom <span class="op">=</span> W.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Use the global mean when no particle contributes to a grid point.</span></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>    valid <span class="op">=</span> denom <span class="op">&gt;</span> <span class="fl">1e-12</span></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>    cond_exp <span class="op">=</span> np.full_like(grid, a2_particles.mean(), dtype<span class="op">=</span><span class="bu">float</span>)</span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>    cond_exp[valid] <span class="op">=</span> num[valid] <span class="op">/</span> denom[valid]</span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Avoid division by zero later in the leverage function.</span></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.maximum(cond_exp, <span class="fl">1e-8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="particle-method-implementation-validation" class="level4">
+<h4 class="anchored" data-anchor-id="particle-method-implementation-validation">Particle method implementation + validation</h4>
+<div id="3f1ba3ad" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.interpolate <span class="im">import</span> CubicSpline</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> norm</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> spot_grid(tk, S0, sigma_mkt, n_points<span class="op">=</span><span class="dv">30</span>):</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">    Build the spot grid G_{t_k} from lognormal quantiles.</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># At time zero, all particles start from the same initial spot.</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> tk <span class="op">&lt;=</span> <span class="dv">0</span>:</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> np.array([S0])</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Lower bound of the grid: 0.1% lognormal quantile.</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    S_min <span class="op">=</span> S0 <span class="op">*</span> np.exp( sigma_mkt <span class="op">*</span> np.sqrt(tk) <span class="op">*</span> norm.ppf(<span class="fl">0.001</span>) <span class="op">-</span> <span class="fl">0.5</span> <span class="op">*</span> sigma_mkt<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> tk)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Upper bound of the grid: 99.9% lognormal quantile.</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    S_max <span class="op">=</span> S0 <span class="op">*</span> np.exp( sigma_mkt <span class="op">*</span> np.sqrt(tk) <span class="op">*</span> norm.ppf(<span class="fl">0.999</span>) <span class="op">-</span> <span class="fl">0.5</span> <span class="op">*</span> sigma_mkt<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> tk)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.linspace(S_min, S_max, n_points)</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> particle_method( S0, Y0, sigma0, rho, gamma, kappa, sigma_mkt, N, n_steps, Dt, seed<span class="op">=</span><span class="dv">123</span>):</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="co">    Calibrate the leverage function l(t_k, S) with the Guyon-Henry-Labordere</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="co">    particle method.</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    np.random.seed(seed)</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Initial stochastic volatility factor and initial leverage value.</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>    a0 <span class="op">=</span> sigma0 <span class="op">*</span> np.exp(Y0)</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>    l0 <span class="op">=</span> sigma_mkt <span class="op">/</span> a0</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Initialize all particles at the same spot and volatility state.</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    S_tk <span class="op">=</span> np.full(N, S0, dtype<span class="op">=</span><span class="bu">float</span>)</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    Y_tk <span class="op">=</span> np.full(N, Y0, dtype<span class="op">=</span><span class="bu">float</span>)</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Initial spot grid and initial constant leverage spline.</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    K_grid_init <span class="op">=</span> spot_grid(Dt, S0, sigma_mkt, n_points<span class="op">=</span><span class="dv">30</span>)</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    spline_prev <span class="op">=</span> CubicSpline(K_grid_init, np.full(<span class="dv">30</span>, l0))</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    K_grid_prev <span class="op">=</span> K_grid_init</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Store the calibrated leverage splines and their associated grids.</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>    splines <span class="op">=</span> {}</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>    Stoch_vol <span class="op">=</span> {}</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>    K_grids <span class="op">=</span> {}</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, n_steps <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>        tk <span class="op">=</span> k <span class="op">*</span> Dt</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Evaluate the previous leverage function at current particle spots.</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>        l_prev <span class="op">=</span> spline_prev( np.clip(S_tk, K_grid_prev[<span class="dv">0</span>], K_grid_prev[<span class="op">-</span><span class="dv">1</span>]) )</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Effective correlation induced by exact simulation of the OU factor.</span></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>        rho_bar <span class="op">=</span> rho <span class="op">*</span> np.sqrt(</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>            <span class="dv">2</span> <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> np.exp(<span class="op">-</span>kappa <span class="op">*</span> Dt))</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>            <span class="op">/</span> (kappa <span class="op">*</span> Dt <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> np.exp(<span class="op">-</span>kappa <span class="op">*</span> Dt)))</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Independent Gaussian variables used to generate correlated increments.</span></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>        Z1 <span class="op">=</span> np.random.randn(N)</span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>        Z2 <span class="op">=</span> np.random.randn(N)</span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Exact simulation of the Ornstein-Uhlenbeck volatility factor.</span></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>        Y_new <span class="op">=</span> (</span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>            np.exp(<span class="op">-</span>kappa <span class="op">*</span> Dt) <span class="op">*</span> Y_tk</span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>            <span class="op">+</span> gamma</span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>            <span class="op">*</span> np.sqrt((<span class="dv">1</span> <span class="op">-</span> np.exp(<span class="op">-</span><span class="dv">2</span> <span class="op">*</span> kappa <span class="op">*</span> Dt)) <span class="op">/</span> (<span class="dv">2</span> <span class="op">*</span> kappa))</span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>            <span class="op">*</span> Z2</span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Effective volatility of each particle over the current time step.</span></span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>        sig_eff <span class="op">=</span> sigma0 <span class="op">*</span> np.exp(Y_tk) <span class="op">*</span> l_prev</span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Log-Euler update of the spot process.</span></span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>        log_S_new <span class="op">=</span> (</span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>            np.log(np.maximum(S_tk, <span class="fl">1e-8</span>))</span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>            <span class="op">-</span> <span class="fl">0.5</span> <span class="op">*</span> sig_eff<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> Dt</span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>            <span class="op">+</span> sig_eff</span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>            <span class="op">*</span> np.sqrt(Dt)</span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>            <span class="op">*</span> (np.sqrt(<span class="dv">1</span> <span class="op">-</span> rho_bar<span class="op">**</span><span class="dv">2</span>) <span class="op">*</span> Z1 <span class="op">+</span> rho_bar <span class="op">*</span> Z2)</span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>        S_new <span class="op">=</span> np.exp(log_S_new)</span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a>        a_new <span class="op">=</span> sigma0 <span class="op">*</span> np.exp(Y_new)</span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Build the spot grid at the current time.</span></span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a>        K_grid <span class="op">=</span> spot_grid(tk, S0, sigma_mkt, n_points<span class="op">=</span><span class="dv">30</span>)</span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Squared stochastic volatility factor used in the conditional expectation.</span></span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a>        a2_new <span class="op">=</span> a_new<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Select the bandwidth parameter once, then reuse it at later dates.</span></span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> k <span class="op">==</span> <span class="dv">1</span>:</span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a>            kappa_opt <span class="op">=</span> cv_bandwidth(S_new, a2_new, tk, sigma_mkt, S0, N, kernel<span class="op">=</span>quartic_kernel)</span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a>        h <span class="op">=</span> bandwidth(kappa_opt, tk, sigma_mkt, S0, N)</span>
+<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Estimate E[a_t^2 | S_t = S] on the spot grid.</span></span>
+<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a>        cond_exp <span class="op">=</span> kernel_regression(S_new, a2_new, K_grid, h, kernel<span class="op">=</span>quartic_kernel)</span>
+<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Compute the leverage function from the calibration identity.</span></span>
+<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a>        l_values <span class="op">=</span> sigma_mkt <span class="op">/</span> np.sqrt(cond_exp)</span>
+<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Interpolate the leverage function on the current spot grid.</span></span>
+<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a>        spline_curr <span class="op">=</span> CubicSpline(K_grid, l_values)</span>
+<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Store current leverage spline and grid.</span></span>
+<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a>        splines[k] <span class="op">=</span> spline_curr</span>
+<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a>        K_grids[k] <span class="op">=</span> K_grid</span>
+<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a>        Stoch_vol[k] <span class="op">=</span> np.sqrt(cond_exp)</span>
+<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Move to the next time step.</span></span>
+<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a>        spline_prev <span class="op">=</span> spline_curr</span>
+<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a>        K_grid_prev <span class="op">=</span> K_grid</span>
+<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a>        S_tk <span class="op">=</span> S_new</span>
+<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a>        Y_tk <span class="op">=</span> Y_new</span>
+<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Optimal bandwidth multiplier: </span><span class="sc">{</span>kappa_opt<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> splines, K_grids, Stoch_vol</span>
+<span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-122"><a href="#cb2-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-123"><a href="#cb2-123" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> simulate_calibrated(S0, Y0, sigma0, rho, gamma, kappa, sigma_mkt, N2, n_steps, Dt, splines<span class="op">=</span><span class="va">None</span>, K_grids<span class="op">=</span><span class="va">None</span>, seed<span class="op">=</span><span class="dv">42</span>):</span>
+<span id="cb2-124"><a href="#cb2-124" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb2-125"><a href="#cb2-125" aria-hidden="true" tabindex="-1"></a><span class="co">    Simulate paths under the calibrated SLV model.</span></span>
+<span id="cb2-126"><a href="#cb2-126" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb2-127"><a href="#cb2-127" aria-hidden="true" tabindex="-1"></a>    np.random.seed(seed)</span>
+<span id="cb2-128"><a href="#cb2-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-129"><a href="#cb2-129" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Initialize validation particles.</span></span>
+<span id="cb2-130"><a href="#cb2-130" aria-hidden="true" tabindex="-1"></a>    S_tk <span class="op">=</span> np.full(N2, S0, dtype<span class="op">=</span><span class="bu">float</span>)</span>
+<span id="cb2-131"><a href="#cb2-131" aria-hidden="true" tabindex="-1"></a>    Y_tk <span class="op">=</span> np.full(N2, Y0, dtype<span class="op">=</span><span class="bu">float</span>)</span>
+<span id="cb2-132"><a href="#cb2-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-133"><a href="#cb2-133" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Store simulated spot paths.</span></span>
+<span id="cb2-134"><a href="#cb2-134" aria-hidden="true" tabindex="-1"></a>    S_paths <span class="op">=</span> np.zeros((n_steps <span class="op">+</span> <span class="dv">1</span>, N2))</span>
+<span id="cb2-135"><a href="#cb2-135" aria-hidden="true" tabindex="-1"></a>    S_paths[<span class="dv">0</span>] <span class="op">=</span> S_tk</span>
+<span id="cb2-136"><a href="#cb2-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-137"><a href="#cb2-137" aria-hidden="true" tabindex="-1"></a>    Y_paths <span class="op">=</span> np.zeros((n_steps <span class="op">+</span> <span class="dv">1</span>, N2))</span>
+<span id="cb2-138"><a href="#cb2-138" aria-hidden="true" tabindex="-1"></a>    Y_paths[<span class="dv">0</span>] <span class="op">=</span> Y_tk</span>
+<span id="cb2-139"><a href="#cb2-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-140"><a href="#cb2-140" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, n_steps <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb2-141"><a href="#cb2-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-142"><a href="#cb2-142" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Use calibrated leverage if provided; otherwise simulate pure stochastic volatility.</span></span>
+<span id="cb2-143"><a href="#cb2-143" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> splines <span class="kw">is</span> <span class="va">None</span> <span class="kw">or</span> K_grids <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb2-144"><a href="#cb2-144" aria-hidden="true" tabindex="-1"></a>            l_prev <span class="op">=</span> np.ones(N2)</span>
+<span id="cb2-145"><a href="#cb2-145" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb2-146"><a href="#cb2-146" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Use the leverage function calibrated at the previous time step.</span></span>
+<span id="cb2-147"><a href="#cb2-147" aria-hidden="true" tabindex="-1"></a>            spline_prev <span class="op">=</span> splines[k <span class="op">-</span> <span class="dv">1</span>] <span class="cf">if</span> k <span class="op">&gt;</span> <span class="dv">1</span> <span class="cf">else</span> splines[<span class="dv">1</span>]</span>
+<span id="cb2-148"><a href="#cb2-148" aria-hidden="true" tabindex="-1"></a>            K_grid_prev <span class="op">=</span> K_grids[k <span class="op">-</span> <span class="dv">1</span>] <span class="cf">if</span> k <span class="op">&gt;</span> <span class="dv">1</span> <span class="cf">else</span> K_grids[<span class="dv">1</span>]</span>
+<span id="cb2-149"><a href="#cb2-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-150"><a href="#cb2-150" aria-hidden="true" tabindex="-1"></a>            l_prev <span class="op">=</span> spline_prev(</span>
+<span id="cb2-151"><a href="#cb2-151" aria-hidden="true" tabindex="-1"></a>                np.clip(S_tk, K_grid_prev[<span class="dv">0</span>], K_grid_prev[<span class="op">-</span><span class="dv">1</span>])</span>
+<span id="cb2-152"><a href="#cb2-152" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb2-153"><a href="#cb2-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-154"><a href="#cb2-154" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Effective correlation for the joint simulation of log-spot and OU factor.</span></span>
+<span id="cb2-155"><a href="#cb2-155" aria-hidden="true" tabindex="-1"></a>        rho_bar <span class="op">=</span> rho <span class="op">*</span> np.sqrt(</span>
+<span id="cb2-156"><a href="#cb2-156" aria-hidden="true" tabindex="-1"></a>            <span class="dv">2</span> <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> np.exp(<span class="op">-</span>kappa <span class="op">*</span> Dt))</span>
+<span id="cb2-157"><a href="#cb2-157" aria-hidden="true" tabindex="-1"></a>            <span class="op">/</span> (kappa <span class="op">*</span> Dt <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> np.exp(<span class="op">-</span>kappa <span class="op">*</span> Dt)))</span>
+<span id="cb2-158"><a href="#cb2-158" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb2-159"><a href="#cb2-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-160"><a href="#cb2-160" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Independent Gaussian variables.</span></span>
+<span id="cb2-161"><a href="#cb2-161" aria-hidden="true" tabindex="-1"></a>        Z1 <span class="op">=</span> np.random.randn(N2)</span>
+<span id="cb2-162"><a href="#cb2-162" aria-hidden="true" tabindex="-1"></a>        Z2 <span class="op">=</span> np.random.randn(N2)</span>
+<span id="cb2-163"><a href="#cb2-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-164"><a href="#cb2-164" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Exact update of the OU volatility factor.</span></span>
+<span id="cb2-165"><a href="#cb2-165" aria-hidden="true" tabindex="-1"></a>        Y_new <span class="op">=</span> (</span>
+<span id="cb2-166"><a href="#cb2-166" aria-hidden="true" tabindex="-1"></a>            np.exp(<span class="op">-</span>kappa <span class="op">*</span> Dt) <span class="op">*</span> Y_tk</span>
+<span id="cb2-167"><a href="#cb2-167" aria-hidden="true" tabindex="-1"></a>            <span class="op">+</span> gamma</span>
+<span id="cb2-168"><a href="#cb2-168" aria-hidden="true" tabindex="-1"></a>            <span class="op">*</span> np.sqrt((<span class="dv">1</span> <span class="op">-</span> np.exp(<span class="op">-</span><span class="dv">2</span> <span class="op">*</span> kappa <span class="op">*</span> Dt)) <span class="op">/</span> (<span class="dv">2</span> <span class="op">*</span> kappa))</span>
+<span id="cb2-169"><a href="#cb2-169" aria-hidden="true" tabindex="-1"></a>            <span class="op">*</span> Z2</span>
+<span id="cb2-170"><a href="#cb2-170" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb2-171"><a href="#cb2-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-172"><a href="#cb2-172" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Effective volatility under the calibrated SLV model.</span></span>
+<span id="cb2-173"><a href="#cb2-173" aria-hidden="true" tabindex="-1"></a>        sig_eff <span class="op">=</span> sigma0 <span class="op">*</span> np.exp(Y_tk) <span class="op">*</span> l_prev</span>
+<span id="cb2-174"><a href="#cb2-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-175"><a href="#cb2-175" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Log-Euler update of the spot process.</span></span>
+<span id="cb2-176"><a href="#cb2-176" aria-hidden="true" tabindex="-1"></a>        log_S_new <span class="op">=</span> (</span>
+<span id="cb2-177"><a href="#cb2-177" aria-hidden="true" tabindex="-1"></a>            np.log(np.maximum(S_tk, <span class="fl">1e-8</span>))</span>
+<span id="cb2-178"><a href="#cb2-178" aria-hidden="true" tabindex="-1"></a>            <span class="op">-</span> <span class="fl">0.5</span> <span class="op">*</span> sig_eff<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> Dt</span>
+<span id="cb2-179"><a href="#cb2-179" aria-hidden="true" tabindex="-1"></a>            <span class="op">+</span> sig_eff</span>
+<span id="cb2-180"><a href="#cb2-180" aria-hidden="true" tabindex="-1"></a>            <span class="op">*</span> np.sqrt(Dt)</span>
+<span id="cb2-181"><a href="#cb2-181" aria-hidden="true" tabindex="-1"></a>            <span class="op">*</span> (np.sqrt(<span class="dv">1</span> <span class="op">-</span> rho_bar<span class="op">**</span><span class="dv">2</span>) <span class="op">*</span> Z1 <span class="op">+</span> rho_bar <span class="op">*</span> Z2)</span>
+<span id="cb2-182"><a href="#cb2-182" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb2-183"><a href="#cb2-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-184"><a href="#cb2-184" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Store new spot values and update the volatility factor.</span></span>
+<span id="cb2-185"><a href="#cb2-185" aria-hidden="true" tabindex="-1"></a>        S_tk <span class="op">=</span> np.exp(log_S_new)</span>
+<span id="cb2-186"><a href="#cb2-186" aria-hidden="true" tabindex="-1"></a>        S_paths[k] <span class="op">=</span> S_tk</span>
+<span id="cb2-187"><a href="#cb2-187" aria-hidden="true" tabindex="-1"></a>        Y_tk <span class="op">=</span> Y_new</span>
+<span id="cb2-188"><a href="#cb2-188" aria-hidden="true" tabindex="-1"></a>        Y_paths[k] <span class="op">=</span> Y_tk</span>
+<span id="cb2-189"><a href="#cb2-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-190"><a href="#cb2-190" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> S_paths, Y_paths</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="black-scholes-price-implementation" class="level4">
+<h4 class="anchored" data-anchor-id="black-scholes-price-implementation">Black scholes price implementation</h4>
+<div id="b0e1f8d9" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> py_vollib.black_scholes.implied_volatility <span class="im">import</span> implied_volatility</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>vec_find_vol_rat <span class="op">=</span> np.vectorize(implied_volatility)   <span class="co"># a better implied vol estimator based on "P Jäckel Let's be rational"</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> blackscholes_price(K, T, S, vol, r<span class="op">=</span><span class="dv">0</span>, q<span class="op">=</span><span class="dv">0</span>, callput<span class="op">=</span><span class="st">'call'</span>):</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">    Compute the call/put option price in Black-Scholes model</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    F <span class="op">=</span> S<span class="op">*</span>np.exp((r<span class="op">-</span>q)<span class="op">*</span>T)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    w <span class="op">=</span> vol<span class="op">**</span><span class="dv">2</span><span class="op">*</span>T</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    d1 <span class="op">=</span> (np.log(F<span class="op">/</span>K)<span class="op">+</span><span class="fl">0.5</span><span class="op">*</span>w)<span class="op">/</span>np.sqrt(w)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    d2 <span class="op">=</span> d1 <span class="op">-</span> np.sqrt(w)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    callput <span class="op">=</span> callput.lower()</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> callput <span class="op">==</span> <span class="st">'call'</span>:</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>        opttype <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> callput <span class="op">==</span> <span class="st">'put'</span>:</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>        opttype <span class="op">=</span> <span class="op">-</span><span class="dv">1</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">'The value of callput must be either "call" or "put".'</span>)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    price <span class="op">=</span> (opttype<span class="op">*</span>F<span class="op">*</span>norm.cdf(opttype<span class="op">*</span>d1)<span class="op">-</span>opttype<span class="op">*</span>K<span class="op">*</span>norm.cdf(opttype<span class="op">*</span>(d2)))<span class="op">*</span>np.exp(<span class="op">-</span>r<span class="op">*</span>T)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> price</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="application-of-the-particle-method" class="level4">
+<h4 class="anchored" data-anchor-id="application-of-the-particle-method">Application of the particle method</h4>
+<div id="84c81229" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ── Paramètres du modèle</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>T       <span class="op">=</span> <span class="fl">1.0</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>S0      <span class="op">=</span> <span class="fl">100.0</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>sigma0  <span class="op">=</span> <span class="fl">0.15</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>Y0      <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>rho     <span class="op">=</span> <span class="op">-</span><span class="fl">0.50</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>gamma   <span class="op">=</span> <span class="fl">0.50</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>kappa   <span class="op">=</span> <span class="fl">1.0</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>sigma_mkt <span class="op">=</span> <span class="fl">0.15</span>    <span class="co"># smile plat</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co"># ── Paramètres numériques</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>Dt       <span class="op">=</span> <span class="dv">1</span> <span class="op">/</span> <span class="dv">100</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>n_steps  <span class="op">=</span> <span class="bu">int</span>(T <span class="op">/</span> Dt)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>N_calib  <span class="op">=</span> <span class="dv">10_000</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>N_valid  <span class="op">=</span> <span class="dv">100_000</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Strikes pour la validation</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>strikes <span class="op">=</span> np.array([<span class="dv">70</span>, <span class="dv">80</span>, <span class="dv">90</span>, <span class="dv">100</span>, <span class="dv">110</span>, <span class="dv">120</span>, <span class="dv">130</span>, <span class="dv">140</span>], dtype<span class="op">=</span><span class="bu">float</span>)</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="co"># ── Étape A : Calibration ─────────────────────────────────────────────</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span> <span class="op">*</span> <span class="dv">60</span>)</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"CALIBRATION  N=</span><span class="sc">{</span>N_calib<span class="sc">}</span><span class="ss">  Nt=</span><span class="sc">{</span>n_steps<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>splines, K_grids, Stoch_vol <span class="op">=</span> particle_method(</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    S0<span class="op">=</span>S0, Y0<span class="op">=</span>Y0, sigma0<span class="op">=</span>sigma0, rho<span class="op">=</span>rho,</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    gamma<span class="op">=</span>gamma, kappa<span class="op">=</span>kappa,</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>    sigma_mkt<span class="op">=</span>sigma_mkt,</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    N<span class="op">=</span>N_calib, n_steps<span class="op">=</span>n_steps, Dt<span class="op">=</span>Dt, seed<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Calibration terminée.</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="co"># ── Étape B : Simulation avec levier calibré</span></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span> <span class="op">*</span> <span class="dv">60</span>)</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"VALIDATION   N=</span><span class="sc">{</span>N_valid<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>S_paths, Y_paths <span class="op">=</span> simulate_calibrated(</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>    S0<span class="op">=</span>S0, Y0<span class="op">=</span>Y0, sigma0<span class="op">=</span>sigma0, rho<span class="op">=</span>rho,</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>    gamma<span class="op">=</span>gamma, kappa<span class="op">=</span>kappa, sigma_mkt<span class="op">=</span>sigma_mkt,</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>    N2<span class="op">=</span>N_valid, n_steps<span class="op">=</span>n_steps, Dt<span class="op">=</span>Dt,</span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>    splines<span class="op">=</span>splines, K_grids<span class="op">=</span>K_grids, seed<span class="op">=</span><span class="dv">123</span></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="results-layouts" class="level4">
+<h4 class="anchored" data-anchor-id="results-layouts">Results layouts</h4>
+<div id="9e564563" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Show simulation paths</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">4</span>))</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].plot(sigma0 <span class="op">*</span> np.exp(Y_paths[:, :<span class="dv">100</span>]))</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_title(<span class="st">"$a_t$ paths"</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_title(<span class="ss">f"$S_t$ paths"</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].plot(S_paths[:, :<span class="dv">100</span>])</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="5a4e3e7e" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Decomposition of leverage functions</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#=======================</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>K_grid <span class="op">=</span> K_grids[<span class="bu">max</span>(K_grids.keys())]</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>l_vals <span class="op">=</span> splines[<span class="bu">max</span>(splines.keys())](K_grid)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>a_vals <span class="op">=</span> Stoch_vol[<span class="bu">max</span>(Stoch_vol.keys())]</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">4</span>))</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>plt.plot(K_grid, l_vals, label<span class="op">=</span><span class="vs">r'$l(t, K)$ — leverage function'</span>)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>plt.plot(K_grid, a_vals, label<span class="op">=</span><span class="vs">r'$a_t$ — stochastic volatility factor'</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>plt.plot(K_grid, l_vals <span class="op">*</span> a_vals, label<span class="op">=</span><span class="vs">r'$\sigma(t, K) = l(t,K)\cdot a_t$ — total volatility'</span>)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Spot price $S_t$"</span>)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Volatility"</span>)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Decomposition of the fitted SLV volatility"</span>)</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="50c9cb1b" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ── Étape C : Prix des calls et volatilités implicites</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="sc">{</span><span class="st">'Strike'</span><span class="sc">:&gt;8}</span><span class="ss">  </span><span class="sc">{</span><span class="st">'Call MC'</span><span class="sc">:&gt;10}</span><span class="ss">  </span><span class="sc">{</span><span class="st">'Call BS'</span><span class="sc">:&gt;10}</span><span class="ss">  </span><span class="sc">{</span><span class="st">'IV hat'</span><span class="sc">:&gt;10}</span><span class="ss">  </span><span class="sc">{</span><span class="st">'Erreur (bp)'</span><span class="sc">:&gt;12}</span><span class="ss">"</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"-"</span> <span class="op">*</span> <span class="dv">58</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>S_T <span class="op">=</span> S_paths[<span class="op">-</span><span class="dv">1</span>,:] <span class="co"># spot prices at T</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> K <span class="kw">in</span> strikes:</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Prix Monte-Carlo</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    call_mc <span class="op">=</span> np.mean(np.maximum(S_T <span class="op">-</span> K, <span class="dv">0</span>))</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Prix Black-Scholes à sigma_mkt</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    call_bs <span class="op">=</span> blackscholes_price(K<span class="op">=</span>K,T<span class="op">=</span>T,S<span class="op">=</span>S0,vol<span class="op">=</span>sigma_mkt,callput<span class="op">=</span><span class="st">'call'</span>)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Volatilité implicite</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>        iv <span class="op">=</span> vec_find_vol_rat(price<span class="op">=</span>call_mc, S<span class="op">=</span>S0, K<span class="op">=</span>K, t<span class="op">=</span>T, r<span class="op">=</span><span class="dv">0</span>, flag<span class="op">=</span><span class="st">'c'</span>)        </span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>        err_bp <span class="op">=</span> np.<span class="bu">abs</span>(iv <span class="op">-</span> sigma_mkt)<span class="op">*</span> <span class="fl">1e4</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>K<span class="sc">:&gt;8.0f}</span><span class="ss">  </span><span class="sc">{</span>call_mc<span class="sc">:&gt;10.4f}</span><span class="ss">  </span><span class="sc">{</span>call_bs<span class="sc">:&gt;10.4f}</span><span class="ss">  </span><span class="sc">{</span>iv<span class="sc">:&gt;10.4%}</span><span class="ss">  </span><span class="sc">{</span>err_bp<span class="sc">:&gt;+12.1f}</span><span class="ss">"</span>)</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">Exception</span>:</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>K<span class="sc">:&gt;8.0f}</span><span class="ss">  </span><span class="sc">{</span>call_mc<span class="sc">:&gt;10.4f}</span><span class="ss">  </span><span class="sc">{</span>call_bs<span class="sc">:&gt;10.4f}</span><span class="ss">  </span><span class="sc">{</span><span class="st">'  N/A'</span><span class="sc">:&gt;10}</span><span class="ss">  </span><span class="sc">{</span><span class="st">'  N/A'</span><span class="sc">:&gt;12}</span><span class="ss">"</span>)</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"-"</span> <span class="op">*</span> <span class="dv">58</span>)</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>ivs <span class="op">=</span> []</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> K <span class="kw">in</span> strikes:</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>        price <span class="op">=</span> np.mean(np.maximum(S_T <span class="op">-</span> K, <span class="dv">0</span>))</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>        ivs.append(vec_find_vol_rat(price, S0, K, T, <span class="dv">0</span>, <span class="st">'c'</span>))</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">Exception</span>:</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>        ivs.append(np.nan)</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>ivs <span class="op">=</span> np.array(ivs)</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>valid <span class="op">=</span> <span class="op">~</span>np.isnan(ivs)</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>mae_bp <span class="op">=</span> np.mean(np.<span class="bu">abs</span>(ivs[valid] <span class="op">-</span> sigma_mkt)) <span class="op">*</span> <span class="fl">1e4</span></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Erreur absolue moyenne : </span><span class="sc">{</span>mae_bp<span class="sc">:.1f}</span><span class="ss"> bp"</span>)</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span> <span class="op">*</span> <span class="dv">60</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="mathematical-details-of-simulation" class="level3">
+<h3 class="anchored" data-anchor-id="mathematical-details-of-simulation">Mathematical details of simulation</h3>
+<section id="simulation-of-the-volatility-factor" class="level4">
+<h4 class="anchored" data-anchor-id="simulation-of-the-volatility-factor">Simulation of the volatility factor</h4>
+<p>The Ornstein–Uhlenbeck process <span class="math inline">\(Y\)</span> admits the explicit representation</p>
+<p><span class="math display">\[
+Y_{t_i}
+=
+e^{-\kappa \Delta t_i}Y_{t_{i-1}}
++
+\int_{t_{i-1}}^{t_i}
+\gamma e^{-\kappa(t_i-s)}dW_s^{(2)}.
+\]</span></p>
+<p>Conditionally on <span class="math inline">\(Y_{t_{i-1}}\)</span>, the random variable <span class="math inline">\(Y_{t_i}\)</span> is Gaussian with conditional moments</p>
+<p><span class="math display">\[
+\mathbb{E}\left[
+Y_{t_i}\mid Y_{t_{i-1}}
+\right]
+=
+e^{-\kappa\Delta t_i}Y_{t_{i-1}},
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+\operatorname{Var}\left[
+Y_{t_i}\mid Y_{t_{i-1}}
+\right]
+=
+\frac{\gamma^2}{2\kappa}
+\left(
+1-e^{-2\kappa\Delta t_i}
+\right).
+\]</span></p>
+<p>Hence, the volatility factor can be simulated exactly on each time interval.</p>
+</section>
+<section id="simulation-of-the-spot-process" class="level4">
+<h4 class="anchored" data-anchor-id="simulation-of-the-spot-process">Simulation of the spot process</h4>
+<p>To simulate the spot process, we use a log-Euler discretization scheme. Over the interval <span class="math inline">\([t_{i-1},t_i]\)</span>, the volatility factor and the leverage function are frozen at their left-endpoint values. Thus,</p>
+<p><span class="math display">\[
+\log S_{t_i}-\log S_{t_{i-1}}
+=
+-\frac12
+\sigma_0^2 e^{2Y_{t_{i-1}}}
+l^2(t_{i-1},S_{t_{i-1}})
+\Delta t_i
++
+\sigma_0 e^{Y_{t_{i-1}}}
+l(t_{i-1},S_{t_{i-1}})
+\int_{t_{i-1}}^{t_i}dW_t^{(1)}.
+\]</span></p>
+<p>Conditionally on <span class="math inline">\((S_{t_{i-1}},Y_{t_{i-1}})\)</span>, the pair <span class="math inline">\((\log S_{t_i},Y_{t_i})\)</span> is jointly Gaussian.</p>
+<p>Its conditional expectation for the log-spot is</p>
+<p><span class="math display">\[
+\mathbb{E}
+\left[
+\log S_{t_i}
+\mid
+S_{t_{i-1}},Y_{t_{i-1}}
+\right]
+=
+\log S_{t_{i-1}}
+-
+\frac12
+\sigma_0^2 e^{2Y_{t_{i-1}}}
+l^2(t_{i-1},S_{t_{i-1}})
+\Delta t_i.
+\]</span></p>
+<p>Its conditional variance is</p>
+<p><span class="math display">\[
+\operatorname{Var}
+\left[
+\log S_{t_i}
+\mid
+S_{t_{i-1}},Y_{t_{i-1}}
+\right]
+=
+\sigma_0^2 e^{2Y_{t_{i-1}}}
+l^2(t_{i-1},S_{t_{i-1}})
+\Delta t_i.
+\]</span></p>
+<p>Finally, the conditional covariance between <span class="math inline">\(Y_{t_i}\)</span> and <span class="math inline">\(\log S_{t_i}\)</span> is</p>
+<p><span class="math display">\[
+\operatorname{Cov}
+\left[
+Y_{t_i},\log S_{t_i}
+\mid
+S_{t_{i-1}},Y_{t_{i-1}}
+\right]
+=
+\sigma_0 e^{Y_{t_{i-1}}}
+l(t_{i-1},S_{t_{i-1}})
+\frac{\gamma\rho}{\kappa}
+\left(
+1-e^{-\kappa\Delta t_i}
+\right).
+\]</span></p>
+<p>Equivalently, the corresponding conditional correlation is</p>
+<p><span class="math display">\[
+\bar{\rho}
+=
+\rho
+\sqrt{
+\frac{
+2(1-e^{-\kappa\Delta t_i})
+}{
+\kappa\Delta t_i(1+e^{-\kappa\Delta t_i})
+}
+}.
+\]</span></p>
+</section>
+<section id="numerical-scheme" class="level4">
+<h4 class="anchored" data-anchor-id="numerical-scheme">Numerical scheme</h4>
+<p>Using the previous conditional moments, one can jointly simulate <span class="math inline">\((\log S_{t_i},Y_{t_i})\)</span> by generating two independent standard Gaussian random variables <span class="math inline">\(Z_1\)</span> and <span class="math inline">\(Z_2\)</span>.</p>
+<p>The simulation scheme is then</p>
+<p><span class="math display">\[
+\begin{cases}
+\log S_{t_i}
+=
+\log S_{t_{i-1}}
+-
+\frac12
+\sigma_0^2 e^{2Y_{t_{i-1}}}
+l^2(t_{i-1},S_{t_{i-1}})
+\Delta t_i
++
+\sigma_0 e^{Y_{t_{i-1}}}
+l(t_{i-1},S_{t_{i-1}})
+\sqrt{\Delta t_i}
+\left(
+\sqrt{1-\bar{\rho}^2}Z_1+\bar{\rho}Z_2
+\right),
+\\[8pt]
+Y_{t_i}
+=
+e^{-\kappa\Delta t_i}Y_{t_{i-1}}
++
+\gamma
+\sqrt{
+\frac{1-e^{-2\kappa\Delta t_i}}{2\kappa}
+}
+Z_2.
+\end{cases}
+\]</span></p>
+<p>This procedure is repeated sequentially over all time intervals <span class="math inline">\([t_{i-1},t_i]\)</span> in order to generate Monte Carlo trajectories of the SLV model.</p>
+
+
+
+</section>
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-black1973pricing" class="csl-entry" role="listitem">
+Black, Fischer, and Myron Scholes. 1973. <span>“The Pricing of Options and Corporate Liabilities.”</span> <em>Journal of Political Economy</em> 81 (3): 637–54.
+</div>
+<div id="ref-dupire1994pricing" class="csl-entry" role="listitem">
+Dupire, Bruno et al. 1994. <span>“Pricing with a Smile.”</span> <em>Risk</em> 7 (1): 18–20.
+</div>
+<div id="ref-guyon2011smile" class="csl-entry" role="listitem">
+Guyon, Julien, and Pierre Henry-Labordere. 2011. <span>“The Smile Calibration Problem Solved.”</span> <em>Available at SSRN 1885032</em>.
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("^(?:http:|https:)\/\/cheryl-kdio\.github\.io\/custom");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<a href="https://github.com/cheryl-kdio">Cheryl Kouadio</a> ©
+<script>document.write(new Date().getFullYear())</script>
+</div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/cheryl-kdio" target="_blank">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
