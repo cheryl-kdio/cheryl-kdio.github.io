@@ -1,0 +1,48 @@
+---
+title: Finance
+sidebar: finance
+toc: false
+listing:
+  contents:
+  - ../../posts/finance/**/*.qmd
+  - ../../posts/finance/**/*.ipynb
+  exclude:
+    draft: true
+  type: default
+  fields:
+  - title
+  - date
+  - reading-time
+  - description
+  date-format: DD/MM/YYYY
+  sort: title
+  filter-ui: true
+  page-size: 100
+---
+
+[← All topics](/topics.qmd)
+
+## Subtopics
+
+::: {.subtopic-cards}
+
+[Derivatives](/browse/finance/derivatives.qmd){.subtopic-card}
+
+[Interest rates](/browse/finance/interest-rates.qmd){.subtopic-card}
+
+[Volatility](/browse/finance/volatility.qmd){.subtopic-card}
+
+[Portfolio management](/browse/finance/portfolio-management.qmd){.subtopic-card}
+
+[Risk management](/browse/finance/risk-management.qmd){.subtopic-card}
+
+[Model calibration](/browse/finance/model-calibration.qmd){.subtopic-card}
+
+[Financial analysis](/browse/finance/financial-analysis.qmd){.subtopic-card}
+
+[Sustainable finance](/browse/finance/sustainable-finance.qmd){.subtopic-card}
+
+:::
+
+
+## Articles

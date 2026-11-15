@@ -1,0 +1,25 @@
+---
+title: Dependence and correlation
+sidebar: statistics-dependence
+toc: false
+listing:
+  contents:
+  - ../../posts/statistics/dependence/**/*.qmd
+  - ../../posts/statistics/dependence/**/*.ipynb
+  exclude:
+    draft: true
+  type: default
+  fields:
+  - title
+  - date
+  - reading-time
+  - description
+  date-format: DD/MM/YYYY
+  sort: title
+  filter-ui: true
+  page-size: 100
+---
+
+[← Statistics](/browse/statistics/index.qmd)
+
+## Articles

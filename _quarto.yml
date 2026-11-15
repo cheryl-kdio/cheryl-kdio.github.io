@@ -23,26 +23,35 @@ website:
 #        href: index.qmd
       - text: About
         menu:
-          - text: News
-            href: posts.qmd#category=news
+          - text: Now
+            href: now.qmd
           - text: Events
             href: posts.qmd#category=event
-          - text: Now
-            href: now.qmd                
-      - text: Articles
+          - text: CV
+            href: files/Cheryl-Kouadio-CV.pdf
+            target: _blank
+      - text: Topics
         menu:
-          - text: Browse by topic
-            href: topics.qmd
-          - text: All articles
-            href: posts.qmd
-          - text: Reports
-            href: publications.qmd
-          - text: ENSAI coursework
+          - text: Finance
+            href: browse/finance/index.qmd
+          - text: Statistics
+            href: browse/statistics/index.qmd
+          - text: Glossary & mathematical foundations
+            href: browse/glossary/index.qmd
+      - text: Reports
+        href: publications.qmd
+      - text: Coursework
+        menu:
+          - text: ENSAI
             href: posts.qmd#category=ensai-gdr
-          - text: M2MO coursework
+          - text: M2MO
             href: posts.qmd#category=m2mo
       - text: Notes
-        href: notes.qmd
+        menu:
+          - text: All notes
+            href: notes.qmd
+          - text: Glossary
+            href: glossary.qmd
 
       # - text: Outreach
       #   menu:
@@ -52,13 +61,8 @@ website:
       #     href: posts.qmd#category=presentation            
       #   - text: Notes
       #     href: notes.qmd          
-      - text : Glossary
-        href: glossary.qmd    
 
     right: 
-      - text: CV
-        href: files/Cheryl-Kouadio-CV.pdf
-        target: _blank 
       - icon: github
         text: Github
         href: https://github.com/cheryl-kdio
@@ -74,17 +78,161 @@ website:
         href: posts.xml
         target: _blank
   
-  # Quarto discovers articles and nested sections from the folder structure.
+  # Folder-based navigation, scoped to the selected topic.
   sidebar:
-    id: topics
+  - id: topics
     title: Topics
     style: docked
     collapse-level: 1
     contents:
-      - href: topics.qmd
-        text: Browse by topic
-      - auto: posts
-      - auto: glossary
+    - href: topics.qmd
+      text: Topics
+    - auto: posts
+    - auto: glossary
+  - id: finance-derivatives
+    title: Derivatives
+    style: docked
+    collapse-level: 2
+    contents:
+    - href: browse/finance/derivatives.qmd
+      text: All articles
+    - auto: posts/finance/derivatives
+    footer: '[← Finance](/browse/finance/index.qmd)'
+  - id: finance-interest-rates
+    title: Interest rates
+    style: docked
+    collapse-level: 2
+    contents:
+    - href: browse/finance/interest-rates.qmd
+      text: All articles
+    - auto: posts/finance/interest-rates
+    footer: '[← Finance](/browse/finance/index.qmd)'
+  - id: finance-volatility
+    title: Volatility
+    style: docked
+    collapse-level: 2
+    contents:
+    - href: browse/finance/volatility.qmd
+      text: All articles
+    - auto: posts/finance/volatility
+    footer: '[← Finance](/browse/finance/index.qmd)'
+  - id: finance-portfolio-management
+    title: Portfolio management
+    style: docked
+    collapse-level: 2
+    contents:
+    - href: browse/finance/portfolio-management.qmd
+      text: All articles
+    - auto: posts/finance/portfolio-management
+    footer: '[← Finance](/browse/finance/index.qmd)'
+  - id: finance-risk-management
+    title: Risk management
+    style: docked
+    collapse-level: 2
+    contents:
+    - href: browse/finance/risk-management.qmd
+      text: All articles
+    - auto: posts/finance/risk-management
+    footer: '[← Finance](/browse/finance/index.qmd)'
+  - id: finance-model-calibration
+    title: Model calibration
+    style: docked
+    collapse-level: 2
+    contents:
+    - href: browse/finance/model-calibration.qmd
+      text: All articles
+    - auto: posts/finance/model-calibration
+    footer: '[← Finance](/browse/finance/index.qmd)'
+  - id: finance-financial-analysis
+    title: Financial analysis
+    style: docked
+    collapse-level: 2
+    contents:
+    - href: browse/finance/financial-analysis.qmd
+      text: All articles
+    - auto: posts/finance/financial-analysis
+    footer: '[← Finance](/browse/finance/index.qmd)'
+  - id: finance-sustainable-finance
+    title: Sustainable finance
+    style: docked
+    collapse-level: 2
+    contents:
+    - href: browse/finance/sustainable-finance.qmd
+      text: All articles
+    - auto: posts/finance/sustainable-finance
+    footer: '[← Finance](/browse/finance/index.qmd)'
+  - id: finance
+    title: Finance
+    style: docked
+    collapse-level: 1
+    contents:
+    - href: browse/finance/index.qmd
+      text: All articles
+    - auto: posts/finance/derivatives
+    - auto: posts/finance/interest-rates
+    - auto: posts/finance/volatility
+    - auto: posts/finance/portfolio-management
+    - auto: posts/finance/risk-management
+    - auto: posts/finance/model-calibration
+    - auto: posts/finance/financial-analysis
+    - auto: posts/finance/sustainable-finance
+    footer: '[← All topics](/topics.qmd)'
+  - id: statistics-machine-learning
+    title: Machine learning
+    style: docked
+    collapse-level: 2
+    contents:
+    - href: browse/statistics/machine-learning.qmd
+      text: All articles
+    - auto: posts/statistics/machine-learning
+    footer: '[← Statistics](/browse/statistics/index.qmd)'
+  - id: statistics-dependence
+    title: Dependence and correlation
+    style: docked
+    collapse-level: 2
+    contents:
+    - href: browse/statistics/dependence.qmd
+      text: All articles
+    - auto: posts/statistics/dependence
+    footer: '[← Statistics](/browse/statistics/index.qmd)'
+  - id: statistics
+    title: Statistics
+    style: docked
+    collapse-level: 1
+    contents:
+    - href: browse/statistics/index.qmd
+      text: All articles
+    - auto: posts/statistics/machine-learning
+    - auto: posts/statistics/dependence
+    footer: '[← All topics](/topics.qmd)'
+  - id: glossary-finance
+    title: Financial glossary
+    style: docked
+    collapse-level: 2
+    contents:
+    - href: browse/glossary/finance.qmd
+      text: All articles
+    - auto: glossary/finance
+    footer: '[← Glossary & mathematical foundations](/browse/glossary/index.qmd)'
+  - id: glossary-mathematics
+    title: Mathematical foundations
+    style: docked
+    collapse-level: 2
+    contents:
+    - href: browse/glossary/mathematics.qmd
+      text: All articles
+    - auto: glossary/mathematics
+    footer: '[← Glossary & mathematical foundations](/browse/glossary/index.qmd)'
+  - id: glossary
+    title: Glossary & mathematical foundations
+    style: docked
+    collapse-level: 1
+    contents:
+    - href: browse/glossary/index.qmd
+      text: All articles
+    - auto: glossary/finance
+    - auto: glossary/mathematics
+    footer: '[← All topics](/topics.qmd)'
 
   page-navigation: true
   

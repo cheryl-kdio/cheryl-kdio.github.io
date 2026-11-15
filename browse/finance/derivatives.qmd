@@ -1,0 +1,25 @@
+---
+title: Derivatives
+sidebar: finance-derivatives
+toc: false
+listing:
+  contents:
+  - ../../posts/finance/derivatives/**/*.qmd
+  - ../../posts/finance/derivatives/**/*.ipynb
+  exclude:
+    draft: true
+  type: default
+  fields:
+  - title
+  - date
+  - reading-time
+  - description
+  date-format: DD/MM/YYYY
+  sort: title
+  filter-ui: true
+  page-size: 100
+---
+
+[← Finance](/browse/finance/index.qmd)
+
+## Articles

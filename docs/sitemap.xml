@@ -1,232 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://cheryl-kdio.github.io/glossary/m2mo/derivatives.html</loc>
-    <lastmod>2026-02-11T09:44:54.882Z</lastmod>
+    <loc>https://cheryl-kdio.github.io/browse/finance/model-calibration.html</loc>
+    <lastmod>2026-11-15T11:24:55.221Z</lastmod>
   </url>
   <url>
-    <loc>https://cheryl-kdio.github.io/glossary/m2mo/edp.html</loc>
-    <lastmod>2026-02-11T09:47:29.326Z</lastmod>
+    <loc>https://cheryl-kdio.github.io/browse/finance/derivatives.html</loc>
+    <lastmod>2026-11-15T11:24:55.218Z</lastmod>
   </url>
   <url>
-    <loc>https://cheryl-kdio.github.io/now.html</loc>
-    <lastmod>2026-11-15T10:42:02.567Z</lastmod>
+    <loc>https://cheryl-kdio.github.io/browse/finance/financial-analysis.html</loc>
+    <lastmod>2026-11-15T11:24:55.221Z</lastmod>
   </url>
   <url>
-    <loc>https://cheryl-kdio.github.io/notes/cuny-baruch-visiting-scholar-paperwork-guide.html</loc>
-    <lastmod>2026-11-15T10:42:02.568Z</lastmod>
+    <loc>https://cheryl-kdio.github.io/browse/finance/volatility.html</loc>
+    <lastmod>2026-11-15T11:24:55.219Z</lastmod>
   </url>
   <url>
-    <loc>https://cheryl-kdio.github.io/glossary.html</loc>
-    <lastmod>2026-11-15T10:42:02.566Z</lastmod>
+    <loc>https://cheryl-kdio.github.io/browse/finance/interest-rates.html</loc>
+    <lastmod>2026-11-15T11:24:55.219Z</lastmod>
   </url>
   <url>
-    <loc>https://cheryl-kdio.github.io/posts/m2mo/yield_curves/00_intro_yield_curve.html</loc>
-    <lastmod>2026-05-03T10:26:32.724Z</lastmod>
+    <loc>https://cheryl-kdio.github.io/browse/glossary/index.html</loc>
+    <lastmod>2026-11-15T11:28:32.341Z</lastmod>
   </url>
   <url>
-    <loc>https://cheryl-kdio.github.io/posts/m2mo/edp/edp_european_opt.html</loc>
-    <lastmod>2026-02-12T21:47:58.903Z</lastmod>
+    <loc>https://cheryl-kdio.github.io/browse/statistics/dependence.html</loc>
+    <lastmod>2026-11-15T11:24:55.223Z</lastmod>
   </url>
   <url>
-    <loc>https://cheryl-kdio.github.io/posts/m2mo/derivatives/00_references.html</loc>
-    <lastmod>2026-11-15T10:31:14.666Z</lastmod>
+    <loc>https://cheryl-kdio.github.io/browse/statistics/machine-learning.html</loc>
+    <lastmod>2026-11-15T11:24:55.223Z</lastmod>
   </url>
   <url>
-    <loc>https://cheryl-kdio.github.io/posts/ensai/apprentisage-stat/Tp4.html</loc>
-    <lastmod>2026-02-11T01:58:13.829Z</lastmod>
+    <loc>https://cheryl-kdio.github.io/glossary/mathematics/stochastic-calculus.html</loc>
+    <lastmod>2026-11-15T11:21:34.324Z</lastmod>
   </url>
   <url>
-    <loc>https://cheryl-kdio.github.io/posts/ensai/apprentisage-stat/Tp2.html</loc>
-    <lastmod>2026-02-11T01:58:04.926Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cheryl-kdio.github.io/posts/ensai/proc_stochastique/modele_heston.html</loc>
-    <lastmod>2026-02-11T01:59:29.841Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cheryl-kdio.github.io/posts/ensai/proc_stochastique/modele_log_sv-part2.html</loc>
-    <lastmod>2026-02-11T01:59:32.892Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cheryl-kdio.github.io/posts/ensai/proc_stochastique/modele_bs.html</loc>
-    <lastmod>2026-02-11T14:34:55.269Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cheryl-kdio.github.io/posts/ensai/risques_financiers/risque_def.html</loc>
-    <lastmod>2026-02-11T02:00:05.542Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cheryl-kdio.github.io/posts/ensai/risques_financiers/value-at-risk/var_classiques.html</loc>
-    <lastmod>2026-02-11T01:59:53.543Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cheryl-kdio.github.io/posts/ensai/risques_financiers/value-at-risk/var_def.html</loc>
-    <lastmod>2026-02-11T01:59:56.692Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cheryl-kdio.github.io/posts/ensai/risques_financiers/value-at-risk/var_application.html</loc>
-    <lastmod>2026-02-11T01:59:51.505Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cheryl-kdio.github.io/posts/ensai/others/spearman-pearson.html</loc>
-    <lastmod>2026-02-11T01:59:14.506Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cheryl-kdio.github.io/posts/ensai/analyses_financieres/bilan_entreprise.html</loc>
-    <lastmod>2026-02-10T22:58:25.348Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cheryl-kdio.github.io/posts/ensai/gestion_actifs/TP-2.html</loc>
-    <lastmod>2026-02-11T01:58:52.358Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cheryl-kdio.github.io/posts/ensai/gestion_actifs/TP-1.html</loc>
-    <lastmod>2026-02-11T08:49:19.891Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cheryl-kdio.github.io/notes.html</loc>
-    <lastmod>2026-11-15T10:42:02.565Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cheryl-kdio.github.io/posts/ensai/gestion_actifs/TP-3.html</loc>
-    <lastmod>2026-02-11T01:58:58.113Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cheryl-kdio.github.io/posts/ensai/analyses_financieres/reglementation_prudentielle.html</loc>
-    <lastmod>2026-02-10T22:58:41.372Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cheryl-kdio.github.io/posts/ensai/others/finance_durable.html</loc>
-    <lastmod>2026-02-11T02:34:13.959Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cheryl-kdio.github.io/posts/ensai/others/ISR.html</loc>
-    <lastmod>2026-02-11T02:34:10.004Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cheryl-kdio.github.io/posts/ensai/risques_financiers/value-at-risk/var_garch.html</loc>
-    <lastmod>2026-02-11T02:00:01.311Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cheryl-kdio.github.io/posts/ensai/risques_financiers/value-at-risk/var_evt.html</loc>
-    <lastmod>2026-02-11T01:59:59.169Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cheryl-kdio.github.io/posts/ensai/risques_financiers/value-at-risk/pj_copules.html</loc>
-    <lastmod>2026-02-11T01:59:49.677Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cheryl-kdio.github.io/posts/ensai/proc_stochastique/pj_courbe_tx.html</loc>
-    <lastmod>2026-02-11T01:59:34.459Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cheryl-kdio.github.io/posts/ensai/proc_stochastique/APF_filter.html</loc>
-    <lastmod>2026-02-11T01:59:26.946Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cheryl-kdio.github.io/posts/ensai/proc_stochastique/modele_log_sv-part1.html</loc>
-    <lastmod>2026-02-11T01:59:31.257Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cheryl-kdio.github.io/posts/ensai/apprentisage-stat/Tp3.html</loc>
-    <lastmod>2026-02-11T01:58:09.600Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cheryl-kdio.github.io/posts/ensai/apprentisage-stat/Tp1.html</loc>
-    <lastmod>2026-02-11T08:49:14.693Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cheryl-kdio.github.io/posts/m2mo/derivatives/03_options_made_simple.html</loc>
-    <lastmod>2026-05-03T12:56:47.459Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cheryl-kdio.github.io/posts/m2mo/derivatives/01_intro_market.html</loc>
-    <lastmod>2026-02-12T21:55:20.198Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cheryl-kdio.github.io/posts/m2mo/vol/implied_vol.html</loc>
-    <lastmod>2026-10-27T21:03:35.859Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cheryl-kdio.github.io/posts/m2mo/edp/edp_american_opt.html</loc>
-    <lastmod>2026-02-12T21:48:01.552Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cheryl-kdio.github.io/posts/m2mo/yield_curves/interest_rates_made_simple.html</loc>
-    <lastmod>2026-05-03T18:44:45.077Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cheryl-kdio.github.io/index.html</loc>
-    <lastmod>2026-11-15T11:17:32.031Z</lastmod>
+    <loc>https://cheryl-kdio.github.io/posts.html</loc>
+    <lastmod>2026-11-15T11:21:34.161Z</lastmod>
   </url>
   <url>
     <loc>https://cheryl-kdio.github.io/publications.html</loc>
     <lastmod>2026-11-15T10:42:02.567Z</lastmod>
   </url>
   <url>
-    <loc>https://cheryl-kdio.github.io/notes/new-york-state-climate-policy.html</loc>
-    <lastmod>2026-11-15T10:42:02.569Z</lastmod>
+    <loc>https://cheryl-kdio.github.io/index.html</loc>
+    <lastmod>2026-11-15T11:51:08.653Z</lastmod>
   </url>
   <url>
-    <loc>https://cheryl-kdio.github.io/posts.html</loc>
-    <lastmod>2026-11-15T11:20:55.551Z</lastmod>
+    <loc>https://cheryl-kdio.github.io/posts/finance/portfolio-management/practical-work/market-risk.html</loc>
+    <lastmod>2026-11-15T10:42:43.173Z</lastmod>
   </url>
   <url>
-    <loc>https://cheryl-kdio.github.io/glossary/m2mo/calcul_sto.html</loc>
-    <lastmod>2026-02-11T09:46:38.640Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cheryl-kdio.github.io/posts/asset_management/markowitz_model.html</loc>
-    <lastmod>2026-11-14T23:01:38.012Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cheryl-kdio.github.io/posts/derivatives/basics_pricing.html</loc>
-    <lastmod>2026-11-15T10:30:05.793Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cheryl-kdio.github.io/posts/m2mo/derivatives/basics_pricing.html</loc>
-    <lastmod>2026-11-15T10:31:19.281Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cheryl-kdio.github.io/posts/finance/derivatives/pricing-basics.html</loc>
-    <lastmod>2026-11-15T10:52:08.022Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cheryl-kdio.github.io/glossary/finance/derivatives.html</loc>
-    <lastmod>2026-11-15T10:42:02.570Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cheryl-kdio.github.io/glossary/mathematics/pde-and-monte-carlo.html</loc>
-    <lastmod>2026-11-15T10:42:02.569Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cheryl-kdio.github.io/posts/finance/portfolio-management/practical-work/bond-valuation-risk.html</loc>
+    <loc>https://cheryl-kdio.github.io/posts/finance/portfolio-management/practical-work/liquidity-risk.html</loc>
     <lastmod>2026-11-15T10:42:43.172Z</lastmod>
   </url>
   <url>
-    <loc>https://cheryl-kdio.github.io/posts/finance/sustainable-finance/socially-responsible-investment.html</loc>
+    <loc>https://cheryl-kdio.github.io/posts/finance/sustainable-finance/responsible-investment.html</loc>
+    <lastmod>2026-11-15T10:42:43.181Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cheryl-kdio.github.io/posts/finance/interest-rates/market-instruments.html</loc>
     <lastmod>2026-11-15T10:44:07.048Z</lastmod>
   </url>
   <url>
-    <loc>https://cheryl-kdio.github.io/posts/finance/interest-rates/interest-rates-made-simple.html</loc>
-    <lastmod>2026-11-15T10:42:43.169Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cheryl-kdio.github.io/posts/finance/risk-management/value-at-risk/var-application.html</loc>
-    <lastmod>2026-11-15T10:44:07.050Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cheryl-kdio.github.io/posts/finance/risk-management/value-at-risk/extreme-value-theory.html</loc>
-    <lastmod>2026-11-15T10:42:43.174Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cheryl-kdio.github.io/posts/finance/risk-management/value-at-risk/historical-and-parametric-var.html</loc>
+    <loc>https://cheryl-kdio.github.io/posts/finance/risk-management/value-at-risk/garch-var.html</loc>
     <lastmod>2026-11-15T10:42:43.175Z</lastmod>
   </url>
   <url>
-    <loc>https://cheryl-kdio.github.io/posts/finance/volatility/stochastic-local-volatility.html</loc>
-    <lastmod>2026-11-15T10:44:07.045Z</lastmod>
+    <loc>https://cheryl-kdio.github.io/posts/finance/risk-management/value-at-risk/copulas-project.html</loc>
+    <lastmod>2026-11-15T11:55:26.368Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cheryl-kdio.github.io/posts/finance/risk-management/value-at-risk/value-at-risk.html</loc>
+    <lastmod>2026-11-15T10:44:07.050Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cheryl-kdio.github.io/posts/finance/risk-management/risk-fundamentals.html</loc>
+    <lastmod>2026-11-15T10:44:07.047Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cheryl-kdio.github.io/posts/finance/derivatives/options-made-simple.html</loc>
+    <lastmod>2026-11-15T10:44:07.047Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cheryl-kdio.github.io/posts/finance/derivatives/financial-markets-overview.html</loc>
+    <lastmod>2026-11-15T10:42:43.166Z</lastmod>
   </url>
   <url>
     <loc>https://cheryl-kdio.github.io/posts/finance/derivatives/numerical-methods/european-options.html</loc>
@@ -261,8 +121,12 @@
     <lastmod>2026-11-15T10:42:43.183Z</lastmod>
   </url>
   <url>
+    <loc>https://cheryl-kdio.github.io/notes.html</loc>
+    <lastmod>2026-11-15T11:51:07.205Z</lastmod>
+  </url>
+  <url>
     <loc>https://cheryl-kdio.github.io/topics.html</loc>
-    <lastmod>2026-11-15T11:07:40.355Z</lastmod>
+    <lastmod>2026-11-15T11:40:24.141Z</lastmod>
   </url>
   <url>
     <loc>https://cheryl-kdio.github.io/posts/statistics/dependence/spearman-pearson.html</loc>
@@ -286,7 +150,7 @@
   </url>
   <url>
     <loc>https://cheryl-kdio.github.io/posts/finance/model-calibration/yield-curve-calibration.html</loc>
-    <lastmod>2026-11-15T10:42:43.180Z</lastmod>
+    <lastmod>2026-11-15T11:55:26.367Z</lastmod>
   </url>
   <url>
     <loc>https://cheryl-kdio.github.io/posts/finance/financial-analysis/prudential-regulation.html</loc>
@@ -297,51 +161,79 @@
     <lastmod>2026-11-15T10:42:43.167Z</lastmod>
   </url>
   <url>
-    <loc>https://cheryl-kdio.github.io/posts/finance/derivatives/financial-markets-overview.html</loc>
-    <lastmod>2026-11-15T10:42:43.166Z</lastmod>
+    <loc>https://cheryl-kdio.github.io/posts/finance/derivatives/pricing-basics.html</loc>
+    <lastmod>2026-11-15T10:52:08.022Z</lastmod>
   </url>
   <url>
-    <loc>https://cheryl-kdio.github.io/posts/finance/derivatives/options-made-simple.html</loc>
-    <lastmod>2026-11-15T10:44:07.047Z</lastmod>
+    <loc>https://cheryl-kdio.github.io/posts/finance/volatility/stochastic-local-volatility.html</loc>
+    <lastmod>2026-11-15T10:44:07.045Z</lastmod>
   </url>
   <url>
-    <loc>https://cheryl-kdio.github.io/posts/finance/risk-management/risk-fundamentals.html</loc>
-    <lastmod>2026-11-15T10:44:07.047Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cheryl-kdio.github.io/posts/finance/risk-management/value-at-risk/value-at-risk.html</loc>
-    <lastmod>2026-11-15T10:44:07.050Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cheryl-kdio.github.io/posts/finance/risk-management/value-at-risk/copulas-project.html</loc>
-    <lastmod>2026-11-15T10:42:43.174Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cheryl-kdio.github.io/posts/finance/risk-management/value-at-risk/garch-var.html</loc>
+    <loc>https://cheryl-kdio.github.io/posts/finance/risk-management/value-at-risk/historical-and-parametric-var.html</loc>
     <lastmod>2026-11-15T10:42:43.175Z</lastmod>
   </url>
   <url>
-    <loc>https://cheryl-kdio.github.io/posts/finance/interest-rates/market-instruments.html</loc>
+    <loc>https://cheryl-kdio.github.io/posts/finance/risk-management/value-at-risk/extreme-value-theory.html</loc>
+    <lastmod>2026-11-15T10:42:43.174Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cheryl-kdio.github.io/posts/finance/risk-management/value-at-risk/var-application.html</loc>
+    <lastmod>2026-11-15T10:44:07.050Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cheryl-kdio.github.io/posts/finance/interest-rates/interest-rates-made-simple.html</loc>
+    <lastmod>2026-11-15T10:42:43.169Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cheryl-kdio.github.io/posts/finance/sustainable-finance/socially-responsible-investment.html</loc>
     <lastmod>2026-11-15T10:44:07.048Z</lastmod>
   </url>
   <url>
-    <loc>https://cheryl-kdio.github.io/posts/finance/sustainable-finance/responsible-investment.html</loc>
-    <lastmod>2026-11-15T10:42:43.181Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cheryl-kdio.github.io/posts/finance/portfolio-management/practical-work/liquidity-risk.html</loc>
+    <loc>https://cheryl-kdio.github.io/posts/finance/portfolio-management/practical-work/bond-valuation-risk.html</loc>
     <lastmod>2026-11-15T10:42:43.172Z</lastmod>
   </url>
   <url>
-    <loc>https://cheryl-kdio.github.io/posts/finance/portfolio-management/practical-work/market-risk.html</loc>
-    <lastmod>2026-11-15T10:42:43.173Z</lastmod>
+    <loc>https://cheryl-kdio.github.io/glossary.html</loc>
+    <lastmod>2026-11-15T11:21:34.160Z</lastmod>
   </url>
   <url>
-    <loc>https://cheryl-kdio.github.io/glossary/mathematics/stochastic-calculus.html</loc>
-    <lastmod>2026-11-15T10:42:02.570Z</lastmod>
+    <loc>https://cheryl-kdio.github.io/now.html</loc>
+    <lastmod>2026-11-15T11:47:42.071Z</lastmod>
   </url>
   <url>
-    <loc>https://cheryl-kdio.github.io/posts/finance/derivatives/model-free-pricing.html</loc>
-    <lastmod>2026-11-15T10:42:43.167Z</lastmod>
+    <loc>https://cheryl-kdio.github.io/glossary/mathematics/pde-and-monte-carlo.html</loc>
+    <lastmod>2026-11-15T11:21:34.323Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cheryl-kdio.github.io/glossary/finance/derivatives.html</loc>
+    <lastmod>2026-11-15T11:21:34.325Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cheryl-kdio.github.io/browse/statistics/index.html</loc>
+    <lastmod>2026-11-15T11:28:32.341Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cheryl-kdio.github.io/browse/glossary/mathematics.html</loc>
+    <lastmod>2026-11-15T11:24:55.224Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cheryl-kdio.github.io/browse/glossary/finance.html</loc>
+    <lastmod>2026-11-15T11:24:55.224Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cheryl-kdio.github.io/browse/finance/index.html</loc>
+    <lastmod>2026-11-15T11:28:32.341Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cheryl-kdio.github.io/browse/finance/sustainable-finance.html</loc>
+    <lastmod>2026-11-15T11:24:55.222Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cheryl-kdio.github.io/browse/finance/portfolio-management.html</loc>
+    <lastmod>2026-11-15T11:24:55.220Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cheryl-kdio.github.io/browse/finance/risk-management.html</loc>
+    <lastmod>2026-11-15T11:24:55.220Z</lastmod>
   </url>
 </urlset>

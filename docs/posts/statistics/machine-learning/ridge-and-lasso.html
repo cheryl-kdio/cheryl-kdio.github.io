@@ -60,14 +60,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="../../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../../">
-<link href="../../../posts/statistics/dependence/spearman-pearson.html" rel="next">
 <link href="../../../posts/statistics/machine-learning/kernels-and-svm.html" rel="prev">
 <script src="../../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../../site_libs/quarto-html/popper.min.js"></script>
@@ -123,9 +122,6 @@ https://badge.dimensions.ai/
 <script async="" src="https://badge.dimensions.ai/badge.js" charset="utf-8"></script>
 
 <script type="text/javascript" src="//cdn.plu.mx/widget-popup.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-
-<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -160,11 +156,11 @@ window.Quarto = {
 <link rel="stylesheet" href="../../../styles.css">
 <meta property="og:title" content="Ridge regression vs.&nbsp;Lasso regression – Cheryl Kouadio">
 <meta property="og:description" content="Cheryl Kouadio is a graduate student in stochastic modeling and quantitative finance at Université Paris Cité. Her academic interests focus on probability theory, stochastic processes, data analysis, and financial risk modeling. She studies how rigorous statistical and mathematical methods can be applied to quantify uncertainty and support decision-making in finance and risk management.">
-<meta property="og:image" content="https://cheryl-kdio.github.io/posts/statistics/machine-learning/Tp1_files/figure-html/cell-5-output-1.png">
+<meta property="og:image" content="https://cheryl-kdio.github.io/files/profile/kouadio_profile.jpeg">
 <meta property="og:site_name" content="Cheryl Kouadio">
 <meta name="twitter:title" content="Ridge regression vs.&nbsp;Lasso regression – Cheryl Kouadio">
 <meta name="twitter:description" content="Cheryl Kouadio is a graduate student in stochastic modeling and quantitative finance at Université Paris Cité. Her academic interests focus on probability theory, stochastic processes, data analysis, and financial risk modeling. She studies how rigorous statistical and mathematical methods can be applied to quantify uncertainty and support decision-making in finance and risk management.">
-<meta name="twitter:image" content="https://cheryl-kdio.github.io/posts/statistics/machine-learning/Tp1_files/figure-html/cell-5-output-1.png">
+<meta name="twitter:image" content="https://cheryl-kdio.github.io/files/profile/kouadio_profile.jpeg">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -191,60 +187,74 @@ window.Quarto = {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-about">    
         <li>
-    <a class="dropdown-item" href="../../../posts.html#category=news">
- <span class="dropdown-text">News</span></a>
+    <a class="dropdown-item" href="../../../now.html">
+ <span class="dropdown-text">Now</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../../posts.html#category=event">
  <span class="dropdown-text">Events</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../now.html">
- <span class="dropdown-text">Now</span></a>
+    <a class="dropdown-item" href="../../../files/Cheryl-Kouadio-CV.pdf" target="_blank">
+ <span class="dropdown-text">CV</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-articles" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Articles</span>
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-topics" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Topics</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-articles">    
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-topics">    
         <li>
-    <a class="dropdown-item" href="../../../topics.html">
- <span class="dropdown-text">Browse by topic</span></a>
+    <a class="dropdown-item" href="../../../browse/finance/index.html">
+ <span class="dropdown-text">Finance</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../posts.html">
- <span class="dropdown-text">All articles</span></a>
+    <a class="dropdown-item" href="../../../browse/statistics/index.html">
+ <span class="dropdown-text">Statistics</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../publications.html">
- <span class="dropdown-text">Reports</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../../../posts.html#category=ensai-gdr">
- <span class="dropdown-text">ENSAI coursework</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../../../posts.html#category=m2mo">
- <span class="dropdown-text">M2MO coursework</span></a>
+    <a class="dropdown-item" href="../../../browse/glossary/index.html">
+ <span class="dropdown-text">Glossary &amp; mathematical foundations</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="../../../notes.html"> 
-<span class="menu-text">Notes</span></a>
+    <a class="nav-link" href="../../../publications.html"> 
+<span class="menu-text">Reports</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../../glossary.html"> 
-<span class="menu-text">Glossary</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-coursework" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Coursework</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-coursework">    
+        <li>
+    <a class="dropdown-item" href="../../../posts.html#category=ensai-gdr">
+ <span class="dropdown-text">ENSAI</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../../../posts.html#category=m2mo">
+ <span class="dropdown-text">M2MO</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-notes" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Notes</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-notes">    
+        <li>
+    <a class="dropdown-item" href="../../../notes.html">
+ <span class="dropdown-text">All notes</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../glossary.html">
+ <span class="dropdown-text">Glossary</span></a>
+  </li>  
+    </ul>
+  </li>
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="../../../files/Cheryl-Kouadio-CV.pdf" target="_blank"> 
-<span class="menu-text">CV</span></a>
-  </li>  
   <li class="nav-item">
     <a class="nav-link" href="https://github.com/cheryl-kdio" target="_blank"> <i class="bi bi-github" role="img">
 </i> 
@@ -276,7 +286,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Statistics</li><li class="breadcrumb-item"><a href="../../../posts/statistics/machine-learning/feature-selection.html">Machine learning</a></li><li class="breadcrumb-item"><a href="../../../posts/statistics/machine-learning/ridge-and-lasso.html">Ridge regression vs.&nbsp;Lasso regression</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../posts/statistics/machine-learning/feature-selection.html">Machine Learning</a></li><li class="breadcrumb-item"><a href="../../../posts/statistics/machine-learning/ridge-and-lasso.html">Ridge regression vs.&nbsp;Lasso regression</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -290,307 +300,19 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../topics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Browse by topic</span></a>
+  <a href="../../../browse/statistics/machine-learning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">All articles</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
- <span class="menu-text">Finance</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Machine Learning</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
- <span class="menu-text">Derivatives</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../posts/finance/derivatives/financial-markets-overview.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Introduction to financial markets</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../posts/finance/derivatives/mathematical-foundations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Mathematical foundations of financial market modeling</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../posts/finance/derivatives/numerical-methods/american-options.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Finite difference Methods for American Options</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../posts/finance/derivatives/numerical-methods/european-options.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Finite difference Methods for European Options</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../posts/finance/derivatives/options-made-simple.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Options made simple: what they are and why they matter and how do we price them?</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../posts/finance/derivatives/pricing-basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Basics of Derivative Pricing</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
- <span class="menu-text">Interest rates</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../posts/finance/interest-rates/interest-rates-made-simple.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Interest rates made simple</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../posts/finance/interest-rates/market-instruments.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Interest rates market - Key instruments</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
- <span class="menu-text">Volatility</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../posts/finance/volatility/stochastic-local-volatility.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Particle method for stochastic local volatility valibration</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
- <span class="menu-text">Portfolio management</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../posts/finance/portfolio-management/markowitz-model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Markowitz Model</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../posts/finance/portfolio-management/practical-work/bond-valuation-risk.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Risque de valorisation d’obligation</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../posts/finance/portfolio-management/practical-work/liquidity-risk.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Risques de liquidité (profil d’écoulement / de liquidation d’un portefeuille d’actifs)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../posts/finance/portfolio-management/practical-work/market-risk.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Le risque de marché en asset management</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
- <span class="menu-text">Risk management</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../posts/finance/risk-management/risk-fundamentals.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Le risque, qu’est ce que c’est ?</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../posts/finance/risk-management/value-at-risk/copulas-project.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Projet de gestion de risques multiples</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../posts/finance/risk-management/value-at-risk/extreme-value-theory.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">TP2:Méthodes basées sur la théorie des valeurs extrêmes</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../posts/finance/risk-management/value-at-risk/garch-var.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">TP3:Méthodes d’une calcul d’une VaR dynamique (basé sur GARCH)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../posts/finance/risk-management/value-at-risk/historical-and-parametric-var.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">TP1:Méthodes traditionnelles de calcul de la VaR et Expected Shortfall (ES)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../posts/finance/risk-management/value-at-risk/value-at-risk.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">La VaR</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../posts/finance/risk-management/value-at-risk/var-application.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Application de la VaR</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
- <span class="menu-text">Model calibration</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../posts/finance/model-calibration/auxiliary-particle-filter.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">APF filter</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../posts/finance/model-calibration/black-scholes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Calibration du modèle Black-Scholes</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../posts/finance/model-calibration/heston.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Calibration avec le modèle d’Heston</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../posts/finance/model-calibration/taylor-kalman-filter.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Calibration du modèle à volatilité stochastique de Taylor : Filtre de Kalman</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../posts/finance/model-calibration/taylor-particle-filter.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Calibration du modèle à volatilité stochastique de Taylor : Filtre particulaire</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../posts/finance/model-calibration/yield-curve-calibration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Modèles de courbe de taux</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
- <span class="menu-text">Financial analysis</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../posts/finance/financial-analysis/balance-sheet-and-income-statement.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Comment fonctionne le bilan et le compte de résultat d’une entreprise</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../posts/finance/financial-analysis/prudential-regulation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">La réglementation prudentielle</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false">
- <span class="menu-text">Sustainable finance</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth2 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../posts/finance/sustainable-finance/responsible-investment.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Investissement responsable</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../posts/finance/sustainable-finance/socially-responsible-investment.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Investissement Socialement Responsable (ISR): De quoi parle-t-on ?</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true">
- <span class="menu-text">Statistics</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="true">
- <span class="menu-text">Machine learning</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../posts/statistics/machine-learning/feature-selection.html" class="sidebar-item-text sidebar-link">
@@ -617,57 +339,11 @@ window.Quarto = {
 </li>
       </ul>
   </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false">
- <span class="menu-text">Dependence and correlation</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth2 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../posts/statistics/dependence/spearman-pearson.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Corrélation de Spearman vs corrélation de Pearson</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false">
- <span class="menu-text">Glossary</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../glossary/finance/derivatives.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Glossary - Derivatives market</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../glossary/mathematics/pde-and-monte-carlo.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Monte-Carlo/EDP</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../glossary/mathematics/stochastic-calculus.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Calcul stochastique</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
     </ul>
     </div>
-</nav>
+<div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
+<p><a href="../../../browse/statistics/index.html">← Statistics</a></p>
+</div></div></nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
@@ -692,7 +368,7 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Statistics</li><li class="breadcrumb-item"><a href="../../../posts/statistics/machine-learning/feature-selection.html">Machine learning</a></li><li class="breadcrumb-item"><a href="../../../posts/statistics/machine-learning/ridge-and-lasso.html">Ridge regression vs.&nbsp;Lasso regression</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../posts/statistics/machine-learning/feature-selection.html">Machine Learning</a></li><li class="breadcrumb-item"><a href="../../../posts/statistics/machine-learning/ridge-and-lasso.html">Ridge regression vs.&nbsp;Lasso regression</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Ridge regression vs.&nbsp;Lasso regression</h1>
   <div class="quarto-categories">
@@ -745,7 +421,7 @@ window.Quarto = {
 <p>where <span class="math inline">\(\sigma^2\)</span> is the variance of the noise in the data.</p>
 <p><u>Hint to prove the bias formula</u> : factorize by <span class="math inline">\(\lambda ( X^TX + \lambda I_d)^{-1}\)</span></p>
 <p>In this activity, we will numerically check the formula for the bias and the variance by generating random data and calculating the squared bias of the sample mean. Let’s start by create a function to generate the data with a noise <span class="math inline">\(\varepsilon \sim \mathcal{N}(0,\sigma^2)\)</span>.</p>
-<div id="a1090c94" class="cell" data-execution_count="1">
+<div id="3ac9739c" class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Q1 : Function that generates data from a linear model</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -756,7 +432,7 @@ window.Quarto = {
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Our goal is now to illustrate the squared bias of each coefficient as a function of <span class="math inline">\(\lambda\)</span> when it varies between 10² and 10⁴ (in the log-domain). We will then generate a dataset with 100 samples and 10 features and calculate the squared bias of the coefficients and the variance for each value of <span class="math inline">\(\lambda\)</span>. The features will be generated from a normal distribution (not mandatory) and the true coefficients are fixed. We voluntarily put to 0 some coefficients to see the effect of the regularization.</p>
-<div id="683af895" class="cell" data-execution_count="2">
+<div id="dee2f5ac" class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> Ridge</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -767,7 +443,7 @@ window.Quarto = {
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.random.normal(loc<span class="op">=</span><span class="dv">0</span>, scale<span class="op">=</span><span class="dv">1</span>, size<span class="op">=</span>(n, d)) <span class="co">#features</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>To compute numerically the bias and the variance of the ridge regression, we will generation 200 datasets. We will then, for each <span class="math inline">\(\lambda\)</span>, store the mean of each coefficients (in order to compute the numerical bias) and the standard deviation (to compute the numerical variance).</p>
-<div id="d1ce23fd" class="cell" data-execution_count="3">
+<div id="7709311d" class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>n_sim<span class="op">=</span><span class="dv">1000</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>estimated_theta <span class="op">=</span> np.zeros((n_sim,d)) <span class="co">#store the estimated theta for each simulation</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>bias_squared <span class="op">=</span> np.zeros((<span class="bu">len</span>(lambda_grid),d)) <span class="co">#store the squared bias for each lambda</span></span>
@@ -782,7 +458,7 @@ window.Quarto = {
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    bias_squared[idx,:]<span class="op">=</span>(np.mean(estimated_theta,axis<span class="op">=</span><span class="dv">0</span>)<span class="op">-</span>theta)<span class="op">**</span><span class="dv">2</span></span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    variance[idx,:] <span class="op">=</span> np.std(estimated_theta,axis<span class="op">=</span><span class="dv">0</span>)<span class="op">**</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="b2f92b36" class="cell" data-execution_count="4">
+<div id="fd165240" class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>))</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(d):</span>
@@ -804,15 +480,8 @@ window.Quarto = {
 <span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the plots</span></span>
 <span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
 <span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Tp1_files/figure-html/cell-5-output-1.png" class="img-fluid figure-img"></p>
-</figure>
 </div>
-</div>
-</div>
-<div id="18aa3e57" class="cell" data-execution_count="5">
+<div id="df70abd6" class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Plot squared theorical bias : −λ(X^T X + λId) (−1) θ</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>bias_theoretical <span class="op">=</span> np.zeros((<span class="bu">len</span>(lambda_grid), d))</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>variance_theorical <span class="op">=</span> np.zeros((<span class="bu">len</span>(lambda_grid), d))</span>
@@ -838,16 +507,6 @@ window.Quarto = {
 <span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_xlabel(<span class="st">'λ (log scale)'</span>)</span>
 <span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_ylabel(<span class="st">'Variance'</span>)</span>
 <span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_title(<span class="st">'Ridge Regression Empirical Variance'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="5">
-<pre><code>Text(0.5, 1.0, 'Ridge Regression Empirical Variance')</code></pre>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Tp1_files/figure-html/cell-6-output-2.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
 </div>
 <p>As we can see, both in the numerical and theoretical bias, the bias of the coefficients is increasing with the increase of <span class="math inline">\(\lambda\)</span>. This is due to the fact that the regularization term is increasing and the coefficients are getting closer to 0. The variance is also decreasing with the increase of <span class="math inline">\(\lambda\)</span> but it is not as significant as the bias. This is due to the fact that the variance is not directly affected by the regularization term.</p>
 <p>One can have an idea of this behaviour by looking at the formula of the bias and the variance of the ridge regression, using the gram matrix <span class="math inline">\(\frac{X^TX}{n}\)</span>. In face, using the large law of numbers, we can see that the bias is proportional to <span class="math inline">\(\lambda\)</span> and the variance is inversely proportional to <span class="math inline">\(\lambda\)</span>.</p>
@@ -862,50 +521,43 @@ window.Quarto = {
 <p><span class="math display">\[
 \theta ^* = argmin_{\theta} \left\{ || Y - X \theta||_2 + \lambda ||\theta||_1 \right\}
 \]</span></p>
-<div id="0046f3a2" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> Lasso</span>
+<div id="ce1554af" class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> Lasso</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>lasso_bias_squared <span class="op">=</span> np.zeros((<span class="bu">len</span>(lambda_grid), d))</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>variance_lasso <span class="op">=</span> np.zeros((<span class="bu">len</span>(lambda_grid), d))</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>estimated_theta_lasso <span class="op">=</span> np.zeros((n_sim, d))</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Iterate over lambda values</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> idx, alpha <span class="kw">in</span> <span class="bu">enumerate</span>(lambda_grid):</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n_sim) :</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>            y <span class="op">=</span> generate_data(X, theta, <span class="dv">1</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>            fit <span class="op">=</span> Lasso(alpha<span class="op">=</span>alpha,fit_intercept<span class="op">=</span><span class="va">False</span>).fit(X,y)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>            estimated_theta_lasso[i,:]<span class="op">=</span> fit.coef_</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>        lasso_bias_squared[idx, :] <span class="op">=</span> (np.mean(estimated_theta_lasso,axis<span class="op">=</span><span class="dv">0</span>)<span class="op">-</span> theta) <span class="op">**</span> <span class="dv">2</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>        variance_lasso[idx, :] <span class="op">=</span> np.std(estimated_theta_lasso, axis<span class="op">=</span><span class="dv">0</span>) <span class="op">**</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="f52e2514" class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>))</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>lasso_bias_squared <span class="op">=</span> np.zeros((<span class="bu">len</span>(lambda_grid), d))</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>variance_lasso <span class="op">=</span> np.zeros((<span class="bu">len</span>(lambda_grid), d))</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>estimated_theta_lasso <span class="op">=</span> np.zeros((n_sim, d))</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Iterate over lambda values</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> idx, alpha <span class="kw">in</span> <span class="bu">enumerate</span>(lambda_grid):</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n_sim) :</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>            y <span class="op">=</span> generate_data(X, theta, <span class="dv">1</span>)</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>            fit <span class="op">=</span> Lasso(alpha<span class="op">=</span>alpha,fit_intercept<span class="op">=</span><span class="va">False</span>).fit(X,y)</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>            estimated_theta_lasso[i,:]<span class="op">=</span> fit.coef_</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>        lasso_bias_squared[idx, :] <span class="op">=</span> (np.mean(estimated_theta_lasso,axis<span class="op">=</span><span class="dv">0</span>)<span class="op">-</span> theta) <span class="op">**</span> <span class="dv">2</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>        variance_lasso[idx, :] <span class="op">=</span> np.std(estimated_theta_lasso, axis<span class="op">=</span><span class="dv">0</span>) <span class="op">**</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="ea6a1570" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>))</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(d):</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">0</span>].plot(lambda_grid, lasso_bias_squared[:, i],label<span class="op">=</span><span class="ss">f'theta </span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_xscale(<span class="st">'log'</span>)</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_xlabel(<span class="st">'λ'</span>)</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_ylabel(<span class="st">'Squared Bias'</span>)</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_title(<span class="st">'Lasso Empirical Squared Bias'</span>)</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].legend(loc<span class="op">=</span><span class="st">'best'</span>)</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(d):</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">1</span>].plot(lambda_grid, variance_lasso[:, i],label<span class="op">=</span><span class="ss">f'theta </span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_xscale(<span class="st">'log'</span>)</span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_xlabel(<span class="st">'λ'</span>)</span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_ylabel(<span class="st">'Variance'</span>)</span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_title(<span class="st">'Lasso Empirical Variance'</span>)</span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Tp1_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(d):</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">0</span>].plot(lambda_grid, lasso_bias_squared[:, i],label<span class="op">=</span><span class="ss">f'theta </span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_xscale(<span class="st">'log'</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_xlabel(<span class="st">'λ'</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_ylabel(<span class="st">'Squared Bias'</span>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_title(<span class="st">'Lasso Empirical Squared Bias'</span>)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].legend(loc<span class="op">=</span><span class="st">'best'</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(d):</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">1</span>].plot(lambda_grid, variance_lasso[:, i],label<span class="op">=</span><span class="ss">f'theta </span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_xscale(<span class="st">'log'</span>)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_xlabel(<span class="st">'λ'</span>)</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_ylabel(<span class="st">'Variance'</span>)</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_title(<span class="st">'Lasso Empirical Variance'</span>)</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -913,241 +565,69 @@ window.Quarto = {
 <h1>Activity 2 : Contamination dataset</h1>
 <p>We now work with a dataset related to diabetes. The initial data consists of <span class="math inline">\(n\)</span> = 442 patients and <span class="math inline">\(d\)</span> = 10 covariates and the output variable <span class="math inline">\(Y\)</span> is a score reflecting the disease progressing. During a cyberattack of the hospital housing the data, a bad robot has contaminated the dataset by adding 200 inappropriate exploratory variables. Since simply noising the data was not sufficient for the robot, he also arbitrarily permuted the variables. To complete the picture, the robot has erased any trace of his villainous act and thus we do not know which variables are relevant. The new data set contains <span class="math inline">\(n\)</span> = 442 patients and <span class="math inline">\(d\)</span> = 210 covariates.</p>
 <p>We are trying to resolve the enigma created by the playful machine and retrieve the relevant variables. We will hence use a regularized regression model to select the relevant variables.</p>
-<div id="b694b48b" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings </span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="9b8ece7a" class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cd5e7404" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#read data from csv file</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(<span class="st">"data_dm3.csv"</span>, sep<span class="op">=</span><span class="st">","</span>, header<span class="op">=</span><span class="va">None</span>)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># renommer les 210 premiers colonnes en X1, X2, ..., X210 et la dernière colonne en Y</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>data.columns <span class="op">=</span> [<span class="ss">f'X</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">'</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">211</span>)] <span class="op">+</span> [<span class="st">'Y'</span>]</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="9">
-<div>
-
-
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">X1</th>
-<th data-quarto-table-cell-role="th">X2</th>
-<th data-quarto-table-cell-role="th">X3</th>
-<th data-quarto-table-cell-role="th">X4</th>
-<th data-quarto-table-cell-role="th">X5</th>
-<th data-quarto-table-cell-role="th">X6</th>
-<th data-quarto-table-cell-role="th">X7</th>
-<th data-quarto-table-cell-role="th">X8</th>
-<th data-quarto-table-cell-role="th">X9</th>
-<th data-quarto-table-cell-role="th">X10</th>
-<th data-quarto-table-cell-role="th">...</th>
-<th data-quarto-table-cell-role="th">X202</th>
-<th data-quarto-table-cell-role="th">X203</th>
-<th data-quarto-table-cell-role="th">X204</th>
-<th data-quarto-table-cell-role="th">X205</th>
-<th data-quarto-table-cell-role="th">X206</th>
-<th data-quarto-table-cell-role="th">X207</th>
-<th data-quarto-table-cell-role="th">X208</th>
-<th data-quarto-table-cell-role="th">X209</th>
-<th data-quarto-table-cell-role="th">X210</th>
-<th data-quarto-table-cell-role="th">Y</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>-1.298173</td>
-<td>-0.162249</td>
-<td>1.223379</td>
-<td>1.355554</td>
-<td>1.080171</td>
-<td>0.634979</td>
-<td>0.298741</td>
-<td>0.548270</td>
-<td>0.731773</td>
-<td>1.018645</td>
-<td>...</td>
-<td>0.588278</td>
-<td>0.210106</td>
-<td>1.861458</td>
-<td>-0.436399</td>
-<td>0.279299</td>
-<td>-1.416020</td>
-<td>-2.332363</td>
-<td>0.215096</td>
-<td>-0.693319</td>
-<td>151.0</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>0.166951</td>
-<td>-0.338060</td>
-<td>-0.618867</td>
-<td>0.759366</td>
-<td>1.134281</td>
-<td>-0.536844</td>
-<td>-0.075120</td>
-<td>0.970251</td>
-<td>-0.327487</td>
-<td>0.717310</td>
-<td>...</td>
-<td>-0.251054</td>
-<td>-0.825716</td>
-<td>0.339139</td>
-<td>1.119430</td>
-<td>0.225958</td>
-<td>-0.822288</td>
-<td>0.382838</td>
-<td>-0.718829</td>
-<td>-0.188993</td>
-<td>75.0</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>-0.416177</td>
-<td>-0.205659</td>
-<td>-1.282226</td>
-<td>1.675500</td>
-<td>1.523746</td>
-<td>0.192029</td>
-<td>-0.235840</td>
-<td>-1.954626</td>
-<td>-0.853309</td>
-<td>0.892791</td>
-<td>...</td>
-<td>1.283837</td>
-<td>0.372516</td>
-<td>-0.652557</td>
-<td>-2.579347</td>
-<td>0.139267</td>
-<td>-1.901196</td>
-<td>0.048210</td>
-<td>0.220205</td>
-<td>0.471588</td>
-<td>141.0</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>0.867184</td>
-<td>-0.398667</td>
-<td>0.093501</td>
-<td>0.025971</td>
-<td>1.852099</td>
-<td>0.789774</td>
-<td>0.801775</td>
-<td>0.376711</td>
-<td>0.853689</td>
-<td>0.247953</td>
-<td>...</td>
-<td>0.446582</td>
-<td>0.334733</td>
-<td>0.399074</td>
-<td>-0.884172</td>
-<td>0.723819</td>
-<td>1.316367</td>
-<td>0.088218</td>
-<td>0.619496</td>
-<td>1.061662</td>
-<td>206.0</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>1.193282</td>
-<td>-0.936980</td>
-<td>-0.725039</td>
-<td>0.766078</td>
-<td>0.223489</td>
-<td>-1.584622</td>
-<td>1.146866</td>
-<td>0.086136</td>
-<td>-0.088780</td>
-<td>-0.945066</td>
-<td>...</td>
-<td>0.786157</td>
-<td>-1.058179</td>
-<td>-0.155788</td>
-<td>-0.642504</td>
-<td>2.040010</td>
-<td>-1.703110</td>
-<td>-1.901502</td>
-<td>1.778811</td>
-<td>-0.489853</td>
-<td>135.0</td>
-</tr>
-</tbody>
-</table>
-
-<p>5 rows × 211 columns</p>
-</div>
-</div>
+<div id="57cdfdf6" class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#read data from csv file</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(<span class="st">"data_dm3.csv"</span>, sep<span class="op">=</span><span class="st">","</span>, header<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># renommer les 210 premiers colonnes en X1, X2, ..., X210 et la dernière colonne en Y</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>data.columns <span class="op">=</span> [<span class="ss">f'X</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">'</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">211</span>)] <span class="op">+</span> [<span class="st">'Y'</span>]</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>First, we will split the dataset into training and test sets. We will use the first 80% of the dataset for training and the remaining 20% for testing.</p>
-<div id="bf804c72" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># split dataset to train and test</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> data.drop(columns<span class="op">=</span><span class="st">'Y'</span>)</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data[<span class="st">'Y'</span>]</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co">#test if the splitting is effective</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>n<span class="op">=</span>X.shape[<span class="dv">0</span>]</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Train size (proportion) : </span><span class="sc">{</span>X_train<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="op">/</span>n <span class="sc">: .2f}</span><span class="ss"> </span><span class="ch">\n</span><span class="ss">Test size (proportion) : </span><span class="sc">{</span>X_test<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="op">/</span>n <span class="sc">: .2f}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Train size (proportion) :  0.80 
-Test size (proportion) :  0.20</code></pre>
-</div>
+<div id="75111bce" class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># split dataset to train and test</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> data.drop(columns<span class="op">=</span><span class="st">'Y'</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data[<span class="st">'Y'</span>]</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">#test if the splitting is effective</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>n<span class="op">=</span>X.shape[<span class="dv">0</span>]</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Train size (proportion) : </span><span class="sc">{</span>X_train<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="op">/</span>n <span class="sc">: .2f}</span><span class="ss"> </span><span class="ch">\n</span><span class="ss">Test size (proportion) : </span><span class="sc">{</span>X_test<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="op">/</span>n <span class="sc">: .2f}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="ridge-regression-1" class="level2">
 <h2 class="anchored" data-anchor-id="ridge-regression-1">1. Ridge regression</h2>
 <p>On training samples, we will try to fit a linear model using Ridge regression by choosing the regularization parameter <span class="math inline">\(\lambda\)</span> by cross-validation. We will use the function <code>RidgeCV</code> from the <code>sklearn</code> library to perform the cross-validation. Since we didn’t center the covariables, we will set the parameter <code>fit_intercept</code> to <code>True</code> in order to include an intercept in the model.</p>
 <pre><code>By default, the function that performs the cross validation in ridge regression performs "leave-one-out" cross-validation. In fact, leave-one-out cross-validation is a special case of k-fold cross-validation where k is equal to the number of samples. It is computationally expensive, but it is useful for small datasets. However, in ridge regression can be useful since the formula of shermann-morrison-woodbury can be used in order to use the estimator of a single ridge regession in other to compute the estimator of the leave-one-out cross-validation.</code></pre>
-<div id="51208cbd" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> RidgeCV</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>lambda_grid <span class="op">=</span> np.logspace(<span class="op">-</span><span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">50</span>)</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>ridge_cv <span class="op">=</span> RidgeCV(alphas<span class="op">=</span>lambda_grid,fit_intercept<span class="op">=</span><span class="va">True</span>).fit(X_train, y_train) <span class="co">#to perform cross validation</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="d04377a1" class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> RidgeCV</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>lambda_grid <span class="op">=</span> np.logspace(<span class="op">-</span><span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">50</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>ridge_cv <span class="op">=</span> RidgeCV(alphas<span class="op">=</span>lambda_grid,fit_intercept<span class="op">=</span><span class="va">True</span>).fit(X_train, y_train) <span class="co">#to perform cross validation</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We might interested in visualizing the path of the coefficients as a function of the regularization parameter λ. This is called regularization path. We can do this by fitting the model for different values of λ and store the coefficients.</p>
-<div id="899a46d4" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the coefficients as a function of lambda</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>coefs <span class="op">=</span> []</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> a <span class="kw">in</span> lambda_grid:</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    ridge <span class="op">=</span> Ridge(alpha<span class="op">=</span>a, fit_intercept<span class="op">=</span><span class="va">True</span>).fit(X, y)</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    coefs.append(ridge.coef_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="336af5ec" class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the coefficients as a function of lambda</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>coefs <span class="op">=</span> []</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> a <span class="kw">in</span> lambda_grid:</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    ridge <span class="op">=</span> Ridge(alpha<span class="op">=</span>a, fit_intercept<span class="op">=</span><span class="va">True</span>).fit(X, y)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    coefs.append(ridge.coef_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="1141df47" class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>plt.plot(lambda_grid, coefs)</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>plt.xscale(<span class="st">'log'</span>)</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'λ'</span>)</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Coefficients'</span>)</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>plt.axvline(x<span class="op">=</span>ridge_cv.alpha_, color<span class="op">=</span><span class="st">'r'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, label<span class="op">=</span><span class="ss">f'λ = </span><span class="sc">{</span>ridge_cv<span class="sc">.</span>alpha_<span class="sc">:.2f}</span><span class="ss">'</span>)</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Ridge path"</span>)</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="st">'best'</span>)</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Tp1_files/figure-html/cell-14-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
+<div id="4ca6bf5f" class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>plt.plot(lambda_grid, coefs)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>plt.xscale(<span class="st">'log'</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'λ'</span>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Coefficients'</span>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>plt.axvline(x<span class="op">=</span>ridge_cv.alpha_, color<span class="op">=</span><span class="st">'r'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, label<span class="op">=</span><span class="ss">f'λ = </span><span class="sc">{</span>ridge_cv<span class="sc">.</span>alpha_<span class="sc">:.2f}</span><span class="ss">'</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Ridge path"</span>)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="st">'best'</span>)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can hereby see that the ridge regression does not really help to select the 10 relevant variables by shrinking the coefficients of the irrelevant variables.</p>
 <p>Ridge regression tends to favor a model with a higher number of parameters, as it shrinks less important coefficients but keeps them in the model. This is why it is important to choose the regularization parameter <span class="math inline">\(\lambda\)</span> wisely. However, it includes all the variables in the model, with reduced but non-zero coefficients.</p>
 <p><i> In our case, it still gives an indication on the 10 variables that were relevant in the initial dataset before the contamination, but is clearly not the best method to select the relevant variables. </i></p>
 <section id="a.-check-on-the-intercept-value-of-the-model-using-lambda-found-by-cross-validation" class="level4">
 <h4 class="anchored" data-anchor-id="a.-check-on-the-intercept-value-of-the-model-using-lambda-found-by-cross-validation">a. Check on the intercept value of the model using lambda found by cross validation</h4>
-<div id="b0bb35e3" class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Intercept value : </span><span class="sc">{</span>ridge_cv<span class="sc">.</span>intercept_<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Intercept value : 152.28937186306015</code></pre>
-</div>
+<div id="5530c9fd" class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Intercept value : </span><span class="sc">{</span>ridge_cv<span class="sc">.</span>intercept_<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The intercept value of the model is 152.29, which means that the model predicts a value of 152.29 for the response variables when all the features are zero. It can be interpreted as the base value of the model. Taking in account the context of the dataset, we can say that the patients used in the dataset have a score of 152.29 (which might be quite high or not - depending on the scale) of having diabetes independently of the features.</p>
 </section>
@@ -1155,47 +635,37 @@ Test size (proportion) :  0.20</code></pre>
 <section id="lasso-regression-1" class="level2">
 <h2 class="anchored" data-anchor-id="lasso-regression-1">2. Lasso regression</h2>
 <p>We will now use the lasso regression to check if it can help use to select the most important variables. We will use the same lambda grid as before and also perform a cross validation. It is important to perform a cross-validation in order to choose the best value of the regularization parameter <span class="math inline">\(\lambda\)</span> as we have demonstrated in the first activity. For the lasso regression, we will use the function <code>LassoCV</code> from the <code>sklearn</code> library. By default, the function uses the coordinate descent algorithm to fit the model. It is a very efficient algorithm to solve the lasso problem because of the non-smoothness of the L1 norm.</p>
-<div id="7742eda1" class="cell" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LassoCV</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>lasso_cv <span class="op">=</span> LassoCV(alphas<span class="op">=</span>lambda_grid,fit_intercept<span class="op">=</span><span class="va">True</span>).fit(X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="9694be4f" class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LassoCV</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>lasso_cv <span class="op">=</span> LassoCV(alphas<span class="op">=</span>lambda_grid,fit_intercept<span class="op">=</span><span class="va">True</span>).fit(X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="be7874c2" class="cell" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#LASSO PATH</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>coefs_lasso <span class="op">=</span> []</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> a <span class="kw">in</span> lambda_grid:</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    lasso <span class="op">=</span> Lasso(alpha<span class="op">=</span>a, fit_intercept<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    lasso.fit(X, y)</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    coefs_lasso.append(lasso.coef_)</span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>plt.plot(lambda_grid, coefs_lasso)</span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>plt.xscale(<span class="st">'log'</span>)</span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'λ'</span>)</span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Coefficients'</span>)</span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Lasso path"</span>)</span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>plt.axvline(x<span class="op">=</span>lasso_cv.alpha_, color<span class="op">=</span><span class="st">'r'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, label<span class="op">=</span><span class="ss">f'λ = </span><span class="sc">{</span>lasso_cv<span class="sc">.</span>alpha_<span class="sc">:.2f}</span><span class="ss">'</span>)</span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Tp1_files/figure-html/cell-17-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
+<div id="6ff4d450" class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#LASSO PATH</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>coefs_lasso <span class="op">=</span> []</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> a <span class="kw">in</span> lambda_grid:</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    lasso <span class="op">=</span> Lasso(alpha<span class="op">=</span>a, fit_intercept<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    lasso.fit(X, y)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    coefs_lasso.append(lasso.coef_)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>plt.plot(lambda_grid, coefs_lasso)</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>plt.xscale(<span class="st">'log'</span>)</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'λ'</span>)</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Coefficients'</span>)</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Lasso path"</span>)</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>plt.axvline(x<span class="op">=</span>lasso_cv.alpha_, color<span class="op">=</span><span class="st">'r'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, label<span class="op">=</span><span class="ss">f'λ = </span><span class="sc">{</span>lasso_cv<span class="sc">.</span>alpha_<span class="sc">:.2f}</span><span class="ss">'</span>)</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Using the lasso regression, we can see that the coefficients of the irrelevant variables are set to zero. This is why the lasso regression is a good method to perform feature selection. Using the default value of the regularization parameter <span class="math inline">\(\lambda\)</span> given by cross-validation, we can see that the lasso regression is able to select the 6 relevant variables. However, by changing the value of <span class="math inline">\(\lambda\)</span>, we can select more or less variables.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>    <span class="co"># check number of variables selected</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    np.<span class="bu">sum</span>(lasso_cv.coef_ <span class="op">!=</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>    <span class="co"># check number of variables selected</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    np.<span class="bu">sum</span>(lasso_cv.coef_ <span class="op">!=</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <section id="a.-check-on-the-intercept-value-of-the-model-using-lambda-found-by-cross-validation-1" class="level4">
 <h4 class="anchored" data-anchor-id="a.-check-on-the-intercept-value-of-the-model-using-lambda-found-by-cross-validation-1">a. Check on the intercept value of the model using lambda found by cross validation</h4>
 <p>We get approximatively the same value for the intercept as the one obtained with Ridge regression.</p>
-<div id="eafb0a08" class="cell" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># check value of intercept</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Intercept value : </span><span class="sc">{</span>lasso_cv<span class="sc">.</span>intercept_<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Intercept value : 151.95282341561403</code></pre>
-</div>
+<div id="0a6bce36" class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># check value of intercept</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Intercept value : </span><span class="sc">{</span>lasso_cv<span class="sc">.</span>intercept_<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -1204,20 +674,16 @@ Test size (proportion) :  0.20</code></pre>
 <p>In linear regression, we evaluate the quality of the model using the quadratic loss function. The quadratic risk is the expected value of the square of the difference between the true value and the predicted value. The mean squared error is then given by the formula:</p>
 <p><span class="math display">\[\mathcal{R}(\hat\theta) =  \frac{1}{n} \sum_{i=1}^{n} \left(y_i - \hat g(x_i) \right) ^2\]</span></p>
 <p>where <span class="math inline">\(\hat g(x)\)</span> is the predicted value of the output variable y given the input variable x, <span class="math inline">\(\hat g(x) =\hat  \theta_0 + \sum_{j=0}^d \hat \theta_j x_j\)</span>.</p>
-<div id="17e3e6ad" class="cell" data-execution_count="18">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_squared_error</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>y_pred_lasso <span class="op">=</span> lasso_cv.predict(X_test)</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>mse_lasso <span class="op">=</span> mean_squared_error(y_test, y_pred_lasso)</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Mean Squared Error for Lasso: </span><span class="sc">{</span>mse_lasso<span class="sc">:.2f}</span><span class="ss">'</span>)</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>y_pred_ridge <span class="op">=</span> ridge_cv.predict(X_test)</span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>mse_ridge <span class="op">=</span> mean_squared_error(y_test, y_pred_ridge)</span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Mean Squared Error for Ridge: </span><span class="sc">{</span>mse_ridge<span class="sc">:.2f}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Mean Squared Error for Lasso: 2869.43
-Mean Squared Error for Ridge: 2923.54</code></pre>
-</div>
+<div id="e8bf89c8" class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_squared_error</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>y_pred_lasso <span class="op">=</span> lasso_cv.predict(X_test)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>mse_lasso <span class="op">=</span> mean_squared_error(y_test, y_pred_lasso)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Mean Squared Error for Lasso: </span><span class="sc">{</span>mse_lasso<span class="sc">:.2f}</span><span class="ss">'</span>)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>y_pred_ridge <span class="op">=</span> ridge_cv.predict(X_test)</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>mse_ridge <span class="op">=</span> mean_squared_error(y_test, y_pred_ridge)</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Mean Squared Error for Ridge: </span><span class="sc">{</span>mse_ridge<span class="sc">:.2f}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>As we can see, the MSE of the lasso regression is less than the error of the ridge regression. This is because the lasso regression is more efficient in selecting the relevant variables. The ridge regression is more efficient for numerical stability and for multicollinearity problem in the dataset, but it does not perform variable selection.</p>
 <p>Still, the MSE of both models are quite high, it might be due many facts such as the response variable is not linearly dependent on the features or that the features are not relevant to predict the response variable. We did not also scale the features nor the response variable, which might affect the performance of the model.</p>
@@ -1656,9 +1122,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../../posts/statistics/dependence/spearman-pearson.html" class="pagination-link" aria-label="Corrélation de Spearman vs corrélation de Pearson">
-        <span class="nav-page-text">Corrélation de Spearman vs corrélation de Pearson</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

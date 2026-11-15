@@ -1,0 +1,25 @@
+---
+title: Machine learning
+sidebar: statistics-machine-learning
+toc: false
+listing:
+  contents:
+  - ../../posts/statistics/machine-learning/**/*.qmd
+  - ../../posts/statistics/machine-learning/**/*.ipynb
+  exclude:
+    draft: true
+  type: default
+  fields:
+  - title
+  - date
+  - reading-time
+  - description
+  date-format: DD/MM/YYYY
+  sort: title
+  filter-ui: true
+  page-size: 100
+---
+
+[← Statistics](/browse/statistics/index.qmd)
+
+## Articles

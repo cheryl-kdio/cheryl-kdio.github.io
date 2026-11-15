@@ -30,7 +30,7 @@ files/                         # Shared images, CV and includes
 
 ## Navigation and adding content
 
-- `topics.qmd` preserves thematic headings and automatically lists the articles in each corresponding folder, including nested folders; `posts.qmd` provides the chronological listing and category filters.
+- `topics.qmd` displays topic and subtopic navigation cards. The linked `browse/` pages automatically list articles from their folders; `posts.qmd` provides the chronological listing and category filters.
 - The sidebar is generated automatically from `posts/` and `glossary/`, including nested folders. New articles and subfolders appear after `quarto render` or during `quarto preview`; no manual article registration in `_quarto.yml` or `topics.qmd` is needed. A new top-level topic on the directory page needs a heading and folder-based listing in `topics.qmd` once; articles within that topic are discovered automatically.
 - Article labels use their `title` metadata. Folder names become section labels (hyphens become spaces). Optional numeric `order` metadata controls navigation order.
 - Use descriptive filenames in lowercase with hyphens. Keep article-specific data and images near their documents.
@@ -50,3 +50,13 @@ To inspect layout without executing Python or R code:
 ```sh
 quarto render --no-execute
 ```
+
+## Scoped topic navigation
+
+The home page links to `browse/<topic>/index.qmd` and its subtopic pages.
+Each page discovers articles from the corresponding source folder and excludes drafts.
+`_quarto.yml` defines scoped sidebars; `_metadata.yml` in each article subtopic assigns
+its sidebar to existing and future articles automatically. Main topic pages show all
+subtopics; subtopic pages and their articles show only their own branch.
+New articles require no navigation changes. A new topic needs a browse page,
+sidebar configuration, home link and folder metadata once.

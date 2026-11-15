@@ -1,7 +1,20 @@
 ---
 title: "Now"
-subtitle: "What I'm up to"
+subtitle: "Updates and what I’m up to"
 title-block-banner: false
+listing:
+  id: news
+  contents:
+    - posts
+    - posts/post-links.yml
+  include:
+    categories: news
+  exclude:
+    draft: true
+  type: default
+  fields: [title, date, description]
+  sort: "date desc"
+  date-format: "DD/MM/YYYY"
 ---
 
 <!--This is my personal clarity, please delete or replace with your clarity-->
@@ -61,3 +74,8 @@ I’m seeking guest speakers who are passionate about sharing their experiences 
 
 - [Climate Guest Speakers](https://drganghe.github.io/climate-guest-speakers/about.html) -->
 
+
+## News
+
+:::{#news}
+:::

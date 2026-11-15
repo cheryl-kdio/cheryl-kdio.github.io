@@ -1,0 +1,25 @@
+---
+title: Mathematical foundations
+sidebar: glossary-mathematics
+toc: false
+listing:
+  contents:
+  - ../../glossary/mathematics/**/*.qmd
+  - ../../glossary/mathematics/**/*.ipynb
+  exclude:
+    draft: true
+  type: default
+  fields:
+  - title
+  - date
+  - reading-time
+  - description
+  date-format: DD/MM/YYYY
+  sort: title
+  filter-ui: true
+  page-size: 100
+---
+
+[← Glossary & mathematical foundations](/browse/glossary/index.qmd)
+
+## Articles

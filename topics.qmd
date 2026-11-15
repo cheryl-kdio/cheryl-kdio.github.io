@@ -1,191 +1,68 @@
 ---
-title: Browse by topic
-description: 'Finance, statistics and mathematical foundations: articles and coursework
-  organised by subject.'
-sidebar: topics
+title: Topics
+description: Explore finance, statistics and mathematical foundations by topic and
+  subtopic.
+sidebar: false
 toc: false
-listing:
-- id: topic-derivatives
-  exclude:
-    draft: true
-  contents:
-  - posts/finance/derivatives/**/*.qmd
-  - posts/finance/derivatives/**/*.ipynb
-  type: default
-  fields: [title, date, reading-time, description]
-  date-format: "DD/MM/YYYY"
-  sort: title
-  page-size: 100
-- id: topic-interest-rates
-  exclude:
-    draft: true
-  contents:
-  - posts/finance/interest-rates/**/*.qmd
-  - posts/finance/interest-rates/**/*.ipynb
-  type: default
-  fields: [title, date, reading-time, description]
-  date-format: "DD/MM/YYYY"
-  sort: title
-  page-size: 100
-- id: topic-volatility
-  exclude:
-    draft: true
-  contents:
-  - posts/finance/volatility/**/*.qmd
-  - posts/finance/volatility/**/*.ipynb
-  type: default
-  fields: [title, date, reading-time, description]
-  date-format: "DD/MM/YYYY"
-  sort: title
-  page-size: 100
-- id: topic-portfolio-management
-  exclude:
-    draft: true
-  contents:
-  - posts/finance/portfolio-management/**/*.qmd
-  - posts/finance/portfolio-management/**/*.ipynb
-  type: default
-  fields: [title, date, reading-time, description]
-  date-format: "DD/MM/YYYY"
-  sort: title
-  page-size: 100
-- id: topic-risk-management
-  exclude:
-    draft: true
-  contents:
-  - posts/finance/risk-management/**/*.qmd
-  - posts/finance/risk-management/**/*.ipynb
-  type: default
-  fields: [title, date, reading-time, description]
-  date-format: "DD/MM/YYYY"
-  sort: title
-  page-size: 100
-- id: topic-model-calibration
-  exclude:
-    draft: true
-  contents:
-  - posts/finance/model-calibration/**/*.qmd
-  - posts/finance/model-calibration/**/*.ipynb
-  type: default
-  fields: [title, date, reading-time, description]
-  date-format: "DD/MM/YYYY"
-  sort: title
-  page-size: 100
-- id: topic-financial-analysis
-  exclude:
-    draft: true
-  contents:
-  - posts/finance/financial-analysis/**/*.qmd
-  - posts/finance/financial-analysis/**/*.ipynb
-  type: default
-  fields: [title, date, reading-time, description]
-  date-format: "DD/MM/YYYY"
-  sort: title
-  page-size: 100
-- id: topic-sustainable-finance
-  exclude:
-    draft: true
-  contents:
-  - posts/finance/sustainable-finance/**/*.qmd
-  - posts/finance/sustainable-finance/**/*.ipynb
-  type: default
-  fields: [title, date, reading-time, description]
-  date-format: "DD/MM/YYYY"
-  sort: title
-  page-size: 100
-- id: topic-machine-learning
-  exclude:
-    draft: true
-  contents:
-  - posts/statistics/machine-learning/**/*.qmd
-  - posts/statistics/machine-learning/**/*.ipynb
-  type: default
-  fields: [title, date, reading-time, description]
-  date-format: "DD/MM/YYYY"
-  sort: title
-  page-size: 100
-- id: topic-dependence
-  exclude:
-    draft: true
-  contents:
-  - posts/statistics/dependence/**/*.qmd
-  - posts/statistics/dependence/**/*.ipynb
-  type: default
-  fields: [title, date, reading-time, description]
-  date-format: "DD/MM/YYYY"
-  sort: title
-  page-size: 100
-- id: topic-glossary
-  exclude:
-    draft: true
-  contents:
-  - glossary/**/*.qmd
-  - glossary/**/*.ipynb
-  type: default
-  fields: [title, date, reading-time, description]
-  date-format: "DD/MM/YYYY"
-  sort: title
-  page-size: 100
+page-layout: full
 ---
 
-Find articles by subject below. Each section updates automatically from its folder. The [complete article list](posts.qmd) also provides category filters.
+Choose a topic or subtopic to view its articles and dedicated navigation.
 
-## Finance
+::: {.topic-cards}
 
-### Derivatives
+::: {.topic-card}
 
-:::{#topic-derivatives}
+### [Finance](/browse/finance/index.qmd)
+
+::: {.subtopic-cards}
+
+[Derivatives](/browse/finance/derivatives.qmd){.subtopic-card}
+
+[Interest rates](/browse/finance/interest-rates.qmd){.subtopic-card}
+
+[Volatility](/browse/finance/volatility.qmd){.subtopic-card}
+
+[Portfolio management](/browse/finance/portfolio-management.qmd){.subtopic-card}
+
+[Risk management](/browse/finance/risk-management.qmd){.subtopic-card}
+
+[Model calibration](/browse/finance/model-calibration.qmd){.subtopic-card}
+
+[Financial analysis](/browse/finance/financial-analysis.qmd){.subtopic-card}
+
+[Sustainable finance](/browse/finance/sustainable-finance.qmd){.subtopic-card}
+
 :::
 
-### Interest rates
+::: 
 
-:::{#topic-interest-rates}
+::: {.topic-card}
+
+### [Statistics](/browse/statistics/index.qmd)
+
+::: {.subtopic-cards}
+
+[Machine learning](/browse/statistics/machine-learning.qmd){.subtopic-card}
+
+[Dependence and correlation](/browse/statistics/dependence.qmd){.subtopic-card}
+
 :::
 
-### Volatility
+::: 
 
-:::{#topic-volatility}
+::: {.topic-card}
+
+### [Glossary & mathematical foundations](/browse/glossary/index.qmd)
+
+::: {.subtopic-cards}
+
+[Financial glossary](/browse/glossary/finance.qmd){.subtopic-card}
+
+[Mathematical foundations](/browse/glossary/mathematics.qmd){.subtopic-card}
+
 :::
 
-### Portfolio management
+::: 
 
-:::{#topic-portfolio-management}
 :::
-
-### Risk management
-
-:::{#topic-risk-management}
-:::
-
-### Model calibration
-
-:::{#topic-model-calibration}
-:::
-
-### Financial analysis
-
-:::{#topic-financial-analysis}
-:::
-
-### Sustainable finance
-
-:::{#topic-sustainable-finance}
-:::
-
-## Statistics
-
-### Machine learning
-
-:::{#topic-machine-learning}
-:::
-
-### Dependence and correlation
-
-:::{#topic-dependence}
-:::
-
-## Mathematical foundations
-
-:::{#topic-glossary}
-:::
-

@@ -1,0 +1,25 @@
+---
+title: Risk management
+sidebar: finance-risk-management
+toc: false
+listing:
+  contents:
+  - ../../posts/finance/risk-management/**/*.qmd
+  - ../../posts/finance/risk-management/**/*.ipynb
+  exclude:
+    draft: true
+  type: default
+  fields:
+  - title
+  - date
+  - reading-time
+  - description
+  date-format: DD/MM/YYYY
+  sort: title
+  filter-ui: true
+  page-size: 100
+---
+
+[← Finance](/browse/finance/index.qmd)
+
+## Articles

@@ -1,0 +1,36 @@
+---
+title: Statistics
+sidebar: statistics
+toc: false
+listing:
+  contents:
+  - ../../posts/statistics/**/*.qmd
+  - ../../posts/statistics/**/*.ipynb
+  exclude:
+    draft: true
+  type: default
+  fields:
+  - title
+  - date
+  - reading-time
+  - description
+  date-format: DD/MM/YYYY
+  sort: title
+  filter-ui: true
+  page-size: 100
+---
+
+[← All topics](/topics.qmd)
+
+## Subtopics
+
+::: {.subtopic-cards}
+
+[Machine learning](/browse/statistics/machine-learning.qmd){.subtopic-card}
+
+[Dependence and correlation](/browse/statistics/dependence.qmd){.subtopic-card}
+
+:::
+
+
+## Articles

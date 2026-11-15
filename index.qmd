@@ -9,7 +9,7 @@ description-meta: "Cheryl Kouadio is a graduate student in stochastic modeling a
 # image: "files/profile/kouadio_profile.jpg"
 page-navigation: false
 toc: false
-#sidebar: false
+sidebar: false
 page-layout: full
 
 about:
@@ -60,11 +60,69 @@ This website is my little corner of the internet, a place where I share what I l
 :::
 
 
-<div>
-<h2>Recent Posts</h2>
-<p align="right">[Browse by topic»](/topics.qmd)</p>
-</div>
+## Explore by topic
 
+Choose a subject to browse its articles and dedicated navigation.
+
+::: {.topic-cards}
+
+::: {.topic-card}
+
+### [Finance](/browse/finance/index.qmd)
+
+::: {.subtopic-cards}
+
+[Derivatives](/browse/finance/derivatives.qmd){.subtopic-card}
+
+[Interest rates](/browse/finance/interest-rates.qmd){.subtopic-card}
+
+[Volatility](/browse/finance/volatility.qmd){.subtopic-card}
+
+[Portfolio management](/browse/finance/portfolio-management.qmd){.subtopic-card}
+
+[Risk management](/browse/finance/risk-management.qmd){.subtopic-card}
+
+[Model calibration](/browse/finance/model-calibration.qmd){.subtopic-card}
+
+[Financial analysis](/browse/finance/financial-analysis.qmd){.subtopic-card}
+
+[Sustainable finance](/browse/finance/sustainable-finance.qmd){.subtopic-card}
+
+:::
+
+::: 
+
+::: {.topic-card}
+
+### [Statistics](/browse/statistics/index.qmd)
+
+::: {.subtopic-cards}
+
+[Machine learning](/browse/statistics/machine-learning.qmd){.subtopic-card}
+
+[Dependence and correlation](/browse/statistics/dependence.qmd){.subtopic-card}
+
+:::
+
+::: 
+
+::: {.topic-card}
+
+### [Glossary & mathematical foundations](/browse/glossary/index.qmd)
+
+::: {.subtopic-cards}
+
+[Financial glossary](/browse/glossary/finance.qmd){.subtopic-card}
+
+[Mathematical foundations](/browse/glossary/mathematics.qmd){.subtopic-card}
+
+:::
+
+::: 
+
+::: 
+
+## Recent Posts
 
 :::{#recent-posts}
 :::

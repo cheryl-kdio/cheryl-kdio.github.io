@@ -1,0 +1,25 @@
+---
+title: Portfolio management
+sidebar: finance-portfolio-management
+toc: false
+listing:
+  contents:
+  - ../../posts/finance/portfolio-management/**/*.qmd
+  - ../../posts/finance/portfolio-management/**/*.ipynb
+  exclude:
+    draft: true
+  type: default
+  fields:
+  - title
+  - date
+  - reading-time
+  - description
+  date-format: DD/MM/YYYY
+  sort: title
+  filter-ui: true
+  page-size: 100
+---
+
+[← Finance](/browse/finance/index.qmd)
+
+## Articles

@@ -1,0 +1,25 @@
+---
+title: Sustainable finance
+sidebar: finance-sustainable-finance
+toc: false
+listing:
+  contents:
+  - ../../posts/finance/sustainable-finance/**/*.qmd
+  - ../../posts/finance/sustainable-finance/**/*.ipynb
+  exclude:
+    draft: true
+  type: default
+  fields:
+  - title
+  - date
+  - reading-time
+  - description
+  date-format: DD/MM/YYYY
+  sort: title
+  filter-ui: true
+  page-size: 100
+---
+
+[← Finance](/browse/finance/index.qmd)
+
+## Articles

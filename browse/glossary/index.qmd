@@ -1,0 +1,36 @@
+---
+title: Glossary & mathematical foundations
+sidebar: glossary
+toc: false
+listing:
+  contents:
+  - ../../glossary/**/*.qmd
+  - ../../glossary/**/*.ipynb
+  exclude:
+    draft: true
+  type: default
+  fields:
+  - title
+  - date
+  - reading-time
+  - description
+  date-format: DD/MM/YYYY
+  sort: title
+  filter-ui: true
+  page-size: 100
+---
+
+[← All topics](/topics.qmd)
+
+## Subtopics
+
+::: {.subtopic-cards}
+
+[Financial glossary](/browse/glossary/finance.qmd){.subtopic-card}
+
+[Mathematical foundations](/browse/glossary/mathematics.qmd){.subtopic-card}
+
+:::
+
+
+## Articles

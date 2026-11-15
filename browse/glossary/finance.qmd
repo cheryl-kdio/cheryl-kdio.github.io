@@ -1,0 +1,25 @@
+---
+title: Financial glossary
+sidebar: glossary-finance
+toc: false
+listing:
+  contents:
+  - ../../glossary/finance/**/*.qmd
+  - ../../glossary/finance/**/*.ipynb
+  exclude:
+    draft: true
+  type: default
+  fields:
+  - title
+  - date
+  - reading-time
+  - description
+  date-format: DD/MM/YYYY
+  sort: title
+  filter-ui: true
+  page-size: 100
+---
+
+[← Glossary & mathematical foundations](/browse/glossary/index.qmd)
+
+## Articles
