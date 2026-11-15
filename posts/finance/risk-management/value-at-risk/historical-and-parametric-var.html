@@ -1,0 +1,1870 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.40">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Cheryl Kouadio">
+<meta name="dcterms.date" content="2025-02-28">
+<meta name="description" content="Cheryl Kouadio is a graduate student in stochastic modeling and quantitative finance at Université Paris Cité. Her academic interests focus on probability theory, stochastic processes, data analysis, and financial risk modeling. She studies how rigorous statistical and mathematical methods can be applied to quantify uncertainty and support decision-making in finance and risk management.">
+
+<title>TP1:Méthodes traditionnelles de calcul de la VaR et Expected Shortfall (ES) – Cheryl Kouadio</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<link href="../../../../posts/finance/risk-management/value-at-risk/value-at-risk.html" rel="next">
+<link href="../../../../posts/finance/risk-management/value-at-risk/garch-var.html" rel="prev">
+<script src="../../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap-703ddb58be2784256fbaab8b7c9be161.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<!-- 
+Load Academicons v1: https://jpswalsh.github.io/academicons/
+-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+
+<!---
+The following code are needed to show dimension citation and altmetrics.
+https://api.altmetric.com/embeds.html
+https://badge.dimensions.ai/
+--->
+
+<script type="text/javascript" src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script>
+
+<script async="" src="https://badge.dimensions.ai/badge.js" charset="utf-8"></script>
+
+<script type="text/javascript" src="//cdn.plu.mx/widget-popup.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../../../styles.css">
+<meta property="og:title" content="TP1:Méthodes traditionnelles de calcul de la VaR et Expected Shortfall (ES) – Cheryl Kouadio">
+<meta property="og:description" content="Cheryl Kouadio is a graduate student in stochastic modeling and quantitative finance at Université Paris Cité. Her academic interests focus on probability theory, stochastic processes, data analysis, and financial risk modeling. She studies how rigorous statistical and mathematical methods can be applied to quantify uncertainty and support decision-making in finance and risk management.">
+<meta property="og:image" content="https://cheryl-kdio.github.io/files/profile/kouadio_profile.jpeg">
+<meta property="og:site_name" content="Cheryl Kouadio">
+<meta name="twitter:title" content="TP1:Méthodes traditionnelles de calcul de la VaR et Expected Shortfall (ES) – Cheryl Kouadio">
+<meta name="twitter:description" content="Cheryl Kouadio is a graduate student in stochastic modeling and quantitative finance at Université Paris Cité. Her academic interests focus on probability theory, stochastic processes, data analysis, and financial risk modeling. She studies how rigorous statistical and mathematical methods can be applied to quantify uncertainty and support decision-making in finance and risk management.">
+<meta name="twitter:image" content="https://cheryl-kdio.github.io/files/profile/kouadio_profile.jpeg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../../index.html">
+    <span class="navbar-title">Cheryl Kouadio</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-about" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">About</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-about">    
+        <li>
+    <a class="dropdown-item" href="../../../../now.html">
+ <span class="dropdown-text">Now</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../posts.html#category=event">
+ <span class="dropdown-text">Events</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../files/Cheryl-Kouadio-CV.pdf" target="_blank">
+ <span class="dropdown-text">CV</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-topics" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Topics</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-topics">    
+        <li>
+    <a class="dropdown-item" href="../../../../browse/finance/index.html">
+ <span class="dropdown-text">Finance</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../browse/statistics/index.html">
+ <span class="dropdown-text">Statistics</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../browse/glossary/index.html">
+ <span class="dropdown-text">Glossary &amp; mathematical foundations</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../publications.html"> 
+<span class="menu-text">Reports</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-coursework" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Coursework</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-coursework">    
+        <li>
+    <a class="dropdown-item" href="../../../../posts.html#category=ensai-gdr">
+ <span class="dropdown-text">ENSAI</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../posts.html#category=m2mo">
+ <span class="dropdown-text">M2MO</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-notes" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Notes</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-notes">    
+        <li>
+    <a class="dropdown-item" href="../../../../notes.html">
+ <span class="dropdown-text">All notes</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../glossary.html">
+ <span class="dropdown-text">Glossary</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://github.com/cheryl-kdio" target="_blank"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text">Github</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.linkedin.com/in/cheryl-kouadio-251815206/" target="_blank"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text">Linkedin</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../../../posts.xml" target="_blank"> <i class="bi bi-rss" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../../posts/finance/risk-management/risk-fundamentals.html">Risk Management</a></li><li class="breadcrumb-item"><a href="../../../../posts/finance/risk-management/value-at-risk/copulas-project.html">Value at Risk</a></li><li class="breadcrumb-item"><a href="../../../../posts/finance/risk-management/value-at-risk/historical-and-parametric-var.html">TP1:Méthodes traditionnelles de calcul de la VaR et Expected Shortfall (ES)</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../browse/finance/risk-management.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">All articles</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Risk Management</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../posts/finance/risk-management/risk-fundamentals.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Le risque, qu’est ce que c’est ?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Value at Risk</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../posts/finance/risk-management/value-at-risk/copulas-project.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Projet de gestion de risques multiples</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../posts/finance/risk-management/value-at-risk/extreme-value-theory.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">TP2:Méthodes basées sur la théorie des valeurs extrêmes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../posts/finance/risk-management/value-at-risk/garch-var.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">TP3:Méthodes d’une calcul d’une VaR dynamique (basé sur GARCH)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../posts/finance/risk-management/value-at-risk/historical-and-parametric-var.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">TP1:Méthodes traditionnelles de calcul de la VaR et Expected Shortfall (ES)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../posts/finance/risk-management/value-at-risk/value-at-risk.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">La VaR</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../posts/finance/risk-management/value-at-risk/var-application.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Application de la VaR</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+<div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
+<p><a href="../../../../browse/finance/index.html">← Finance</a></p>
+</div></div></nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#i.-data-wrangling" id="toc-i.-data-wrangling" class="nav-link active" data-scroll-target="#i.-data-wrangling">I. Data wrangling</a></li>
+  <li><a href="#ii.-implémentation-de-la-var" id="toc-ii.-implémentation-de-la-var" class="nav-link" data-scroll-target="#ii.-implémentation-de-la-var">II. Implémentation de la VaR</a>
+  <ul class="collapse">
+  <li><a href="#ii.1.-statistiques-descriptives" id="toc-ii.1.-statistiques-descriptives" class="nav-link" data-scroll-target="#ii.1.-statistiques-descriptives">II.1. Statistiques descriptives</a></li>
+  <li><a href="#ii.2.-var-non-paramétrique" id="toc-ii.2.-var-non-paramétrique" class="nav-link" data-scroll-target="#ii.2.-var-non-paramétrique">II.2. VaR non paramétrique</a>
+  <ul class="collapse">
+  <li><a href="#ii.2.1.-historique" id="toc-ii.2.1.-historique" class="nav-link" data-scroll-target="#ii.2.1.-historique">II.2.1. Historique</a></li>
+  <li><a href="#ii.2.2.-bootstrap" id="toc-ii.2.2.-bootstrap" class="nav-link" data-scroll-target="#ii.2.2.-bootstrap">II.2.2. Bootstrap</a></li>
+  <li><a href="#ii.2.3.-backtest" id="toc-ii.2.3.-backtest" class="nav-link" data-scroll-target="#ii.2.3.-backtest">II.2.3. Backtest</a></li>
+  </ul></li>
+  <li><a href="#ii.3.-var-paramétrique" id="toc-ii.3.-var-paramétrique" class="nav-link" data-scroll-target="#ii.3.-var-paramétrique">II.3. VaR paramétrique</a>
+  <ul class="collapse">
+  <li><a href="#ii.3.1.-validation-ex-ante" id="toc-ii.3.1.-validation-ex-ante" class="nav-link" data-scroll-target="#ii.3.1.-validation-ex-ante">II.3.1. Validation ex-ante</a></li>
+  <li><a href="#ii.3.2.-implémentation-de-la-var" id="toc-ii.3.2.-implémentation-de-la-var" class="nav-link" data-scroll-target="#ii.3.2.-implémentation-de-la-var">II.3.2. Implémentation de la VaR</a></li>
+  </ul></li>
+  <li><a href="#ii.4.-var-skew-student" id="toc-ii.4.-var-skew-student" class="nav-link" data-scroll-target="#ii.4.-var-skew-student">II.4. VaR skew-student</a>
+  <ul class="collapse">
+  <li><a href="#ii.4.1.-validation-ex-ante" id="toc-ii.4.1.-validation-ex-ante" class="nav-link" data-scroll-target="#ii.4.1.-validation-ex-ante">II.4.1. Validation ex-ante</a></li>
+  <li><a href="#ii.4.2.-calcul-de-la-var-skew-student" id="toc-ii.4.2.-calcul-de-la-var-skew-student" class="nav-link" data-scroll-target="#ii.4.2.-calcul-de-la-var-skew-student">II.4.2. Calcul de la VaR Skew Student</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#iii.-implémentation-de-les" id="toc-iii.-implémentation-de-les" class="nav-link" data-scroll-target="#iii.-implémentation-de-les">III. Implémentation de l’ES</a></li>
+  <li><a href="#iv.protocole-de-backtesting" id="toc-iv.protocole-de-backtesting" class="nav-link" data-scroll-target="#iv.protocole-de-backtesting">IV.Protocole de Backtesting</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../../posts/finance/risk-management/risk-fundamentals.html">Risk Management</a></li><li class="breadcrumb-item"><a href="../../../../posts/finance/risk-management/value-at-risk/copulas-project.html">Value at Risk</a></li><li class="breadcrumb-item"><a href="../../../../posts/finance/risk-management/value-at-risk/historical-and-parametric-var.html">TP1:Méthodes traditionnelles de calcul de la VaR et Expected Shortfall (ES)</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">TP1:Méthodes traditionnelles de calcul de la VaR et Expected Shortfall (ES)</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">paper</div>
+    <div class="quarto-category">risques-fin</div>
+    <div class="quarto-category">ensai-gdr</div>
+    <div class="quarto-category">risk-management</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Cheryl Kouadio </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">February 28, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Ce TP est fait dans le but de modéliser la Value at Risk qui est une mesure de risque financier. La Value at Risk (VaR) est une mesure essentielle du risque de marché qui estime la perte potentielle maximale d’un portefeuille sur un horizon h donné, avec un certain niveau de confiance <span class="math inline">\(\alpha\)</span>. La VaR est utilisée par les institutions financières et les gestionnaires de risques pour évaluer l’exposition aux pertes extrêmes et ajuster leurs stratégies d’investissement. Elle est définie comme suit :</p>
+<p><span class="math display">\[VaR_{\alpha}(h) = inf \{ l \in \mathbb{R} | P(PnL \geq -l) \geq 1 - \alpha \}\]</span></p>
+<p>Le PnL représente le profit and loss, c’est-à-dire la variation de la valeur du portefeuille. Dans notre cas, nous utilserons les rendements logarithmiques des actifs financiers, qui est stationnaire, pour calculer la VaR. Les rendements logarithmiques sont calculés comme suit :</p>
+<p><span class="math display">\[r_t = log(\frac{P_t}{P_{t-1}}) \approx \frac{P_t - P_{t-1}}{P_{t-1}}.\]</span></p>
+<p>Cette mesure est préférée aux rendements simples car sa décomposition en termes additifs permet de mieux modéliser les variations de prix des actifs financiers. De plus, en supposant la distribution identique et indépendante des rendements, on peut facilement déterminer sa loi de probabilité et calculer la VaR.</p>
+<p>Dans ce projet, nous explorerons plusieurs méthodes pour calculer la VaR, en tenant compte de la nature des rendements financiers et des hypothèses sous-jacentes :</p>
+<ul>
+<li><strong>Méthodes non paramétriques</strong> : VaR historique et VaR bootstrap.</li>
+<li><strong>Méthodes paramétriques</strong>: VaR gaussienne et VaR basée sur une distribution Skew Student.</li>
+<li><strong>Méthodes avancées</strong> : VaR avec pondération exponentielle EWMA et VaR calculée par diffusion d’actifs. En complément, nous calculerons également l’Expected Shortfall (ES), qui mesure la perte moyenne au-delà du seuil de la VaR. Cette mesure est plus robuste, car elle intègre les queues de distribution et est particulièrement utile pour évaluer les risques extrêmes.</li>
+</ul>
+<div id="c4c8ee0f" class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Définition des librairies</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> yfinance <span class="im">as</span> yf</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tqdm <span class="im">import</span> tqdm</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> bootstrap</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">"ignore"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="520581f6" class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import des données du CAC 40</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> yf.download(<span class="st">"^FCHI"</span>,start<span class="op">=</span><span class="st">"2008-01-01"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcul des rendements logarithmiques</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>data[<span class="st">'log_return'</span>] <span class="op">=</span> np.log(data[<span class="st">'Close'</span>] <span class="op">/</span> data[<span class="st">'Close'</span>].shift(<span class="dv">1</span>))</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Retirer la première ligne</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.dropna()</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>data.columns <span class="op">=</span> data.columns.get_level_values(<span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="2a6b7ebb" class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="i.-data-wrangling" class="level1">
+<h1>I. Data wrangling</h1>
+<p>Le jeu de données est constitué de 6 variables, à savoir, le prix de clôture (Close), le volume des transactions (Volume), le prix d’ouverture (Open), le prix le plus bas (Low), le prix le plus élevé (High) et les rendements logarithmiques (log-return). Pour calculer les rendements sur lesquels nous nous sommes baser pour mesurer le risque du portefeuille, nous avons utilisé le prix de clôture. Il aurait été idéal de disposer des prix de clôture ajustés, i.e.&nbsp;les prix de clôture qui tiennent compte des dividendes et des éventuels splits. Cependant, en raison de l’indispobilité de ces données, nous avons utilisé les prix de clôture bruts.</p>
+<p>Sur tout l’historique du CAC 40, nous n’observons aucune donnée manquante et aucune valeur aberrante (i.e.&nbsp;Prix de clôture négatif). Nous avons donc pu calculer les rendements logarithmiques sans problème.</p>
+<div id="50a670e6" class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>data.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="bd420cb3" class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="34a8173f" class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># check na</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span><span class="op">*</span><span class="dv">80</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data.isna().<span class="bu">sum</span>())</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span><span class="op">*</span><span class="dv">80</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Sur tout l’historique du CAC40, i.e.&nbsp;entre 1990 jusqu’à récemment, nous avons enregistré 5 périodes de crise financière. Ces périodes sont les suivantes :</p>
+<ul>
+<li>1994 : Crise obligataire</li>
+<li>2000 : Bulle Internet</li>
+<li>2008 : Crise des subprimes</li>
+<li>2011 : Crise de la dette souveraine</li>
+<li>2020 : Crise du Covid-19</li>
+</ul>
+<p>Cela peut se réperer par les clusters de rendements observables sur le graphique ci-dessous. Comme on peut l’observer, ces clusters de volatilité sont généralement associés à des périodes où le rendement journalier chute brutalemment. Pour mesurer le risque de marché, il peut être utile de modéliser ces clusters de volatilité et de prendre en compte les queues de distribution à travers des modèles GARCH par exemple.</p>
+<p>Pour modéliser la VaR comme mesure de risque, il serait utile également de prendre les événements extrêmes en considération. En effet, en observant la densité des rendements, on peut voir que la distribution des rendements est leptokurtique, c’est-à-dire que les queues de distribution sont plus épaisses que celles d’une distribution normale (kurtosis &gt; 3). Cela signifie que les événements extrêmes sont plus fréquents que ce que la distribution normale ne le suggère. De plus, le coefficient d’asytmmétrie est négatif, ce qui signifie que la distribution des rendements est asymétrique. Cela peut être problématique pour les méthodes paramétriques qui supposent, parfois, une distribution symétrique des rendements.</p>
+<div id="e3b03533" class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>fig, ax1 <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>ax1.plot(data[<span class="st">'log_return'</span>], label<span class="op">=</span><span class="st">'Rendements logarithmiques'</span>, color<span class="op">=</span><span class="st">'red'</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>ax1.set_xlabel(<span class="st">'Date'</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>ax1.set_ylabel(<span class="st">'Rendements logarithmiques'</span>, color<span class="op">=</span><span class="st">'red'</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>ax1.tick_params(axis<span class="op">=</span><span class="st">'y'</span>, labelcolor<span class="op">=</span><span class="st">'red'</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>ax2 <span class="op">=</span> ax1.twinx()</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>ax2.plot(data[<span class="st">'Close'</span>], label<span class="op">=</span><span class="st">'Prix historiques'</span>, color<span class="op">=</span><span class="st">'blue'</span>)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>ax2.set_ylabel(<span class="st">'Prix historiques'</span>, color<span class="op">=</span><span class="st">'blue'</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>ax2.tick_params(axis<span class="op">=</span><span class="st">'y'</span>, labelcolor<span class="op">=</span><span class="st">'blue'</span>)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>fig.legend(loc<span class="op">=</span><span class="st">'upper left'</span>, bbox_to_anchor<span class="op">=</span>(<span class="fl">0.12</span>,<span class="fl">0.89</span>))</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Evolution des prix de clôture, rendements logarithmiques du CAC 40"</span>)</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="adeabc6c" class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Densité des rendements logarithmiques</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>data[<span class="st">'log_return'</span>].plot(kind<span class="op">=</span><span class="st">'kde'</span>, color<span class="op">=</span><span class="st">'red'</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Densité des rendements logarithmiques du CAC 40"</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="09b4731e" class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Skewness</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>skewness <span class="op">=</span> data[<span class="st">'log_return'</span>].skew()</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Skewness: </span><span class="sc">{</span>skewness<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Kurtosis</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>kurtosis <span class="op">=</span> data[<span class="st">'log_return'</span>].kurtosis()</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Kurtosis: </span><span class="sc">{</span>kurtosis<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="c53c9009" class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Autocorrélation et pacf</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.graphics.tsaplots <span class="im">import</span> plot_acf, plot_pacf</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>fig, (ax1, ax2) <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>plot_acf(data[<span class="st">'log_return'</span>], lags<span class="op">=</span><span class="dv">10</span>, ax<span class="op">=</span>ax1)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>plot_pacf(data[<span class="st">'log_return'</span>], lags<span class="op">=</span><span class="dv">10</span>, ax<span class="op">=</span>ax2)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>plt.suptitle(<span class="st">"Autocorrélation et PACF des rendements logarithmiques du CAC 40"</span>)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="4c95852b" class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># check for stationarity</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.tsa.stattools <span class="im">import</span> adfuller</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> adf_test(series, title<span class="op">=</span><span class="st">''</span>):</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co">    Pass in a time series and an optional title, returns an Adataset report</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'Augmented Dickey-Fuller Test: </span><span class="sc">{}</span><span class="ch">\n</span><span class="st">'</span>.<span class="bu">format</span>(title))</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># .dropna() handles differenced data</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> adfuller(series.dropna(),autolag<span class="op">=</span><span class="st">'AIC'</span>)</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">=</span> [<span class="st">'Adataset test statistic'</span>,<span class="st">'p-value'</span>,<span class="st">'# lags used'</span>,<span class="st">'# observations'</span>]</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    out <span class="op">=</span> pd.Series(result[<span class="dv">0</span>:<span class="dv">4</span>],index<span class="op">=</span>labels)</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> key,val <span class="kw">in</span> result[<span class="dv">4</span>].items():</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>        out[<span class="st">'critical value (</span><span class="sc">{}</span><span class="st">)'</span>.<span class="bu">format</span>(key)]<span class="op">=</span>val</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># .to_string() removes the line "dtype: float64"</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>out<span class="sc">.</span>to_string()<span class="sc">}</span><span class="ch">\n</span><span class="ss">'</span>)</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> result[<span class="dv">1</span>] <span class="op">&lt;=</span> <span class="fl">0.05</span>:</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Strong evidence against the null hypothesis"</span>)</span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Reject the null hypothesis"</span>)</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Data has no unit root and is stationary"</span>)</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Weak evidence against the null hypothesis"</span>)</span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Fail to reject the null hypothesis"</span>)</span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Data has a unit root and is non-stationary"</span>)</span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span><span class="op">*</span><span class="dv">80</span>)</span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>adf_test(data[<span class="st">"Close"</span>], title<span class="op">=</span><span class="st">'Prix de clôture'</span>)</span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span><span class="op">*</span><span class="dv">80</span>)</span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>adf_test(data[<span class="st">"log_return"</span>], title<span class="op">=</span><span class="st">'Log-rendements'</span>)</span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span><span class="op">*</span><span class="dv">80</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="ii.-implémentation-de-la-var" class="level1">
+<h1>II. Implémentation de la VaR</h1>
+<p>On va prendre comme période d’apprentissage où la BCE fait baisser ses taux directeurs et comme période de (back-)test où la BCE fait augmenter ses taux directeurs. De ce fait, nous avons le découpage suivant : - Train : 15 octobre 2008 - 26 juillet 2022 - Test : 28 juillet 2022 - 11 juin 2024</p>
+<p>On va implémenter les différentes méthodes de calcul de la VaR et de l’ES sur le jeu de données du CAC 40. On va comparer les performances de ces méthodes en utilisant la période de test. On s’attend à ce que les méthodes paramétriques soient moins performantes que les méthodes non paramétriques, car elles supposent une distribution des rendements qui n’est pas toujours vérifiée. De plus, les méthodes avancées, comme l’EWMA et la diffusion d’actifs, devraient être plus performantes que les méthodes non paramétriques, car elles prennent en compte la dynamique des rendements et les corrélations entre les actifs. En général, le backtest devrait être vérifié puisque la période de test ne comporte aucune crise financière.</p>
+<div id="7c8d3063" class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>train <span class="op">=</span> data[[<span class="st">'log_return'</span>,<span class="st">"Close"</span>]][<span class="st">'15-10-2008'</span>:<span class="st">'26-07-2022'</span>]</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>data_train <span class="op">=</span> train[<span class="st">'log_return'</span>]</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>test <span class="op">=</span> data[[<span class="st">'log_return'</span>,<span class="st">"Close"</span>]][<span class="st">'27-07-2022'</span>:<span class="st">'11-06-2024'</span>]</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>data_test <span class="op">=</span> test[<span class="st">'log_return'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="ii.1.-statistiques-descriptives" class="level2">
+<h2 class="anchored" data-anchor-id="ii.1.-statistiques-descriptives">II.1. Statistiques descriptives</h2>
+<p>Nous constatons que dans la période d’entrainement est plus volatile (std=1.39%). Cela s’explique par le fait que la période d’entrainement prend en compte deux crises majeures : la crise des subprimes et la crise du Covid-19. Cela peut également se voir à travers les clusters de volatilité observables à la suite de ces crises. Dans la période de test, aucun évènement majeur n’est observé, avec une plus faible volatilité observée (std=0.08%).</p>
+<p>On s’attend à ce que la VaR entrainée sur la période d’entrainement performe très bien sur la période de test, mais on s’attend également à ce que la VaR entrainée sur la période de test performe moins bien sur la période d’entrainement.</p>
+<div id="1c100fa7" class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">4</span>))</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>plt.plot(data_train, label<span class="op">=</span><span class="st">'Train'</span>, color<span class="op">=</span><span class="st">'grey'</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>plt.plot(data_test, label<span class="op">=</span><span class="st">'Test'</span>, color<span class="op">=</span><span class="st">'red'</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="st">'upper left'</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Données d'entrainement et de test"</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="49acb6d8" class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>data_train.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="5d83c055" class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>data_test.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="ii.2.-var-non-paramétrique" class="level2">
+<h2 class="anchored" data-anchor-id="ii.2.-var-non-paramétrique">II.2. VaR non paramétrique</h2>
+<p>La VaR est une mesure de risque qui donne une estimation de la perte maximale que l’on peut subir avec un certain niveau de confiance <span class="math inline">\(\alpha\)</span> sur un horizon de temps donné. Par exemple, une VaR à 5% sur 1 jour de 1000 euros signifie que 95% du temps, on ne perdra pas plus de 1000 euros sur un jour.</p>
+<p><span class="math display">\[P(\text{Loss} &lt; \text{VaR}) = \alpha.\]</span></p>
+<p>On peut également raisonner en terme de gain, i.e.&nbsp;Profit and Loss (PnL).</p>
+<p><span class="math display">\[P(\text{PnL} &gt; - \text{VaR}) = \alpha.\]</span></p>
+<p>La VaR peut se calculer suivant trois approches : 1. <strong>Approche historique</strong> : On se base sur les rendements passés selon l’horizon fixé pour estimer la VaR, à l’aide d’un quantile empirique d’ordre <span class="math inline">\(\alpha\)</span>. Autrement, on peut se baser sur les rendements journaliers et utiliser la méthode de <strong>scaling</strong>. 2. <strong>Approche bootstrap</strong> : On tire aléatoirement des échantillons de rendements passés avec remise, puis on prend le quantile empirique d’ordre <span class="math inline">\(\alpha\)</span> pour calculer la VaR de chaque échantillon. La VaR finale est la moyenne des VaR obtenues.</p>
+<section id="ii.2.1.-historique" class="level3">
+<h3 class="anchored" data-anchor-id="ii.2.1.-historique">II.2.1. Historique</h3>
+<div id="293cc1e6" class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Objectif : implémenter une fonction calculant la VaR historique</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> historical_var(data, alpha<span class="op">=</span><span class="fl">0.99</span>):</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co">    Calcul de la VaR historique</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co">    data : les rendements logarithmiques</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co">    alpha : le niveau de confiance</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span>np.percentile(data, <span class="dv">100</span><span class="op">*</span>(<span class="dv">1</span><span class="op">-</span> alpha))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="48999a6f" class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcul de la VaR historique sur l'échantillon d'entrainement pour h=1j et alpha=0.99</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="fl">0.99</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>var_hist_train <span class="op">=</span> historical_var(data_train, alpha<span class="op">=</span>alpha)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"La VaR historique pour h=1j et alpha=0.99 est : </span><span class="sc">{</span>var_hist_train<span class="sc">:.4%}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>On constate que la VaR historique pour une horizon de 1 jour et un niveau de confiance de 99% est de -4,09%. De ce fait, la perte maximale que l’on peut subir avec un niveau de confiance de 99% sur un jour est de 4,09%. Autrement dit, il y a 1 chance sur 100 que la perte soit supérieure à 4,09%. Cette perte peut se produire 2 à 3 ans fois en une année (252 jours de trading).</p>
+</section>
+<section id="ii.2.2.-bootstrap" class="level3">
+<h3 class="anchored" data-anchor-id="ii.2.2.-bootstrap">II.2.2. Bootstrap</h3>
+<p>Pour l’implémentation de la VaR bootstrap, nous faisons le choix de faire un tirage de taille n=la taille de la série des rendements, avec remise. Ce choix est fait pour des raisons de simplicité. En ce qui concerne le choix du nombre d’échantillons, nous allons observer l’évolution de de l’estimation de la VaR en fonction du nombre d’échantillons. Nous limiterons à des échantillons compris entre 1000 et 10000, pour des raisons de temps computationnels, en ayant conscience que plus le nombre d’échantillons est grand, plus l’estimation de la VaR sera précise.</p>
+<div id="26d84360" class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Objectif : implémenter une fonction calculant la VaR bootstrap et un IC</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> bootstrap_var(data, alpha<span class="op">=</span><span class="fl">0.99</span>, M<span class="op">=</span><span class="dv">1000</span>, seuil<span class="op">=</span><span class="fl">0.05</span>):</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">    Calcul de la VaR bootstrap</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co">    data : les rendements logarithmiques</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co">    alpha : le niveau de confiance de la VaR</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co">    n : le nombre de simulations</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co">    seuil : le seuil de l'intervalle de confiance</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># set seed</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    np.random.seed(<span class="dv">42</span>)</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Initialisation du vecteur des VaR</span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>    var <span class="op">=</span> np.zeros(M)</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calcul de la VaR bootstrap</span></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(M):</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>        sample <span class="op">=</span> np.random.choice(data, size<span class="op">=</span><span class="bu">len</span>(data), replace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>        var[i] <span class="op">=</span> <span class="op">-</span>np.percentile(sample, <span class="dv">100</span><span class="op">*</span>(<span class="dv">1</span><span class="op">-</span> alpha))</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calcul de l'intervalle de confiance</span></span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>    lower <span class="op">=</span> np.percentile(var, <span class="dv">100</span><span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>seuil)<span class="op">/</span><span class="dv">2</span>)</span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>    upper <span class="op">=</span> np.percentile(var, <span class="dv">100</span><span class="op">*</span>(seuil <span class="op">+</span> (<span class="dv">1</span><span class="op">-</span>seuil)<span class="op">/</span><span class="dv">2</span>))</span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.mean(var), lower, upper</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="1f933b10" class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Observer la variation de la VaR en fonction de M</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>M_values <span class="op">=</span> np.arange(<span class="dv">1000</span>, <span class="dv">10000</span>, <span class="dv">10</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>var_bs_values <span class="op">=</span> []</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> M <span class="kw">in</span> tqdm(M_values):</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    var_bs_train, _, _ <span class="op">=</span> bootstrap_var(data_train, alpha<span class="op">=</span>alpha, M<span class="op">=</span>M)</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    var_bs_values.append(var_bs_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="01b9bfcc" class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">4</span>))</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>plt.plot(M_values, var_bs_values, marker<span class="op">=</span><span class="st">'o'</span>, color<span class="op">=</span><span class="st">'red'</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Nombre de simulations'</span>)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'VaR bootstrap'</span>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Variation de la VaR bootstrap en fonction du nombre de simulations"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Pour la taille de l’echantillon bootstrap, nous allons prendre M=8000 étant donné que la courbe semble se stabiliser à partir de cette valeur. Avec ce choix, la VaR estimé est de 4.11%% avec un intervalle de confiance à 5% de [4.05%, 4.09%]. De plus, en ce qui concerne la VaR historique, nous constatons que l’estimation est contenu dans l’intervalle de confiance.</p>
+<div id="aaf7810a" class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>M<span class="op">=</span><span class="dv">8000</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>var_bs_train, lower_ic,upper_ic <span class="op">=</span> bootstrap_var(data_train, alpha<span class="op">=</span>alpha, M<span class="op">=</span>M)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"La VaR bootstrap pour h=1j et alpha=0.99 est : </span><span class="sc">{</span>var_bs_train<span class="sc">:.4%}</span><span class="ss">"</span>)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"L'intervalle de confiance est : [</span><span class="sc">{</span>lower_ic<span class="sc">:.4%}</span><span class="ss">, </span><span class="sc">{</span>upper_ic<span class="sc">:.4%}</span><span class="ss">]"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="ii.2.3.-backtest" class="level3">
+<h3 class="anchored" data-anchor-id="ii.2.3.-backtest">II.2.3. Backtest</h3>
+<p>Pour l’exercice de backtest, il s’agit de : 1. Déterminer si la proportion <span class="math inline">\(p\)</span> de violations de la VaR est cohérente avec le niveau de confiance, i.e.&nbsp;égale à <span class="math inline">\(1-\alpha\)</span>. Cela permet de vérifier si la mesure de risque est bien calibrée. Pour cela, nous pouvons avoir recours à un test de proportion ou un test de ratio de vraisemblance.</p>
+<pre><code>**Unconditional coverage test** :
+Soit I la variable indicatrice de violation de la VaR, i.e. $I=1$ si la perte est supérieure à la VaR, et $I=0$ sinon. La proportion de violations de la VaR est donnée par :
+
+$$p = \frac{1}{n} \sum_{i=1}^{n} I_i = \frac{Z}{n}$$
+
+Sous H0, i.e. p=1-$\alpha$, Z $\sim$ Binomiale(n, 1-$\alpha$). En supposant que n est suffisamment grand, on peut approximer Z par une loi normale. Ainsi donc :
+$$\frac{Z - n (1-\alpha)}{\sqrt{\alpha (1-\alpha) n}} \sim \mathcal{N}(n(1-\alpha), n\alpha(1-\alpha))$$
+
+Sous cette hypothèse asymptotique, on peut calculer la statistique du ratio de vraisemblance suivant :
+$$LR = -2 ln \left( \frac{L(H1)}{L(H0)} \right) =-2 ln \left( 1- (1-\alpha))^{n-e}(1-\alpha)^e \right) + 2 ln \left( (1-\frac{e}{n})^{n-e} (\frac{e}{n})^e  \right)  \sim \chi^2(1)$$
+
+où e est le nombre de violations de la VaR. On rejette H0 si LR &gt; $\chi^2(1-\alpha)$.
+
+**Test de proportion** :
+$$
+H_0 : p = p_0 = 1-\alpha \\ H_1 : p &gt; 1-\alpha
+$$
+On peut également utiliser un test binomial pour tester si la proportion de violations de la VaR est égale à $1-\alpha$. On peut calculer la statistique du test suivant :
+$$Z = \frac{p - p_0}{\sqrt{p_0 (1-p_0) / n}} \sim \mathcal{N}(0,1)$$
+
+On rejette H0 si Z &gt; $p_0+ \phi^{-1}(1-\alpha) \sqrt{p_0 (1-p_0)/n}$, où $\phi$ est la quantile de la loi normale standard.</code></pre>
+<ol start="2" type="1">
+<li><p>Déterminer si, lorsqu’il y en a, les violations de VaR à deux différents jours sont indépendantes. Cela permet si la mesure de risque est capable de réagir aux chocs de marché affectant la volatilité des rendements. Pour cela, nous utilisons un conditional coverage test.</p>
+<p><strong>Conditional coverage test</strong> : y revenir</p></li>
+</ol>
+<div id="0345832b" class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> stats</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Objectif : implémenter une fonction calculant le nombre d'exception sur l'échantillon test</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> exceptions(data, var):</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co">    Calcul du nombre d'exception</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="co">    data : les rendements logarithmiques</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="co">    var : la VaR</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.<span class="bu">sum</span>(data <span class="op">&lt;</span> <span class="op">-</span>var)</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Objectif : test de proportion binomiale</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> binomial_test(n, p, p0 <span class="op">=</span> <span class="fl">0.01</span>, alpha<span class="op">=</span><span class="fl">0.05</span>):</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a><span class="co">    Test de proportion binomiale</span></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a><span class="co">    H0 : p = p0</span></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a><span class="co">    H1 : p &gt; p0</span></span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a><span class="co">    n : le nombre d'essais</span></span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a><span class="co">    p : la proportion</span></span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a><span class="co">    alpha : le niveau de confiance</span></span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>    z <span class="op">=</span> (p <span class="op">-</span> p0) <span class="op">/</span> np.sqrt(p0 <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> p0) <span class="op">/</span> n)</span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>    <span class="co">#reject_zone = p0 + stats.norm.ppf(1 - alpha) * np.sqrt(p0 * (1 - p0) / n)</span></span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>    p_value <span class="op">=</span> <span class="dv">1</span> <span class="op">-</span> stats.norm.cdf(z)</span>
+<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a>    reject <span class="op">=</span> p_value <span class="op">&lt;</span> alpha</span>
+<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calcul des IC</span></span>
+<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a>    lower <span class="op">=</span> p <span class="op">-</span> stats.norm.ppf(<span class="dv">1</span> <span class="op">-</span> alpha) <span class="op">*</span> np.sqrt(p <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> p) <span class="op">/</span> n)</span>
+<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a>    upper <span class="op">=</span> p <span class="op">+</span> stats.norm.ppf(<span class="dv">1</span> <span class="op">-</span> alpha) <span class="op">*</span> np.sqrt(p <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> p) <span class="op">/</span> n)</span>
+<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> p_value, reject, lower, upper</span>
+<span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Unconditionnal coverage test ==&gt; to do.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="0382c919" class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Backtest de la VaR historique</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>exceptions_test <span class="op">=</span> exceptions(data_test, var_hist_train)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Le nombre d'exceptions sur l'échantillon de test est : </span><span class="sc">{</span>exceptions_test<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span><span class="op">*</span><span class="dv">80</span>)</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="bu">len</span>(data_test)</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> exceptions_test <span class="op">/</span> n</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>p_value, reject, lower,upper <span class="op">=</span> binomial_test(n, p)</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"H0 : le nombre d'exceptions est inférieur ou égale à </span><span class="sc">{</span><span class="dv">1</span><span class="op">-</span>alpha<span class="sc">:.2%}</span><span class="ss">"</span>)</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"IC : [</span><span class="sc">{</span>lower<span class="sc">:.2%}</span><span class="ss">,</span><span class="sc">{</span>upper<span class="sc">:.2%}</span><span class="ss">]"</span>)</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"La p-value du test de proportion binomiale est : </span><span class="sc">{</span>p_value<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Rejet de l'hypothèse nulle : </span><span class="sc">{</span>reject<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span><span class="op">*</span><span class="dv">80</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="ii.3.-var-paramétrique" class="level2">
+<h2 class="anchored" data-anchor-id="ii.3.-var-paramétrique">II.3. VaR paramétrique</h2>
+<section id="ii.3.1.-validation-ex-ante" class="level3">
+<h3 class="anchored" data-anchor-id="ii.3.1.-validation-ex-ante">II.3.1. Validation ex-ante</h3>
+<p>Visuellement, les données ne semblent pas suivre une loi normale. En effet, les quantiles théoriques d’une loi normale ne collent pas avec les quantiles empiriques des rendements. Cela peut être dû à la présence de queues épaisses observables sur l’estimation de la densité des rendements sur l’échantillon d’apprentissage, de pics, de clusters de volatilité que nous avons observées plus haut. De plus, le skewness est négatif ce qui indique une asymétrie négative des rendements. Enfin, le kurtosis est supérieur à 3, ce qui indique une distribution leptokurtique des rendements.</p>
+<p>Nous allons tout de même implémenter une VaR gaussienne pour voir comment elle se comporte dans le backtest.</p>
+<div id="0c031e8e" class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test visuel d'adéquation de la loi normale</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Créer un Q-Q plot</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>stats.probplot(data_train, dist<span class="op">=</span><span class="st">"norm"</span>, plot<span class="op">=</span>ax)</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Personnalisation du graphique</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Q-Q Plot (Normal Distribution)"</span>)</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Theoretical Quantiles"</span>)</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Sample Quantiles"</span>)</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Afficher le graphique</span></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="916d12db" class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Densité de l'echantillon train et l'échantillon de test</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">4</span>))</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>data_train.plot(kind<span class="op">=</span><span class="st">'kde'</span>, label<span class="op">=</span><span class="st">'Train'</span>, color<span class="op">=</span><span class="st">'red'</span>)</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="st">'upper left'</span>)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Densité de l'échantillon d'entrainement"</span>)</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="b881a77b" class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Skewness et kurtosis</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span><span class="op">*</span><span class="dv">80</span>)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Skewness de l'échantillon d'entrainement : "</span>, data_train.skew())</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Kurtosis de l'échantillon d'entrainement : "</span>, data_train.kurt())</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span><span class="op">*</span><span class="dv">80</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="2907c65e" class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> kstest</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Test de Kolmogorov-Smirnov</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>ks_stat, ks_p_value <span class="op">=</span> kstest(data_train, <span class="st">'norm'</span>)</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span><span class="op">*</span><span class="dv">80</span>)</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"H0 : Les données suivent une loi normale"</span>)</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Statistique de test : </span><span class="sc">{</span>ks_stat<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"P-value : </span><span class="sc">{</span>ks_p_value<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span><span class="op">*</span><span class="dv">80</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="ii.3.2.-implémentation-de-la-var" class="level3">
+<h3 class="anchored" data-anchor-id="ii.3.2.-implémentation-de-la-var">II.3.2. Implémentation de la VaR</h3>
+<section id="a.-méthode-scaling" class="level4">
+<h4 class="anchored" data-anchor-id="a.-méthode-scaling">a. Méthode scaling</h4>
+<div id="01b9cc4b" class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Objectif : écrire une fonction qui calcule la VaR gaussienne</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> gaussian_var(data, alpha):</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co">    Calcul de la VaR gaussienne</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="co">    data : les rendements logarithmiques</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="co">    alpha : le niveau de confiance</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>    <span class="im">from</span> scipy.stats <span class="im">import</span> norm</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>    mu <span class="op">=</span> np.mean(data)</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>    sigma <span class="op">=</span> np.std(data)</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span>(mu <span class="op">+</span> sigma <span class="op">*</span> norm.ppf(<span class="dv">1</span> <span class="op">-</span> alpha))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="c87151e8" class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>var_gauss_train <span class="op">=</span> gaussian_var(data_train, alpha<span class="op">=</span>alpha)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"La VaR gaussienne pour h=1j et alpha=</span><span class="sc">{</span>alpha<span class="sc">}</span><span class="ss"> est : </span><span class="sc">{</span>var_gauss_train<span class="sc">:.4%}</span><span class="ss">"</span>)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"La VaR historique pour h=10j et alpha=</span><span class="sc">{</span>alpha<span class="sc">}</span><span class="ss"> est : </span><span class="sc">{</span>np<span class="sc">.</span>sqrt(<span class="dv">10</span>)<span class="op">*</span>var_gauss_train<span class="sc">:.4%}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="b.-méthode-de-diffusion-dun-actif" class="level4">
+<h4 class="anchored" data-anchor-id="b.-méthode-de-diffusion-dun-actif">b. Méthode de diffusion d’un actif</h4>
+<p>Pour calculer la <strong>VaR gaussienne à 10 jours</strong> par <strong>méthode de diffusion d’un actif</strong>, nous allons suivre les étapes suivantes :</p>
+<p>L’évolution du prix d’un actif suit un processus de type mouvement brownien géométrique : <span class="math display">\[
+dS_t = \mu S_t dt + \sigma S_t dW_t &lt;=&gt; S_t = S_{t-1} e^{(\mu - \frac{1}{2} \sigma^2) + \sigma W_t}
+\]</span> où $ S_t$ est le prix de l’actif à l’instant$ t$, $ $ est le rendement moyen estimé (drift), $ $ est la volatilité du rendement, $ dW_t$ est un mouvement brownien standard.</p>
+<p>On peut de ce fait calculer plusieurs trajectoires de rendements de <span class="math inline">\(S_0\)</span> et <span class="math inline">\(S_{10}\)</span>, puis calculer la VaR à partir de la série des rendements $ r_{10j} = (S_{10} / S_{0}) $ obtenus avec ces trajectoires.</p>
+<p>En utilisant la méthode de scaling et la méthode de diffusion, nous obtenons sensiblement la même VaR.</p>
+<div id="285a6b7a" class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>mu <span class="op">=</span> np.mean(data_train)</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>sigma <span class="op">=</span> np.std(data_train)</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>return_sim <span class="op">=</span> []</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>T <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>M <span class="op">=</span> <span class="dv">1000</span></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>S0 <span class="op">=</span> train[<span class="st">'Close'</span>].iloc[<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(M):</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>    S <span class="op">=</span> np.zeros(T<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>    S[<span class="dv">0</span>] <span class="op">=</span> S0</span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,T<span class="op">+</span><span class="dv">1</span>):</span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>        Wt <span class="op">=</span> np.random.normal()</span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>        S[t] <span class="op">=</span> S[t<span class="op">-</span><span class="dv">1</span>] <span class="op">*</span> np.exp((mu <span class="op">-</span> <span class="fl">0.5</span> <span class="op">*</span> sigma<span class="op">**</span><span class="dv">2</span>) <span class="op">+</span> sigma <span class="op">*</span> Wt)</span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>    return_sim.append(np.log(S[T]<span class="op">/</span>S0))</span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>var_gauss_diffusion <span class="op">=</span> gaussian_var(return_sim, alpha<span class="op">=</span>alpha)</span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"La VaR gaussienne pour h=10j et alpha=</span><span class="sc">{</span>alpha<span class="sc">}</span><span class="ss"> est : </span><span class="sc">{</span>var_gauss_diffusion<span class="sc">:.4%}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="c.-méthode-ewma" class="level4">
+<h4 class="anchored" data-anchor-id="c.-méthode-ewma">c.&nbsp;Méthode EWMA</h4>
+<p>La VaR EWMA est une méthode qui permet de calculer la VaR en surpondérant les rendements les plus récents. Cela permet de donner plus de poids aux rendements les plus récents, et donc de mieux capturer les changements de volatilité. La VaR EWMA est donnée par la formule suivante :</p>
+<p><span class="math display">\[
+VaR_{t+1} = \mu + \sigma \times z_{\alpha}
+\]</span></p>
+<div id="d7a9a8d3" class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># VaR la méthode EWMA (Exponential Weighting Moving Average)</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> gaussian_var_ewma(data, alpha, lambda_<span class="op">=</span><span class="fl">0.94</span>):</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="co">    Calcul de la VaR gaussienne EWMA</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="co">    data : les rendements logarithmiques</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="co">    alpha : le niveau de confiance</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="co">    lambda_ : le paramètre de lissage</span></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>    weights <span class="op">=</span> np.array([(<span class="dv">1</span><span class="op">-</span>lambda_)<span class="op">*</span>(lambda_<span class="op">**</span>i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(data))])</span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>    weights <span class="op">=</span> weights <span class="op">/</span> np.<span class="bu">sum</span>(weights)</span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>    mu <span class="op">=</span> np.<span class="bu">sum</span>(data[::<span class="op">-</span><span class="dv">1</span>] <span class="op">*</span> weights)</span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>    sigma <span class="op">=</span> np.sqrt(np.<span class="bu">sum</span>(weights <span class="op">*</span> (data[::<span class="op">-</span><span class="dv">1</span>] <span class="op">-</span> mu)<span class="op">**</span><span class="dv">2</span>))</span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span>(mu <span class="op">+</span> sigma <span class="op">*</span> stats.norm.ppf(<span class="dv">1</span> <span class="op">-</span> alpha)), mu, sigma</span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a><span class="co"># y revenir</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="f8a8cbd0" class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>lambdas <span class="op">=</span> [<span class="fl">0.9</span>, <span class="fl">0.95</span>, <span class="fl">0.99</span>]</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="fl">0.99</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> stats</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> l <span class="kw">in</span> lambdas:</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"="</span><span class="op">*</span><span class="dv">80</span>)</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Lambda : "</span>, l)</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"-"</span><span class="op">*</span><span class="dv">15</span>)</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>    var_gauss_emwa, mu, sigma <span class="op">=</span> gaussian_var_ewma(data_train, alpha<span class="op">=</span>alpha, lambda_<span class="op">=</span>l)</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"La VaR gaussienne EWMA pour h=1j et alpha=</span><span class="sc">{</span>alpha<span class="sc">}</span><span class="ss"> est : </span><span class="sc">{</span>var_gauss_emwa<span class="sc">:.4%}</span><span class="ss">"</span>)</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"La moyenne est : </span><span class="sc">{</span>mu<span class="sc">:.4%}</span><span class="ss">"</span>)</span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"L'écart-type est : </span><span class="sc">{</span>sigma<span class="sc">:.4%}</span><span class="ss">"</span>)</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>    n_exceptions <span class="op">=</span> exceptions(data_test, var_gauss_emwa)</span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Le nombre d'exceptions sur l'échantillon de test est : </span><span class="sc">{</span>n_exceptions<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Avec la méthode EWMA, nous observons une que la VaR diminue plus <span class="math inline">\(\lambda\)</span> augmente. Cela est dû au fait que plus <span class="math inline">\(\lambda\)</span> est grand, plus les rendements les plus récents sont surpondérés, et donc la volatilité est plus faible, en raison de la fin de la période d’apprentissage.</p>
+</section>
+</section>
+</section>
+<section id="ii.4.-var-skew-student" class="level2">
+<h2 class="anchored" data-anchor-id="ii.4.-var-skew-student">II.4. VaR skew-student</h2>
+<section id="ii.4.1.-validation-ex-ante" class="level3">
+<h3 class="anchored" data-anchor-id="ii.4.1.-validation-ex-ante">II.4.1. Validation ex-ante</h3>
+<div id="c151b334" class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ecrire une fonction permettant d’estimer les paramètres d’une loi de Skew Student par maximum de vraisemblance.</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> minimize</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> t</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> skew_student_pdf(x, mu, sigma, gamma, nu ):</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a><span class="co">    Compute the Skew Student-t probability density function (PDF).</span></span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>    t_x <span class="op">=</span> ((x <span class="op">-</span> mu) <span class="op">*</span> gamma <span class="op">/</span> sigma) <span class="op">*</span> np.sqrt((nu <span class="op">+</span> <span class="dv">1</span>) <span class="op">/</span> (nu <span class="op">+</span> ((x <span class="op">-</span> mu) <span class="op">/</span> sigma) <span class="op">**</span> <span class="dv">2</span>))</span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># PDF of the standard Student-t distribution</span></span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>    pdf_t <span class="op">=</span> t.pdf(x , df<span class="op">=</span>nu,  loc<span class="op">=</span>mu, scale<span class="op">=</span>sigma)</span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># CDF of the transformed Student-t distribution</span></span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>    cdf_t <span class="op">=</span> t.cdf(t_x, df<span class="op">=</span>nu <span class="op">+</span> <span class="dv">1</span>,loc<span class="op">=</span><span class="dv">0</span>, scale<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Skew Student density function</span></span>
+<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a>    density <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> pdf_t <span class="op">*</span> cdf_t</span>
+<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> density</span>
+<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-24"><a href="#cb34-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-25"><a href="#cb34-25" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> skew_student_log_likelihood(params, data):</span>
+<span id="cb34-26"><a href="#cb34-26" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb34-27"><a href="#cb34-27" aria-hidden="true" tabindex="-1"></a><span class="co">    Calcul de la log-vraisemblance de la loi de Skew Student</span></span>
+<span id="cb34-28"><a href="#cb34-28" aria-hidden="true" tabindex="-1"></a><span class="co">    params [mu, sigma, gamma, nu]: les paramètres de la loi</span></span>
+<span id="cb34-29"><a href="#cb34-29" aria-hidden="true" tabindex="-1"></a><span class="co">    data : les rendements logarithmiques</span></span>
+<span id="cb34-30"><a href="#cb34-30" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb34-31"><a href="#cb34-31" aria-hidden="true" tabindex="-1"></a>    mu, sigma, gamma, nu <span class="op">=</span> params</span>
+<span id="cb34-32"><a href="#cb34-32" aria-hidden="true" tabindex="-1"></a>    density <span class="op">=</span> skew_student_pdf(data , mu, sigma, gamma, nu)</span>
+<span id="cb34-33"><a href="#cb34-33" aria-hidden="true" tabindex="-1"></a>    <span class="co"># log-vraisemblance</span></span>
+<span id="cb34-34"><a href="#cb34-34" aria-hidden="true" tabindex="-1"></a>    loglik <span class="op">=</span> np.<span class="bu">sum</span>(np.log(density))</span>
+<span id="cb34-35"><a href="#cb34-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-36"><a href="#cb34-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span> loglik</span>
+<span id="cb34-37"><a href="#cb34-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-38"><a href="#cb34-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Optimisation des paramètres avec contraintes de positivité sur sigma et nu</span></span>
+<span id="cb34-39"><a href="#cb34-39" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> skew_student_fit(data):</span>
+<span id="cb34-40"><a href="#cb34-40" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb34-41"><a href="#cb34-41" aria-hidden="true" tabindex="-1"></a><span class="co">    Estimation des paramètres de la loi de Skew Student</span></span>
+<span id="cb34-42"><a href="#cb34-42" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb34-43"><a href="#cb34-43" aria-hidden="true" tabindex="-1"></a>    <span class="co"># initial guess</span></span>
+<span id="cb34-44"><a href="#cb34-44" aria-hidden="true" tabindex="-1"></a>    x0 <span class="op">=</span> np.array([np.mean(data), np.std(data), <span class="dv">1</span>, <span class="dv">4</span>])</span>
+<span id="cb34-45"><a href="#cb34-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-46"><a href="#cb34-46" aria-hidden="true" tabindex="-1"></a>    <span class="co"># contraintes</span></span>
+<span id="cb34-47"><a href="#cb34-47" aria-hidden="true" tabindex="-1"></a>    bounds <span class="op">=</span> [(<span class="va">None</span>, <span class="va">None</span>), (<span class="dv">0</span>, <span class="va">None</span>), (<span class="va">None</span>, <span class="va">None</span>), (<span class="va">None</span>, <span class="va">None</span>)]</span>
+<span id="cb34-48"><a href="#cb34-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-49"><a href="#cb34-49" aria-hidden="true" tabindex="-1"></a>    <span class="co"># optimisation</span></span>
+<span id="cb34-50"><a href="#cb34-50" aria-hidden="true" tabindex="-1"></a>    res <span class="op">=</span> minimize(skew_student_log_likelihood, x0, args<span class="op">=</span>(data), bounds<span class="op">=</span>bounds)</span>
+<span id="cb34-51"><a href="#cb34-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-52"><a href="#cb34-52" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> res.x</span>
+<span id="cb34-53"><a href="#cb34-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-54"><a href="#cb34-54" aria-hidden="true" tabindex="-1"></a>params <span class="op">=</span> skew_student_fit(data_train)</span>
+<span id="cb34-55"><a href="#cb34-55" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span><span class="op">*</span><span class="dv">80</span>)</span>
+<span id="cb34-56"><a href="#cb34-56" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Les paramètres estimés de la loi de Skew Student sont : "</span>)</span>
+<span id="cb34-57"><a href="#cb34-57" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"-"</span><span class="op">*</span><span class="dv">15</span>)</span>
+<span id="cb34-58"><a href="#cb34-58" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Mu : "</span>, params[<span class="dv">0</span>])</span>
+<span id="cb34-59"><a href="#cb34-59" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Sigma : "</span>, params[<span class="dv">1</span>])</span>
+<span id="cb34-60"><a href="#cb34-60" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Gamma : "</span>, params[<span class="dv">2</span>])</span>
+<span id="cb34-61"><a href="#cb34-61" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Nu : "</span>, params[<span class="dv">3</span>])</span>
+<span id="cb34-62"><a href="#cb34-62" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span><span class="op">*</span><span class="dv">80</span>)</span>
+<span id="cb34-63"><a href="#cb34-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-64"><a href="#cb34-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-65"><a href="#cb34-65" aria-hidden="true" tabindex="-1"></a>params_sstd <span class="op">=</span> {</span>
+<span id="cb34-66"><a href="#cb34-66" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mu"</span> : params[<span class="dv">0</span>],</span>
+<span id="cb34-67"><a href="#cb34-67" aria-hidden="true" tabindex="-1"></a>    <span class="st">"sigma"</span> : params[<span class="dv">1</span>],</span>
+<span id="cb34-68"><a href="#cb34-68" aria-hidden="true" tabindex="-1"></a>    <span class="st">"gamma"</span> : params[<span class="dv">2</span>],</span>
+<span id="cb34-69"><a href="#cb34-69" aria-hidden="true" tabindex="-1"></a>    <span class="st">"nu"</span> : params[<span class="dv">3</span>]</span>
+<span id="cb34-70"><a href="#cb34-70" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="fc590b65" class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Superposition de la densité théorique et des données</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>x_values <span class="op">=</span> np.linspace(<span class="bu">min</span>(data_train), <span class="bu">max</span>(data_train), <span class="dv">1000</span>)</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>theoretical_density <span class="op">=</span> skew_student_pdf(x_values, <span class="op">**</span>params_sstd)</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize <span class="op">=</span> (<span class="dv">10</span>,<span class="dv">4</span>))</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>plt.hist(data_train, bins<span class="op">=</span><span class="dv">30</span>, density<span class="op">=</span><span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.5</span>, label<span class="op">=</span><span class="st">'Données empiriques'</span>)</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>plt.plot(x_values, theoretical_density, label<span class="op">=</span><span class="st">'Densité Skew Student'</span>, color<span class="op">=</span><span class="st">'red'</span>)</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Densité normale</span></span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>plt.plot(x_values, stats.norm.pdf(x_values, np.mean(data_train), np.std(data_train)), label<span class="op">=</span><span class="st">'Densité normale'</span>, color<span class="op">=</span><span class="st">'blue'</span>)</span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Rendements logarithmiques'</span>)</span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Densité'</span>)</span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Comparaison entre les données et la densité théorique d'une loi de Skew Student"</span>)</span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Le graphique ci-dessus est satisfaisant. La densité théorique de la skew-student semble bien s’ajuster aux données. La loi skew-student de paramètres (<span class="math inline">\(\mu = 0.002, \sigma = 0.009, \gamma = -0.23, \nu = 2.96\)</span>). Le <span class="math inline">\(\mu\)</span> est le rendement moyen, <span class="math inline">\(\sigma\)</span> est l’écart-type, <span class="math inline">\(\gamma\)</span> est le coefficient d’asymétrie et <span class="math inline">\(\nu\)</span> est le degré de liberté. Le skewness est négatif, ce qui indique une asymétrie négative des rendements, comme ce qu’on a observé plus haut.</p>
+<p>Nous allons appuyer cette validation en utilisant le QQ-plot. La fonction quantile d’une loi skew-student n’est pas analytique. Pour ce faire, nous allons construire la fonction de repartition de la skew-student ainsi que la fonction quantile qui est l’inverse de cette fonction de repartition. Nous allons ensuite comparer les quantiles théoriques de la skew-student avec les quantiles empiriques des rendements.</p>
+<p>En observant le QQ-plot, on constate que les quantiles théoriques de la skew-student collent bien avec les quantiles empiriques des rendements. Cela confirme que la skew-student est une bonne approximation de la distribution des rendements. Pour une validation plus rigoureuse, on peut utiliser un test de Kolmogorov-Smirnov pour tester si les rendements suivent une loi skew-student.</p>
+<div id="b3f05c96" class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Intégration de la fonction de densité</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> integrate</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> minimize_scalar</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> integrale_SkewStudent(x,params):</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>    borne_inf <span class="op">=</span> <span class="op">-</span>np.inf</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>    resultat_integration, erreur <span class="op">=</span> integrate.quad(<span class="kw">lambda</span> x: skew_student_pdf(x, <span class="op">**</span>params), borne_inf, x)</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> resultat_integration</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fonc_minimize(x, alpha,params):</span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>    value <span class="op">=</span> integrale_SkewStudent(x,params)<span class="op">-</span>alpha</span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">abs</span>(value)</span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> skew_student_quantile(alpha,mu, sigma, gamma, nu ):</span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>    params <span class="op">=</span> {</span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mu"</span> : mu ,</span>
+<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"sigma"</span> : sigma,</span>
+<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"gamma"</span> : gamma,</span>
+<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"nu"</span> : nu</span>
+<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-22"><a href="#cb36-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> alpha <span class="op">&lt;</span><span class="dv">0</span> <span class="kw">or</span> alpha <span class="op">&gt;</span><span class="dv">1</span>:</span>
+<span id="cb36-23"><a href="#cb36-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">Exception</span>(<span class="st">"Veuillez entrer un niveau alpha entre 0 et 1"</span>)</span>
+<span id="cb36-24"><a href="#cb36-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb36-25"><a href="#cb36-25" aria-hidden="true" tabindex="-1"></a>        resultat_minimisation <span class="op">=</span> minimize_scalar(<span class="kw">lambda</span> x: fonc_minimize(x, alpha,params))</span>
+<span id="cb36-26"><a href="#cb36-26" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> resultat_minimisation.x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="405f262a" class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>niveaux_quantiles <span class="op">=</span> np.arange(<span class="fl">0.001</span>, <span class="dv">1</span>, <span class="fl">0.001</span>)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>quantiles_empiriques <span class="op">=</span> np.quantile(data_train, niveaux_quantiles)</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>quantiles_theoriques <span class="op">=</span> [skew_student_quantile(alpha,<span class="op">**</span>params_sstd) <span class="cf">for</span> alpha <span class="kw">in</span> tqdm(niveaux_quantiles)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="2082c8c7" class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>plt.scatter(quantiles_theoriques, quantiles_empiriques)</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>plt.plot(quantiles_theoriques, quantiles_theoriques, color<span class="op">=</span><span class="st">'red'</span>, label<span class="op">=</span><span class="st">'Première bissectrice'</span>)</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'QQ Plot - Quantiles empiriques vs Quantiles théoriques'</span>)</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Quantiles théoriques (distribution Skew Student)'</span>)</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Quantiles empiriques'</span>)</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="775e53b5" class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># # kstest y revenir</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ks_stat, ks_p_value = kstest(data_train, skew_student_pdf, args=(**params_sstd,))</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="co"># print("="*80)</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="co"># print("H0 : Les données suivent une loi de Skew Student")</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="co"># print(f"Statistique de test : {ks_stat:.4f}")</span></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="co"># print(f"P-value : {ks_p_value:.4f}")</span></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a><span class="co"># print("="*80)</span></span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a><span class="co"># A revoir</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="ii.4.2.-calcul-de-la-var-skew-student" class="level3">
+<h3 class="anchored" data-anchor-id="ii.4.2.-calcul-de-la-var-skew-student">II.4.2. Calcul de la VaR Skew Student</h3>
+<div id="96af03c4" class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Objectif : écrire une fonction qui calcule la VaR skew-student</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sstd_var_fct(alpha, params):</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="co">    Calcul de la VaR skew student</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="co">    data : les rendements logarithmiques</span></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a><span class="co">    alpha : le niveau de confiance</span></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span>skew_student_quantile(<span class="dv">1</span><span class="op">-</span>alpha, <span class="op">**</span>params)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="9830d0c4" class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>sstd_var <span class="op">=</span> sstd_var_fct(alpha, params_sstd)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"La VaR skew student pour h=1j et alpha=</span><span class="sc">{</span>alpha<span class="sc">}</span><span class="ss"> est : </span><span class="sc">{</span>sstd_var<span class="sc">:.4%}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="iii.-implémentation-de-les" class="level1">
+<h1>III. Implémentation de l’ES</h1>
+<p>L’expected shortfall (ES) est une mesure de risque qui donne une estimation de la perte moyenne au-delà du seuil de la VaR. Par exemple, un ES à 5% sur 1 jour de 1000 euros signifie que si la perte dépasse 1000 euros, alors la perte moyenne sera de 1500 euros. L’ES est une mesure plus robuste que la VaR, car elle prend en compte les queues de distribution et est particulièrement utile pour évaluer les risques extrêmes. Elle est définie comme suit :</p>
+<p><span class="math display">\[ES_{\alpha}(h) = E(PnL | PnL \leq -VaR_{\alpha}(h))\]</span></p>
+<p>/!&nbsp;La ES du cours est différente de celle ci. Elle est définie comme suit : <span class="math display">\[ES_{\alpha}(h) = E(PnL - VaR | PnL \leq -VaR_{\alpha}(h)) = CTE - VaR\]</span></p>
+<p>Voir ce qui est fait dans le cadre réglementaire.</p>
+<div id="d919c9a2" class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Expected Shortfall pour la VaR historique, bootstrap et gaussienne, et skew-student</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> expected_shortfall(data, var):</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="co">    Calcul de l'Expected Shortfall</span></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a><span class="co">    data : les rendements logarithmiques</span></span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a><span class="co">    var : la VaR</span></span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span>data[data <span class="op">&lt;</span> <span class="op">-</span>var].mean()</span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a>es_hist_train <span class="op">=</span> expected_shortfall(data_train, var_hist_train)</span>
+<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a>es_bs_train <span class="op">=</span> expected_shortfall(data_train, var_bs_train)</span>
+<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a>es_gauss_train <span class="op">=</span> expected_shortfall(data_train, var_gauss_train)</span>
+<span id="cb42-14"><a href="#cb42-14" aria-hidden="true" tabindex="-1"></a>es_sstd_train <span class="op">=</span> expected_shortfall(data_train, sstd_var)</span>
+<span id="cb42-15"><a href="#cb42-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-16"><a href="#cb42-16" aria-hidden="true" tabindex="-1"></a><span class="co"># in a df</span></span>
+<span id="cb42-17"><a href="#cb42-17" aria-hidden="true" tabindex="-1"></a>es <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb42-18"><a href="#cb42-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Historique'</span>: [es_hist_train],</span>
+<span id="cb42-19"><a href="#cb42-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Bootstrap'</span>: [es_bs_train],</span>
+<span id="cb42-20"><a href="#cb42-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Gaussienne'</span>: [es_gauss_train],</span>
+<span id="cb42-21"><a href="#cb42-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Skew Student'</span>: [es_sstd_train]</span>
+<span id="cb42-22"><a href="#cb42-22" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb42-23"><a href="#cb42-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-24"><a href="#cb42-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span><span class="op">*</span><span class="dv">80</span>)</span>
+<span id="cb42-25"><a href="#cb42-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Expected Shortfall empirique (en %) pour h=1j"</span>)</span>
+<span id="cb42-26"><a href="#cb42-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">round</span>(<span class="dv">100</span><span class="op">*</span>es,<span class="dv">2</span>))</span>
+<span id="cb42-27"><a href="#cb42-27" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span><span class="op">*</span><span class="dv">80</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="a74d9785" class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> stats</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.integrate <span class="im">as</span> integrate</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> expected_shortfall_theoretical(alpha, quantile_function, density_function,params):</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a><span class="co">    Computes the Expected Shortfall (Conditional VaR) for a given distribution.</span></span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters:</span></span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a><span class="co">    - alpha (float): Confidence level (e.g., 0.99 for 99%)</span></span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a><span class="co">    - quantile_function (callable): Function to compute quantiles (e.g., skew_student_quantile)</span></span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a><span class="co">    - params (dict): Parameters of the distribution</span></span>
+<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
+<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a><span class="co">    - float: Expected Shortfall value</span></span>
+<span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb43-16"><a href="#cb43-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-17"><a href="#cb43-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Compute the Value at Risk (VaR) at level alpha</span></span>
+<span id="cb43-18"><a href="#cb43-18" aria-hidden="true" tabindex="-1"></a>    var_alpha <span class="op">=</span> quantile_function(<span class="dv">1</span><span class="op">-</span>alpha, <span class="op">**</span>params)</span>
+<span id="cb43-19"><a href="#cb43-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-20"><a href="#cb43-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Expected Shortfall integral</span></span>
+<span id="cb43-21"><a href="#cb43-21" aria-hidden="true" tabindex="-1"></a>    integral_value, _ <span class="op">=</span> integrate.quad(<span class="kw">lambda</span> x: x <span class="op">*</span> density_function(x, <span class="op">**</span>params), <span class="op">-</span><span class="bu">float</span>(<span class="st">"inf"</span>), var_alpha)</span>
+<span id="cb43-22"><a href="#cb43-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-23"><a href="#cb43-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Compute Expected Shortfall</span></span>
+<span id="cb43-24"><a href="#cb43-24" aria-hidden="true" tabindex="-1"></a>    es_alpha <span class="op">=</span> <span class="op">-</span>integral_value <span class="op">/</span> (<span class="dv">1</span> <span class="op">-</span> alpha)</span>
+<span id="cb43-25"><a href="#cb43-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-26"><a href="#cb43-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> es_alpha</span>
+<span id="cb43-27"><a href="#cb43-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-28"><a href="#cb43-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute Expected Shortfall using the corrected function</span></span>
+<span id="cb43-29"><a href="#cb43-29" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="fl">0.99</span></span>
+<span id="cb43-30"><a href="#cb43-30" aria-hidden="true" tabindex="-1"></a>es_sstd_theoretical <span class="op">=</span> expected_shortfall_theoretical(alpha,skew_student_quantile,skew_student_pdf, params_sstd)</span>
+<span id="cb43-31"><a href="#cb43-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-32"><a href="#cb43-32" aria-hidden="true" tabindex="-1"></a>params_norm <span class="op">=</span> {</span>
+<span id="cb43-33"><a href="#cb43-33" aria-hidden="true" tabindex="-1"></a>    <span class="st">"loc"</span> : np.mean(data_train),</span>
+<span id="cb43-34"><a href="#cb43-34" aria-hidden="true" tabindex="-1"></a>    <span class="st">"scale"</span> : np.std(data_train)</span>
+<span id="cb43-35"><a href="#cb43-35" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb43-36"><a href="#cb43-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-37"><a href="#cb43-37" aria-hidden="true" tabindex="-1"></a>es_gauss_theoretical <span class="op">=</span> expected_shortfall_theoretical(alpha,stats.norm.ppf,stats.norm.pdf, params_norm)</span>
+<span id="cb43-38"><a href="#cb43-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-39"><a href="#cb43-39" aria-hidden="true" tabindex="-1"></a>es_theoretical <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb43-40"><a href="#cb43-40" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Gaussienne'</span>: [es_gauss_theoretical],</span>
+<span id="cb43-41"><a href="#cb43-41" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Skew Student'</span>: [es_sstd_theoretical]</span>
+<span id="cb43-42"><a href="#cb43-42" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb43-43"><a href="#cb43-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-44"><a href="#cb43-44" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span><span class="op">*</span><span class="dv">80</span>)</span>
+<span id="cb43-45"><a href="#cb43-45" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Expected Shortfall théorique (en %) pour h=1j"</span>)</span>
+<span id="cb43-46"><a href="#cb43-46" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">round</span>(<span class="dv">100</span><span class="op">*</span>es_theoretical,<span class="dv">2</span>))</span>
+<span id="cb43-47"><a href="#cb43-47" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span><span class="op">*</span><span class="dv">80</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="iv.protocole-de-backtesting" class="level1">
+<h1>IV.Protocole de Backtesting</h1>
+<p>L’exercice de backtesting consiste à vérifier la capacité d’adaptation du modèle et sa viabilité en dehors de son cadre d’entraînement. Il permet d’évaluer la performance des modèles dans le temps. Idéalement, il faudrait le realiser quotidiennement afin d’évaluer s’il est utile ou non de recalibrer le modèle.</p>
+<p>Dans le cadre de TP, nous n’avons pas observé d’exceptions avec l’utilisation de la VaR historique. Cela est probablement du à la période d’apprentissage trop stricte. Notre modèle était donc trop restrictif/conservateur ce qui peut témoigner de son incapacité d’adaptation. Pour ce faire, il aurait été necessaire de le recalibrer.</p>
+<p>Sachant que les modèles sont évalués quotidiennement, à quel moment doit-on considérer qu’il est nécessaire de recalibrer le modèle ? Quels indicateurs pourrait-on mettre en place pour déterminer si tout est sous contrôle (VaR trop haute, trop basse) ou si un recalibrage est requis, sachant que le modèle est backtesté chaque jour ?</p>
+<p>Pour repondre à ces questions, nous proposons le protocole de backtest ci-dessous :</p>
+<ul>
+<li><p>Dans la réglementation baloise, il est demandé de tester les performances de la VaR sur les 250 jours suivants la date de réalisation du modèle. Dans ces 250 jours, on est censé observé 2 à 3 exceptions, soit 1%. Lorsqu’il n’y a aucune exception sur cette période de temps, nous jugerons que le modèle est mal calibré.</p></li>
+<li><p>Lorsqu’il y a des exceptions, nous pouvons comparer ces exceptions théoriques aux exceptions observées à l’aide d’un test de Kupiec/Unconditionnal coverage [1], une variante du test binomiale qui permet de tester sous l’hypothèse nulle que le taux d’exception(p) est égal au niveau de confiance de la VaR (1-<span class="math inline">\(\alpha\)</span>). La statistique de test suit une loi de khi-deux à 1 degré de liberté. Lorsque cette hypothèse est rejetée, cela signifie que le modèle est mal calibré. En effet, si une banque a trop d’exceptions, i.e.&nbsp;<span class="math inline">\(p \geq 1 - \alpha\)</span>, cela signifie que son modèle sous-estime le risque, ce qui peut conduire à une exigence de recalibrage ou une augmentation du capital réglementaire. Si une banque a trop peu d’exceptions (voire 0), i.e.&nbsp;<span class="math inline">\(p \leq 1 - \alpha\)</span>, cela peut indiquer que son modèle est trop conservateur, ce qui immobilise trop de capital inutilement.</p></li>
+<li><p>Puisqu’un seul test de backtesting n’est pas suffisant[2] pour juger la qualité d’un modèle de VaR, il serait préférable de combiner différentes méthodes. Pour ce faire, un autre test a été utilisé pour juger de la necessité de recalibrage du modèle. Il s’agit du test de Christoffersen’s Interval Forecast/Independance test [3]. Ce test permet de vérifier si les exceptions sont indépendantes et donc bien réparties dans le temps. En effet, si les exceptions sont concentrées dans un intervalle de temps, cela peut indiquer que le modèle est mal calibré. Sous l’hypothèse nulle, la statistique de test suit asymptotiquement une loi de khi-deux à 1 degré de liberté.</p></li>
+<li><p>En couplant le test de Kupiec au test de Christoffersen [3], nous avons le test de conditional coverage mixte[3] qui suit une loi de khi-deux à 2 degrés de liberté.</p></li>
+</ul>
+<p>Pour la mise en place de ces tests statistiques, nous avons besoin d’une échantillon de taille suffisamment grande, i.e <span class="math inline">\(N=30\)</span>. Pour ce faire, nous ne pourrons mettre en place ce protocole qu’à partir du 30ème jour de backtesting. Pour le backtest, nous avons fait le choix d’utiliser un expanding window, i.e.&nbsp;une fenêtre d’apprentissage qui s’agrandit à chaque période de recalibrage. Il aurait été plus pertinent de privilégier un rolling window, i.e.&nbsp;une fenêtre d’apprentissage qui se déplace à chaque période de recalibrage, pour éviter de bruiter les données.</p>
+<p>PROBLÈME : au bout de 30j, s’il n’y a pas d’exceptions, on ne recalibre pas le modèle mais si au 31e jour il y a une exception, le test de kupiec echoue=&gt; recalibrage. <strong><em>References</em></strong>: - [1] Kupiec, P. “Techniques for Verifying the Accuracy of Risk Management Models.” Journal of Derivatives. Vol. 3, 1995, pp.&nbsp;73–84. - [2] Haas, M. “New Methods in Backtesting.” Financial Engineering, Research Center Caesar, Bonn, 2001. - [3] Christoffersen, P. “Evaluating Interval Forecasts.” International Economic Review. Vol. 39, 1998, pp.&nbsp;841–862.</p>
+<div id="e2fe7dd4" class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> chi2</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Backtest:</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, actual, forecast, alpha, alpha_test):</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.index <span class="op">=</span> actual.index</span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.actual <span class="op">=</span> actual.values</span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.forecast <span class="op">=</span> forecast</span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.alpha <span class="op">=</span> alpha</span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.alpha_test <span class="op">=</span> alpha_test</span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> hit_series(<span class="va">self</span>):</span>
+<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a>        <span class="co">""" Returns a series of 1s (VaR breaches) and 0s (no breach) """</span></span>
+<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> (<span class="va">self</span>.actual <span class="op">&lt;</span> <span class="op">-</span> <span class="va">self</span>.forecast).astype(<span class="bu">int</span>)</span>
+<span id="cb44-16"><a href="#cb44-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb44-17"><a href="#cb44-17" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> lr_bt(<span class="va">self</span>):</span>
+<span id="cb44-18"><a href="#cb44-18" aria-hidden="true" tabindex="-1"></a>        <span class="co">""" Back-test protocol """</span></span>
+<span id="cb44-19"><a href="#cb44-19" aria-hidden="true" tabindex="-1"></a>        hits <span class="op">=</span> <span class="va">self</span>.hit_series()  <span class="co"># Série des violations de la VaR (1 si violation, 0 sinon)</span></span>
+<span id="cb44-20"><a href="#cb44-20" aria-hidden="true" tabindex="-1"></a>        transitions <span class="op">=</span> hits[<span class="dv">1</span>:] <span class="op">-</span> hits[:<span class="op">-</span><span class="dv">1</span>]  <span class="co"># Différences entre valeurs successives (1 si passage de 0 à 1, -1 si passage de 1 à 0)</span></span>
+<span id="cb44-21"><a href="#cb44-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-22"><a href="#cb44-22" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Transition counts</span></span>
+<span id="cb44-23"><a href="#cb44-23" aria-hidden="true" tabindex="-1"></a>        n01 <span class="op">=</span> np.<span class="bu">sum</span>(transitions <span class="op">==</span> <span class="dv">1</span>)  <span class="co"># 0 -&gt; 1</span></span>
+<span id="cb44-24"><a href="#cb44-24" aria-hidden="true" tabindex="-1"></a>        n10 <span class="op">=</span> np.<span class="bu">sum</span>(transitions <span class="op">==</span> <span class="op">-</span><span class="dv">1</span>) <span class="co"># 1 -&gt; 0</span></span>
+<span id="cb44-25"><a href="#cb44-25" aria-hidden="true" tabindex="-1"></a>        n11 <span class="op">=</span> np.<span class="bu">sum</span>((transitions <span class="op">==</span> <span class="dv">0</span>) <span class="op">&amp;</span> (hits[<span class="dv">1</span>:] <span class="op">==</span> <span class="dv">1</span>)) <span class="co"># 1 -&gt; 1</span></span>
+<span id="cb44-26"><a href="#cb44-26" aria-hidden="true" tabindex="-1"></a>        n00 <span class="op">=</span> np.<span class="bu">sum</span>((transitions <span class="op">==</span> <span class="dv">0</span>) <span class="op">&amp;</span> (hits[<span class="dv">1</span>:] <span class="op">==</span> <span class="dv">0</span>)) <span class="co"># 0 -&gt; 0</span></span>
+<span id="cb44-27"><a href="#cb44-27" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb44-28"><a href="#cb44-28" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Number of observations in each state</span></span>
+<span id="cb44-29"><a href="#cb44-29" aria-hidden="true" tabindex="-1"></a>        n0, n1 <span class="op">=</span> n01 <span class="op">+</span> n00, n10 <span class="op">+</span> n11</span>
+<span id="cb44-30"><a href="#cb44-30" aria-hidden="true" tabindex="-1"></a>        total_n <span class="op">=</span> n0 <span class="op">+</span> n1</span>
+<span id="cb44-31"><a href="#cb44-31" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb44-32"><a href="#cb44-32" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Probability estimates</span></span>
+<span id="cb44-33"><a href="#cb44-33" aria-hidden="true" tabindex="-1"></a>        p01 <span class="op">=</span> n01 <span class="op">/</span> (n00 <span class="op">+</span> n01) <span class="cf">if</span> (n00 <span class="op">+</span> n01) <span class="op">&gt;</span> <span class="dv">0</span> <span class="cf">else</span> <span class="dv">0</span></span>
+<span id="cb44-34"><a href="#cb44-34" aria-hidden="true" tabindex="-1"></a>        p11 <span class="op">=</span> n11 <span class="op">/</span> (n11 <span class="op">+</span> n10) <span class="cf">if</span> (n11 <span class="op">+</span> n10) <span class="op">&gt;</span> <span class="dv">0</span> <span class="cf">else</span> <span class="dv">0</span></span>
+<span id="cb44-35"><a href="#cb44-35" aria-hidden="true" tabindex="-1"></a>        p <span class="op">=</span> n1 <span class="op">/</span> total_n <span class="cf">if</span> total_n <span class="op">&gt;</span> <span class="dv">0</span> <span class="cf">else</span> <span class="dv">0</span></span>
+<span id="cb44-36"><a href="#cb44-36" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb44-37"><a href="#cb44-37" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> n1 <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb44-38"><a href="#cb44-38" aria-hidden="true" tabindex="-1"></a>            <span class="co">#</span></span>
+<span id="cb44-39"><a href="#cb44-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-40"><a href="#cb44-40" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Unconditional Coverage Test/Kupiec</span></span>
+<span id="cb44-41"><a href="#cb44-41" aria-hidden="true" tabindex="-1"></a>            uc_h0 <span class="op">=</span> n0 <span class="op">*</span> np.log(<span class="dv">1</span> <span class="op">-</span> <span class="va">self</span>.alpha) <span class="op">+</span> n1 <span class="op">*</span> np.log(<span class="va">self</span>.alpha)</span>
+<span id="cb44-42"><a href="#cb44-42" aria-hidden="true" tabindex="-1"></a>            uc_h1 <span class="op">=</span> n0 <span class="op">*</span> np.log(<span class="dv">1</span> <span class="op">-</span> p) <span class="op">+</span> n1 <span class="op">*</span> np.log(p)</span>
+<span id="cb44-43"><a href="#cb44-43" aria-hidden="true" tabindex="-1"></a>            uc_stat <span class="op">=</span> <span class="op">-</span><span class="dv">2</span> <span class="op">*</span> (uc_h0 <span class="op">-</span> uc_h1)</span>
+<span id="cb44-44"><a href="#cb44-44" aria-hidden="true" tabindex="-1"></a>            <span class="co"># uc_critical_val = chi2.ppf(self.alpha_test, 1)</span></span>
+<span id="cb44-45"><a href="#cb44-45" aria-hidden="true" tabindex="-1"></a>            uc_pval <span class="op">=</span> <span class="dv">1</span> <span class="op">-</span> chi2.cdf(uc_stat, <span class="dv">1</span>)</span>
+<span id="cb44-46"><a href="#cb44-46" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb44-47"><a href="#cb44-47" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Independence Test/Christoffersen</span></span>
+<span id="cb44-48"><a href="#cb44-48" aria-hidden="true" tabindex="-1"></a>            ind_h0 <span class="op">=</span> (n00 <span class="op">+</span> n01) <span class="op">*</span> np.log(<span class="dv">1</span> <span class="op">-</span> p) <span class="op">+</span> (n01 <span class="op">+</span> n11) <span class="op">*</span> np.log(p)</span>
+<span id="cb44-49"><a href="#cb44-49" aria-hidden="true" tabindex="-1"></a>            ind_h1 <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb44-50"><a href="#cb44-50" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> p01 <span class="op">&gt;</span> <span class="dv">0</span>: ind_h1 <span class="op">+=</span> n01 <span class="op">*</span> np.log(p01)</span>
+<span id="cb44-51"><a href="#cb44-51" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> (<span class="dv">1</span> <span class="op">-</span> p01) <span class="op">&gt;</span> <span class="dv">0</span>: ind_h1 <span class="op">+=</span> n00 <span class="op">*</span> np.log(<span class="dv">1</span> <span class="op">-</span> p01)</span>
+<span id="cb44-52"><a href="#cb44-52" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> p11 <span class="op">&gt;</span> <span class="dv">0</span>: ind_h1 <span class="op">+=</span> n11 <span class="op">*</span> np.log(p11)</span>
+<span id="cb44-53"><a href="#cb44-53" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> (<span class="dv">1</span> <span class="op">-</span> p11) <span class="op">&gt;</span> <span class="dv">0</span>: ind_h1 <span class="op">+=</span> n10 <span class="op">*</span> np.log(<span class="dv">1</span> <span class="op">-</span> p11)</span>
+<span id="cb44-54"><a href="#cb44-54" aria-hidden="true" tabindex="-1"></a>            ind_stat <span class="op">=</span> <span class="op">-</span><span class="dv">2</span> <span class="op">*</span> (ind_h0 <span class="op">-</span> ind_h1)</span>
+<span id="cb44-55"><a href="#cb44-55" aria-hidden="true" tabindex="-1"></a>            <span class="co"># ind_critical_val = chi2.ppf(self.alpha_test, 1)</span></span>
+<span id="cb44-56"><a href="#cb44-56" aria-hidden="true" tabindex="-1"></a>            ind_pval <span class="op">=</span> <span class="dv">1</span> <span class="op">-</span> chi2.cdf(ind_stat, <span class="dv">1</span>)</span>
+<span id="cb44-57"><a href="#cb44-57" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb44-58"><a href="#cb44-58" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Conditional Coverage Test/ Christoffersen &amp; Kupiec mixture</span></span>
+<span id="cb44-59"><a href="#cb44-59" aria-hidden="true" tabindex="-1"></a>            cc_stat <span class="op">=</span> uc_stat <span class="op">+</span> ind_stat</span>
+<span id="cb44-60"><a href="#cb44-60" aria-hidden="true" tabindex="-1"></a>            <span class="co"># cc_critical_val = chi2.ppf(self.alpha_test, 2)</span></span>
+<span id="cb44-61"><a href="#cb44-61" aria-hidden="true" tabindex="-1"></a>            cc_pval <span class="op">=</span> <span class="dv">1</span> <span class="op">-</span> chi2.cdf(cc_stat, <span class="dv">2</span>)</span>
+<span id="cb44-62"><a href="#cb44-62" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb44-63"><a href="#cb44-63" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Store results in a DataFrame</span></span>
+<span id="cb44-64"><a href="#cb44-64" aria-hidden="true" tabindex="-1"></a>            df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb44-65"><a href="#cb44-65" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Statistic"</span>: [uc_stat, cc_stat, ind_stat],</span>
+<span id="cb44-66"><a href="#cb44-66" aria-hidden="true" tabindex="-1"></a>                <span class="co"># "Critical Value": [uc_critical_val, ind_critical_val, cc_critical_val],</span></span>
+<span id="cb44-67"><a href="#cb44-67" aria-hidden="true" tabindex="-1"></a>                <span class="st">"p-value"</span>: [uc_pval, cc_pval, ind_pval]</span>
+<span id="cb44-68"><a href="#cb44-68" aria-hidden="true" tabindex="-1"></a>            }, index<span class="op">=</span>[<span class="st">"Unconditional"</span>, <span class="st">"Conditional"</span>,<span class="st">"Independence"</span>])</span>
+<span id="cb44-69"><a href="#cb44-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-70"><a href="#cb44-70" aria-hidden="true" tabindex="-1"></a>            binomial_test <span class="op">=</span> stats.binomtest(n1, total_n, <span class="dv">1</span><span class="op">-</span><span class="va">self</span>.alpha, alternative<span class="op">=</span><span class="st">'two-sided'</span>)</span>
+<span id="cb44-71"><a href="#cb44-71" aria-hidden="true" tabindex="-1"></a>            df.loc[<span class="st">"Binomial"</span>] <span class="op">=</span> [binomial_test.statistic, binomial_test.pvalue]</span>
+<span id="cb44-72"><a href="#cb44-72" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb44-73"><a href="#cb44-73" aria-hidden="true" tabindex="-1"></a>            df <span class="op">=</span> pd.DataFrame(np.nan, index<span class="op">=</span>[<span class="st">"Unconditional"</span>, <span class="st">"Conditional"</span>, <span class="st">"Independence"</span>], columns<span class="op">=</span>[<span class="st">"Statistic"</span>, <span class="st">"p-value"</span>])</span>
+<span id="cb44-74"><a href="#cb44-74" aria-hidden="true" tabindex="-1"></a>            binomial_test <span class="op">=</span> stats.binomtest(n1, total_n, <span class="dv">1</span><span class="op">-</span><span class="va">self</span>.alpha, alternative<span class="op">=</span><span class="st">'two-sided'</span>)</span>
+<span id="cb44-75"><a href="#cb44-75" aria-hidden="true" tabindex="-1"></a>            df.loc[<span class="st">"Binomial"</span>] <span class="op">=</span> [binomial_test.statistic, binomial_test.pvalue]</span>
+<span id="cb44-76"><a href="#cb44-76" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb44-77"><a href="#cb44-77" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb44-78"><a href="#cb44-78" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="bfa77c7b" class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> daily_backtest(actual, forecast, alpha<span class="op">=</span><span class="fl">0.99</span>, alpha_test <span class="op">=</span> <span class="fl">0.95</span>,min_days<span class="op">=</span><span class="dv">30</span>, max_days<span class="op">=</span><span class="dv">250</span>):</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">""" Runs a growing backtest daily, starting at min_days up to max_days """</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>    recalibration_needed <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>    end_test <span class="op">=</span> <span class="bu">min</span>(max_days,<span class="bu">len</span>(actual))</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> end <span class="kw">in</span> <span class="bu">range</span>(min_days, end_test <span class="op">+</span><span class="dv">1</span>):</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>        data_to_test <span class="op">=</span> actual[:end]</span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>        var_to_test <span class="op">=</span> forecast</span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(data_to_test) <span class="op">&lt;</span> <span class="dv">30</span>:</span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>            <span class="cf">continue</span></span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a>        bt <span class="op">=</span> Backtest(actual<span class="op">=</span>data_to_test, forecast<span class="op">=</span>var_to_test, alpha<span class="op">=</span>alpha, alpha_test<span class="op">=</span>alpha_test)</span>
+<span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a>        result <span class="op">=</span> bt.lr_bt()</span>
+<span id="cb45-13"><a href="#cb45-13" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb45-14"><a href="#cb45-14" aria-hidden="true" tabindex="-1"></a>        nb_exceptions <span class="op">=</span> bt.hit_series().<span class="bu">sum</span>()</span>
+<span id="cb45-15"><a href="#cb45-15" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb45-16"><a href="#cb45-16" aria-hidden="true" tabindex="-1"></a>        <span class="co"># res=bootstrap((data_to_test,), statistic=lambda x: exceptions(x, var_to_test)/len(x), method='percentile', n_resamples=1000)</span></span>
+<span id="cb45-17"><a href="#cb45-17" aria-hidden="true" tabindex="-1"></a>        <span class="co"># ci_lower, ci_upper = res.confidence_interval</span></span>
+<span id="cb45-18"><a href="#cb45-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-19"><a href="#cb45-19" aria-hidden="true" tabindex="-1"></a>        <span class="co"># if ci_lower &lt;= 1-alpha &lt;= ci_upper:</span></span>
+<span id="cb45-20"><a href="#cb45-20" aria-hidden="true" tabindex="-1"></a>        <span class="co">#     print(f"Recalibration needed at {end} days: The conditional test failed.")</span></span>
+<span id="cb45-21"><a href="#cb45-21" aria-hidden="true" tabindex="-1"></a>        <span class="co">#     recalibration_needed = True</span></span>
+<span id="cb45-22"><a href="#cb45-22" aria-hidden="true" tabindex="-1"></a>        <span class="co">#     return recalibration_needed, end</span></span>
+<span id="cb45-23"><a href="#cb45-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-24"><a href="#cb45-24" aria-hidden="true" tabindex="-1"></a>        <span class="co"># if "conditional" in result.index and result.loc["Independence", "p-value"] &lt; 0.05:</span></span>
+<span id="cb45-25"><a href="#cb45-25" aria-hidden="true" tabindex="-1"></a>        <span class="co">#     print(f"Recalibration needed at {end} days: The Independence test failed.")</span></span>
+<span id="cb45-26"><a href="#cb45-26" aria-hidden="true" tabindex="-1"></a>        <span class="co">#     recalibration_needed = True</span></span>
+<span id="cb45-27"><a href="#cb45-27" aria-hidden="true" tabindex="-1"></a>        <span class="co">#     return recalibration_needed, end</span></span>
+<span id="cb45-28"><a href="#cb45-28" aria-hidden="true" tabindex="-1"></a>        <span class="co"># failed_tests = result.iloc[2:][result.iloc[2:]["p-value"] &lt; 0.05].index.tolist()</span></span>
+<span id="cb45-29"><a href="#cb45-29" aria-hidden="true" tabindex="-1"></a>        failed_tests <span class="op">=</span> result[result[<span class="st">"p-value"</span>] <span class="op">&lt;</span> <span class="fl">0.05</span>].index.tolist()</span>
+<span id="cb45-30"><a href="#cb45-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-31"><a href="#cb45-31" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> failed_tests:</span>
+<span id="cb45-32"><a href="#cb45-32" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"Recalibration needed at </span><span class="sc">{</span>end<span class="sc">}</span><span class="ss"> days: The following tests failed: </span><span class="sc">{</span><span class="st">', '</span><span class="sc">.</span>join(failed_tests)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb45-33"><a href="#cb45-33" aria-hidden="true" tabindex="-1"></a>            recalibration_needed <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb45-34"><a href="#cb45-34" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> recalibration_needed, end</span>
+<span id="cb45-35"><a href="#cb45-35" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb45-36"><a href="#cb45-36" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> end <span class="op">==</span> max_days <span class="kw">and</span> nb_exceptions <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb45-37"><a href="#cb45-37" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"Recalibration needed at </span><span class="sc">{</span>end<span class="sc">}</span><span class="ss"> days: No exceptions observed in the test window."</span>)</span>
+<span id="cb45-38"><a href="#cb45-38" aria-hidden="true" tabindex="-1"></a>            recalibration_needed <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb45-39"><a href="#cb45-39" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> recalibration_needed, end</span>
+<span id="cb45-40"><a href="#cb45-40" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb45-41"><a href="#cb45-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> recalibration_needed:</span>
+<span id="cb45-42"><a href="#cb45-42" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"No recalibration needed in the tested period."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="534102c5" class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> iterative_backtest(data_train, data_test, var_model, alpha):</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">""" Runs an iterative backtest with recalibration """</span></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>    data_train <span class="op">=</span> data_train.copy()</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>    data_test <span class="op">=</span> data_test.copy()</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>    var_result <span class="op">=</span> var_model(data_train, alpha<span class="op">=</span>alpha)</span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>    var_to_test <span class="op">=</span> var_result[<span class="dv">0</span>] <span class="cf">if</span> <span class="bu">isinstance</span>(var_result, (<span class="bu">list</span>, <span class="bu">tuple</span>)) <span class="cf">else</span> var_result </span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a>    recalibration_points <span class="op">=</span> [<span class="dv">0</span>]</span>
+<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a>    vars_stored <span class="op">=</span> [var_to_test]</span>
+<span id="cb46-11"><a href="#cb46-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb46-12"><a href="#cb46-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="bu">len</span>(data_test) <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">and</span> <span class="bu">len</span>(data_test) <span class="op">&gt;=</span> <span class="dv">250</span>:</span>
+<span id="cb46-13"><a href="#cb46-13" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"="</span><span class="op">*</span><span class="dv">80</span>)</span>
+<span id="cb46-14"><a href="#cb46-14" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Old VaR to test: </span><span class="sc">{</span>var_to_test<span class="sc">:.4%}</span><span class="ss">"</span>)</span>
+<span id="cb46-15"><a href="#cb46-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-16"><a href="#cb46-16" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Run daily backtest correctly</span></span>
+<span id="cb46-17"><a href="#cb46-17" aria-hidden="true" tabindex="-1"></a>        res_backtest, index <span class="op">=</span> daily_backtest(data_test, var_to_test, alpha<span class="op">=</span>alpha, alpha_test<span class="op">=</span><span class="fl">0.95</span>, min_days<span class="op">=</span><span class="dv">30</span>, max_days<span class="op">=</span><span class="dv">250</span>)</span>
+<span id="cb46-18"><a href="#cb46-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-19"><a href="#cb46-19" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Find the index of recalibration</span></span>
+<span id="cb46-20"><a href="#cb46-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> res_backtest:</span>
+<span id="cb46-21"><a href="#cb46-21" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="bu">len</span>(data_test))</span>
+<span id="cb46-22"><a href="#cb46-22" aria-hidden="true" tabindex="-1"></a>            recalibration_points.append(index)</span>
+<span id="cb46-23"><a href="#cb46-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-24"><a href="#cb46-24" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Expand training data and shrink test data</span></span>
+<span id="cb46-25"><a href="#cb46-25" aria-hidden="true" tabindex="-1"></a>            data_train <span class="op">=</span> pd.concat([data_train, data_test.iloc[:index,]])</span>
+<span id="cb46-26"><a href="#cb46-26" aria-hidden="true" tabindex="-1"></a>            data_test <span class="op">=</span> data_test.iloc[index:,]</span>
+<span id="cb46-27"><a href="#cb46-27" aria-hidden="true" tabindex="-1"></a>            var_result <span class="op">=</span> var_model(data_train, alpha<span class="op">=</span>alpha)</span>
+<span id="cb46-28"><a href="#cb46-28" aria-hidden="true" tabindex="-1"></a>            var_to_test <span class="op">=</span> var_result[<span class="dv">0</span>] <span class="cf">if</span> <span class="bu">isinstance</span>(var_result, (<span class="bu">list</span>, <span class="bu">tuple</span>)) <span class="cf">else</span> var_result </span>
+<span id="cb46-29"><a href="#cb46-29" aria-hidden="true" tabindex="-1"></a>            vars_stored.append(var_to_test)</span>
+<span id="cb46-30"><a href="#cb46-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-31"><a href="#cb46-31" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"New VaR to test: </span><span class="sc">{</span>var_to_test<span class="sc">:.4%}</span><span class="ss">"</span>)</span>
+<span id="cb46-32"><a href="#cb46-32" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb46-33"><a href="#cb46-33" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="st">"No recalibration needed."</span>)</span>
+<span id="cb46-34"><a href="#cb46-34" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span>
+<span id="cb46-35"><a href="#cb46-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-36"><a href="#cb46-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> recalibration_points, vars_stored</span>
+<span id="cb46-37"><a href="#cb46-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-38"><a href="#cb46-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Execute iterative backtest</span></span>
+<span id="cb46-39"><a href="#cb46-39" aria-hidden="true" tabindex="-1"></a>recalibration_points, vars_stored <span class="op">=</span> iterative_backtest(data_train, data_test, gaussian_var_ewma, alpha<span class="op">=</span>alpha)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="d1f02c6f" class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>data_test.reset_index(drop<span class="op">=</span><span class="va">True</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>plt.plot(data_test, label<span class="op">=</span><span class="st">"Returns"</span>, color<span class="op">=</span><span class="st">'blue'</span>)</span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>recab <span class="op">=</span> np.cumsum(np.array(recalibration_points))</span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>vars_stored_neg <span class="op">=</span> <span class="op">-</span>np.array(vars_stored)</span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a>plt.scatter(recab, vars_stored_neg, color<span class="op">=</span><span class="st">'black'</span>, label<span class="op">=</span><span class="st">"Recalibration points"</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">len</span>(recab) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a>    plt.step(recab, vars_stored_neg, where<span class="op">=</span><span class="st">'post'</span>, color<span class="op">=</span><span class="st">'red'</span>, linestyle<span class="op">=</span><span class="st">'solid'</span>, label<span class="op">=</span><span class="st">"VaR Adjusted"</span>)</span>
+<span id="cb47-13"><a href="#cb47-13" aria-hidden="true" tabindex="-1"></a>    plt.hlines(vars_stored_neg[<span class="op">-</span><span class="dv">1</span>], xmin<span class="op">=</span>recab[<span class="op">-</span><span class="dv">1</span>], xmax<span class="op">=</span><span class="bu">len</span>(data_test), color<span class="op">=</span><span class="st">'red'</span>, linestyle<span class="op">=</span><span class="st">'solid'</span>)</span>
+<span id="cb47-14"><a href="#cb47-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-15"><a href="#cb47-15" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Time"</span>)</span>
+<span id="cb47-16"><a href="#cb47-16" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"VaR / Returns"</span>)</span>
+<span id="cb47-17"><a href="#cb47-17" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Backtesting VaR with Recalibration Points"</span>)</span>
+<span id="cb47-18"><a href="#cb47-18" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb47-19"><a href="#cb47-19" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb47-20"><a href="#cb47-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-21"><a href="#cb47-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("^(?:http:|https:)\/\/cheryl-kdio\.github\.io\/custom");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../../../posts/finance/risk-management/value-at-risk/garch-var.html" class="pagination-link" aria-label="TP3:Méthodes d'une calcul d'une VaR dynamique (basé sur GARCH)">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">TP3:Méthodes d’une calcul d’une VaR dynamique (basé sur GARCH)</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../../../posts/finance/risk-management/value-at-risk/value-at-risk.html" class="pagination-link" aria-label="La VaR">
+        <span class="nav-page-text">La VaR</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<a href="https://github.com/cheryl-kdio">Cheryl Kouadio</a> ©
+<script>document.write(new Date().getFullYear())</script>
+</div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/cheryl-kdio" target="_blank">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

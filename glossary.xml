@@ -15,11 +15,11 @@
 <link>https://cheryl-kdio.github.io/glossary.html</link>
 </image>
 <generator>quarto-1.6.40</generator>
-<lastBuildDate>Sun, 21 Jun 2026 20:15:39 GMT</lastBuildDate>
+<lastBuildDate>Sun, 15 Nov 2026 11:56:05 GMT</lastBuildDate>
 <item>
   <title>Calcul stochastique</title>
   <dc:creator>Cheryl KOUADIO</dc:creator>
-  <link>https://cheryl-kdio.github.io/glossary/m2mo/calcul_sto.html</link>
+  <link>https://cheryl-kdio.github.io/glossary/mathematics/stochastic-calculus.html</link>
   <description><![CDATA[ 
 
 
@@ -58,50 +58,25 @@ Extension de la formule d’Itô aux processus discontinus.
     </div>
 </div>
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="Z2xvc3Nhcnk=" data-listing-file-modified-sort="1770803094882" data-listing-reading-time-sort="5" data-listing-word-count-sort="929">
+<div class="quarto-post image-right" data-index="0" data-categories="Z2xvc3Nhcnk=" data-listing-file-modified-sort="1794741694323" data-listing-reading-time-sort="1" data-listing-word-count-sort="56">
 <div class="thumbnail">
-<p><a href="../../glossary/m2mo/derivatives.html" class="no-external"></a></p><a href="../../glossary/m2mo/derivatives.html" class="no-external">
-<!-- img(9CEB782EFEE6)[progressive=false, height=]:listing:glossary/m2mo/derivatives.html -->
-</a><p><a href="../../glossary/m2mo/derivatives.html" class="no-external"></a></p>
+<p><a href="../../glossary/mathematics/pde-and-monte-carlo.html" class="no-external"></a></p><a href="../../glossary/mathematics/pde-and-monte-carlo.html" class="no-external">
+<!-- img(9CEB782EFEE6)[progressive=false, height=]:listing:glossary/mathematics/pde-and-monte-carlo.html -->
+</a><p><a href="../../glossary/mathematics/pde-and-monte-carlo.html" class="no-external"></a></p>
 </div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="../../glossary/m2mo/derivatives.html" class="no-external">Glossary - Derivatives market</a>
+<a href="../../glossary/mathematics/pde-and-monte-carlo.html" class="no-external">Monte-Carlo/EDP</a>
 </h3>
 <div class="listing-subtitle">
-<a href="../../glossary/m2mo/derivatives.html" class="no-external"></a>
+<a href="../../glossary/mathematics/pde-and-monte-carlo.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<a href="../../glossary/m2mo/derivatives.html" class="no-external"><!-- desc(5A0113B34292)[max=175]:glossary/m2mo/derivatives.html --></a>
+<a href="../../glossary/mathematics/pde-and-monte-carlo.html" class="no-external"><!-- desc(5A0113B34292)[max=175]:glossary/mathematics/pde-and-monte-carlo.html --></a>
 </div>
 </div>
 <div class="metadata">
-<p><a href="../../glossary/m2mo/derivatives.html" class="no-external"></a></p><a href="../../glossary/m2mo/derivatives.html" class="no-external">
-<div class="listing-author">
-Cheryl KOUADIO
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="Z2xvc3Nhcnk=" data-listing-file-modified-sort="1770803249326" data-listing-reading-time-sort="1" data-listing-word-count-sort="56">
-<div class="thumbnail">
-<p><a href="../../glossary/m2mo/edp.html" class="no-external"></a></p><a href="../../glossary/m2mo/edp.html" class="no-external">
-<!-- img(9CEB782EFEE6)[progressive=false, height=]:listing:glossary/m2mo/edp.html -->
-</a><p><a href="../../glossary/m2mo/edp.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../../glossary/m2mo/edp.html" class="no-external">Monte-Carlo/EDP</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../../glossary/m2mo/edp.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="../../glossary/m2mo/edp.html" class="no-external"><!-- desc(5A0113B34292)[max=175]:glossary/m2mo/edp.html --></a>
-</div>
-</div>
-<div class="metadata">
-<p><a href="../../glossary/m2mo/edp.html" class="no-external"></a></p><a href="../../glossary/m2mo/edp.html" class="no-external">
+<p><a href="../../glossary/mathematics/pde-and-monte-carlo.html" class="no-external"></a></p><a href="../../glossary/mathematics/pde-and-monte-carlo.html" class="no-external">
 <div class="listing-author">
 Cheryl KOUADIO
 </div>
@@ -114,20 +89,211 @@ No matching items
 </div>
 </div> ]]></description>
   <category>glossary</category>
-  <guid>https://cheryl-kdio.github.io/glossary/m2mo/calcul_sto.html</guid>
-  <pubDate>Sun, 21 Jun 2026 20:15:39 GMT</pubDate>
+  <guid>https://cheryl-kdio.github.io/glossary/mathematics/stochastic-calculus.html</guid>
+  <pubDate>Sun, 15 Nov 2026 11:56:05 GMT</pubDate>
+</item>
+<item>
+  <title>Financial glossary</title>
+  <link>https://cheryl-kdio.github.io/browse/glossary/finance.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p><a href="../../browse/glossary/index.html">← Glossary &amp; mathematical foundations</a></p>
+<section id="articles" class="level2">
+<h2 class="anchored" data-anchor-id="articles">Articles</h2>
+
+
+
+</section>
+
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="listing-actions-group">
+    <div class="input-group input-group-sm quarto-listing-filter">
+      <span class="input-group-text"><i class="bi bi-search"></i></span>
+      <input type="text" class="search form-control" placeholder="Filter">
+    </div>
+</div>
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="Z2xvc3Nhcnk=" data-listing-file-modified-sort="1794741694325" data-listing-reading-time-sort="5" data-listing-word-count-sort="929">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../glossary/finance/derivatives.html" class="no-external">Glossary - Derivatives market</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../glossary/finance/derivatives.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../glossary/finance/derivatives.html" class="no-external"><!-- desc(5A0113B34292)[max=175]:glossary/finance/derivatives.html --></a>
+</div>
+</div>
+<div class="metadata">
+<p><a href="../../glossary/finance/derivatives.html" class="no-external"></a></p><a href="../../glossary/finance/derivatives.html" class="no-external">
+<div class="listing-reading-time">
+5 min
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div> ]]></description>
+  <guid>https://cheryl-kdio.github.io/browse/glossary/finance.html</guid>
+  <pubDate>Sun, 15 Nov 2026 11:56:05 GMT</pubDate>
+</item>
+<item>
+  <title>Glossary &amp; mathematical foundations</title>
+  <link>https://cheryl-kdio.github.io/browse/glossary/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p><a href="../../topics.html">← All topics</a></p>
+<section id="subtopics" class="level2">
+<h2 class="anchored" data-anchor-id="subtopics">Subtopics</h2>
+<div class="subtopic-cards">
+<p><a href="../../browse/glossary/finance.html" class="subtopic-card">Financial glossary</a></p>
+<p><a href="../../browse/glossary/mathematics.html" class="subtopic-card">Mathematical foundations</a></p>
+</div>
+</section>
+<section id="articles" class="level2">
+<h2 class="anchored" data-anchor-id="articles">Articles</h2>
+
+
+
+</section>
+
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="listing-actions-group">
+    <div class="input-group input-group-sm quarto-listing-filter">
+      <span class="input-group-text"><i class="bi bi-search"></i></span>
+      <input type="text" class="search form-control" placeholder="Filter">
+    </div>
+</div>
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="Z2xvc3Nhcnk=" data-listing-file-modified-sort="1794741694324" data-listing-reading-time-sort="1" data-listing-word-count-sort="58">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../glossary/mathematics/stochastic-calculus.html" class="no-external">Calcul stochastique</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../glossary/mathematics/stochastic-calculus.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../glossary/mathematics/stochastic-calculus.html" class="no-external"><!-- desc(5A0113B34292)[max=175]:glossary/mathematics/stochastic-calculus.html --></a>
+</div>
+</div>
+<div class="metadata">
+<p><a href="../../glossary/mathematics/stochastic-calculus.html" class="no-external"></a></p><a href="../../glossary/mathematics/stochastic-calculus.html" class="no-external">
+<div class="listing-reading-time">
+1 min
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-listing-file-modified-sort="1794741895224" data-listing-reading-time-sort="1" data-listing-word-count-sort="5">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../browse/glossary/finance.html" class="no-external">Financial glossary</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../browse/glossary/finance.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../browse/glossary/finance.html" class="no-external"><!-- desc(5A0113B34292)[max=175]:browse/glossary/finance.html --></a>
+</div>
+</div>
+<div class="metadata">
+<p><a href="../../browse/glossary/finance.html" class="no-external"></a></p><a href="../../browse/glossary/finance.html" class="no-external">
+<div class="listing-reading-time">
+1 min
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="2" data-categories="Z2xvc3Nhcnk=" data-listing-file-modified-sort="1794741694325" data-listing-reading-time-sort="5" data-listing-word-count-sort="929">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../glossary/finance/derivatives.html" class="no-external">Glossary - Derivatives market</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../glossary/finance/derivatives.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../glossary/finance/derivatives.html" class="no-external"><!-- desc(5A0113B34292)[max=175]:glossary/finance/derivatives.html --></a>
+</div>
+</div>
+<div class="metadata">
+<p><a href="../../glossary/finance/derivatives.html" class="no-external"></a></p><a href="../../glossary/finance/derivatives.html" class="no-external">
+<div class="listing-reading-time">
+5 min
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="3" data-listing-file-modified-sort="1794741895224" data-listing-reading-time-sort="1" data-listing-word-count-sort="5">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../browse/glossary/mathematics.html" class="no-external">Mathematical foundations</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../browse/glossary/mathematics.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../browse/glossary/mathematics.html" class="no-external"><!-- desc(5A0113B34292)[max=175]:browse/glossary/mathematics.html --></a>
+</div>
+</div>
+<div class="metadata">
+<p><a href="../../browse/glossary/mathematics.html" class="no-external"></a></p><a href="../../browse/glossary/mathematics.html" class="no-external">
+<div class="listing-reading-time">
+1 min
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="4" data-categories="Z2xvc3Nhcnk=" data-listing-file-modified-sort="1794741694323" data-listing-reading-time-sort="1" data-listing-word-count-sort="56">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../glossary/mathematics/pde-and-monte-carlo.html" class="no-external">Monte-Carlo/EDP</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../glossary/mathematics/pde-and-monte-carlo.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../glossary/mathematics/pde-and-monte-carlo.html" class="no-external"><!-- desc(5A0113B34292)[max=175]:glossary/mathematics/pde-and-monte-carlo.html --></a>
+</div>
+</div>
+<div class="metadata">
+<p><a href="../../glossary/mathematics/pde-and-monte-carlo.html" class="no-external"></a></p><a href="../../glossary/mathematics/pde-and-monte-carlo.html" class="no-external">
+<div class="listing-reading-time">
+1 min
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div> ]]></description>
+  <guid>https://cheryl-kdio.github.io/browse/glossary/</guid>
+  <pubDate>Sun, 15 Nov 2026 11:56:05 GMT</pubDate>
 </item>
 <item>
   <title>Glossary - Derivatives market</title>
   <dc:creator>Cheryl KOUADIO</dc:creator>
-  <link>https://cheryl-kdio.github.io/glossary/m2mo/derivatives.html</link>
+  <link>https://cheryl-kdio.github.io/glossary/finance/derivatives.html</link>
   <description><![CDATA[ 
 
 
 
 
 <section id="fondements" class="level1">
-<h1>Fondements</h1>
+
 <dl>
 <dt><span id="acro-arbitrage" class="acronym-item">Arbitrage</span></dt>
 <dd>
@@ -362,52 +528,76 @@ Stratégie <img src="https://latex.codecogs.com/png.latex?(%5Cdelta%5E0_t,%20%5C
     </div>
 </div>
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="Z2xvc3Nhcnk=" data-listing-file-modified-sort="1770803198640" data-listing-reading-time-sort="1" data-listing-word-count-sort="58">
-<div class="thumbnail">
-<p><a href="../../glossary/m2mo/calcul_sto.html" class="no-external"></a></p><a href="../../glossary/m2mo/calcul_sto.html" class="no-external">
-<!-- img(9CEB782EFEE6)[progressive=false, height=]:listing:glossary/m2mo/calcul_sto.html -->
-</a><p><a href="../../glossary/m2mo/calcul_sto.html" class="no-external"></a></p>
+
 </div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div> ]]></description>
+  <category>glossary</category>
+  <guid>https://cheryl-kdio.github.io/glossary/finance/derivatives.html</guid>
+  <pubDate>Sun, 15 Nov 2026 11:56:05 GMT</pubDate>
+</item>
+<item>
+  <title>Mathematical foundations</title>
+  <link>https://cheryl-kdio.github.io/browse/glossary/mathematics.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p><a href="../../browse/glossary/index.html">← Glossary &amp; mathematical foundations</a></p>
+<section id="articles" class="level2">
+<h2 class="anchored" data-anchor-id="articles">Articles</h2>
+
+
+
+</section>
+
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="listing-actions-group">
+    <div class="input-group input-group-sm quarto-listing-filter">
+      <span class="input-group-text"><i class="bi bi-search"></i></span>
+      <input type="text" class="search form-control" placeholder="Filter">
+    </div>
+</div>
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="Z2xvc3Nhcnk=" data-listing-file-modified-sort="1794741694324" data-listing-reading-time-sort="1" data-listing-word-count-sort="58">
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="../../glossary/m2mo/calcul_sto.html" class="no-external">Calcul stochastique</a>
+<a href="../../glossary/mathematics/stochastic-calculus.html" class="no-external">Calcul stochastique</a>
 </h3>
 <div class="listing-subtitle">
-<a href="../../glossary/m2mo/calcul_sto.html" class="no-external"></a>
+<a href="../../glossary/mathematics/stochastic-calculus.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<a href="../../glossary/m2mo/calcul_sto.html" class="no-external"><!-- desc(5A0113B34292)[max=175]:glossary/m2mo/calcul_sto.html --></a>
+<a href="../../glossary/mathematics/stochastic-calculus.html" class="no-external"><!-- desc(5A0113B34292)[max=175]:glossary/mathematics/stochastic-calculus.html --></a>
 </div>
 </div>
 <div class="metadata">
-<p><a href="../../glossary/m2mo/calcul_sto.html" class="no-external"></a></p><a href="../../glossary/m2mo/calcul_sto.html" class="no-external">
-<div class="listing-author">
-Cheryl KOUADIO
+<p><a href="../../glossary/mathematics/stochastic-calculus.html" class="no-external"></a></p><a href="../../glossary/mathematics/stochastic-calculus.html" class="no-external">
+<div class="listing-reading-time">
+1 min
 </div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-categories="Z2xvc3Nhcnk=" data-listing-file-modified-sort="1770803249326" data-listing-reading-time-sort="1" data-listing-word-count-sort="56">
-<div class="thumbnail">
-<p><a href="../../glossary/m2mo/edp.html" class="no-external"></a></p><a href="../../glossary/m2mo/edp.html" class="no-external">
-<!-- img(9CEB782EFEE6)[progressive=false, height=]:listing:glossary/m2mo/edp.html -->
-</a><p><a href="../../glossary/m2mo/edp.html" class="no-external"></a></p>
-</div>
+<div class="quarto-post image-right" data-index="1" data-categories="Z2xvc3Nhcnk=" data-listing-file-modified-sort="1794741694323" data-listing-reading-time-sort="1" data-listing-word-count-sort="56">
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="../../glossary/m2mo/edp.html" class="no-external">Monte-Carlo/EDP</a>
+<a href="../../glossary/mathematics/pde-and-monte-carlo.html" class="no-external">Monte-Carlo/EDP</a>
 </h3>
 <div class="listing-subtitle">
-<a href="../../glossary/m2mo/edp.html" class="no-external"></a>
+<a href="../../glossary/mathematics/pde-and-monte-carlo.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<a href="../../glossary/m2mo/edp.html" class="no-external"><!-- desc(5A0113B34292)[max=175]:glossary/m2mo/edp.html --></a>
+<a href="../../glossary/mathematics/pde-and-monte-carlo.html" class="no-external"><!-- desc(5A0113B34292)[max=175]:glossary/mathematics/pde-and-monte-carlo.html --></a>
 </div>
 </div>
 <div class="metadata">
-<p><a href="../../glossary/m2mo/edp.html" class="no-external"></a></p><a href="../../glossary/m2mo/edp.html" class="no-external">
-<div class="listing-author">
-Cheryl KOUADIO
+<p><a href="../../glossary/mathematics/pde-and-monte-carlo.html" class="no-external"></a></p><a href="../../glossary/mathematics/pde-and-monte-carlo.html" class="no-external">
+<div class="listing-reading-time">
+1 min
 </div>
 </a>
 </div>
@@ -417,14 +607,13 @@ Cheryl KOUADIO
 No matching items
 </div>
 </div> ]]></description>
-  <category>glossary</category>
-  <guid>https://cheryl-kdio.github.io/glossary/m2mo/derivatives.html</guid>
-  <pubDate>Sun, 21 Jun 2026 20:15:39 GMT</pubDate>
+  <guid>https://cheryl-kdio.github.io/browse/glossary/mathematics.html</guid>
+  <pubDate>Sun, 15 Nov 2026 11:56:05 GMT</pubDate>
 </item>
 <item>
   <title>Monte-Carlo/EDP</title>
   <dc:creator>Cheryl KOUADIO</dc:creator>
-  <link>https://cheryl-kdio.github.io/glossary/m2mo/edp.html</link>
+  <link>https://cheryl-kdio.github.io/glossary/mathematics/pde-and-monte-carlo.html</link>
   <description><![CDATA[ 
 
 
@@ -467,50 +656,25 @@ Estimation des paramètres d’un modèle pour reproduire les prix de marché.
     </div>
 </div>
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="Z2xvc3Nhcnk=" data-listing-file-modified-sort="1770803198640" data-listing-reading-time-sort="1" data-listing-word-count-sort="58">
+<div class="quarto-post image-right" data-index="0" data-categories="Z2xvc3Nhcnk=" data-listing-file-modified-sort="1794741694324" data-listing-reading-time-sort="1" data-listing-word-count-sort="58">
 <div class="thumbnail">
-<p><a href="../../glossary/m2mo/calcul_sto.html" class="no-external"></a></p><a href="../../glossary/m2mo/calcul_sto.html" class="no-external">
-<!-- img(9CEB782EFEE6)[progressive=false, height=]:listing:glossary/m2mo/calcul_sto.html -->
-</a><p><a href="../../glossary/m2mo/calcul_sto.html" class="no-external"></a></p>
+<p><a href="../../glossary/mathematics/stochastic-calculus.html" class="no-external"></a></p><a href="../../glossary/mathematics/stochastic-calculus.html" class="no-external">
+<!-- img(9CEB782EFEE6)[progressive=false, height=]:listing:glossary/mathematics/stochastic-calculus.html -->
+</a><p><a href="../../glossary/mathematics/stochastic-calculus.html" class="no-external"></a></p>
 </div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="../../glossary/m2mo/calcul_sto.html" class="no-external">Calcul stochastique</a>
+<a href="../../glossary/mathematics/stochastic-calculus.html" class="no-external">Calcul stochastique</a>
 </h3>
 <div class="listing-subtitle">
-<a href="../../glossary/m2mo/calcul_sto.html" class="no-external"></a>
+<a href="../../glossary/mathematics/stochastic-calculus.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<a href="../../glossary/m2mo/calcul_sto.html" class="no-external"><!-- desc(5A0113B34292)[max=175]:glossary/m2mo/calcul_sto.html --></a>
+<a href="../../glossary/mathematics/stochastic-calculus.html" class="no-external"><!-- desc(5A0113B34292)[max=175]:glossary/mathematics/stochastic-calculus.html --></a>
 </div>
 </div>
 <div class="metadata">
-<p><a href="../../glossary/m2mo/calcul_sto.html" class="no-external"></a></p><a href="../../glossary/m2mo/calcul_sto.html" class="no-external">
-<div class="listing-author">
-Cheryl KOUADIO
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="Z2xvc3Nhcnk=" data-listing-file-modified-sort="1770803094882" data-listing-reading-time-sort="5" data-listing-word-count-sort="929">
-<div class="thumbnail">
-<p><a href="../../glossary/m2mo/derivatives.html" class="no-external"></a></p><a href="../../glossary/m2mo/derivatives.html" class="no-external">
-<!-- img(9CEB782EFEE6)[progressive=false, height=]:listing:glossary/m2mo/derivatives.html -->
-</a><p><a href="../../glossary/m2mo/derivatives.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../../glossary/m2mo/derivatives.html" class="no-external">Glossary - Derivatives market</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../../glossary/m2mo/derivatives.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="../../glossary/m2mo/derivatives.html" class="no-external"><!-- desc(5A0113B34292)[max=175]:glossary/m2mo/derivatives.html --></a>
-</div>
-</div>
-<div class="metadata">
-<p><a href="../../glossary/m2mo/derivatives.html" class="no-external"></a></p><a href="../../glossary/m2mo/derivatives.html" class="no-external">
+<p><a href="../../glossary/mathematics/stochastic-calculus.html" class="no-external"></a></p><a href="../../glossary/mathematics/stochastic-calculus.html" class="no-external">
 <div class="listing-author">
 Cheryl KOUADIO
 </div>
@@ -523,8 +687,8 @@ No matching items
 </div>
 </div> ]]></description>
   <category>glossary</category>
-  <guid>https://cheryl-kdio.github.io/glossary/m2mo/edp.html</guid>
-  <pubDate>Sun, 21 Jun 2026 20:15:39 GMT</pubDate>
+  <guid>https://cheryl-kdio.github.io/glossary/mathematics/pde-and-monte-carlo.html</guid>
+  <pubDate>Sun, 15 Nov 2026 11:56:05 GMT</pubDate>
 </item>
 </channel>
 </rss>
