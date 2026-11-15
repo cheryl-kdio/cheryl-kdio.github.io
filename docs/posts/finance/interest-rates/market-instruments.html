@@ -313,8 +313,8 @@ window.Quarto = {
   <li><a href="#different-types-of-interest-rates" id="toc-different-types-of-interest-rates" class="nav-link active" data-scroll-target="#different-types-of-interest-rates">Different types of interest rates</a></li>
   <li><a href="#link-between-the-zero-coupon-bond-price-and-the-interest-rates" id="toc-link-between-the-zero-coupon-bond-price-and-the-interest-rates" class="nav-link" data-scroll-target="#link-between-the-zero-coupon-bond-price-and-the-interest-rates">Link between the Zero-coupon bond price and the interest rates</a>
   <ul class="collapse">
-  <li><a href="#zero-coupon-bond-price-and-simple-spot-interest-rate" id="toc-zero-coupon-bond-price-and-simple-spot-interest-rate" class="nav-link" data-scroll-target="#zero-coupon-bond-price-and-simple-spot-interest-rate">Zero-coupon bond price and simple spot interest rate</a></li>
-  <li><a href="#zero-coupon-bond-price-and-simple-forward-interest-rate" id="toc-zero-coupon-bond-price-and-simple-forward-interest-rate" class="nav-link" data-scroll-target="#zero-coupon-bond-price-and-simple-forward-interest-rate">Zero-coupon bond price and simple forward interest rate</a></li>
+  <li><a href="#link-with-the-simple-spot-interest-rate" id="toc-link-with-the-simple-spot-interest-rate" class="nav-link" data-scroll-target="#link-with-the-simple-spot-interest-rate">Link with the simple spot interest rate</a></li>
+  <li><a href="#link-with-the-simple-forward-interest-rate" id="toc-link-with-the-simple-forward-interest-rate" class="nav-link" data-scroll-target="#link-with-the-simple-forward-interest-rate">Link with the simple forward interest rate</a></li>
   </ul></li>
   <li><a href="#rates-derivatives" id="toc-rates-derivatives" class="nav-link" data-scroll-target="#rates-derivatives">Rates derivatives</a>
   <ul class="collapse">
@@ -399,9 +399,10 @@ What is a zero-coupon bond?
 <p>A zero-coupon bond is a debt security that does not pay periodic interest (coupons). Instead, it is issued at a discount to its face value and pays its full face value at maturity. If the face value is <span class="math inline">\(1\)</span>, its price at time <span class="math inline">\(t\)</span> for maturity <span class="math inline">\(T\)</span> is denoted <span class="math inline">\(B(t,T)\)</span>.</p>
 </div>
 </div>
-<section id="zero-coupon-bond-price-and-simple-spot-interest-rate" class="level2">
-<h2 class="anchored" data-anchor-id="zero-coupon-bond-price-and-simple-spot-interest-rate">Zero-coupon bond price and simple spot interest rate</h2>
-<p>Assume we pay <span class="math inline">\(B(t,T)\)</span> at time <span class="math inline">\(t\)</span> to buy a zero-coupon bond that will pay <span class="math inline">\(1\)</span> at maturity <span class="math inline">\(T\)</span>. Hence, <span class="math inline">\(B(t,T) \mapsto 1\)</span> at maturity <span class="math inline">\(T\)</span>. Alternatively, we can invest <span class="math inline">\(B(t,T)\)</span> in the money market account that pays the simple spot rate <span class="math inline">\(L(t,T)\)</span>. At maturity <span class="math inline">\(T\)</span>, we obtain <span class="math inline">\(B(t,T)(1 + (T-t)L(t,T))\)</span>. Since we are in a no-arbitrage framework, we must have the same payoff at maturity <span class="math inline">\(T\)</span> for both strategies, which implies <span class="math inline">\(1 = B(t,T)(1 + (T-t)L(t,T))\)</span>. Hence, we deduce the following link between the zero-coupon bond price and the simple spot interest rate:</p>
+<section id="link-with-the-simple-spot-interest-rate" class="level2">
+<h2 class="anchored" data-anchor-id="link-with-the-simple-spot-interest-rate">Link with the simple spot interest rate</h2>
+<p>Assume we pay <span class="math inline">\(B(t,T)\)</span> at time <span class="math inline">\(t\)</span> to buy a zero-coupon bond that will pay <span class="math inline">\(1\)</span> at maturity <span class="math inline">\(T\)</span>. Hence, <span class="math inline">\(B(t,T) \mapsto 1\)</span> at maturity <span class="math inline">\(T\)</span>. Alternatively, we can invest <span class="math inline">\(B(t,T)\)</span> in the money market account that pays the simple spot rate <span class="math inline">\(L(t,T)\)</span>. At maturity <span class="math inline">\(T\)</span>, we obtain <span class="math inline">\(B(t,T)(1 + (T-t)L(t,T))\)</span>.</p>
+<p>Since we are in a no-arbitrage framework, we must have the same payoff at maturity <span class="math inline">\(T\)</span> for both strategies, which implies <span class="math inline">\(1 = B(t,T)(1 + (T-t)L(t,T))\)</span>. Hence, we deduce the following link between the zero-coupon bond price and the simple spot interest rate:</p>
 <p><span class="math display">\[
 L(t,T) = \frac{1}{T-t} \left( \frac{1}{B(t,T)} - 1 \right).
 \]</span></p>
@@ -424,9 +425,36 @@ The yield curve or the term structure of interest rates
 </div>
 </div>
 </section>
-<section id="zero-coupon-bond-price-and-simple-forward-interest-rate" class="level2">
-<h2 class="anchored" data-anchor-id="zero-coupon-bond-price-and-simple-forward-interest-rate">Zero-coupon bond price and simple forward interest rate</h2>
-<p>The forward rate is the rate that can be locked at time <span class="math inline">\(t\)</span> for a loan starting at date <span class="math inline">\(T\)</span> and ending at date <span class="math inline">\(S\)</span>. At time <span class="math inline">\(t\)</span>, one can invest in a zero-coupon bond maturing at <span class="math inline">\(S\)</span> and obtain <span class="math inline">\(B(t,S) \mapsto 1\)</span> at maturity <span class="math inline">\(S\)</span>. Alternatively, one can invest in a zero-coupon bond maturing at <span class="math inline">\(T\)</span>, obtain <span class="math inline">\(B(t,T) \mapsto 1\)</span> at time <span class="math inline">\(T\)</span>, and then reinvest the proceeds from <span class="math inline">\(T\)</span> to <span class="math inline">\(S\)</span> at the forward rate <span class="math inline">\(L(t;T,S)\)</span>. At maturity <span class="math inline">\(S\)</span>, this yields <span class="math inline">\(1 + (S-T)L(t;T,S)\)</span>. Under no-arbitrage, we must have <span class="math inline">\(B(t,S) = B(t,T)\frac{1}{1 + (S-T)L(t;T,S)}\)</span>. Hence, <span class="math display">\[
+<section id="link-with-the-simple-forward-interest-rate" class="level2">
+<h2 class="anchored" data-anchor-id="link-with-the-simple-forward-interest-rate">Link with the simple forward interest rate</h2>
+<p>The forward rate is the rate that can be locked at time <span class="math inline">\(t\)</span> for a loan starting at date <span class="math inline">\(T\)</span> and ending at date <span class="math inline">\(S\)</span>. To derive the forward rate from zero-coupon bond prices, consider two strategies over the period <span class="math inline">\([T,S]\)</span>, with <span class="math inline">\(t \leq T &lt; S\)</span>.</p>
+<p><strong>Strategy 1: A portfolio of zero-coupon bonds</strong></p>
+<p>At time <span class="math inline">\(t\)</span>:</p>
+<ol type="1">
+<li>Sell one zero-coupon bond maturing at <span class="math inline">\(T\)</span>. You receive <span class="math inline">\(B(t,T)\)</span> today and must pay <span class="math inline">\(1\)</span> at time <span class="math inline">\(T\)</span>.</li>
+<li>Use the proceeds to buy <span class="math inline">\(\frac{B(t,T)}{B(t,S)}\)</span> zero-coupon bonds maturing at <span class="math inline">\(S\)</span>.</li>
+</ol>
+<p>The initial net investment is zero. The subsequent cash flows are:</p>
+<pre class="text"><code>Strategy 1: Zero-coupon bond portfolio
+
+
+        t                         T                         S
+────────┼─────────────────────────┼─────────────────────────┼────────▶
+        │                         │                         │
+   Net cash flow: 0             Pay: 1              Receive:+B(t,T)/B(t,S)
+</code></pre>
+<p><strong>Strategy 2: A forward lending agreement</strong></p>
+<p>At time <span class="math inline">\(t\)</span>, agree to lend <span class="math inline">\(1\)</span> at time <span class="math inline">\(T\)</span> until time <span class="math inline">\(S\)</span>, at the forward rate <span class="math inline">\(L(t;T,S)\)</span>.</p>
+<p>This agreement requires no initial payment and generates:</p>
+<pre class="text"><code>Strategy 2: Forward lending agreement
+
+        t                         T                         S
+────────┼─────────────────────────┼─────────────────────────┼────────▶
+        │                         │                         │
+   Net cash flow: 0             Pay: 1              Receive:+1 + (S−T)L(t;T,S)</code></pre>
+<p><strong>No-arbitrage condition</strong></p>
+<p>Both strategies require zero initial investment and the same payment at <span class="math inline">\(T\)</span>. Their payments at <span class="math inline">\(S\)</span> must therefore coincide; otherwise, taking opposite positions in the two strategies would create an arbitrage. Thus, <span class="math inline">\(1+(S-T)L(t;T,S)=\frac{B(t,T)}{B(t,S)}.\)</span></p>
+<p>The simply compounded forward rate is consequently : <span class="math display">\[
 L(t; T,S) = \frac{1}{S-T} \left( \frac{B(t,T)}{B(t,S)} - 1 \right).
 \]</span></p>
 <p>The instantaneous forward rate satisfies <span class="math inline">\(f(t,T) = -\frac{\partial}{\partial T} \ln B(t,T)\)</span>. Moreover,<span class="math inline">\(B(t,T) = e^{-\int_t^T f(t,u) du}.\)</span></p>

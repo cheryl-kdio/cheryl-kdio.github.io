@@ -42,10 +42,11 @@ A zero-coupon bond is a debt security that does not pay periodic interest (coupo
 If the face value is $1$, its price at time $t$ for maturity $T$ is denoted $B(t,T)$.
 :::
 
-## Zero-coupon bond price and simple spot interest rate
+## Link with the simple spot interest rate
 
 Assume we pay $B(t,T)$ at time $t$ to buy a zero-coupon bond that will pay $1$ at maturity $T$. Hence, $B(t,T) \mapsto 1$ at maturity $T$.
 Alternatively, we can invest $B(t,T)$ in the money market account that pays the simple spot rate $L(t,T)$. At maturity $T$, we obtain $B(t,T)(1 + (T-t)L(t,T))$.
+
 Since we are in a no-arbitrage framework, we must have the same payoff at maturity $T$ for both strategies, which implies $1 = B(t,T)(1 + (T-t)L(t,T))$.
 Hence, we deduce the following link between the zero-coupon bond price and the simple spot interest rate:
 
@@ -68,13 +69,50 @@ The yield curve is a graphical representation of the relationship between intere
 For each date $t$, we can build a yield curve using market instruments (bonds, FRA, swaps, etc.) and use it to price interest rate derivatives.
 :::
 
-## Zero-coupon bond price and simple forward interest rate
+## Link with the simple forward interest rate
 
 The forward rate is the rate that can be locked at time $t$ for a loan starting at date $T$ and ending at date $S$.
-At time $t$, one can invest in a zero-coupon bond maturing at $S$ and obtain $B(t,S) \mapsto 1$ at maturity $S$.
-Alternatively, one can invest in a zero-coupon bond maturing at $T$, obtain $B(t,T) \mapsto 1$ at time $T$, and then reinvest the proceeds from $T$ to $S$ at the forward rate $L(t;T,S)$. At maturity $S$, this yields $1 + (S-T)L(t;T,S)$.
-Under no-arbitrage, we must have $B(t,S) = B(t,T)\frac{1}{1 + (S-T)L(t;T,S)}$.
-Hence,
+To derive the forward rate from zero-coupon bond prices, consider two strategies over the period $[T,S]$, with $t \leq T < S$.
+
+**Strategy 1: A portfolio of zero-coupon bonds**
+
+At time $t$:
+
+1. Sell one zero-coupon bond maturing at $T$. You receive $B(t,T)$ today and must pay $1$ at time $T$.
+2. Use the proceeds to buy $\frac{B(t,T)}{B(t,S)}$ zero-coupon bonds maturing at $S$.
+
+The initial net investment is zero. The subsequent cash flows are: 
+```text
+Strategy 1: Zero-coupon bond portfolio
+
+
+        t                         T                         S
+────────┼─────────────────────────┼─────────────────────────┼────────▶
+        │                         │                         │
+   Net cash flow: 0             Pay: 1              Receive:+B(t,T)/B(t,S)
+
+```
+
+**Strategy 2: A forward lending agreement**
+
+At time $t$, agree to lend $1$ at time $T$ until time $S$, at the forward rate $L(t;T,S)$.
+
+This agreement requires no initial payment and generates:
+
+```text
+Strategy 2: Forward lending agreement
+
+        t                         T                         S
+────────┼─────────────────────────┼─────────────────────────┼────────▶
+        │                         │                         │
+   Net cash flow: 0             Pay: 1              Receive:+1 + (S−T)L(t;T,S)
+```
+**No-arbitrage condition**
+
+Both strategies require zero initial investment and the same payment at $T$. Their payments at $S$ must therefore coincide; otherwise, taking opposite positions in the two strategies would create an arbitrage.
+Thus, $1+(S-T)L(t;T,S)=\frac{B(t,T)}{B(t,S)}.$
+
+The simply compounded forward rate is consequently :
 $$
 L(t; T,S) = \frac{1}{S-T} \left( \frac{B(t,T)}{B(t,S)} - 1 \right).
 $$
