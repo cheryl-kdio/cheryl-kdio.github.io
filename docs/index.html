@@ -41,7 +41,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-3146a0984a964146c28da0a2cf78b9ad.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-703ddb58be2784256fbaab8b7c9be161.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -78,7 +78,7 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-image','listing-date','listing-title','listing-subtitle',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-date','listing-title','listing-subtitle','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       page: 6,
     pagination: { item: "<li class='page-item'><a class='page page-link' href='#'></a></li>" },
       searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description"],
@@ -154,18 +154,14 @@ window.Quarto = {
 Université Paris Cité
 Faculty of Mathematics and Applications
 Paris, France">
-<meta property="og:image" content="https://cheryl-kdio.github.io/posts/m2mo/yield_curves/covers/yield_curves.png">
+<meta property="og:image" content="https://cheryl-kdio.github.io/files/profile/kouadio_profile.jpeg">
 <meta property="og:site_name" content="Cheryl Kouadio">
-<meta property="og:image:height" content="1194">
-<meta property="og:image:width" content="1603">
 <meta name="twitter:title" content="Cheryl Kouadio, Msc – Cheryl Kouadio">
 <meta name="twitter:description" content="Master’s Student in Stochastic Modeling and Quantitative Finance
 Université Paris Cité
 Faculty of Mathematics and Applications
 Paris, France">
-<meta name="twitter:image" content="https://cheryl-kdio.github.io/posts/m2mo/yield_curves/covers/yield_curves.png">
-<meta name="twitter:image-height" content="1194">
-<meta name="twitter:image-width" content="1603">
+<meta name="twitter:image" content="https://cheryl-kdio.github.io/files/profile/kouadio_profile.jpeg">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -211,23 +207,31 @@ Paris, France">
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-articles">    
         <li>
+    <a class="dropdown-item" href="./topics.html">
+ <span class="dropdown-text">Browse by topic</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./posts.html">
+ <span class="dropdown-text">All articles</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="./publications.html">
  <span class="dropdown-text">Reports</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./posts.html#category=paper">
- <span class="dropdown-text">All papers</span></a>
-  </li>  
-        <li>
     <a class="dropdown-item" href="./posts.html#category=ensai-gdr">
- <span class="dropdown-text">Ensai</span></a>
+ <span class="dropdown-text">ENSAI coursework</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./posts.html#category=m2mo">
- <span class="dropdown-text">M2MO</span></a>
+ <span class="dropdown-text">M2MO coursework</span></a>
   </li>  
     </ul>
   </li>
+  <li class="nav-item">
+    <a class="nav-link" href="./notes.html"> 
+<span class="menu-text">Notes</span></a>
+  </li>  
   <li class="nav-item">
     <a class="nav-link" href="./glossary.html"> 
 <span class="menu-text">Glossary</span></a>
@@ -314,14 +318,19 @@ Hi there! 🤗
 </div></div>
 </div>
 
-<section id="recent-posts" class="level2">
-<h2 data-anchor-id="recent-posts">Recent Posts</h2>
+<div>
+<h2>
+Recent Posts
+</h2>
+<p align="right">
+<a href="./topics.html">Browse by topic»</a>
+</p>
+</div>
 <div id="listing-recent-posts" class="quarto-listing quarto-listing-container-grid">
 <div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-categories="ZGVyaXZhdGl2ZXMlMkNwcmljaW5nJTJDZmluYW5jZQ==" data-listing-date-sort="1794738679000" data-listing-file-modified-sort="1794738679281" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="962">
-<a href="./posts/m2mo/derivatives/basics_pricing.html" class="quarto-grid-link">
+<div class="g-col-1" data-index="0" data-categories="ZGVyaXZhdGl2ZXMlMkNwcmljaW5nJTJDZmluYW5jZSUyQ3BhcGVyJTJDbTJtbw==" data-listing-date-sort="1794739928000" data-listing-file-modified-sort="1794739928022" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="962">
+<a href="./posts/finance/derivatives/pricing-basics.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
-<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
 Basics of Derivative Pricing
@@ -329,6 +338,23 @@ Basics of Derivative Pricing
 <div class="card-subtitle listing-subtitle">
 Financial Derivatives
 </div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('ZGVyaXZhdGl2ZXM='); return false;">
+derivatives
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('cHJpY2luZw=='); return false;">
+pricing
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('ZmluYW5jZQ=='); return false;">
+finance
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('cGFwZXI='); return false;">
+paper
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('bTJtbw=='); return false;">
+m2mo
+</div>
+</div>
 <div class="card-attribution card-text-small end">
 <div class="listing-date">
 Nov 15, 2026
@@ -338,33 +364,29 @@ Nov 15, 2026
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="1" data-categories="YXNzZXQtbWFuYWdlbWVudCUyQ3BvcnRmb2xpby1vcHRpbWl6YXRpb24lMkNmaW5hbmNl" data-listing-date-sort="1794697298000" data-listing-file-modified-sort="1794697298012" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="236">
-<a href="./posts/asset_management/markowitz_model.html" class="quarto-grid-link">
+<div class="g-col-1" data-index="1" data-categories="cGFwZXIlMkNtMm1vJTJDb3B0aW9ucyUyQ3ZvbGF0aWxpdHk=" data-listing-date-sort="1781992800000" data-listing-file-modified-sort="1794739447045" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="16" data-listing-word-count-sort="3122">
+<a href="./posts/finance/volatility/stochastic-local-volatility.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
-<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Markowitz Model
-</h5>
-<div class="card-attribution card-text-small end">
-<div class="listing-date">
-Nov 15, 2026
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="2" data-categories="cGFwZXIlMkNtMm1vJTJDb3B0aW9ucw==" data-listing-date-sort="1781992800000" data-listing-file-modified-sort="1793135015859" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="16" data-listing-word-count-sort="3122">
-<a href="./posts/m2mo/vol/implied_vol.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="posts/m2mo/vol/slv_paths.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
 Particle method for stochastic local volatility valibration
 </h5>
 <div class="card-subtitle listing-subtitle">
 A numerical implementation of Guyon &amp; Henry-Labordère (2011)
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('cGFwZXI='); return false;">
+paper
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('bTJtbw=='); return false;">
+m2mo
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('b3B0aW9ucw=='); return false;">
+options
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('dm9sYXRpbGl0eQ=='); return false;">
+volatility
+</div>
 </div>
 <div class="card-attribution card-text-small end">
 <div class="listing-date">
@@ -375,12 +397,9 @@ Jun 21, 2026
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="3" data-categories="cGFwZXIlMkNtMm1vJTJDcmF0ZXM=" data-listing-date-sort="1777759200000" data-listing-file-modified-sort="1777833885077" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1090">
-<a href="./posts/m2mo/yield_curves/interest_rates_made_simple.html" class="quarto-grid-link">
+<div class="g-col-1" data-index="2" data-categories="cGFwZXIlMkNtMm1vJTJDcmF0ZXMlMkNpbnRlcmVzdC1yYXRlcw==" data-listing-date-sort="1777759200000" data-listing-file-modified-sort="1794739363169" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1090">
+<a href="./posts/finance/interest-rates/interest-rates-made-simple.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top">
-<img loading="lazy" src="./posts/m2mo/yield_curves/covers/yield_curves.png" class="thumbnail-image card-img" style="height: 150px;">
-</p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
 Interest rates made simple
@@ -388,6 +407,20 @@ Interest rates made simple
 <div class="card-subtitle listing-subtitle">
 Term structure interest rate modelling
 </div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('cGFwZXI='); return false;">
+paper
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('bTJtbw=='); return false;">
+m2mo
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('cmF0ZXM='); return false;">
+rates
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('aW50ZXJlc3QtcmF0ZXM='); return false;">
+interest-rates
+</div>
+</div>
 <div class="card-attribution card-text-small end">
 <div class="listing-date">
 May 3, 2026
@@ -397,12 +430,9 @@ May 3, 2026
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="4" data-categories="cGFwZXIlMkNtMm1vJTJDb3B0aW9ucw==" data-listing-date-sort="1777759200000" data-listing-file-modified-sort="1777813007459" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1334">
-<a href="./posts/m2mo/derivatives/03_options_made_simple.html" class="quarto-grid-link">
+<div class="g-col-1" data-index="3" data-categories="cGFwZXIlMkNtMm1vJTJDb3B0aW9ucyUyQ2Rlcml2YXRpdmVz" data-listing-date-sort="1777759200000" data-listing-file-modified-sort="1794739447047" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1334">
+<a href="./posts/finance/derivatives/options-made-simple.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top">
-<img loading="lazy" src="./posts/m2mo/derivatives/featured.png" class="thumbnail-image card-img" style="height: 150px;">
-</p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
 Options made simple: what they are and why they matter and how do we price them?
@@ -410,6 +440,20 @@ Options made simple: what they are and why they matter and how do we price them?
 <div class="card-subtitle listing-subtitle">
 A practical introduction to derivatives pricing
 </div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('cGFwZXI='); return false;">
+paper
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('bTJtbw=='); return false;">
+m2mo
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('b3B0aW9ucw=='); return false;">
+options
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('ZGVyaXZhdGl2ZXM='); return false;">
+derivatives
+</div>
+</div>
 <div class="card-attribution card-text-small end">
 <div class="listing-date">
 May 3, 2026
@@ -419,18 +463,29 @@ May 3, 2026
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="5" data-categories="cGFwZXIlMkNtMm1vJTJDcmF0ZXM=" data-listing-date-sort="1771023600000" data-listing-file-modified-sort="1777803992724" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1059">
-<a href="./posts/m2mo/yield_curves/00_intro_yield_curve.html" class="quarto-grid-link">
+<div class="g-col-1" data-index="4" data-categories="cGFwZXIlMkNtMm1vJTJDcmF0ZXMlMkNpbnRlcmVzdC1yYXRlcw==" data-listing-date-sort="1771023600000" data-listing-file-modified-sort="1794739447048" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1059">
+<a href="./posts/finance/interest-rates/market-instruments.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top">
-<img loading="lazy" src="./posts/m2mo/yield_curves/covers/rates_types_cover.png" class="thumbnail-image card-img" style="height: 150px;">
-</p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
 Interest rates market - Key instruments
 </h5>
 <div class="card-subtitle listing-subtitle">
 Term structure interest rate modelling
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('cGFwZXI='); return false;">
+paper
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('bTJtbw=='); return false;">
+m2mo
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('cmF0ZXM='); return false;">
+rates
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('aW50ZXJlc3QtcmF0ZXM='); return false;">
+interest-rates
+</div>
 </div>
 <div class="card-attribution card-text-small end">
 <div class="listing-date">
@@ -441,19 +496,228 @@ Feb 14, 2026
 </div>
 </a>
 </div>
+<div class="g-col-1" data-index="5" data-categories="cGFwZXIlMkNtMm1vJTJDZGVyaXZhdGl2ZXM=" data-listing-date-sort="1770678000000" data-listing-file-modified-sort="1794739363166" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="924">
+<a href="./posts/finance/derivatives/mathematical-foundations.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Mathematical foundations of financial market modeling
+</h5>
+<div class="card-subtitle listing-subtitle">
+Financial Markets
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('cGFwZXI='); return false;">
+paper
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('bTJtbw=='); return false;">
+m2mo
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('ZGVyaXZhdGl2ZXM='); return false;">
+derivatives
+</div>
+</div>
+<div class="card-attribution card-text-small end">
+<div class="listing-date">
+Feb 10, 2026
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="6" data-categories="cGFwZXIlMkNtMm1vJTJDZWRwJTJDZGVyaXZhdGl2ZXM=" data-listing-date-sort="1770505200000" data-listing-file-modified-sort="1794739363167" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="39" data-listing-word-count-sort="7677">
+<a href="./posts/finance/derivatives/numerical-methods/american-options.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Finite difference Methods for American Options
+</h5>
+<div class="card-subtitle listing-subtitle">
+EDP in finance
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('cGFwZXI='); return false;">
+paper
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('bTJtbw=='); return false;">
+m2mo
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('ZWRw'); return false;">
+edp
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('ZGVyaXZhdGl2ZXM='); return false;">
+derivatives
+</div>
+</div>
+<div class="card-attribution card-text-small end">
+<div class="listing-date">
+Feb 8, 2026
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="7" data-categories="cGFwZXIlMkNtMm1vJTJDZGVyaXZhdGl2ZXM=" data-listing-date-sort="1769900400000" data-listing-file-modified-sort="1794739363166" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1104">
+<a href="./posts/finance/derivatives/financial-markets-overview.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Introduction to financial markets
+</h5>
+<div class="card-subtitle listing-subtitle">
+Financial Markets
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('cGFwZXI='); return false;">
+paper
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('bTJtbw=='); return false;">
+m2mo
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('ZGVyaXZhdGl2ZXM='); return false;">
+derivatives
+</div>
+</div>
+<div class="card-attribution card-text-small end">
+<div class="listing-date">
+Feb 1, 2026
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="8" data-categories="cGFwZXIlMkNtMm1vJTJDZWRwJTJDZGVyaXZhdGl2ZXM=" data-listing-date-sort="1768345200000" data-listing-file-modified-sort="1794739363168" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="40" data-listing-word-count-sort="7918">
+<a href="./posts/finance/derivatives/numerical-methods/european-options.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Finite difference Methods for European Options
+</h5>
+<div class="card-subtitle listing-subtitle">
+EDP in finance
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('cGFwZXI='); return false;">
+paper
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('bTJtbw=='); return false;">
+m2mo
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('ZWRw'); return false;">
+edp
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('ZGVyaXZhdGl2ZXM='); return false;">
+derivatives
+</div>
+</div>
+<div class="card-attribution card-text-small end">
+<div class="listing-date">
+Jan 14, 2026
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="9" data-categories="bmV3cw==" data-listing-date-sort="1765753200000">
+<a href="https://ascopubs.org/doi/10.1200/CCI-25-00084" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Detecting the Cure Model Appropriateness in Randomized Clinical Trials With Long-Term Survivors
+</h5>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('bmV3cw=='); return false;">
+news
+</div>
+</div>
+<div class="card-attribution card-text-small end">
+<div class="listing-date">
+Dec 15, 2025
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="10" data-categories="cGFwZXIlMkNhc3NldC1tYW5hZ2VtZW50JTJDZW5zYWktZ2RyJTJDcG9ydGZvbGlvLW1hbmFnZW1lbnQ=" data-listing-date-sort="1742684400000" data-listing-file-modified-sort="1794739363172" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="33" data-listing-word-count-sort="6568">
+<a href="./posts/finance/portfolio-management/practical-work/bond-valuation-risk.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Risque de valorisation d’obligation
+</h5>
+<div class="card-subtitle listing-subtitle">
+Risque de crédit
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('cGFwZXI='); return false;">
+paper
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('YXNzZXQtbWFuYWdlbWVudA=='); return false;">
+asset-management
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('ZW5zYWktZ2Ry'); return false;">
+ensai-gdr
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('cG9ydGZvbGlvLW1hbmFnZW1lbnQ='); return false;">
+portfolio-management
+</div>
+</div>
+<div class="card-attribution card-text-small end">
+<div class="listing-date">
+Mar 23, 2025
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="11" data-categories="cGFwZXIlMkNyaXNxdWVzLWZpbiUyQ2Vuc2FpLWdkciUyQ3Jpc2stbWFuYWdlbWVudA==" data-listing-date-sort="1741820400000" data-listing-file-modified-sort="1794739363174" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="29" data-listing-word-count-sort="5796">
+<a href="./posts/finance/risk-management/value-at-risk/copulas-project.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Projet de gestion de risques multiples
+</h5>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('cGFwZXI='); return false;">
+paper
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('cmlzcXVlcy1maW4='); return false;">
+risques-fin
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('ZW5zYWktZ2Ry'); return false;">
+ensai-gdr
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('cmlzay1tYW5hZ2VtZW50'); return false;">
+risk-management
+</div>
+</div>
+<div class="card-attribution card-text-small end">
+<div class="listing-date">
+Mar 13, 2025
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
 </div>
 <div class="listing-no-matching d-none">
 No matching items
 </div>
+<nav id="recent-posts-pagination" class="listing-pagination" aria-label="Page Navigation">
+  <ul class="pagination"></ul>
+</nav>
 </div>
-<p align="right">
-<a href="./posts.html">All Posts »</a>
-</p>
 
 
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

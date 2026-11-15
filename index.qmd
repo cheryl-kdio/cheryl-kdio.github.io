@@ -34,13 +34,13 @@ listing:
     contents: 
       - posts
       - posts/post-links.yml
-#    exclude:
-#      title: " "
+    exclude:
+      draft: true
     type: grid
-    max-items: 6
+    max-items: 12
 #    image-height: 150px
     page-size: 6 #set same as max-times to remove the page number setting
-    fields: [image, date, title, subtitle]
+    fields: [date, title, subtitle, categories]
     max-description-length: 75
     sort: 
       - "date desc"
@@ -60,9 +60,12 @@ This website is my little corner of the internet, a place where I share what I l
 :::
 
 
-## Recent Posts
+<div>
+<h2>Recent Posts</h2>
+<p align="right">[Browse by topic»](/topics.qmd)</p>
+</div>
+
 
 :::{#recent-posts}
 :::
 
-<p align="right">[All Posts »](/posts.qmd)</p>

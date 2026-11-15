@@ -1,7 +1,9 @@
 ---
 title: "Glossary"
 description-meta: "Glossary of element used in articles"
-listing: 
+listing:
+  exclude:
+    draft: true
   id: glossary
   sort: "title"
   type: table

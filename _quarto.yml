@@ -31,15 +31,19 @@ website:
             href: now.qmd                
       - text: Articles
         menu:
+          - text: Browse by topic
+            href: topics.qmd
+          - text: All articles
+            href: posts.qmd
           - text: Reports
             href: publications.qmd
-          - text: All papers
-            href: posts.qmd#category=paper
-          - text: Ensai
+          - text: ENSAI coursework
             href: posts.qmd#category=ensai-gdr
-          - text: M2MO
+          - text: M2MO coursework
             href: posts.qmd#category=m2mo
-      
+      - text: Notes
+        href: notes.qmd
+
       # - text: Outreach
       #   menu:
       #   - text: Policy Engagement
@@ -70,6 +74,18 @@ website:
         href: posts.xml
         target: _blank
   
+  # Quarto discovers articles and nested sections from the folder structure.
+  sidebar:
+    id: topics
+    title: Topics
+    style: docked
+    collapse-level: 1
+    contents:
+      - href: topics.qmd
+        text: Browse by topic
+      - auto: posts
+      - auto: glossary
+
   page-navigation: true
   
   page-footer: 

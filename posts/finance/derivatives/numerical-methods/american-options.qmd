@@ -1,0 +1,962 @@
+---
+title: "Finite difference Methods for American Options"
+subtitle: "EDP in finance"
+author:
+  - name: Cheryl KOUADIO
+  - name: Marilene Kougoum
+categories: [paper, m2mo, edp, derivatives]
+date: "2026-02-08"
+jupyter: python3
+aliases:
+  - /posts/m2mo/edp/edp_american_opt.html
+---
+
+
+Dans ce TP, on étudie des schémas numériques permettant d'approcher la solution de l'équation de Black-Scholes pour les options américaines. On considerera en particulier deux cas de payoff pour les options américaines :
+
+- **payoff 1:** le cas de put standard de payoff $\phi_1(s) = (K-s)^+$, avec $K$ le prix d'exercice de l'option. Ce payoff est connu pour avoir de bonnes propriétés de régularité, i.e. il est continu et même lipschitzien, ce qui facilite l'analyse numérique.
+
+- **payoff 2:** le cas d'un produit de payoff $\phi_2(s) = K \mathbf{1}_{\frac{K}{2} \leq s \leq K }$, qui correspond à une option de type "cash-or-nothing" (payoff en cash) avec barrière. Ce payoff est plus irrégulier, puisqu'il est discontinu, ce qui rend l'analyse numérique plus délicate.
+
+Dans les deux cas, l'EDP correspond à un système non linéaire d'équations aux dérivées partielles suivant :
+$$
+\begin{cases}
+\min \left( \frac{\partial v}{\partial t} - \frac{1}{2} \sigma^2 s^2 \frac{\partial^2 v}{\partial s^2} - r s \frac{\partial v}{\partial s} + r v, v - \phi \right) = 0, \quad (t,s) \in (0,T) \times (S_{min}, S_{max}), \\
+v(t, S_{min}) = v_l(t), \quad t \in (0,T), \\
+v(t, S_{max}) = v_r(t) := 0, \quad t \in (0,T), \\
+v(0,s) = g(s), \quad s \in (S_{min}, S_{max}),
+\end{cases}
+$$
+
+Dans le cas du payoff 1, on a $v_l(t) := \phi(S_{min}) = K - S_{min}$, tandis que dans le cas du payoff 2, on a $v_l(t) := \phi(S_{min}) = 0$.
+
+Ces schémas nous permettront d'obtenir une approximation numérique de la fonction de prix d'un put européen $v(t,s)$, avec $t \in [0,T]$ et $s \in [S_{min}, S_{max}]$.
+
+Les schémas numériques permettant d'approcher cette EDP abordés ici sont :
+1. le schéma d'Euler explicite
+2. le schéma d'Euler implicite (et plus généralement pour tout schéma implicite pour les options américaines), on est conduit à un systeme non linéaire discret à résoudre à chaque pas de temps, qui à la forme d'un "problème d'obstacle".
+2. On s'intéressera à diverses méthodes numériques de résolution de ce système, telles que la méthode PSOR (projected successive over-relaxation), une méthode de type Newton.
+
+
+# Méthodes numériques
+
+Nous considérons la grille discrète suivante : $h = \frac{S_{max} - S_{min}}{J + 1}$ et $\Delta t = \frac{T}{N}$, avec $J$ et $N$ des entiers positifs, et :
+- $s_j = S_{min} + j h$, pour $j = 0, \ldots, J + 1$,
+- $t_n = n \Delta t$, pour $n = 0, \ldots, N$.
+
+On cherche une approximation $U_j^n \approx v(t_n, s_j)$ pour $j = 1, \ldots, J$ et $n = 0, \ldots, N$.
+Les schémas aux différences finies nous permettront de discrétiser l'équation de Black-Scholes du prix d'un put américain sur cette grille.
+
+## Explicit Euler Scheme or Euler Forward Scheme
+
+Le schéma d'Euler explicite est un schéma basé sur une discrétisation explicite en temps. La discrétisation de l'EDP est basée sur des approximations centrées. Dès lors, on approxime les dérivées partielles de la manière suivante :
+
+$$
+\begin{cases}
+min(\frac{U_j^{n+1} - U_j^n}{\Delta t} - \frac{1}{2} \sigma^2 s_j^2 \frac{U_{j+1}^n - 2 U_j^n + U_{j-1}^n}{h^2} - r s_j \frac{U_{j+1}^n - U_{j-1}^n}{2 h} + r U_j^n, U^{n+1}_j - \phi(s_j))= 0, \quad j = 1, \ldots, J,\quad n = 0, \ldots, N-1. \\
+U_0^n = v_l(t_n), \quad n = 0, \ldots, N-1. \\
+U_{J+1}^n = v_r(t_n), \quad n = 0, \ldots, N-1.
+\end{cases}
+$$
+
+On peut la réécrire sous la forme matricielle afin d'extraire une solution numérique dite explicite :
+Sous forma matricielle, le schéma s'écrit :
+
+$$
+\begin{cases}
+min(\frac{U^{n+1} - U^n}{\Delta t} +  A U^n + q(t_n), U^{n+1} - g) = 0, \quad n = 0, \ldots, N-1, \\
+U^0 = (\phi(s_i))_{1 \leq i \leq J},
+\end{cases}
+$$
+
+où
+- g est un vecteur de $\mathbb{R}^J$ défini par $g_j = \phi(s_j)$ pour $j = 1, \ldots, J$,
+
+-   $A$ est une matrice carrée tridiagonale de taille $J \times J$.
+    En posant $\alpha_j = \frac{\sigma^2}{2} \frac{s_j^2}{h^2}$ et $\beta_j = r \frac{s_j}{2 h}$, les coefficients de la matrice $A$ sont donnés par :
+
+    $$
+    \begin{cases}
+    A_{j,j-1} = -\alpha_j + \beta_j, \quad j= 2, \ldots, J, \\
+    A_{j,j} = 2\alpha_j + r, \quad j = 1, \ldots, J, \\
+    A_{j,j+1} = -\alpha_j - \beta_j, \quad j = 1, \ldots, J, \\
+    \end{cases}
+    $$
+
+-   $q(t_n)$ un vecteur de $\mathbb{R}^J$ qui dépendent des paramètres du modèle et de la discrétisation spatiale donné par :
+
+    $$
+    q_j(t_n) =
+    \begin{cases}
+    (-\alpha_1 + \beta_1) U_0^n, \quad j = 1, \\
+    0, \quad j = 2, \ldots, J-1, \\
+    (-\alpha_J + \beta_J) U_{J+1}^n, \quad j = J.
+    \end{cases}
+    $$
+
+De fait, on obtient la relation de récurrence explicite permettant de calculer $U^{n+1}$ en fonction de $U^n$ :
+
+$$
+U^{n+1} = max(U^n - \Delta t ( A U^n + q(t_n)), g)), \quad n = 0, \ldots, N-1,
+$$
+
+## Implicit Euler Scheme
+
+Pour des raisons de stabilité, on peut également utiliser un schéma d'Euler implicite, qui est basé sur une discrétisation implicite en temps.
+
+### Splitting scheme
+Une première approche est de considérer le "splitting scheme", qui consiste à séparer la partie linéaire de l'EDP de la partie non linéaire :
+(i) On calcule $U^{n+1,(1)}$ tel que $U^{n+1,(1)} - U^n + \Delta t (A U^{n+1,(1)} + q(t_{n+1})) = 0$,
+(ii) On calcule $U^{n+1}$ tel que $U^{n+1} = max(U^{n+1,(1)}, g)$.
+
+### Méthodes numériques de résolution
+Une seconde approche est de considérer un schéma d'Euler implicite "fully implicit", qui consiste à discrétiser l'EDP de manière implicite en temps, ce qui conduit à un système non linéaire à résoudre à chaque pas de temps :
+$$\begin{cases}
+min(\frac{U^{n+1} - U^n}{\Delta t} +  A U^{n+1} + q(t_{n+1}), U^{n+1} - g) = 0, \quad n = 0, \ldots, N-1, \\
+U^0 = (\phi(s_i))_{1 \leq i \leq J}.
+\end{cases}$$
+
+En posant $B = I + \Delta t A$ et $b = U^n - \Delta t q(t_{n+1})$, le problème se transforme en la résolution d'un problème d'obstacle à chaque pas de temps ou il s'agit de trouver $x \in \mathbb{R}^J$ tel que $min(B x - b, x - g) = 0$. De fait, on a recours à des méthodes numériques de résolution de ce type de problème, telles que la méthode PSOR (projected successive over-relaxation) ou une méthode de type Newton.
+
+#### PSOR Algorithm
+
+La méthode PSOR est une méthode itérative de résolution de problèmes d'obstacle. Elle consiste à itérer sur les composantes du vecteur $x$ en appliquant une relaxation projetée.
+
+Tout d'abord, on décompose la matrice $B$ en une partie triangulaire inférieure $L$, et une partie triangulaire strictement supérieure $U$, de sorte que $B = L + U$. Ensuite, pour un temps fixé $n$, on cherche à trouver une solution $x$ du problème d'obstacle en itérant sur les composantes du vecteur $x$ au temps fixé en appliquant la formule suivante :
+$$
+x_j^{(k+1)} = max\left(g_j, \frac{\omega}{B_{j,j}} \left(b_j - \sum_{i=1}^{j-1} B_{j,i} x_i^{(k+1)} - \sum_{i=j+1}^{J} B_{j,i} x_i^{(k)} \right) + (1 - \omega) x_j^k \right) , \quad j = 1, \ldots, J,
+$$
+
+
+où $k$ est l'indice de l'itération. La méthode converge vers la solution du problème d'obstacle, et le taux de convergence dépend du choix du paramètre de relaxation, i.e. du choix de la valeur de $\omega \in (0,2)$ dans la formule de relaxation.
+Lorsque $\omega = 1$, la méthode PSOR correspond à la méthode classique de Gauss-Seidel projetée. Lorsque $\omega \neq 1$, la méthode PSOR peut accélérer la convergence, mais le choix optimal de $\omega$ dépend du problème spécifique et peut nécessiter une expérimentation.
+
+#### Semi-smooth Newton's method
+
+La méthode de type Newton est une méthode itérative de résolution de problèmes non linéaires. Elle consiste à linéariser le problème d'obstacle autour d'une solution approximative $x^{(k)}$ à chaque itération, et à résoudre le problème linéarisé pour obtenir une nouvelle approximation $x^{(k+1)}$.
+
+On cherche à résoudre le problème d'obstacle $F(x) = min(B x - b, x - g) = 0$ en itérant sur les approximations successives de la solution.
+On linéarise le problème d'obstacle autour de l'approximation $x^{(k)}$ en utilisant la formule de Taylor :
+$$
+F(x) \approx F(x^{(k)}) + F'(x^{(k)})(x - x^{(k)}),
+$$
+
+On cherche à résoudre $F(x) = 0$. Dès lors, à chaque itération, on résout le problème linéarisé $F'(x^{(k)})(x - x^{(k)}) = -F(x^{(k)})$ pour obtenir une nouvelle approximation $x^{(k+1)}$. La méthode de type Newton converge quadratiquement vers la solution du problème d'obstacle, ce qui en fait une méthode très efficace pour résoudre ce type de problème.
+
+$F'(x)$ est la matrice jacobienne de $F$ à l'approximation $x$. La matrice jacobienne de $F$ est donnée par :
+$$
+F'(x)_{i,j} := \begin{cases}
+B_{i,j}, \quad \text{si } B x - b < x - g, \\
+\delta_{i,j}, \quad \text{sinon}.
+\end{cases}
+$$
+
+## Higher order schemes
+
+Enfin, nous envisagerons de comparer les schémas d'Euler implicite, les schémas de type Crank-Nicolson, et un schéma d'ordre 2 tel que le BDF2.
+
+# Implémentations
+
+Les différents schémas numériques étudiés pour l’équation de Black–Scholes avec option américaine partagent une structure commune. Nous introduisons donc une classe de base abstraite SchemeBase qui regroupe les paramètres financiers et numériques, la construction de la grille discrète, les conditions initiales et aux limites, ainsi que la discrétisation spatiale de l’opérateur de Black-Scholes à travers la matrice
+A et le vecteur
+q(t).
+
+Les schémas spécifiques héritent de cette classe de base et implémentent la méthode solve(). En particulier, nous définissons les classes suivantes :
+- `SchemeEE` pour le schéma d'Euler explicite,
+- `SplittingScheme` pour le schéma splitting d'Euler implicite,
+- `SchemeCN` pour le schéma de Crank-Nicolson,
+- `PSOR` pour la méthode PSOR,
+- `NewtonSemiSmooth` pour la méthode de résolution newton semi smooth, et
+- `BdfScheme` pour le schema de résolution BDF2.
+
+
+```{python}
+# Package imports
+
+import numpy as np
+import matplotlib.pyplot as plt
+import numpy.linalg as lng
+from scipy.sparse import diags,eye
+from abc import ABC, abstractmethod
+import scipy.stats as stats
+from scipy.sparse import csr_matrix as sparse
+from scipy.sparse.linalg import spsolve
+import pandas as pd
+import time
+import warnings
+import numpy.linalg as lng
+from tqdm import tqdm
+
+warnings.filterwarnings("ignore")
+```
+
+```{python}
+class SchemeBase(ABC):
+    """
+    Classe de base pour les schémas numériques de l'équation de Black-Scholes.
+    """
+    def __init__(self, r, sigma, K, T, N, J, Smin, Smax, payoff=1):
+        # Financial parameters
+        self.r = r
+        self.sigma = sigma
+        self.K = K
+        self.T = T
+
+        # Numerical parameters
+        self.N = N
+        self.J = J
+        self.Smin = Smin
+        self.Smax = Smax
+        self.payoff = payoff
+
+        # Grids
+        self.dt = T / N
+        self.h = (Smax - Smin) / (J + 1)
+        self.s = Smin + self.h * np.arange(1, J + 1)
+
+
+        # Operator
+        self.A, self.alpha, self.beta = self._build_matrix_A()
+
+    def phi(self,s):
+        """
+        Condition initiale (payoff) pour un put américain.
+        𝜙(s) = max(K - s, 0) si payoff=1
+             = K si K * 0.5 <= s <= K sinon 0 si payoff=2
+        """
+        if self.payoff == 1:
+            return np.maximum(self.K - s, 0)
+        elif self.payoff  == 2:
+            return np.where((self.K * 0.5 <= s) & (s <= self.K), self.K, 0)
+
+    def uleft(self, t):
+        """
+        Condition aux limites à gauche pour un put américain.
+        u( t, Smin ) = K * exp(-r * t) - S
+        """
+        if self.payoff  == 1 :
+            return self.K - self.Smin if self.Smin > 0 else None
+        elif self.payoff  == 2 :
+            return 0.0
+
+
+    def uright(self, t):
+        """
+        Condition aux limites à droite pour un put américain.
+        u( t, Smax ) = 0
+        """
+        return 0.0
+
+    def _build_matrix_A(self):
+        """
+        Matrice d'amplification A.
+        """
+        alpha = 0.5 * self.sigma**2 * (self.s**2 / self.h**2)
+        beta  = self.r * self.s / (2 * self.h)
+
+        lower = -alpha[1:] + beta[1:]        # sous-diagonale
+        main  = 2 * alpha + self.r            # diagonale principale
+        upper = -alpha[:-1] - beta[:-1]       # sur-diagonale
+
+        A = diags(
+            diagonals=[lower, main, upper],
+            offsets=[-1, 0, 1],
+            shape=(self.J, self.J),
+            format="csr"
+        )
+
+        return A, alpha, beta
+
+
+    def q(self, t):
+        """
+        Vecteur des conditions aux limites.
+        """
+        y = np.zeros(self.J)
+        y[0]  = (-self.alpha[0] + self.beta[0]) * self.uleft(t)
+        y[-1] = (-self.alpha[-1] - self.beta[-1]) * self.uright(t)
+        return y
+
+    def interpolate(self, Sval, U):
+        """
+        Interpolation linéaire pour obtenir la valeur approximée d'un put
+        en un point spot Sval donné.
+        """
+        if Sval <= self.Smin:
+            return self.uleft(self.T)
+        elif Sval >= self.Smax:
+            return self.uright(self.T)
+        else:
+            return np.interp(Sval, self.s, U)
+
+    # Abstract method
+    @abstractmethod
+    def solve(self):
+        """
+        Méthode abstraite de résolution du schéma numérique.
+        """
+        raise NotImplementedError("Méthode solve() à implémenter dans la classe fille")
+```
+
+```{python}
+class SchemeEE(SchemeBase):
+    """
+    Schéma d'Euler explicite.
+    """
+    def __init__(self, r, sigma, K, T, N, J, Smin, Smax, payoff=1):
+        super().__init__(r, sigma, K, T, N, J, Smin, Smax, payoff)
+        self.scheme_name = "EE"
+
+    def solve(self):
+        """
+        Résolution du schéma d'Euler explicite.
+        """
+        U = self.phi(self.s)
+        g = self.phi(self.s)
+
+        for n in range(self.N):
+            t = n * self.dt
+            U = np.maximum(U - self.dt * (self.A @ U + self.q(t)), g)
+
+        return U,t
+```
+
+```{python}
+class SplittingScheme(SchemeBase):
+    """
+    Schéma d'Euler implicite "Splitting scheme".
+    """
+    def __init__(self, r, sigma, K, T, N, J, Smin, Smax, payoff=1):
+        super().__init__(r, sigma, K, T, N, J, Smin, Smax, payoff)
+        self.scheme_name = "EI-AMER-SPLIT"
+
+    def solve(self):
+        U = self.phi(self.s)
+        g = self.phi(self.s)
+        I = eye(self.J, format="csr")
+
+        for n in range(self.N):
+            t = n * self.dt
+            U = spsolve(I + self.dt * self.A, U - self.dt * self.q(t))
+            U = np.maximum(U, g)
+
+        return U,t
+```
+
+```{python}
+class SchemeCN(SchemeBase):
+    """
+    Schéma de Crank-Nicolson.
+    """
+    def __init__(self, r, sigma, K, T, N, J, Smin, Smax, payoff=1):
+        super().__init__(r, sigma, K, T, N, J, Smin, Smax, payoff)
+        self.scheme_name = "CN-AMER-SPLIT"
+
+    def solve(self):
+        U = self.phi(self.s)
+        g = self.phi(self.s)
+        I = eye(self.J, format="csr")
+        factor_minus = I - 0.5 * self.dt * self.A
+        factor_plus = I + 0.5 * self.dt * self.A
+
+        for n in range(self.N):
+            t = n * self.dt
+            U = spsolve(factor_plus, factor_minus@U - self.dt * self.q(t))
+            U = np.maximum(U, g)
+        return U,t
+```
+
+```{python}
+class PSOR(SchemeBase):
+    """
+    Schéma PSOR
+    """
+
+    def __init__(self, r, sigma, K, T, N, J, Smin, Smax, payoff=1):
+        super().__init__(r, sigma, K, T, N, J, Smin, Smax, payoff)
+        self.scheme_name = "EI-AMER-PSOR"
+
+    def solve(self, omega=1, tol=1e-6, max_iter_=100):
+
+        g = self.phi(self.s).copy()
+        I = eye(self.J, format="csr")
+        B = I + self.dt * self.A
+        U = g.copy()
+
+        # Boucle en temps
+        for n in range(self.N):
+
+            t = n * self.dt
+
+            # Second membre f = U^{n+1} + dt * q(t_n)
+            b = U + self.dt * self.q(t)
+
+            # Initialisation PSOR
+            U_new = U.copy()
+
+            # Boucle PSOR
+            for k in range(max_iter_):
+
+                U_old = U_new.copy()
+                # Boucle spatiale
+                for i in range(self.J):
+                    s1 = 0.0
+                    for j in range(i):
+                        s1 += B[i, j] * U_new[j]
+
+                    s2 = 0.0
+                    for j in range(i + 1, self.J):
+                        s2 += B[i, j] * U_old[j]
+
+                    ci = (b[i] - s1 - s2) / B[i, i]
+                    U_new[i] = max(
+                        (1 - omega )* U_old[i] + omega * ci     ,
+                        g[i]
+                    )
+
+                error1 = lng.norm(U_new - U_old)
+                # error2 = lng.norm(np.minimum(B @ U_new - b, U_new - g))
+                # Critère de convergence PSOR
+                if error1 < tol:
+                    break
+            # Passage au temps suivant
+            U = U_new.copy()
+
+        return U, self.T
+```
+
+```{python}
+class NewtonSemiSmooth(SchemeBase):
+    """
+    Euler implicite + Newton semi-smooth
+    pour option américaine (problème d'obstacle)
+    """
+
+    def __init__(self, r, sigma, K, T, N, J, Smin, Smax, payoff=1):
+        super().__init__(r, sigma, K, T, N, J, Smin, Smax, payoff)
+        self.scheme_name = "EI-AMER-NEWTON-SS"
+
+    def solve(self, tol=1e-8, max_iter_=20):
+
+        # Obstacle (payoff)
+        g = self.phi(self.s).copy()
+
+        # Matrice implicite
+        I = eye(self.J, format="csr")
+        B = I + self.dt * self.A
+
+        # Condition terminale
+        U = g.copy()
+
+        for n in range(self.N):
+
+            t = n * self.dt
+            b = U + self.dt * self.q(t)
+            x = U.copy()
+
+            # Boucle Newton semi-smooth
+            for k in range(max_iter_):
+
+                # F(x)
+                Bx_b = B @ x - b
+                x_g  = x - g
+                F = np.minimum(Bx_b, x_g)
+
+                # Test d'arrêt
+                if lng.norm(F, np.inf) < tol:
+                    break
+
+                # Construction de F'(x) (jacobienne généralisée)
+                rows, cols, data = [], [], []
+
+                for i in range(self.J):
+                    if Bx_b[i] <= x_g[i]:
+                        # ligne i de B
+                        row = B.getrow(i)
+                        rows.extend([i] * len(row.indices))
+                        cols.extend(row.indices)
+                        data.extend(row.data)
+                    else:
+                        # ligne i de I
+                        rows.append(i)
+                        cols.append(i)
+                        data.append(1.0)
+
+                DF = sparse((data, (rows, cols)), shape=(self.J, self.J))
+
+                # Étape de Newton : DF * delta = F
+                delta = spsolve(DF, F)
+
+                # Mise à jour
+                x = x - delta
+
+            # Passage au temps suivant
+            U = x.copy()
+
+        return U, self.T
+```
+
+```{python}
+class BdfScheme(SchemeBase):
+    """
+    Schéma BDF2
+    """
+
+    def __init__(self, r, sigma, K, T, N, J, Smin, Smax, payoff=1):
+        super().__init__(r, sigma, K, T, N, J, Smin, Smax, payoff)
+        self.scheme_name = "BDF2-Obstacle-Newton"
+
+    def solve(self):
+
+        # Obstacle
+        g = self.phi(self.s).copy()
+        I = eye(self.J, format="csr")
+
+        # ---------- Initialisation ----------
+        # U^0
+        U_nm1 = g.copy()
+
+        # U^1 via Euler implicite (avec obstacle)
+        B_euler = I + self.dt * self.A
+        b_euler = U_nm1 + self.dt * self.q(self.dt)
+        U_n = spsolve(B_euler, b_euler)
+        U_n = np.maximum(U_n, g)   # projection autorisée uniquement ici (Euler)
+
+        # ---------- Boucle BDF2 ----------
+        for n in range(1, self.N):
+
+            t = (n + 1) * self.dt
+            factor1 = (3.0 / (2.0 * self.dt)) * I + self.A
+            factor2 = (4.0 * U_n - U_nm1) / (2.0 * self.dt) - self.q(t)
+
+            U = spsolve(factor1, factor2)
+            U = np.maximum(U, g)
+
+            U_nm1 = U_n.copy()
+            U_n = U.copy()
+
+        return U, self.T
+```
+
+# Résultats des schémas numériques
+
+## Euler Explicit Scheme
+
+
+Nous étudions ici le comportement du schéma d’Euler explicite appliqué à l’équation de Black–Scholes pour une option américaine de type put. Les simulations sont réalisées en faisant varier les paramètres de discrétisation spatiale
+J et temporelle
+N, tout en imposant la contrainte d’obstacle à chaque pas de temps.
+
+Les figures présentées correspondent aux cas suivants (pour les deux payoffs considérés) :
+
+- N = 20, J = 50
+- N = 20, J = 20
+- N = 50, J = 20
+
+
+Pour chaque configuration, le prix numérique de l’option est comparé au payoff, et la valeur associée à la condition de CFL est calculée.
+
+```{python}
+r_ = 0.1
+sigma_ = 0.3
+K_ = 100
+T_ = 1
+Smin_ = 50
+Smax_ = 250
+print("Paramètres financiers:")
+print("r=%.2f" %r_, "sigma=%.2f" %sigma_, "K=%.0f" %K_, "T=%.0f" %T_)
+
+# Definition des paramètres dans un dictionnaire
+params = dict(
+    r=r_,
+    sigma=sigma_,
+    K=K_,
+    T=T_,
+    N=None, # Valeur à définir plus tard
+    J=None, # Valeur à définir plus tard
+    Smin=Smin_,
+    Smax=Smax_
+)
+```
+
+```{python}
+J_values = [50, 20, 20]
+N_values = [20, 20, 50]
+
+cfl_records1 = []
+
+fig, axes = plt.subplots(1, 3, figsize=(24, 8), sharey=False)
+for j, (N_, J_) in enumerate(zip(N_values, J_values)):
+    params['N'] = N_
+    params['J'] = J_
+
+    ee = SchemeEE(**params, payoff=1)
+    U, t = ee.solve()
+    s = ee.s
+    dt = ee.dt
+
+    #CFL condition
+    CFL = dt / (ee.h ** 2) * (ee.sigma ** 2) * (ee.Smax ** 2)
+
+    # Enregistrement dans la table
+    cfl_records1.append({
+        "N": N_,
+        "J": J_,
+        "CFL": CFL
+    })
+
+    ax = axes[j]
+    ax.plot(s, U, label="Prix option")
+    ax.plot(s, ee.phi(s), 'k--', label="Payoff")
+
+    ax.set_title(f"N = {N_}, J = {J_}")
+    ax.set_xlabel("s")
+    if j == 0:
+        ax.set_ylabel("u(t,s)")
+    ax.legend()
+
+plt.suptitle(
+    f"Evolution du prix du put américain -- Scheme {ee.scheme_name}",
+    fontsize=16
+)
+plt.tight_layout(rect=[0, 0, 1, 0.95])
+plt.show()
+```
+
+```{python}
+J_values = [50, 20, 20]
+N_values = [20, 20, 50]
+
+cfl_records2 = []
+
+fig, axes = plt.subplots(1, 3, figsize=(24, 8), sharey=False)
+for j, (N_, J_) in enumerate(zip(N_values, J_values)):
+    params['N'] = N_
+    params['J'] = J_
+
+    ee = SchemeEE(**params, payoff=2)
+    U, t = ee.solve()
+    s = ee.s
+    dt = ee.dt
+
+    #CFL condition
+    CFL = dt / (ee.h ** 2) * (ee.sigma ** 2) * (ee.Smax ** 2)
+
+    # Enregistrement dans la table
+    cfl_records2.append({
+        "N": N_,
+        "J": J_,
+        "CFL": CFL
+    })
+
+    ax = axes[j]
+    ax.plot(s, U, label="Prix option")
+    ax.plot(s, ee.phi(s), 'k--', label="Payoff")
+
+    ax.set_title(f"N = {N_}, J = {J_}")
+    ax.set_xlabel("s")
+    if j == 0:
+        ax.set_ylabel("u(t,s)")
+    ax.legend()
+
+plt.suptitle(
+    f"Evolution du prix du put américain -- Scheme {ee.scheme_name}, N fixé à {N_}",
+    fontsize=16
+)
+plt.tight_layout(rect=[0, 0, 1, 0.95])
+plt.show()
+```
+
+Les figures ci - dessus représentent le prix numérique de l’option au temps final, comparé au payoff, pour différentes configurations de maillage.
+
+Les résultats montrent que le comportement du schéma dépend fortement du choix de
+N et
+J. Lorsque le maillage spatial est fin (
+J=50) et que le nombre de pas de temps est relativement faible (
+N=20), la solution numérique devient instable et présente de fortes oscillations, avec des valeurs non physiques. Ce phénomène traduit une instabilité du schéma explicite.
+En revanche, pour un maillage spatial plus grossier (
+J=20) et un pas de temps suffisamment petit (
+N=20 ou N=50), la solution obtenue est plus régulière et respecte correctement la contrainte d’option américaine, la solution restant au-dessus du payoff.
+
+Ces observations suggèrent que la stabilité du schéma d’Euler explicite est étroitement liée à la relation entre le pas de temps et le pas d’espace, ce qui motive l’analyse de la condition de stabilité de type CFL.
+
+
+```{python}
+cfl_df1 = pd.DataFrame(cfl_records1)  # Cas 1 : N fixé
+cfl_df2 = pd.DataFrame(cfl_records2)  # Cas 2 : N = J
+
+cfl_df1 = cfl_df1.rename(columns={"CFL": "CFL (N=10)"})
+cfl_df2 = cfl_df2.rename(columns={"CFL": "CFL (N=J)"})
+
+print("Payoff standard:")
+print("="*20)
+print(cfl_df1)
+print("Payoff tronqué:")
+print("="*20)
+print(cfl_df2)
+```
+
+L’étude de la condition de CFL met en évidence le caractère conditionnellement stable du schéma d’Euler explicite. Comme observé sur les figures, lorsque le maillage spatial est raffiné sans diminution suffisante du pas de temps, la condition de stabilité est violée et la solution numérique présente des oscillations marquées. À l’inverse, lorsque
+N et J sont augmentés conjointement, la condition de CFL est mieux respectée et le comportement du schéma s’améliore.
+
+On remarque par ailleurs que les valeurs calculées de la CFL sont identiques pour le payoff standard et pour le payoff tronqué. Ce résultat est attendu, puisque la condition de stabilité dépend uniquement des paramètres numériques et du modèle, en particulier du pas de temps
+Δt, du pas d’espace h, de la volatilité
+σ et de la borne supérieure
+Smax et non de la régularité du payoff.
+
+```{python}
+def get_convergence_table(N_grid, J_grid, params, Sval, scheme_class):
+
+    est_prices = []
+    errex = []
+    errors = []
+    cpu_times = []
+
+    for N, J in zip(N_grid, J_grid):
+        params['N'] = N
+        params['J'] = J
+
+        start = time.time()
+        scheme = scheme_class(**params)
+        U, _ = scheme.solve()
+        tcpu = time.time() - start
+
+        price_est = scheme.interpolate(Sval, U)
+
+        est_prices.append(price_est)
+        cpu_times.append(tcpu)
+
+    est_prices = np.array(est_prices)
+    errors = np.zeros(len(est_prices))
+    errors[1:] = np.abs(np.diff(est_prices))
+    cpu_times = np.array(cpu_times)
+
+    # Ordre de convergence global
+    alpha = np.zeros(len(errors))
+    h_step = (params["Smax"] - params["Smin"]) / (J_grid + 1)
+    alpha[1:] = np.where(
+        (errors[:-1] > 0) & (errors[1:] > 0) & (h_step[:-1] > h_step[1:]),
+        np.log(errors[:-1] / errors[1:]) / np.log(h_step[:-1] / h_step[1:]),
+        0
+    )
+    df = pd.DataFrame({
+        "J": J_grid,
+        "N": N_grid,
+        "U(s)": est_prices,
+        "error": errors,
+        "alpha": alpha,
+        "tcpu": cpu_times
+    })
+
+    return df.round(6)
+```
+
+```{python}
+Sval = 90
+J_grid = np.array([20, 40, 80, 160, 320])
+
+N_grid = np.array([2*(j**2)/10 for j in J_grid]).astype(int)
+
+print("Cas N = J\n", "="*75)
+
+print("Convergence Table for Scheme EE:")
+print(get_convergence_table(N_grid, J_grid-1, params, Sval, SchemeEE))
+```
+
+ordre h^2 + dt  ==> division de l'erreur par 4.
+
+<!-- ### Condition de stabilité (CFL) et convergence -->
+
+<!-- L’étude de la condition de CFL met en évidence le caractère conditionnellement stable du schéma d’Euler explicite. Comme observé sur les figures, lorsque le maillage spatial est raffiné sans diminution suffisante du pas de temps, la condition de stabilité est violée et la solution numérique présente des oscillations marquées. À l’inverse, lorsque
+N et J sont augmentés conjointement, la condition de CFL est mieux respectée et le comportement du schéma s’améliore.
+
+On remarque par ailleurs que les valeurs calculées de la CFL sont identiques pour le payoff standard et pour le payoff tronqué. Ce résultat est attendu, puisque la condition de stabilité dépend uniquement des paramètres numériques et du modèle, en particulier du pas de temps
+Δt, du pas d’espace h, de la volatilité
+σ et de la borne supérieure
+Smax et non de la régularité du payoff. -->
+
+
+Pour compléter l’analyse de la stabilité, il est également intéressant d’étudier la convergence du schéma.
+Pour étudier l'ordre de convergence du schéma, nous avons utilisé une grille pour J qui varie en doublant à chaque fois, et une grille pour N qui varie selon la règle $2 \times \frac{J^2}{10}$.
+Etant donné le fait que l'ordre théorique de convergence du schéma d'Euler explicite pour l'équation de Black-Scholes est de 2 en espace et de 1 en temps, on s'attend à ce que l'erreur diminue d'un facteur de 4 à chaque évolution de la grille.
+La table de convergence présentée ci-dessous montre l’évolution de la solution numérique U(s) lorsque le nombre de points spatiaux
+J et le nombre de pas temporels N sont augmentés.
+
+En respectant la règle de variation des grilles pour J et N, on s'assure que les deux contributions à l'erreur, i.e. l'erreur spatiale et l'erreur temporelle, diminuent de manière cohérente, ce qui permet d'observer une convergence plus régulière du schéma et donc un ordre de convergence plus clair.
+
+On observe que l’erreur diminue progressivement au fur et à mesure que le maillage spatial et temporel est raffiné, tandis que le facteur
+α (estimant l’ordre de convergence en espace) tend vers la valeur théorique attendue (2), ce qui confirme que le schéma d’Euler explicite converge correctement sous la condition de CFL.
+
+La colonne tcpu montre que ce raffinement s’accompagne d’un coût computationnel croissant, le temps de calcul augmentant rapidement lorsque le maillage spatial et temporel est affiné.
+
+## Schemas implicites
+
+
+Après avoir étudié le schéma d’Euler explicite, nous nous intéressons à des schémas implicites et semi-implicites (Euler implicite, Crank-Nicolson...). Ce passage est principalement motivé par le fait que le schéma explicite est conditionnellement stable et impose une limitation relativement stricte sur le pas de temps Δt et le maillage via la condition CFL. Les schémas implicites, eux, offrent une stabilité plus grande, permettant d’utiliser des pas de temps plus importants.
+
+Dans le cas du schéma d’Euler implicite (et plus généralement pour tout schéma implicite appliqué aux options américaines), on est conduit à résoudre à chaque pas de temps un système non linéaire discret, correspondant à un problème d’obstacle v≥ϕ. Pour traiter ce système, nous utilisons diverses méthodes numériques, telles que la méthode PSOR (Projected Successive Over-Relaxation) ou une méthode de type Newton semi-smooth.
+
+Ces schémas complémentaires nous permettent donc de comparer précision, stabilité et coût computationnel, tout en gérant correctement la contrainte inhérente aux options américaines.
+
+### Splitting Euler Implicit scheme & Splitting Crank-Nicolson Scheme
+
+Pour étudier le comportement du schéma splitting d'Euler implicite, nous nous sommes directement placés dans le cas où N=20 et J=50, qui avait montré des oscillations dans le schéma explicite. Les résultats obtenus sont présentés dans le graphique ci-dessous. Comme on peut le constater, le schéma d'Euler implicite produit une approximation stable et sans oscillations du prix du put européen, même pour des valeurs élevées de N et J. Cela confirme la stabilité inconditionnelle du schéma implicite, qui ne dépend pas de la relation entre le pas de temps et le pas d'espace.
+
+```{python}
+params['J'] = 20
+params['N'] = 50
+
+print("Paramètres financiers:")
+print("r=%.2f" %r_, "sigma=%.2f" %sigma_, "K=%.0f" %K_, "T=%.0f" %T_)
+
+print("Paramètres numériques:")
+print("J=%.0f" %params['J'], "N=%.0f" %params['N'])
+```
+
+```{python}
+ei_split = SplittingScheme(**params)
+U,t = ei_split.solve()
+s = ei_split.s
+dt = ei_split.dt
+
+plt.plot(s,U,label="t=%.2f" %(t+dt))
+plt.plot(s,ei_split.phi(s), 'k--', label="payoff")
+plt.xlabel("s")
+plt.ylabel("u(t,s)")
+plt.title("Evolution du prix du put au cours du temps [Splitting Euler Implicite]")
+plt.legend()
+plt.show()
+```
+
+
+Le schéma de splitting d'Euler implicite est un schéma implicite qui permet de séparer la partie linéaire de l'EDP de la partie non linéaire. En appliquant ce schéma, on observe, ci dessus, une évolution du prix du put au cours du temps qui est plus stable que celle obtenue avec le schéma d'Euler explicite.
+
+Bien qu'ils puissent être moins précis qu'un vrai schéma d'Euler implicite "fully implicit", les schémas de splitting d'Euler implicite et de splitting de Crank-Nicolson sont plus simples à implémenter et peuvent offrir une bonne approximation du prix du put américain, tout en étant plus stables que le schéma d'Euler explicite. Par ailleurs, en ce qui concerne les ordres de convergence, les schémas de splitting d'Euler implicite et de splitting de Crank-Nicolson peuvent présenter des ordres de convergence similaires à ceux des schémas d'Euler implicite et de Crank-Nicolson classiques.
+
+```{python}
+N_grid = J_grid = np.array([20*(2**k) for k in range(5)]).astype(int)
+
+print("Splitting scheme")
+print("="*75, "\nConvergence Table for Scheme EI:")
+print(get_convergence_table(N_grid, J_grid-1, params, Sval, SplittingScheme))
+
+print("="*75, "\nConvergence Table for Scheme CN:")
+print(get_convergence_table(N_grid, J_grid-1, params, Sval, SchemeCN))
+```
+
+### PSOR Algorithm
+
+Comme attendu, le schéma PSOR prend plus de temps à converger que les schémas d'Euler implicite et de Crank-Nicolson, en raison de la nature itérative de la méthode PSOR. Cependant, il offre une bonne approximation du prix du put américain, tout en étant plus stable que le schéma d'Euler explicite.
+
+```{python}
+params['J'] = 100 -1
+params['N'] = 10
+
+
+print("Paramètres financiers:")
+print("r=%.2f" %r_, "sigma=%.2f" %sigma_, "K=%.0f" %K_, "T=%.0f" %T_)
+
+print("Paramètres numériques:")
+print("J=%.0f" %params['J'], "N=%.0f" %params['N'])
+```
+
+```{python}
+psor = PSOR(**params, payoff=1)
+U,t = psor.solve() # omega = 1.5 pour une convergence rapide
+s = psor.s
+dt = psor.dt
+
+plt.figure(figsize=(6, 5))
+plt.plot(s,U,label="t=%.2f" %(t))
+plt.plot(s,psor.phi(s), 'k--', label="payoff")
+plt.xlabel("s")
+plt.ylabel("u(t,s)")
+plt.title("Evolution du prix du put européen au cours du temps [PSOR]")
+plt.legend()
+plt.show()
+```
+
+Cependant, elle peut être accélérée en choisissant un paramètre de relaxation $\omega$ approprié, ce qui peut réduire le nombre d'itérations nécessaires pour atteindre la convergence. Nous constatons que pour des valeurs de $\omega$ proches de 1.5, la méthode PSOR converge plus rapidement que pour des valeurs plus proches de 1, ce qui suggère que l'over-relaxation peut être bénéfique pour accélérer la convergence de la méthode PSOR.
+
+```{python}
+# comparing time
+
+omegas = [1.2, 1.5, 1.8, 1.9]
+
+for omega in omegas:
+    psor = PSOR(**params, payoff=1)
+    start_time = time.time()
+    U, t = psor.solve(omega=omega)
+    end_time = time.time()
+    print(f"Omega: {omega}, Time taken: {end_time - start_time:.4f} seconds")
+```
+
+### Semi-smooth Newton's method
+
+En général, la méthode PSOR est une méthode efficace pour résoudre les problèmes d'obstacle associés aux options américaines, mais elle peut être moins rapide que les méthodes de type Newton pour des problèmes de grande taille ou pour des schémas d'ordre supérieur.
+
+Pour ce faire, nous avons implémenté une méthode de type Newton pour résoudre le problème d'obstacle à chaque pas de temps. Cette méthode consiste à linéariser le problème d'obstacle autour d'une solution approximative à chaque itération, et à résoudre le problème linéarisé pour obtenir une nouvelle approximation.
+
+```{python}
+params['J'] = 100 -1
+params['N'] = 10
+
+
+print("Paramètres financiers:")
+print("r=%.2f" %r_, "sigma=%.2f" %sigma_, "K=%.0f" %K_, "T=%.0f" %T_)
+
+print("Paramètres numériques:")
+print("J=%.0f" %params['J'], "N=%.0f" %params['N'])
+```
+
+```{python}
+newtonss = NewtonSemiSmooth(**params, payoff=1)
+U,t = newtonss.solve()
+s = newtonss.s
+dt = newtonss.dt
+
+plt.figure(figsize=(6, 5))
+plt.plot(s,U,label="t=%.2f" %(t))
+plt.plot(s,newtonss.phi(s), 'k--', label="payoff")
+plt.xlabel("s")
+plt.ylabel("u(t,s)")
+plt.title("Evolution du prix du put européen au cours du temps [Newton Semi-Smooth]")
+plt.legend()
+plt.show()
+```
+
+### Mini-conclusion sur les schéma implicites
+
+L’étude des schémas implicites et semi-implicites montre que, lorsque le maillage spatial J et le pas temporel N sont raffinés, toutes les méthodes testées produisent des solutions numériques de plus en plus précises. Les ordres de convergence estimés (α) sont cohérents avec les prédictions théoriques : proches de 1 pour Euler implicite et proches de 2 pour Crank-Nicolson.
+
+Le raffinement du maillage et du pas de temps s’accompagne d’une augmentation notable du temps de calcul, ce que mettent en évidence les tables de convergence et qui illustre clairement le compromis entre précision et coût computationnel.
+
+En termes de qualité des solutions, les méthodes numériques explorées (PSOR et Newton semi-smooth) produisent des résultats lisses et cohérents, respectant correctement la contrainte d’obstacle.
+
+## Higher order schemes
+
+Après avoir étudié les schémas implicites classiques et les méthodes de résolution pour le problème d’obstacle, nous considérons également un schéma d’ordre 2, le BDF2, qui améliore la précision temporelle tout en prenant en compte l’obstacle.
+
+### BDF Scheme
+
+Le schéma BDF2 est testé avec les mêmes paramètres de maillage spatial et de pas de temps que les schémas précédents. Le graphique ci-dessous montre que le prix du put européen reste lisse et cohérent, respectant correctement la contrainte d’obstacle, de manière similaire aux autres méthodes implicites étudiées.
+
+```{python}
+params['J'] = 100 -1
+params['N'] = 10
+
+bdf2 = BdfScheme(**params, payoff=1)
+U,t = bdf2.solve()
+s = bdf2.s
+dt = bdf2.dt
+
+plt.figure(figsize=(6, 5))
+plt.plot(s,U,label="t=%.2f" %(t))
+plt.plot(s,bdf2.phi(s), 'k--', label="payoff")
+plt.xlabel("s")
+plt.ylabel("u(t,s)")
+plt.title("Evolution du prix du put européen au cours du temps [BDF2]")
+plt.legend()
+plt.show()
+```
+

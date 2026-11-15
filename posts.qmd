@@ -1,10 +1,12 @@
 ---
-title: "What’s New & Updated"
-subtitle: "Posts about papers, events, news, and more"
+title: "All articles"
+subtitle: "Finance, statistics and coursework"
 description-meta: "Posts about papers, events, news, and more"
-listing: 
+listing:
+  exclude:
+    draft: true
   sort: "date desc"
-  fields: [image, date, title, author, reading-time,description]
+  fields: [date, title, author, reading-time,description]
   type: default
   page-size: 100
   categories: true
