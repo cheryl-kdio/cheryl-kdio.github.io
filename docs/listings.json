@@ -31,6 +31,8 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/m2mo/derivatives/basics_pricing.html",
+      "/posts/asset_management/markowitz_model.html",
       "/posts/m2mo/vol/implied_vol.html",
       "/posts/m2mo/yield_curves/interest_rates_made_simple.html",
       "/posts/m2mo/derivatives/03_options_made_simple.html",
@@ -69,6 +71,8 @@
   {
     "listing": "/posts.html",
     "items": [
+      "/posts/m2mo/derivatives/basics_pricing.html",
+      "/posts/asset_management/markowitz_model.html",
       "/posts/m2mo/vol/implied_vol.html",
       "/posts/m2mo/derivatives/03_options_made_simple.html",
       "/posts/m2mo/yield_curves/interest_rates_made_simple.html",

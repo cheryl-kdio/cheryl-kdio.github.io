@@ -1,0 +1,82 @@
+---
+title: "Basics of Derivative Pricing"
+subtitle: "Financial Derivatives"
+author:
+  name: Cheryl KOUADIO
+date: last-modified
+categories: [derivatives, pricing, finance]
+format:
+  html:
+    toc: true
+---
+
+
+In quantitative finance, one is a must know. It is about how to price the derivatives.
+Even though we can get an idea of the price of a derivative by looking at the market, it is important to understand how to price them. Furthermore, knowing the meaning behind it is important to understand how the market works. In this article, we will introduce the basics of derivative pricing. We will start by defining what a derivative is, then we will introduce the concept of no-arbitrage and finally we will introduce the concept of risk-neutral pricing.
+
+# What is a derivative?
+
+A derivative is a financial instrument whose value depends on the value of another asset, which is called the underlying asset. The underlying asset can be a stock, a bond, a commodity, an index, or even another derivative. The most common types of derivatives are options and futures.
+
+The dependance on the underlying asset is determined by the so-called payoff function $\varepsilon_T$. It also gives the profit or loss of the derivative at maturity $T$. 
+For example, the payoff function of a call option is given by:
+$$
+\varepsilon_T = \max(S_T - K, 0)
+$$
+
+where $S_T$ is the price of the underlying asset at time $T$, $K$ is the strike price of the option, and $\varepsilon_T$ is the payoff of the option at time $T$. 
+
+In other words, the payoff of a call option is the difference between the price of the underlying asset and the strike price, if the price of the underlying asset is greater than the strike price, and zero otherwise. 
+
+# Derivative pricing
+
+To derive the price of a derivative, we need to understand three concepts (by order): the discount factor, the no-arbitrage principle, and the risk-neutral pricing.
+
+## 1. The discount factor
+
+Since derivatives are all about promises to pay in the future, it is important to know how to value them in the present. This is where the discount factor comes into play. 
+
+The discount factor is a way to determine the present value of a future cash flow. It  is based on the idea that a given currency unit today, let's say euro, is not worth the same in the future.  To know how this varies, we often talk of the interest rate ( for example, the one you are subjected where you have a bank account and want to spare some money in the liquid account). Moreover, it is important to know the period of time for which it is applied. 
+Let's say that the yearly interest rate is $r$. The value of 1 euro in one year is $\left(1+r \times Period(T-t) \right)$ where Period(T-t) is the number of years between the time $t$ and the time $T$. For example, if we want to know the value of 1 euro in 6 months, then Period(T-t) = 0.5.
+
+Hence, the discount factor is given by the valeur of 1 euro we might receive in the future in the present. It is given by:
+$$
+\beta(t,T) = \frac{1}{\left( 1+r \times Period(T-t) \right)}.
+$$ 
+
+Since the interest rate is often small, we can use the approximation $\beta(t,T) \approx e^{-r \times Period(T-t)}$.
+
+## 2. The no-arbitrage principle
+
+By definition, an arbitrage opportunity is a situation where one can make a profit without taking any risk. In other words, it is a situation where one can make money without investing any money.
+
+In order to ensure consistency in the market about the price of derivatives, we need to ensure that there are no arbitrage opportunities. Moreover, we want the price of a derivative to be essentially determined by the price of the underlying asset. This is where the no-arbitrage principle comes into play. By absence of arbitrage, we mean that if two portfolios from different market places have the same underlying and the same future cash flows, it should have the same price.
+
+In case of an arbitrage opportunity, one can make a profit without taking any risk. Hence, there would be a demand for the cheaper portfolio and a supply for the more expensive one. This would lead to a change in the price of the two portfolios until they have the same price, meaning there is another factor, other than the underlying price, that is not taken into account in the pricing of the two portfolios.
+
+## 3. The risk-neutral measure
+
+It is common to price derivatives by assuming that all investors are risk-neutral, meaning the investors are indifferent to the risk of their investments. 
+
+Hence, it is important to price derivatives under a risk-neutral measure under which the expected future discounted price of the traded asset, conditional on the information available today, equals its current discounted price : This is the so-called martingale property.
+
+Moreover, the existence of a risk-neutral probability measure implies the absence of arbitrage. In fact, if there was an arbitrage opportunity, then the expected future discounted price of the traded asset would not equal its current discounted price, which would contradict the martingale property.
+
+## The pricing formula
+
+Using the three concepts introduced above, we can derive the price of a derivative.
+
+Under the risk-neutral measure, let's denote it  $\mathbb{Q}$, the price of a derivative is given by the expected value of its future discounted cash flows. In other words, the price of a derivative with payoff $\varepsilon_T$ is given by:
+$$
+\Pi_t = \mathbb{E}^{\mathbb{Q}} \left[ \beta(t,T) \varepsilon_T \middle| \mathcal{F}_t \right]
+$$
+
+Moreover, under the risk-neutral measure, we know that the discounted price of the underlying asset is a martingale. Mathematically, this means that :
+$$
+\mathbb{E}^{\mathbb{Q}} \left[ \beta(t,T) S_T \middle| \mathcal{F}_t \right] = \beta(t,t) S_t = S_t \text{ (since $\beta(t,t) = 1$)}.
+$$
+
+
+:::{.callout-note}
+This pricing formula assumes the absence of arbitrage and uses a risk-neutral probability measure. Under this measure, a derivative’s price equals the expected present value of its future cash flows, discounted at the risk-free rate. Together, no-arbitrage, risk-neutral valuation, and discounting allow us to price derivatives consistently with the underlying asset.
+:::
