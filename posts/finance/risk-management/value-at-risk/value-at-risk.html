@@ -625,6 +625,10 @@ VaR(99\%)=2.3263 \times \sqrt{82.1176} - 2.665 = 18.42
 <span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>VaR<span class="ot">&lt;-</span> <span class="fu">calculate_VaR</span>(mu,W_t,std_devs,correlation_matrix,<span class="fl">0.99</span>)</span>
 <span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>VaR</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         [,1]
+[1,] 18.41564</code></pre>
+</div>
 </div>
 </section>
 </section>
@@ -724,23 +728,27 @@ VaR= 2.33 * \sqrt{W_t^T \Sigma W_t}
 <section id="implémentation-en-r-1" class="level4" data-number="2.4.1.1">
 <h4 data-number="2.4.1.1" class="anchored" data-anchor-id="implémentation-en-r-1"><span class="header-section-number">2.4.1.1</span> Implémentation en R</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Définition des écarts-types en points de base convertis en pourcentage</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>std_devs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.746</span>, <span class="fl">2.170</span>, <span class="fl">3.264</span>, <span class="fl">3.901</span>, <span class="fl">4.155</span>)<span class="sc">/</span><span class="dv">10000</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Matrice de corrélation</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>correlation_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="dv">100</span>, <span class="fl">87.205</span>, <span class="fl">79.809</span>, <span class="fl">75.584</span>, <span class="fl">71.944</span>,</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fl">87.205</span>, <span class="dv">100</span>, <span class="fl">97.845</span>, <span class="fl">95.270</span>, <span class="fl">92.110</span>,</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fl">79.809</span>, <span class="fl">97.845</span>, <span class="dv">100</span>, <span class="fl">98.895</span>, <span class="fl">96.556</span>,</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fl">75.584</span>, <span class="fl">95.270</span>, <span class="fl">98.895</span>, <span class="dv">100</span>, <span class="fl">99.219</span>,</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fl">71.944</span>, <span class="fl">92.110</span>, <span class="fl">96.556</span>, <span class="fl">99.219</span>, <span class="dv">100</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>), <span class="at">nrow =</span> <span class="dv">5</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)<span class="sc">/</span><span class="dv">100</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>W_tm <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="fl">4.978</span>, <span class="sc">-</span><span class="fl">9.826</span>, <span class="sc">-</span><span class="fl">14.437</span>, <span class="sc">-</span><span class="fl">18.783</span>, <span class="sc">-</span><span class="fl">480.356</span>),<span class="at">nrow =</span> <span class="dv">5</span>)<span class="sc">*</span><span class="dv">10000</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>mu<span class="ot">&lt;-</span><span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">5</span>)</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>VaR<span class="ot">&lt;-</span><span class="fu">calculate_VaR</span>(mu,W_tm,std_devs,correlation_matrix,<span class="fl">0.99</span>)</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>VaR</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Définition des écarts-types en points de base convertis en pourcentage</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>std_devs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.746</span>, <span class="fl">2.170</span>, <span class="fl">3.264</span>, <span class="fl">3.901</span>, <span class="fl">4.155</span>)<span class="sc">/</span><span class="dv">10000</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Matrice de corrélation</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>correlation_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="dv">100</span>, <span class="fl">87.205</span>, <span class="fl">79.809</span>, <span class="fl">75.584</span>, <span class="fl">71.944</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fl">87.205</span>, <span class="dv">100</span>, <span class="fl">97.845</span>, <span class="fl">95.270</span>, <span class="fl">92.110</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fl">79.809</span>, <span class="fl">97.845</span>, <span class="dv">100</span>, <span class="fl">98.895</span>, <span class="fl">96.556</span>,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fl">75.584</span>, <span class="fl">95.270</span>, <span class="fl">98.895</span>, <span class="dv">100</span>, <span class="fl">99.219</span>,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fl">71.944</span>, <span class="fl">92.110</span>, <span class="fl">96.556</span>, <span class="fl">99.219</span>, <span class="dv">100</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>), <span class="at">nrow =</span> <span class="dv">5</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)<span class="sc">/</span><span class="dv">100</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>W_tm <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="fl">4.978</span>, <span class="sc">-</span><span class="fl">9.826</span>, <span class="sc">-</span><span class="fl">14.437</span>, <span class="sc">-</span><span class="fl">18.783</span>, <span class="sc">-</span><span class="fl">480.356</span>),<span class="at">nrow =</span> <span class="dv">5</span>)<span class="sc">*</span><span class="dv">10000</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>mu<span class="ot">&lt;-</span><span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">5</span>)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>VaR<span class="ot">&lt;-</span><span class="fu">calculate_VaR</span>(mu,W_tm,std_devs,correlation_matrix,<span class="fl">0.99</span>)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>VaR</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         [,1]
+[1,] 4970.384</code></pre>
+</div>
 </div>
 </section>
 </section>

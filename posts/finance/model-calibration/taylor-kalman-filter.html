@@ -157,11 +157,15 @@ window.Quarto = {
 <link rel="stylesheet" href="../../../styles.css">
 <meta property="og:title" content="Calibration du modèle à volatilité stochastique de Taylor : Filtre de Kalman – Cheryl Kouadio">
 <meta property="og:description" content="Cheryl Kouadio is a graduate student in stochastic modeling and quantitative finance at Université Paris Cité. Her academic interests focus on probability theory, stochastic processes, data analysis, and financial risk modeling. She studies how rigorous statistical and mathematical methods can be applied to quantify uncertainty and support decision-making in finance and risk management.">
-<meta property="og:image" content="https://cheryl-kdio.github.io/files/profile/kouadio_profile.jpeg">
+<meta property="og:image" content="https://cheryl-kdio.github.io/posts/finance/model-calibration/taylor-kalman-filter_files/figure-html/cell-3-output-1.png">
 <meta property="og:site_name" content="Cheryl Kouadio">
+<meta property="og:image:height" content="431">
+<meta property="og:image:width" content="590">
 <meta name="twitter:title" content="Calibration du modèle à volatilité stochastique de Taylor : Filtre de Kalman – Cheryl Kouadio">
 <meta name="twitter:description" content="Cheryl Kouadio is a graduate student in stochastic modeling and quantitative finance at Université Paris Cité. Her academic interests focus on probability theory, stochastic processes, data analysis, and financial risk modeling. She studies how rigorous statistical and mathematical methods can be applied to quantify uncertainty and support decision-making in finance and risk management.">
-<meta name="twitter:image" content="https://cheryl-kdio.github.io/files/profile/kouadio_profile.jpeg">
+<meta name="twitter:image" content="https://cheryl-kdio.github.io/posts/finance/model-calibration/taylor-kalman-filter_files/figure-html/cell-3-output-1.png">
+<meta name="twitter:image-height" content="431">
+<meta name="twitter:image-width" content="590">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -423,7 +427,7 @@ y_t = x_t + \varepsilon_t
 <p>où <span class="math inline">\(y_t\)</span> est le logarithme des rendements au carré à l’instant <span class="math inline">\(t\)</span>, <span class="math inline">\(x_t\)</span> est la volatilité de l’actif financier à l’instant <span class="math inline">\(t\)</span>, et <span class="math inline">\(\varepsilon_t\)</span> est un bruit blanc de loi log-<span class="math inline">\(\chi^2\)</span>.</p>
 <p>De ce fait, nous pouvons utiliser le filtre de Kalman pour estimer la volatilité de l’actif financier en utilisant les rendements observés. En effet, le filtre de Kalman est un algorithme récursif qui permet d’estimer l’état caché d’un système dynamique à partir d’observations bruitées. Il s’applique à des modèles linéaires dont le bruit est gaussien. Dans notre cas, nous avons linéarisé le modèle pour qu’il soit compatible avec le filtre de Kalman. Cependant, le bruit n’est pas gaussien, mais log-<span class="math inline">\(\chi^2\)</span>. L’objectif de ce notebook est d’observer le comportement du filtre de Kalman où le bruit n’est pas gaussien.</p>
 <p>Nous possédons déjà d’un fichier avec les rendements de l’actif financier et la vraie volatilité simulés avec les paramètres suivants <span class="math inline">\(\mu = -0.8\)</span>, <span class="math inline">\(\phi = 0.9\)</span>, <span class="math inline">\(\sigma = 0.09\)</span>. Nous allons donc utiliser ces données pour estimer la volatilité de l’actif financier en utilisant le filtre de Kalman. Néanmoins, le code est également fourni pour simuler les données si vous souhaitez tester le filtre de Kalman sur d’autres paramètres.</p>
-<div id="21262854" class="cell">
+<div id="a6920c7f" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulation d'un modèle à vol stochastique de Taylor</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># r_t = exp(x_t/2)*eps_t (eps_t iid N(0,1))</span></span>
@@ -457,7 +461,7 @@ y_t = x_t + \varepsilon_t
 <span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> data[<span class="st">'r'</span>]</span>
 <span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> data[<span class="st">'x'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="ded1a7b9" class="cell">
+<div id="afb13627" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Affichage des trajectoires</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -468,8 +472,22 @@ y_t = x_t + \varepsilon_t
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>plt.plot(x, color<span class="op">=</span><span class="st">'red'</span>)</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Trajectoire de log-volatilité"</span>)</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="taylor-kalman-filter_files/figure-html/cell-3-output-1.png" class="img-fluid figure-img"></p>
+</figure>
 </div>
-<div id="69de03e2" class="cell">
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="taylor-kalman-filter_files/figure-html/cell-3-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="10e24e05" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Construction du modèle log-SV (modèle de Taylor)</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Pour appliquer le filtre de Kalman, il faut que les bruits soient centrés.</span></span>
@@ -502,7 +520,7 @@ x_{\text{hat}[t]} &amp;= x_{\text{hat\_m}} + K \cdot (y[t] - y_m)
 <p>$$</p>
 <p>Pour initialiser le filtre de Kalman, il est conseillé de connaitre la loi stationnaire de la volatilité. En effet, la volatilité suit une loi normale stationnaire de paramètre <span class="math inline">\(\mu/(1 - \phi)\)</span> et <span class="math inline">\(\sigma^2/(1 - \phi^2)\)</span>. Par conséquent, nous pouvons initialiser le filtre de Kalman avec ces paramètres. En ce qui concerne la matrice de covariance de l’état initial, nous pouvons la fixer à une valeur élevée, par exemple <span class="math inline">\(10^2\)</span>.</p>
 <p>Dans notre cas, nous allons tester deux initialisations différentes : une initialisation avec les paramètres stationnaires et une initialisation avec des paramètres aléatoires.</p>
-<div id="e78cefe2" class="cell">
+<div id="4f052587" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Script de filtre de kalman pour estimer la volatilité à chaque instant t en supposant les paramètres connus</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> kalman_filter(y, mu, phi, sigma_squared, n, init_x, init_P):</span>
@@ -525,14 +543,21 @@ x_{\text{hat}[t]} &amp;= x_{\text{hat\_m}} + K \cdot (y[t] - y_m)
 <span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>        x_hat[t] <span class="op">=</span> x_hat_m <span class="op">+</span> K <span class="op">*</span> (y[t] <span class="op">-</span> y_m)</span>
 <span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x_hat, P, K</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="6563e2c3" class="cell">
+<div id="22c02554" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialisation à 0 et 0.01</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>init_x <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>init_P <span class="op">=</span> <span class="fl">0.01</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>x_hat, P, K <span class="op">=</span> kalman_filter(y, mu, phi, sigma_squared, n, init_x, init_P)</span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>plt.plot(x_hat, color<span class="op">=</span><span class="st">'grey'</span>, label<span class="op">=</span><span class="st">'Volatilité estimée'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="taylor-kalman-filter_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></p>
+</figure>
 </div>
-<div id="91938e03" class="cell">
+</div>
+</div>
+<div id="c3d78e3b" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialisation à x_0 et sigma_squared/(1-phi**2)</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>init_x <span class="op">=</span> x[<span class="dv">0</span>]</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>init_P <span class="op">=</span> sigma_squared<span class="op">/</span>(<span class="dv">1</span><span class="op">-</span>phi<span class="op">**</span><span class="dv">2</span>)</span>
@@ -549,85 +574,115 @@ x_{\text{hat}[t]} &amp;= x_{\text{hat\_m}} + K \cdot (y[t] - y_m)
 <span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"MSE = "</span>, mse)</span>
 <span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"MAE = "</span>, mae)</span>
 <span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"RMSE = "</span>, rmse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>MSE =  0.2794557366826766
+MAE =  0.4120099778966342
+RMSE =  0.5286357315606622</code></pre>
 </div>
-<div id="46402ce1" class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialisation à mu/(1-phi) et sigma_squared/(1-phi**2)</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>init_x <span class="op">=</span> mu<span class="op">/</span>(<span class="dv">1</span><span class="op">-</span>phi)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>init_P <span class="op">=</span> sigma_squared<span class="op">/</span>(<span class="dv">1</span><span class="op">-</span>phi<span class="op">**</span><span class="dv">2</span>)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>x_hat, P, K <span class="op">=</span> kalman_filter(y, mu, phi, sigma_squared, n, init_x, init_P)</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>plt.plot(x_hat, color<span class="op">=</span><span class="st">'red'</span>, label<span class="op">=</span><span class="st">'Volatilité estimée'</span>)</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>plt.plot(x, color<span class="op">=</span><span class="st">'grey'</span>, label <span class="op">=</span> <span class="st">'Volatilité réelle'</span>)</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute MSE, MAE, RMSE</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>mse <span class="op">=</span> np.mean((x <span class="op">-</span> x_hat)<span class="op">**</span><span class="dv">2</span>)</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>mae <span class="op">=</span> np.mean(np.<span class="bu">abs</span>(x <span class="op">-</span> x_hat))</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>rmse <span class="op">=</span> np.sqrt(mse)</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"MSE = "</span>, mse)</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"MAE = "</span>, mae)</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"RMSE = "</span>, rmse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="taylor-kalman-filter_files/figure-html/cell-7-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="8b8ba1cd" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialisation à mu/(1-phi) et sigma_squared/(1-phi**2)</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>init_x <span class="op">=</span> mu<span class="op">/</span>(<span class="dv">1</span><span class="op">-</span>phi)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>init_P <span class="op">=</span> sigma_squared<span class="op">/</span>(<span class="dv">1</span><span class="op">-</span>phi<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>x_hat, P, K <span class="op">=</span> kalman_filter(y, mu, phi, sigma_squared, n, init_x, init_P)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>plt.plot(x_hat, color<span class="op">=</span><span class="st">'red'</span>, label<span class="op">=</span><span class="st">'Volatilité estimée'</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>plt.plot(x, color<span class="op">=</span><span class="st">'grey'</span>, label <span class="op">=</span> <span class="st">'Volatilité réelle'</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute MSE, MAE, RMSE</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>mse <span class="op">=</span> np.mean((x <span class="op">-</span> x_hat)<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>mae <span class="op">=</span> np.mean(np.<span class="bu">abs</span>(x <span class="op">-</span> x_hat))</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>rmse <span class="op">=</span> np.sqrt(mse)</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"MSE = "</span>, mse)</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"MAE = "</span>, mae)</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"RMSE = "</span>, rmse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>MSE =  0.27543214871007066
+MAE =  0.4078063371140131
+RMSE =  0.5248162999660649</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="taylor-kalman-filter_files/figure-html/cell-8-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
 </div>
 </section>
 <section id="filtre-de-kalman-avec-paramètres-inconnus" class="level2">
 <h2 class="anchored" data-anchor-id="filtre-de-kalman-avec-paramètres-inconnus">Filtre de Kalman avec paramètres inconnus</h2>
 <p>Dans le cas où les paramètres du modèle sont inconnus, nous pouvons les estimer en utilisant le filtre de Kalman. En effet, nous pouvons utiliser l’algorithme EM pour estimer les paramètres du modèle. L’algorithme EM est un algorithme itératif qui permet d’estimer les paramètres d’un modèle en maximisant la vraisemblance des données observées. Dans notre cas, nous allons utiliser l’algorithme EM pour estimer les paramètres <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\phi\)</span> et <span class="math inline">\(\sigma\)</span> du modèle.</p>
-<div id="7e8f1c6d" class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> minimize</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the log-likelihood function for the log-SV model with Kalman filter</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> log_sv_kalman(params, y):</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Extract parameters</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    mu, phi, sigma_eta <span class="op">=</span> params</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Number of observations</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="bu">len</span>(y)</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Initialize state and variance</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    x_t <span class="op">=</span> mu  <span class="co"># Initial state (log-volatility)</span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    P_t <span class="op">=</span> sigma_eta<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> (<span class="dv">1</span> <span class="op">-</span> phi<span class="op">**</span><span class="dv">2</span>)  <span class="co"># Initial variance (stationarity assumption)</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Log-likelihood accumulator</span></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    log_likelihood <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(n):</span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Observation equation: y_t ~ x_t + nu_t</span></span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Prediction step</span></span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>        y_t_pred <span class="op">=</span> x_t</span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>        F_t <span class="op">=</span> P_t <span class="op">+</span> np.pi<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> <span class="dv">2</span>  <span class="co"># Variance of observation noise</span></span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Update step</span></span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>        v_t <span class="op">=</span> y[t] <span class="op">-</span> y_t_pred  <span class="co"># Prediction error</span></span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>        K_t <span class="op">=</span> P_t <span class="op">/</span> F_t  <span class="co"># Kalman gain</span></span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>        x_t <span class="op">=</span> x_t <span class="op">+</span> K_t <span class="op">*</span> v_t</span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>        P_t <span class="op">=</span> (<span class="dv">1</span> <span class="op">-</span> K_t) <span class="op">*</span> P_t <span class="op">+</span> sigma_eta<span class="op">**</span><span class="dv">2</span>  <span class="co"># Update variance</span></span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Update log-likelihood</span></span>
-<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>        log_likelihood <span class="op">+=</span> <span class="op">-</span><span class="fl">0.5</span> <span class="op">*</span> (np.log(<span class="dv">2</span> <span class="op">*</span> np.pi) <span class="op">+</span> np.log(F_t) <span class="op">+</span> (v_t<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> F_t))</span>
-<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>        <span class="co"># State evolution</span></span>
-<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>        x_t <span class="op">=</span> mu <span class="op">+</span> phi <span class="op">*</span> (x_t <span class="op">-</span> mu)  <span class="co"># State equation</span></span>
-<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span>log_likelihood  <span class="co"># Negative log-likelihood for minimization</span></span>
-<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Initial parameter guesses</span></span>
-<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>initial_params <span class="op">=</span> [<span class="op">-</span><span class="fl">0.7</span>, <span class="fl">0.8</span>, np.sqrt(<span class="fl">0.05</span>)]</span>
-<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a><span class="co"># Constrain phi between -1 and 1 and sigma_eta &gt; 0</span></span>
-<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>bounds <span class="op">=</span> [(<span class="op">-</span>np.inf, np.inf), (<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), (<span class="fl">1e-6</span>, np.inf)]</span>
-<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a><span class="co"># Optimize parameters using the log-likelihood function</span></span>
-<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> minimize(log_sv_kalman, initial_params, args<span class="op">=</span>(y,), bounds<span class="op">=</span>bounds, method<span class="op">=</span><span class="st">'L-BFGS-B'</span>)</span>
-<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract estimated parameters</span></span>
-<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>mu_est, phi_est, sigma_eta_est <span class="op">=</span> result.x</span>
-<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a><span class="co"># Print results</span></span>
-<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Estimated parameters:"</span>)</span>
-<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"mu: </span><span class="sc">{</span>mu_est<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
-<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"phi: </span><span class="sc">{</span>phi_est<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
-<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"sigma_eta: </span><span class="sc">{</span>sigma_eta_est<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="75e0191b" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> minimize</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the log-likelihood function for the log-SV model with Kalman filter</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> log_sv_kalman(params, y):</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Extract parameters</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    mu, phi, sigma_eta <span class="op">=</span> params</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Number of observations</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="bu">len</span>(y)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Initialize state and variance</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    x_t <span class="op">=</span> mu  <span class="co"># Initial state (log-volatility)</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    P_t <span class="op">=</span> sigma_eta<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> (<span class="dv">1</span> <span class="op">-</span> phi<span class="op">**</span><span class="dv">2</span>)  <span class="co"># Initial variance (stationarity assumption)</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Log-likelihood accumulator</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    log_likelihood <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Observation equation: y_t ~ x_t + nu_t</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Prediction step</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>        y_t_pred <span class="op">=</span> x_t</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>        F_t <span class="op">=</span> P_t <span class="op">+</span> np.pi<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> <span class="dv">2</span>  <span class="co"># Variance of observation noise</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Update step</span></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>        v_t <span class="op">=</span> y[t] <span class="op">-</span> y_t_pred  <span class="co"># Prediction error</span></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>        K_t <span class="op">=</span> P_t <span class="op">/</span> F_t  <span class="co"># Kalman gain</span></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>        x_t <span class="op">=</span> x_t <span class="op">+</span> K_t <span class="op">*</span> v_t</span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>        P_t <span class="op">=</span> (<span class="dv">1</span> <span class="op">-</span> K_t) <span class="op">*</span> P_t <span class="op">+</span> sigma_eta<span class="op">**</span><span class="dv">2</span>  <span class="co"># Update variance</span></span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Update log-likelihood</span></span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>        log_likelihood <span class="op">+=</span> <span class="op">-</span><span class="fl">0.5</span> <span class="op">*</span> (np.log(<span class="dv">2</span> <span class="op">*</span> np.pi) <span class="op">+</span> np.log(F_t) <span class="op">+</span> (v_t<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> F_t))</span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>        <span class="co"># State evolution</span></span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>        x_t <span class="op">=</span> mu <span class="op">+</span> phi <span class="op">*</span> (x_t <span class="op">-</span> mu)  <span class="co"># State equation</span></span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span>log_likelihood  <span class="co"># Negative log-likelihood for minimization</span></span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Initial parameter guesses</span></span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>initial_params <span class="op">=</span> [<span class="op">-</span><span class="fl">0.7</span>, <span class="fl">0.8</span>, np.sqrt(<span class="fl">0.05</span>)]</span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a><span class="co"># Constrain phi between -1 and 1 and sigma_eta &gt; 0</span></span>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a>bounds <span class="op">=</span> [(<span class="op">-</span>np.inf, np.inf), (<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), (<span class="fl">1e-6</span>, np.inf)]</span>
+<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a><span class="co"># Optimize parameters using the log-likelihood function</span></span>
+<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> minimize(log_sv_kalman, initial_params, args<span class="op">=</span>(y,), bounds<span class="op">=</span>bounds, method<span class="op">=</span><span class="st">'L-BFGS-B'</span>)</span>
+<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract estimated parameters</span></span>
+<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a>mu_est, phi_est, sigma_eta_est <span class="op">=</span> result.x</span>
+<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a><span class="co"># Print results</span></span>
+<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Estimated parameters:"</span>)</span>
+<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"mu: </span><span class="sc">{</span>mu_est<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb10-55"><a href="#cb10-55" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"phi: </span><span class="sc">{</span>phi_est<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb10-56"><a href="#cb10-56" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"sigma_eta: </span><span class="sc">{</span>sigma_eta_est<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Estimated parameters:
+mu: -0.8021
+phi: 0.8001
+sigma_eta: 1.2184</code></pre>
+</div>
 </div>
 
 
