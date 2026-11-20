@@ -8,14 +8,14 @@
 <title>Cheryl Kouadio</title>
 <link>https://cheryl-kdio.github.io/posts.html</link>
 <atom:link href="https://cheryl-kdio.github.io/posts.xml" rel="self" type="application/rss+xml"/>
-<description>Cheryl Kouadio is a graduate student in stochastic modeling and quantitative finance at Université Paris Cité. Her academic interests focus on probability theory, stochastic processes, data analysis, and financial risk modeling. She studies how rigorous statistical and mathematical methods can be applied to quantify uncertainty and support decision-making in finance and risk management.</description>
+<description>Browse articles on mathematics, statistics and quantitative finance by Cheryl Kouadio.</description>
 <image>
-<url>https://cheryl-kdio.github.io/files/profile/kouadio_profile.jpeg</url>
+<url>https://cheryl-kdio.github.io/files/profile/kouadio_profile.jpg</url>
 <title>Cheryl Kouadio</title>
 <link>https://cheryl-kdio.github.io/posts.html</link>
 </image>
 <generator>quarto-1.6.40</generator>
-<lastBuildDate>Sun, 15 Nov 2026 10:52:08 GMT</lastBuildDate>
+<lastBuildDate>Fri, 20 Nov 2026 23:36:17 GMT</lastBuildDate>
 <item>
   <title>Basics of Derivative Pricing</title>
   <dc:creator>Cheryl KOUADIO</dc:creator>
@@ -85,7 +85,7 @@ Note
   <category>paper</category>
   <category>m2mo</category>
   <guid>https://cheryl-kdio.github.io/posts/finance/derivatives/pricing-basics.html</guid>
-  <pubDate>Sun, 15 Nov 2026 10:52:08 GMT</pubDate>
+  <pubDate>Fri, 20 Nov 2026 23:36:17 GMT</pubDate>
 </item>
 <item>
   <title>Particle method for stochastic local volatility valibration</title>

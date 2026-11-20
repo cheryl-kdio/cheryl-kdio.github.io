@@ -10,11 +10,11 @@
 <atom:link href="https://cheryl-kdio.github.io/notes.xml" rel="self" type="application/rss+xml"/>
 <description>Cheryl Kouadio is a graduate student in stochastic modeling and quantitative finance at Université Paris Cité. Her academic interests focus on probability theory, stochastic processes, data analysis, and financial risk modeling. She studies how rigorous statistical and mathematical methods can be applied to quantify uncertainty and support decision-making in finance and risk management.</description>
 <image>
-<url>https://cheryl-kdio.github.io/files/profile/kouadio_profile.jpeg</url>
+<url>https://cheryl-kdio.github.io/files/profile/kouadio_profile.jpg</url>
 <title>Cheryl Kouadio</title>
 <link>https://cheryl-kdio.github.io/notes.html</link>
 </image>
 <generator>quarto-1.6.40</generator>
-<lastBuildDate>Sun, 15 Nov 2026 17:14:50 GMT</lastBuildDate>
+<lastBuildDate>Fri, 20 Nov 2026 23:36:24 GMT</lastBuildDate>
 </channel>
 </rss>

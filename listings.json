@@ -112,49 +112,6 @@
     ]
   },
   {
-    "listing": "/index.html",
-    "items": [
-      "/posts/finance/derivatives/pricing-basics.html",
-      "/posts/finance/volatility/stochastic-local-volatility.html",
-      "/posts/finance/interest-rates/interest-rates-made-simple.html",
-      "/posts/finance/derivatives/options-made-simple.html",
-      "/posts/finance/interest-rates/market-instruments.html",
-      "/posts/finance/derivatives/mathematical-foundations.html",
-      "/posts/finance/derivatives/numerical-methods/american-options.html",
-      "/posts/finance/derivatives/financial-markets-overview.html",
-      "/posts/finance/derivatives/numerical-methods/european-options.html",
-      "/posts/finance/portfolio-management/practical-work/bond-valuation-risk.html",
-      "/posts/finance/risk-management/value-at-risk/copulas-project.html",
-      "/posts/finance/model-calibration/yield-curve-calibration.html",
-      "/posts/finance/risk-management/value-at-risk/historical-and-parametric-var.html",
-      "/posts/finance/risk-management/value-at-risk/extreme-value-theory.html",
-      "/posts/finance/risk-management/value-at-risk/garch-var.html",
-      "/posts/finance/model-calibration/auxiliary-particle-filter.html",
-      "/posts/statistics/dependence/spearman-pearson.html",
-      "/posts/finance/model-calibration/heston.html",
-      "/posts/finance/portfolio-management/practical-work/market-risk.html",
-      "/posts/finance/portfolio-management/practical-work/liquidity-risk.html",
-      "/posts/finance/model-calibration/taylor-particle-filter.html",
-      "/posts/finance/model-calibration/taylor-kalman-filter.html",
-      "/posts/finance/model-calibration/black-scholes.html",
-      "/posts/statistics/machine-learning/feature-selection.html",
-      "/posts/statistics/machine-learning/gradient-boosting.html",
-      "/posts/statistics/machine-learning/kernels-and-svm.html",
-      "/posts/statistics/machine-learning/ridge-and-lasso.html",
-      "/posts/finance/financial-analysis/prudential-regulation.html",
-      "/posts/finance/sustainable-finance/socially-responsible-investment.html",
-      "/posts/finance/risk-management/risk-fundamentals.html",
-      "/posts/finance/financial-analysis/balance-sheet-and-income-statement.html",
-      "/posts/finance/risk-management/value-at-risk/var-application.html",
-      "/posts/finance/risk-management/value-at-risk/value-at-risk.html",
-      "/posts/finance/sustainable-finance/responsible-investment.html"
-    ]
-  },
-  {
-    "listing": "/notes.html",
-    "items": []
-  },
-  {
     "listing": "/glossary.html",
     "items": [
       "/glossary/mathematics/stochastic-calculus.html",
@@ -164,6 +121,10 @@
       "/browse/glossary/mathematics.html",
       "/glossary/mathematics/pde-and-monte-carlo.html"
     ]
+  },
+  {
+    "listing": "/notes.html",
+    "items": []
   },
   {
     "listing": "/now.html",
