@@ -1,68 +1,59 @@
 ---
-title: Topics
-description: Explore finance, statistics and mathematical foundations by topic and
-  subtopic.
+title: "Topics"
+description: "Explore mathematics, statistics and quantitative finance through articles and research projects."
 sidebar: false
-toc: false
-page-layout: full
+toc: true
 ---
 
-Choose a topic or subtopic to view its articles and dedicated navigation.
+## Quantitative Finance
 
-::: {.topic-cards}
+[]{#finance}
 
-::: {.topic-card}
+Pricing, interest rates, portfolio management and the modeling of financial risk.
 
-### [Finance](/browse/finance/index.qmd)
+- [Browse the finance archive](browse/finance/index.qmd)
+- [Research on yield curve construction and calibration](research.qmd#yield-curve-construction-and-calibration)
+- [Financial glossary](browse/glossary/finance.qmd)
 
-::: {.subtopic-cards}
+## Probability
 
-[Derivatives](/browse/finance/derivatives.qmd){.subtopic-card}
+Dependence between random variables and the behavior of extreme observations.
 
-[Interest rates](/browse/finance/interest-rates.qmd){.subtopic-card}
+- [Copulas and multiple risks](posts/finance/risk-management/value-at-risk/copulas-project.qmd)
+- [Extreme value theory](posts/finance/risk-management/value-at-risk/extreme-value-theory.qmd)
+- [Research on dependence and tail risk](research.qmd#dependence-and-tail-risk)
 
-[Volatility](/browse/finance/volatility.qmd){.subtopic-card}
+## Statistics
 
-[Portfolio management](/browse/finance/portfolio-management.qmd){.subtopic-card}
+Statistical learning, correlation and inference from observed data.
 
-[Risk management](/browse/finance/risk-management.qmd){.subtopic-card}
+- [Browse the statistics archive](browse/statistics/index.qmd)
+- [Machine learning](browse/statistics/machine-learning.qmd)
+- [Dependence and correlation](browse/statistics/dependence.qmd)
+- [Research on cure models in clinical trials](research.qmd#published-work)
 
-[Model calibration](/browse/finance/model-calibration.qmd){.subtopic-card}
+## Mathematical Foundations
 
-[Financial analysis](/browse/finance/financial-analysis.qmd){.subtopic-card}
+[]{#glossary-mathematical-foundations}
 
-[Sustainable finance](/browse/finance/sustainable-finance.qmd){.subtopic-card}
+Definitions and arguments that underpin financial models, from no-arbitrage to stochastic calculus.
 
-:::
+- [Mathematical foundations of financial market modeling](posts/finance/derivatives/mathematical-foundations.qmd)
+- [Glossary of mathematical foundations](browse/glossary/mathematics.qmd)
+- [Research on numerical option pricing](research.qmd#numerical-option-pricing)
 
-::: 
+## Numerical Methods
 
-::: {.topic-card}
+Finite difference schemes and Monte Carlo simulation for pricing and calibration.
 
-### [Statistics](/browse/statistics/index.qmd)
+- [PDE and Monte Carlo glossary](glossary/mathematics/pde-and-monte-carlo.qmd)
+- [Finite difference methods for European options](posts/finance/derivatives/numerical-methods/european-options.qmd)
+- [Research on numerical option pricing](research.qmd#numerical-option-pricing)
 
-::: {.subtopic-cards}
+## Stochastic Processes
 
-[Machine learning](/browse/statistics/machine-learning.qmd){.subtopic-card}
+Models of evolving rates and volatility, with applications to filtering and pricing.
 
-[Dependence and correlation](/browse/statistics/dependence.qmd){.subtopic-card}
-
-:::
-
-::: 
-
-::: {.topic-card}
-
-### [Glossary & mathematical foundations](/browse/glossary/index.qmd)
-
-::: {.subtopic-cards}
-
-[Financial glossary](/browse/glossary/finance.qmd){.subtopic-card}
-
-[Mathematical foundations](/browse/glossary/mathematics.qmd){.subtopic-card}
-
-:::
-
-::: 
-
-:::
+- [Stochastic calculus glossary](glossary/mathematics/stochastic-calculus.qmd)
+- [Calibration du modèle Black-Scholes](posts/finance/model-calibration/black-scholes.qmd)
+- [Research on volatility and filtering](research.qmd#volatility-and-filtering)

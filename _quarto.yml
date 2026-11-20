@@ -14,70 +14,23 @@ author-meta: "Cheryl Kouadio"
 
 website:
   title: "Cheryl Kouadio"
-  image: "/files/profile/kouadio_profile.jpeg"
+  image: "files/profile/kouadio_profile.jpg"
   description: "Cheryl Kouadio is a graduate student in stochastic modeling and quantitative finance at Université Paris Cité. Her academic interests focus on probability theory, stochastic processes, data analysis, and financial risk modeling. She studies how rigorous statistical and mathematical methods can be applied to quantify uncertainty and support decision-making in finance and risk management."
   navbar:
     background: light
+    collapse-below: lg
     left:
-#      - text: Home
-#        href: index.qmd
-      - text: About
-        menu:
-          - text: Now
-            href: now.qmd
-          - text: Events
-            href: posts.qmd#category=event
-          - text: CV
-            href: files/Cheryl-Kouadio-CV.pdf
-            target: _blank
+      - text: Home
+        href: index.qmd
+      - text: Writings
+        href: posts.qmd
+      - text: Research
+        href: research.qmd
       - text: Topics
-        menu:
-          - text: Finance
-            href: browse/finance/index.qmd
-          - text: Statistics
-            href: browse/statistics/index.qmd
-          - text: Glossary & mathematical foundations
-            href: browse/glossary/index.qmd
-      - text: Reports
-        href: publications.qmd
-      - text: Coursework
-        menu:
-          - text: ENSAI
-            href: posts.qmd#category=ensai-gdr
-          - text: M2MO
-            href: posts.qmd#category=m2mo
-      - text: Notes
-        menu:
-          - text: All notes
-            href: notes.qmd
-          - text: Glossary
-            href: glossary.qmd
+        href: topics.qmd
+      - text: About
+        href: about.qmd
 
-      # - text: Outreach
-      #   menu:
-      #   - text: Policy Engagement
-      #     href: posts.qmd#category=outreach       
-      #   - text: Presentations
-      #     href: posts.qmd#category=presentation            
-      #   - text: Notes
-      #     href: notes.qmd          
-
-    right: 
-      - icon: github
-        text: Github
-        href: https://github.com/cheryl-kdio
-        target: _blank
-      - icon: linkedin
-        text: Linkedin
-        href: https://www.linkedin.com/in/cheryl-kouadio-251815206/
-        target: _blank
-#      - icon: twitter-x 
-#        href: https://twitter.com/DrGangHe
-#        target: _blank        
-      - icon: rss
-        href: posts.xml
-        target: _blank
-  
   # Folder-based navigation, scoped to the selected topic.
   sidebar:
   - id: topics
@@ -236,17 +189,21 @@ website:
 
   page-navigation: true
   
-  page-footer: 
-    center: "[Cheryl Kouadio](https://github.com/cheryl-kdio) &copy; <script>document.write(new Date().getFullYear())</script>"
-    right:  
-      - icon: github
+  page-footer:
+    left: "[Cheryl Kouadio](/about.qmd)"
+    right:
+      - text: Email
+        href: mailto:cheryl.s.kouadio@gmail.com
+      - text: GitHub
         href: https://github.com/cheryl-kdio
-        target: _blank
+      - text: LinkedIn
+        href: https://www.linkedin.com/in/cheryl-kouadio-251815206/
+      - text: RSS
+        href: /posts.xml
 
-  
   search:
     location: navbar
-    type: textbox
+    type: overlay
   
   reader-mode: true
 
@@ -270,6 +227,7 @@ bibliography: references.bib
 
 format:
   html:
+    html-math-method: mathjax
     theme: cosmo
     css: styles.css
     toc: true
@@ -281,5 +239,5 @@ format:
     link-external-icon: false
     link-external-newwindow: true
     email-obfuscation: javascript
-    link-external-filter: '^(?:http:|https:)\/\/cheryl-kdio\.github\.io\/custom'
-    include-in-header: "files/includes/_academic.qmd"
+    include-in-header: files/includes/journal-head.html
+    include-after-body: files/includes/journal-body.html

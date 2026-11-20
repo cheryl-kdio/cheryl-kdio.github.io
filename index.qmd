@@ -1,129 +1,146 @@
 ---
-title: "Cheryl Kouadio, Msc"
-subtitle: |
-  Master’s Student in Stochastic Modeling and Quantitative Finance \
-  Université Paris Cité \
-  Faculty of Mathematics and Applications \
-  Paris, France
-description-meta: "Cheryl Kouadio is a graduate student in stochastic modeling and quantitative finance at Université Paris Cité. Her academic interests focus on probability theory, stochastic processes, data analysis, and financial risk modeling. She studies how rigorous statistical and mathematical methods can be applied to quantify uncertainty and support decision-making in finance and risk management."
-# image: "files/profile/kouadio_profile.jpg"
+description: "Research notes, essays and computational explorations in mathematics, statistics and quantitative finance by Cheryl Kouadio."
+pagetitle: "A personal research journal"
+image: files/images/density-study.svg
 page-navigation: false
 toc: false
+anchor-sections: false
 sidebar: false
 page-layout: full
-
-about:
-  id: hero-heading
-  template: trestles
-  image-width: 50%
-  image-shape: round
-  links:
-  - icon: envelope
-    text: E-mail
-    href: mailto:cheryl.s.kouadio@gmail.com
-  - icon: github
-    text: Github
-    href: https://github.com/cheryl-kdio
-  - icon: linkedin
-    text: LinkedIn
-    href: https://linkedin.com/in/cheryl-kouadio
-    target: _blank
-
-listing:
-  - id: recent-posts
-    contents: 
-      - posts
-      - posts/post-links.yml
-    exclude:
-      draft: true
-    type: grid
-    max-items: 12
-#    image-height: 150px
-    page-size: 6 #set same as max-times to remove the page number setting
-    fields: [date, title, subtitle, categories]
-    max-description-length: 75
-    sort: 
-      - "date desc"
-      - "title asc"
-
 ---
 
-<!-- <link rel="me" href="https://mastodon.social/@hegang"> -->
+::::: {.journal-home}
 
-:::{#hero-heading}
+::: {.journal-hero}
 
-<p align="center" style="font-size: 2em; font-weight: bold;">Hi there! 🤗</p>
+::: {.journal-hero-copy}
 
-I'm a graduate student passionate about mathematics, statistics, and their applications to finance and risk. I'm currently completing a Master's degree in Modélisation Aléatoire et Finance Quantitative (M2MO) at Université Paris Cité, a program centered on probability theory, stochastic processes, numerical methods, and quantitative finance. Previously, I studied at ENSAI, where I specialized in financial risk management.
+[Mathematics · Statistics · Quantitative Finance]{.journal-kicker}
 
-This website is my little corner of the internet, a place where I share what I learn through coursework, projects, and personal exploration in mathematics, statistics, and quantitative finance. I hope it can also be useful to other students walking a similar path!
-:::
+# A personal research journal {.journal-display}
 
+[Exploring mathematics, uncertainty and financial systems.]{.journal-deck}
 
-## Explore by topic
-
-Choose a subject to browse its articles and dedicated navigation.
-
-::: {.topic-cards}
-
-::: {.topic-card}
-
-### [Finance](/browse/finance/index.qmd)
-
-::: {.subtopic-cards}
-
-[Derivatives](/browse/finance/derivatives.qmd){.subtopic-card}
-
-[Interest rates](/browse/finance/interest-rates.qmd){.subtopic-card}
-
-[Volatility](/browse/finance/volatility.qmd){.subtopic-card}
-
-[Portfolio management](/browse/finance/portfolio-management.qmd){.subtopic-card}
-
-[Risk management](/browse/finance/risk-management.qmd){.subtopic-card}
-
-[Model calibration](/browse/finance/model-calibration.qmd){.subtopic-card}
-
-[Financial analysis](/browse/finance/financial-analysis.qmd){.subtopic-card}
-
-[Sustainable finance](/browse/finance/sustainable-finance.qmd){.subtopic-card}
+Research notes, essays and computational explorations by Cheryl Kouadio.
 
 :::
 
-::: 
-
-::: {.topic-card}
-
-### [Statistics](/browse/statistics/index.qmd)
-
-::: {.subtopic-cards}
-
-[Machine learning](/browse/statistics/machine-learning.qmd){.subtopic-card}
-
-[Dependence and correlation](/browse/statistics/dependence.qmd){.subtopic-card}
+![](files/images/density-study.svg){.journal-hero-art fig-alt="Gaussian density curves with increasing standard deviation, shown in an oblique projection."}
 
 :::
 
-::: 
+## Featured Writing {.journal-section}
 
-::: {.topic-card}
+::: {.journal-feature}
 
-### [Glossary & mathematical foundations](/browse/glossary/index.qmd)
+::: {.journal-feature-copy}
 
-::: {.subtopic-cards}
+[Quantitative Finance · Interest Rates]{.journal-kicker}
 
-[Financial glossary](/browse/glossary/finance.qmd){.subtopic-card}
+### [Interest rates market - Key instruments](posts/finance/interest-rates/market-instruments.qmd)
 
-[Mathematical foundations](/browse/glossary/mathematics.qmd){.subtopic-card}
+From zero-coupon bonds and the term structure to forward rates and the derivatives that depend on them.
+
+<time datetime="2026-02-14">14 February 2026</time>
 
 :::
 
-::: 
+![Four common yield curve shapes.](posts/finance/interest-rates/covers/yield_curves.png){.journal-chart loading="lazy" fig-alt="Four charts show illustrative normal, inverted, steepening and flattening yield curves by maturity."}
 
-::: 
-
-## Recent Posts
-
-:::{#recent-posts}
 :::
 
+## Selected Writings {.journal-section}
+
+::: {.journal-grid}
+
+::: {.journal-entry}
+
+[Mathematical Foundations]{.journal-kicker}
+
+### [Mathematical foundations of financial market modeling](posts/finance/derivatives/mathematical-foundations.qmd)
+
+Market instruments, self-financing strategies and no-arbitrage in discrete time.
+
+:::
+
+::: {.journal-entry}
+
+[Statistics]{.journal-kicker}
+
+### [Corrélation de Spearman vs corrélation de Pearson](posts/statistics/dependence/spearman-pearson.qmd)
+
+A comparison of rank-based and linear measures of dependence.
+
+:::
+
+::: {.journal-entry}
+
+[Stochastic Processes]{.journal-kicker}
+
+### [Calibration du modèle Black-Scholes](posts/finance/model-calibration/black-scholes.qmd)
+
+An exploration of volatility calibration under the Black–Scholes model.
+
+:::
+
+:::
+
+[Browse the writing archive](posts.qmd){.journal-link}
+
+## Research Highlights {.journal-section}
+
+::: {.journal-feature .journal-research-feature}
+
+::: {.journal-feature-copy}
+
+[Yield Curve Calibration]{.journal-kicker}
+
+### [Modèles de courbe de taux](posts/finance/model-calibration/yield-curve-calibration.qmd)
+
+An empirical reconstruction of a zero-coupon yield curve, followed by Hull–White calibration and a Monte Carlo application to barrier caplets.
+
+[Explore the research](research.qmd){.journal-link}
+
+:::
+
+![Observed market rates by maturity.](files/images/market-rates-by-maturity.png){.journal-chart loading="lazy" fig-alt="Observed rates plotted against maturity for the instruments used in the calibration."}
+
+:::
+
+## Explore by Topic {.journal-section}
+
+::: {.journal-topic-index}
+
+[Quantitative Finance](topics.qmd#quantitative-finance)
+
+[Probability](topics.qmd#probability)
+
+[Statistics](topics.qmd#statistics)
+
+[Mathematical Foundations](topics.qmd#mathematical-foundations)
+
+[Numerical Methods](topics.qmd#numerical-methods)
+
+[Stochastic Processes](topics.qmd#stochastic-processes)
+
+:::
+
+## About the Author {.journal-section}
+
+:::: {.journal-author}
+
+![](files/profile/kouadio_profile.jpg){.journal-portrait loading="lazy"}
+
+::: {.journal-author-copy}
+
+### Cheryl Kouadio
+
+My academic background is in stochastic modeling and quantitative finance at Université Paris Cité and financial risk management at ENSAI. I use this journal to share what I learn through coursework, projects and independent study.
+
+[About Cheryl](about.qmd){.journal-link}
+
+:::
+
+::::
+
+:::::

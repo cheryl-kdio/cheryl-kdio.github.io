@@ -1,0 +1,86 @@
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const main = document.querySelector("main#quarto-document-content");
+  if (!main) return;
+
+  const skip = document.createElement("a");
+  skip.className = "journal-skip";
+  skip.href = "#quarto-document-content";
+  skip.textContent = "Skip to content";
+  main.tabIndex = -1;
+  document.body.prepend(skip);
+
+  const title = main.querySelector("#title-block-header");
+  const links = document.querySelector("#TOC > ul");
+  if (title && links && links.querySelectorAll("a").length > 2) {
+    const contents = document.createElement("details");
+    contents.className = "journal-mobile-toc";
+    const summary = document.createElement("summary");
+    summary.textContent = "On this page";
+    contents.append(summary);
+    const list = links.cloneNode(true);
+    list.querySelectorAll("[id], [class], [data-scroll-target]").forEach((element) => {
+      element.removeAttribute("id");
+      element.removeAttribute("class");
+      element.removeAttribute("data-scroll-target");
+    });
+    contents.append(list);
+    title.after(contents);
+  }
+
+  const categoryControls = document.querySelectorAll(
+    ".quarto-listing-category .category, .quarto-listing .listing-category[onclick]"
+  );
+  categoryControls.forEach((control) => {
+    control.tabIndex = 0;
+    control.setAttribute("role", "button");
+    control.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        control.click();
+      }
+    });
+  });
+
+  // Preserve table semantics and confine horizontal scrolling to the figure or table.
+  main.querySelectorAll("table").forEach((table) => {
+    if (table.closest(".table-responsive, .html-widget, .quarto-listing")) return;
+    const wrapper = document.createElement("div");
+    wrapper.className = "table-responsive";
+    table.before(wrapper);
+    wrapper.append(table);
+  });
+
+  if ("ResizeObserver" in window) {
+    const scrollRegions = new ResizeObserver((entries) => {
+      entries.forEach(({ target }) => {
+        if (target.scrollWidth > target.clientWidth + 1) {
+          target.tabIndex = 0;
+        } else {
+          target.removeAttribute("tabindex");
+        }
+      });
+    });
+    main.querySelectorAll(".math.display, .table-responsive, pre").forEach((region) => {
+      scrollRegions.observe(region);
+      if (region.matches(".math.display")) {
+        region.setAttribute("role", "group");
+        region.setAttribute("aria-label", "Equation");
+      }
+    });
+  }
+
+  const archive = document.querySelector("#quarto-header a.nav-link[href$='/posts.html']");
+  if (!archive) return;
+  const root = new URL("./", archive.href);
+  const path = location.pathname.slice(root.pathname.length);
+  const section = /^(posts\/|notes\.html$)/.test(path) ? "posts"
+    : /^(browse\/|glossary[/.])/.test(path) ? "topics"
+    : path === "publications.html" ? "research"
+    : path === "now.html" ? "about" : null;
+  if (section && !document.querySelector("#quarto-header .nav-link[aria-current]")) {
+    const sectionLink = document.querySelector('#quarto-header a.nav-link[href$="/' + section + '.html"]');
+    if (sectionLink) sectionLink.setAttribute("aria-current", "location");
+  }
+});
+</script>

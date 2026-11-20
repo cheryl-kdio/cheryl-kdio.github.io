@@ -30,18 +30,17 @@ files/                         # Shared images, CV and includes
 
 ## Navigation and adding content
 
-- `topics.qmd` displays topic and subtopic navigation cards. The linked `browse/` pages automatically list articles from their folders; `posts.qmd` provides the chronological listing and category filters.
-- The sidebar is generated automatically from `posts/` and `glossary/`, including nested folders. New articles and subfolders appear after `quarto render` or during `quarto preview`; no manual article registration in `_quarto.yml` or `topics.qmd` is needed. A new top-level topic on the directory page needs a heading and folder-based listing in `topics.qmd` once; articles within that topic are discovered automatically.
-- Article labels use their `title` metadata. Folder names become section labels (hyphens become spaces). Optional numeric `order` metadata controls navigation order.
-- Use descriptive filenames in lowercase with hyphens. Keep article-specific data and images near their documents.
-- Set `title` and `categories` in each article’s YAML header. Keep provenance categories (`ensai-gdr`, `m2mo`) and add subject categories such as `derivatives` or `pricing`; these automatically become listing filters.
-- Moved documents carry `aliases` for their previous HTML addresses. Preserve these aliases.
-- `_freeze/` contains cached computations; `docs/` contains generated output. Edit source files rather than generated HTML.
+- `index.qmd` contains the editorial selection. Update its featured article, selected writings and research highlight when the selection changes. The measured rates chart in `files/images/market-rates-by-maturity.png` comes from the existing yield-curve calibration project.
+- `posts.qmd` is the Writings archive, with Quarto search, category filters and RSS. `research.qmd` curates existing studies and links to the reports, publications and applications in `publications.qmd`.
+- `topics.qmd` groups articles and projects by theme. The linked `browse/` indexes automatically list articles from their folders, and their scoped sidebars are configured in `_quarto.yml` and assigned in each folder’s `_metadata.yml`.
+- Set `title` and `categories` in article metadata. Preserve coursework categories (`ensai-gdr`, `m2mo`) and document `aliases` for older URLs.
+- Use short, descriptive lowercase filenames. Keep each article’s data and figures near its source. `_freeze/` contains cached computations and `docs/` contains generated output. Make editorial changes in the source files.
+- Use fenced Div classes `.definition`, `.theorem`, `.proposition`, `.lemma`, `.proof`, `.remark`, `.example` or `.mathematical-intuition` for scientific blocks. Include the block title in the source. Quarto remains responsible for MathJax, citations and cross-references.
 
 ## Local preview and build
 
 ```sh
-quarto preview
+quarto preview --output-dir _site
 quarto render
 ```
 
@@ -50,13 +49,3 @@ To inspect layout without executing Python or R code:
 ```sh
 quarto render --no-execute
 ```
-
-## Scoped topic navigation
-
-The home page links to `browse/<topic>/index.qmd` and its subtopic pages.
-Each page discovers articles from the corresponding source folder and excludes drafts.
-`_quarto.yml` defines scoped sidebars; `_metadata.yml` in each article subtopic assigns
-its sidebar to existing and future articles automatically. Main topic pages show all
-subtopics; subtopic pages and their articles show only their own branch.
-New articles require no navigation changes. A new topic needs a browse page,
-sidebar configuration, home link and folder metadata once.

@@ -1,0 +1,34 @@
+---
+title: "About"
+subtitle: "Cheryl Kouadio"
+description: "About Cheryl Kouadio and her interests in mathematics, statistics and quantitative finance."
+toc: false
+---
+
+::: {.journal-author}
+
+![](files/profile/kouadio_profile.jpg){.journal-portrait fig-alt="Portrait of Cheryl Kouadio."}
+
+:::{}
+
+I’m interested in how mathematics and statistics help us understand uncertainty in financial systems. This journal brings together notes from coursework, computational projects and independent study.
+
+My academic background includes the Master’s program in Modélisation Aléatoire et Finance Quantitative (M2MO) at Université Paris Cité and studies in financial risk management at ENSAI.
+
+:::
+
+:::
+
+## Areas of interest
+
+I write about probability, stochastic processes, numerical methods and their applications to pricing, calibration and risk. The [topic index](topics.qmd) brings together work on these subjects.
+
+## Selected work
+
+- [Modèles de courbe de taux](posts/finance/model-calibration/yield-curve-calibration.qmd)
+- [Detecting the Cure Model Appropriateness in Randomized Clinical Trials With Long-Term Survivors](publications.qmd#journal-articles)
+- [Asset Pricing and Management](https://github.com/Niyo-D-JC/Asset-Pricing-and-Management)
+
+## Contact and links
+
+[Email](mailto:cheryl.s.kouadio@gmail.com) · [GitHub](https://github.com/cheryl-kdio) · [LinkedIn](https://www.linkedin.com/in/cheryl-kouadio-251815206/) · [CV](files/Cheryl-Kouadio-CV.pdf) · [Now](now.qmd)
