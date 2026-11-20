@@ -81,17 +81,10 @@ At time $t$:
 1. Sell one zero-coupon bond maturing at $T$. You receive $B(t,T)$ today and must pay $1$ at time $T$.
 2. Use the proceeds to buy $\frac{B(t,T)}{B(t,S)}$ zero-coupon bonds maturing at $S$.
 
-The initial net investment is zero. The subsequent cash flows are: 
-```text
-Strategy 1: Zero-coupon bond portfolio
+The initial net investment is zero. The subsequent cash flows are:
 
-
-        t                         T                         S
-────────┼─────────────────────────┼─────────────────────────┼────────▶
-        │                         │                         │
-   Net cash flow: 0             Pay: 1              Receive:+B(t,T)/B(t,S)
-
-```
+- At $T$: pay $1$.
+- At $S$: receive $\frac{B(t,T)}{B(t,S)}$.
 
 **Strategy 2: A forward lending agreement**
 
@@ -99,14 +92,9 @@ At time $t$, agree to lend $1$ at time $T$ until time $S$, at the forward rate $
 
 This agreement requires no initial payment and generates:
 
-```text
-Strategy 2: Forward lending agreement
+- At $T$: pay $1$.
+- At $S$: receive $1+(S-T)L(t;T,S)$.
 
-        t                         T                         S
-────────┼─────────────────────────┼─────────────────────────┼────────▶
-        │                         │                         │
-   Net cash flow: 0             Pay: 1              Receive:+1 + (S−T)L(t;T,S)
-```
 **No-arbitrage condition**
 
 Both strategies require zero initial investment and the same payment at $T$. Their payments at $S$ must therefore coincide; otherwise, taking opposite positions in the two strategies would create an arbitrage.

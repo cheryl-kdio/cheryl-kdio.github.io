@@ -6,7 +6,6 @@ author:
 categories: [paper, m2mo, rates, interest-rates]
 date: "2026-05-03"
 jupyter: python3
-draft : True
 # image : "covers/yield_curves.png"
 aliases:
   - /posts/m2mo/yield_curves/01_vasicek_model.html
