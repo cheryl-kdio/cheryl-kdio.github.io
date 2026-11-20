@@ -211,6 +211,12 @@ window.Quarto = {
  <span class="menu-text">Interest rates market - Key instruments</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../posts/finance/interest-rates/vasicek-model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">On the modelling of interest rates : The vasicek model</span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -350,23 +356,17 @@ The yield curve or the term structure of interest rates
 <li>Use the proceeds to buy <span class="math inline">\(\frac{B(t,T)}{B(t,S)}\)</span> zero-coupon bonds maturing at <span class="math inline">\(S\)</span>.</li>
 </ol>
 <p>The initial net investment is zero. The subsequent cash flows are:</p>
-<pre class="text"><code>Strategy 1: Zero-coupon bond portfolio
-
-
-        t                         T                         S
-────────┼─────────────────────────┼─────────────────────────┼────────▶
-        │                         │                         │
-   Net cash flow: 0             Pay: 1              Receive:+B(t,T)/B(t,S)
-</code></pre>
+<ul>
+<li>At <span class="math inline">\(T\)</span>: pay <span class="math inline">\(1\)</span>.</li>
+<li>At <span class="math inline">\(S\)</span>: receive <span class="math inline">\(\frac{B(t,T)}{B(t,S)}\)</span>.</li>
+</ul>
 <p><strong>Strategy 2: A forward lending agreement</strong></p>
 <p>At time <span class="math inline">\(t\)</span>, agree to lend <span class="math inline">\(1\)</span> at time <span class="math inline">\(T\)</span> until time <span class="math inline">\(S\)</span>, at the forward rate <span class="math inline">\(L(t;T,S)\)</span>.</p>
 <p>This agreement requires no initial payment and generates:</p>
-<pre class="text"><code>Strategy 2: Forward lending agreement
-
-        t                         T                         S
-────────┼─────────────────────────┼─────────────────────────┼────────▶
-        │                         │                         │
-   Net cash flow: 0             Pay: 1              Receive:+1 + (S−T)L(t;T,S)</code></pre>
+<ul>
+<li>At <span class="math inline">\(T\)</span>: pay <span class="math inline">\(1\)</span>.</li>
+<li>At <span class="math inline">\(S\)</span>: receive <span class="math inline">\(1+(S-T)L(t;T,S)\)</span>.</li>
+</ul>
 <p><strong>No-arbitrage condition</strong></p>
 <p>Both strategies require zero initial investment and the same payment at <span class="math inline">\(T\)</span>. Their payments at <span class="math inline">\(S\)</span> must therefore coincide; otherwise, taking opposite positions in the two strategies would create an arbitrage. Thus, <span class="math inline">\(1+(S-T)L(t;T,S)=\frac{B(t,T)}{B(t,S)}.\)</span></p>
 <p>The simply compounded forward rate is consequently : <span class="math display">\[

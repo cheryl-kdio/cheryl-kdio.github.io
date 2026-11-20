@@ -38,7 +38,8 @@
     "listing": "/browse/finance/interest-rates.html",
     "items": [
       "/posts/finance/interest-rates/interest-rates-made-simple.html",
-      "/posts/finance/interest-rates/market-instruments.html"
+      "/posts/finance/interest-rates/market-instruments.html",
+      "/posts/finance/interest-rates/vasicek-model.html"
     ]
   },
   {
@@ -79,6 +80,7 @@
       "/posts/finance/volatility/stochastic-local-volatility.html",
       "/posts/finance/derivatives/options-made-simple.html",
       "/posts/finance/interest-rates/interest-rates-made-simple.html",
+      "/posts/finance/interest-rates/vasicek-model.html",
       "/posts/finance/interest-rates/market-instruments.html",
       "/posts/finance/derivatives/mathematical-foundations.html",
       "/posts/finance/derivatives/numerical-methods/american-options.html",
@@ -187,6 +189,7 @@
       "/posts/finance/risk-management/risk-fundamentals.html",
       "/posts/finance/derivatives/mathematical-foundations.html",
       "/posts/finance/model-calibration/yield-curve-calibration.html",
+      "/posts/finance/interest-rates/vasicek-model.html",
       "/posts/finance/derivatives/options-made-simple.html",
       "/posts/finance/volatility/stochastic-local-volatility.html",
       "/posts/finance/risk-management/value-at-risk/copulas-project.html",
