@@ -49,7 +49,7 @@ ul.task-list li input[type="checkbox"] {
   "copy-button": false,
   "collapse-after": 3,
   "panel-placement": "end",
-  "type": "textbox",
+  "type": "overlay",
   "limit": 50,
   "keyboard-shortcut": [
     "f",
@@ -99,25 +99,9 @@ ul.task-list li input[type="checkbox"] {
     }
   })
   </script>
-<!-- 
-Load Academicons v1: https://jpswalsh.github.io/academicons/
--->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-
-
-<!---
-The following code are needed to show dimension citation and altmetrics.
-https://api.altmetric.com/embeds.html
-https://badge.dimensions.ai/
---->
-
-<script type="text/javascript" src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script>
-
-<script async="" src="https://badge.dimensions.ai/badge.js" charset="utf-8"></script>
-
-<script type="text/javascript" src="//cdn.plu.mx/widget-popup.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&amp;display=swap" rel="stylesheet">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -152,11 +136,11 @@ window.Quarto = {
 <link rel="stylesheet" href="../../styles.css">
 <meta property="og:title" content="Glossary &amp; mathematical foundations – Cheryl Kouadio">
 <meta property="og:description" content="Cheryl Kouadio is a graduate student in stochastic modeling and quantitative finance at Université Paris Cité. Her academic interests focus on probability theory, stochastic processes, data analysis, and financial risk modeling. She studies how rigorous statistical and mathematical methods can be applied to quantify uncertainty and support decision-making in finance and risk management.">
-<meta property="og:image" content="https://cheryl-kdio.github.io/files/profile/kouadio_profile.jpeg">
+<meta property="og:image" content="https://cheryl-kdio.github.io/browse/glossary/files/profile/kouadio_profile.jpg">
 <meta property="og:site_name" content="Cheryl Kouadio">
 <meta name="twitter:title" content="Glossary &amp; mathematical foundations – Cheryl Kouadio">
 <meta name="twitter:description" content="Cheryl Kouadio is a graduate student in stochastic modeling and quantitative finance at Université Paris Cité. Her academic interests focus on probability theory, stochastic processes, data analysis, and financial risk modeling. She studies how rigorous statistical and mathematical methods can be applied to quantify uncertainty and support decision-making in finance and risk management.">
-<meta name="twitter:image" content="https://cheryl-kdio.github.io/files/profile/kouadio_profile.jpeg">
+<meta name="twitter:image" content="https://cheryl-kdio.github.io/browse/glossary/files/profile/kouadio_profile.jpg">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -177,94 +161,25 @@ window.Quarto = {
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-about" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">About</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-about">    
-        <li>
-    <a class="dropdown-item" href="../../now.html">
- <span class="dropdown-text">Now</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../../posts.html#category=event">
- <span class="dropdown-text">Events</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../../files/Cheryl-Kouadio-CV.pdf" target="_blank">
- <span class="dropdown-text">CV</span></a>
-  </li>  
-    </ul>
-  </li>
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-topics" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Topics</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-topics">    
-        <li>
-    <a class="dropdown-item" href="../../browse/finance/index.html">
- <span class="dropdown-text">Finance</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../../browse/statistics/index.html">
- <span class="dropdown-text">Statistics</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../../browse/glossary/index.html">
- <span class="dropdown-text">Glossary &amp; mathematical foundations</span></a>
-  </li>  
-    </ul>
-  </li>
   <li class="nav-item">
-    <a class="nav-link" href="../../publications.html"> 
-<span class="menu-text">Reports</span></a>
-  </li>  
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-coursework" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Coursework</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-coursework">    
-        <li>
-    <a class="dropdown-item" href="../../posts.html#category=ensai-gdr">
- <span class="dropdown-text">ENSAI</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../../posts.html#category=m2mo">
- <span class="dropdown-text">M2MO</span></a>
-  </li>  
-    </ul>
-  </li>
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-notes" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Notes</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-notes">    
-        <li>
-    <a class="dropdown-item" href="../../notes.html">
- <span class="dropdown-text">All notes</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../../glossary.html">
- <span class="dropdown-text">Glossary</span></a>
-  </li>  
-    </ul>
-  </li>
-</ul>
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="https://github.com/cheryl-kdio" target="_blank"> <i class="bi bi-github" role="img">
-</i> 
-<span class="menu-text">Github</span></a>
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://www.linkedin.com/in/cheryl-kouadio-251815206/" target="_blank"> <i class="bi bi-linkedin" role="img">
-</i> 
-<span class="menu-text">Linkedin</span></a>
+    <a class="nav-link" href="../../posts.html"> 
+<span class="menu-text">Writings</span></a>
   </li>  
-  <li class="nav-item compact">
-    <a class="nav-link" href="../../posts.xml" target="_blank"> <i class="bi bi-rss" role="img">
-</i> 
-<span class="menu-text"></span></a>
+  <li class="nav-item">
+    <a class="nav-link" href="../../research.html"> 
+<span class="menu-text">Research</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../topics.html"> 
+<span class="menu-text">Topics</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -710,6 +625,92 @@ Schéma implicite semi-centré…</dd><dt><span id="acro-psor" class="acronym-it
 No matching items
 </div>
 </div></main> <!-- /main -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const main = document.querySelector("main#quarto-document-content");
+  if (!main) return;
+
+  const skip = document.createElement("a");
+  skip.className = "journal-skip";
+  skip.href = "#quarto-document-content";
+  skip.textContent = "Skip to content";
+  main.tabIndex = -1;
+  document.body.prepend(skip);
+
+  const title = main.querySelector("#title-block-header");
+  const links = document.querySelector("#TOC > ul");
+  if (title && links && links.querySelectorAll("a").length > 2) {
+    const contents = document.createElement("details");
+    contents.className = "journal-mobile-toc";
+    const summary = document.createElement("summary");
+    summary.textContent = "On this page";
+    contents.append(summary);
+    const list = links.cloneNode(true);
+    list.querySelectorAll("[id], [class], [data-scroll-target]").forEach((element) => {
+      element.removeAttribute("id");
+      element.removeAttribute("class");
+      element.removeAttribute("data-scroll-target");
+    });
+    contents.append(list);
+    title.after(contents);
+  }
+
+  const categoryControls = document.querySelectorAll(
+    ".quarto-listing-category .category, .quarto-listing .listing-category[onclick]"
+  );
+  categoryControls.forEach((control) => {
+    control.tabIndex = 0;
+    control.setAttribute("role", "button");
+    control.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        control.click();
+      }
+    });
+  });
+
+  // Preserve table semantics and confine horizontal scrolling to the figure or table.
+  main.querySelectorAll("table").forEach((table) => {
+    if (table.closest(".table-responsive, .html-widget, .quarto-listing")) return;
+    const wrapper = document.createElement("div");
+    wrapper.className = "table-responsive";
+    table.before(wrapper);
+    wrapper.append(table);
+  });
+
+  if ("ResizeObserver" in window) {
+    const scrollRegions = new ResizeObserver((entries) => {
+      entries.forEach(({ target }) => {
+        if (target.scrollWidth > target.clientWidth + 1) {
+          target.tabIndex = 0;
+        } else {
+          target.removeAttribute("tabindex");
+        }
+      });
+    });
+    main.querySelectorAll(".math.display, .table-responsive, pre").forEach((region) => {
+      scrollRegions.observe(region);
+      if (region.matches(".math.display")) {
+        region.setAttribute("role", "group");
+        region.setAttribute("aria-label", "Equation");
+      }
+    });
+  }
+
+  const archive = document.querySelector("#quarto-header a.nav-link[href$='/posts.html']");
+  if (!archive) return;
+  const root = new URL("./", archive.href);
+  const path = location.pathname.slice(root.pathname.length);
+  const section = /^(posts\/|notes\.html$)/.test(path) ? "posts"
+    : /^(browse\/|glossary[/.])/.test(path) ? "topics"
+    : path === "publications.html" ? "research"
+    : path === "now.html" ? "about" : null;
+  if (section && !document.querySelector("#quarto-header .nav-link[aria-current]")) {
+    const sectionLink = document.querySelector('#quarto-header a.nav-link[href$="/' + section + '.html"]');
+    if (sectionLink) sectionLink.setAttribute("aria-current", "location");
+  }
+});
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -800,7 +801,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("^(?:http:|https:)\/\/cheryl-kdio\.github\.io\/custom");
+      var filterRegex = new RegExp("https:\/\/cheryl-kdio\.github\.io");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -1145,19 +1146,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-      &nbsp;
-    </div>   
+<p><a href="../../about.html">Cheryl Kouadio</a></p>
+</div>   
     <div class="nav-footer-center">
-<a href="https://github.com/cheryl-kdio">Cheryl Kouadio</a> ©
-<script>document.write(new Date().getFullYear())</script>
-</div>
+      &nbsp;
+    </div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
-    <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/cheryl-kdio" target="_blank">
-      <i class="bi bi-github" role="img">
-</i> 
-    </a>
+    <li class="nav-item">
+    <a class="nav-link" href="mailto:cheryl.s.kouadio@gmail.com">
+<p>Email</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://github.com/cheryl-kdio">
+<p>GitHub</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://www.linkedin.com/in/cheryl-kouadio-251815206/">
+<p>LinkedIn</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="../../posts.xml">
+<p>RSS</p>
+</a>
   </li>  
 </ul>
     </div>

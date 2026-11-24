@@ -1,0 +1,19 @@
+{
+  "New Quarto article": {
+    "include": ["**/*.qmd"],
+    "isFileTemplate": true,
+    "body": [
+      "---",
+      "title: \"${1:Titre}\"",
+      "subtitle: \"${2:Sous-titre}\"",
+      "author : \"${3:Cheryl KOUADIO}\"",
+      "description: \"${4:Résumé}\"",
+      "date: ${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}",
+      "categories: [${5:type}]",
+      "draft: true",
+      "---",
+      "",
+      "$0"
+    ]
+  }
+}

@@ -1,0 +1,10 @@
+---
+title: "Titre"
+subtitle: "Sous-titre"
+author : "Cheryl KOUADIO"
+description: "Résumé"
+date: 2026-11-22
+categories: [type]
+draft: true
+---
+
